@@ -10,6 +10,7 @@
 ## Часть 1 — Запуск напрямую
 После запуска, сервис отдает `ok` при открытии в браузере:
 [img1](https://github.com/Patineshka/containerization-and-orchestration/blob/main/lab1/images/img1.png)
+
 PID процесса на хосте: 289524
 [img2](https://github.com/Patineshka/containerization-and-orchestration/blob/main/lab1/images/img2.png)
 
