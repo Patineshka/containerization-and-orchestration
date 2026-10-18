@@ -1,0 +1,12 @@
+FROM python:3.13-slim-trixie AS build
+WORKDIR /build
+COPY server.py .
+
+RUN python3 -c "import py_compile; py_compile.compile('server.py', cfile='server.pyc', doraise=True)"
+
+FROM gcr.io/distroless/python3-debian13:nonroot
+WORKDIR /app
+COPY --from=build /build/server.pyc /app/server.pyc
+
+EXPOSE 8080
+CMD ["/app/server.pyc"]
