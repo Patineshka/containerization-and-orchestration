@@ -1,0 +1,28 @@
+groups:
+  - name: lab1
+    rules:
+      - alert: Lab1HighMemory
+        expr: lab1_memory_usage_bytes{job="lab1-api"} / lab1_memory_limit_bytes{job="lab1-api"} > 0.8
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Память API выше 80% лимита"
+          description: "Остаётся мало запаса памяти; возможны ошибки выделения и OOM."
+
+      - alert: Lab1CPUThrottling
+        expr: rate(lab1_cpu_throttled_periods_total{job="lab1-api"}[1m]) / clamp_min(rate(lab1_cpu_periods_total{job="lab1-api"}[1m]), 0.000001) > 0.2
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "API ограничивается по CPU более чем в 20% периодов"
+          description: "Квоты CPU может не хватать; возможны задержки ответов."
+
+      - alert: Lab1OOMKill
+        expr: increase(lab1_oom_kills_total{job="lab1-api"}[5m]) > 0
+        labels:
+          severity: critical
+        annotations:
+          summary: "В cgroup API произошёл OOM kill"
+          description: "Ядро завершило процесс из-за нехватки памяти."

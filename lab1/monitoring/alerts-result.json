@@ -1,0 +1,22 @@
+{
+    "status": "success",
+    "data": {
+        "alerts": [
+            {
+                "labels": {
+                    "alertname": "Lab1CPUThrottling",
+                    "instance": "127.0.0.1:9105",
+                    "job": "lab1-api",
+                    "severity": "warning"
+                },
+                "annotations": {
+                    "description": "Квоты CPU может не хватать; возможны задержки ответов.",
+                    "summary": "API ограничивается по CPU более чем в 20% периодов"
+                },
+                "state": "firing",
+                "activeAt": "2026-10-17T20:37:43.205690223Z",
+                "value": "1e+00"
+            }
+        ]
+    }
+}
