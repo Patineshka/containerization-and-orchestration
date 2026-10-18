@@ -13,6 +13,7 @@
 <img src="images/img1.png" alt="img1" width="600">
 
 PID процесса на хосте: 289524
+
 <img src="images/img2.png" alt="img2" width="600">
 
 ## Часть 2 — Namespaces
@@ -24,8 +25,10 @@ patineshka@p33:~/lab1/api$ unshare --user --map-root-user --pid --fork \
 ```
 Однако при первом запуске команды возникла ошибка: ```unshare: write failed /proc/self/uid_map: Operation not permitted```
 Она возникла из-за того, что ```unshare``` является ```unprivileged_userns```:
+
 <img src="images/img3.png" alt="Отказ при запуске unshare" width="600">
 После выполнения лабораторной было временно разрешены непривилегированные user namespace и процесс заново был помещен в namespace:
+
 <img src="images/img4.png" alt="Запуск сервиса в namespaces" width="600">
 
 При запуске от обычного пользователя UID 0 внутри соответствует UID 1000 снаружи:
@@ -42,6 +45,7 @@ uid_map: 0 1000 1
 - В сети есть только включённый интерфейс `lo`
 - Пользователь — root, но снаружи процесс принадлежит обычному пользователю
 - `/health` возвращает `ok`
+- 
 <img src="images/img6.png" alt="Проверка изоляции изнутри" width="600">
 
 ## Часть 3 — Cgroups
@@ -50,9 +54,11 @@ uid_map: 0 1000 1
 - `memory.max = 134217728` — ограничение памяти 128 МиБ.
 - `memory.swap.max = 0` — запрет использования swap.
 - В `cgroup.procs` записан PID процесса.
+- 
 <img src="images/img7.png" alt="Настройка cgroup и лимита памяти" width="600">
 
 После запуска `http://127.0.0.1:8080/eat?mb=256` процесс был остановлен OOM_Kill:
+
 <img src="images/img8.png" alt="OOM: ошибка curl, счётчики memory.events и отсутствие процесса" width="600">
 
 ### 3.2 CPU
@@ -63,6 +69,7 @@ nr_throttled: 0 → 382
 throttled_usec: 0 → 16161693
 ```
 Процесс остался жив, но после исчерпания квоты ждал ее пополнения:
+
 <img src="images/img9.png" alt="Статистика CPU до и после нагрузки" width="600">
 
 ### 3.3 Память
@@ -81,6 +88,7 @@ pids.events: max 59201 - дро отклонило создание новых �
 ```
 
 Уже существующие процессы из-за достижения `pids.max` не убивались:
+
 <img src="images/img10.png" alt="img10" width="600">
 
 ## Часть 4 — Права
@@ -113,9 +121,11 @@ CapAmb: 0000000000000000
 
 Сначала был проверен запрет системного вызова `uname` через `systemd-run`. 
 Обычная команда `uname -a` работает:
+
 <img src="images/img13.png" alt="img13" width="600">
 
 Под seccomp-фильтром завершается с ошибкой:
+
 <img src="images/img14.png" alt="img14" width="600">
 
 Что закрывает каждый механизм: Capabilities ограничивают привилегированные операции, а seccomp фильтрует системные вызовы. 
