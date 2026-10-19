@@ -241,8 +241,7 @@ patineshka@p33:~/lab1$ curl -fsSG http://127.0.0.1:9090/api/v1/query
 
 | Панель | Зачем нужна | Запрос в графана |
 |---|---|---|
-| Память, % от лимита | Показывает запас памяти до установленного ограничения | `100 * lab1_memory_usage_bytes{job="lab1-api"}
-  / lab1_memory_limit_bytes{job="lab1-api"}` |
+| Память, % от лимита | Показывает запас памяти до установленного ограничения | `100 * lab1_memory_usage_bytes{job="lab1-api"} / lab1_memory_limit_bytes{job="lab1-api"}` |
 | Использование CPU, % одного ядра | Показывает фактическое потребление процессорного времени | `100 * rate(lab1_cpu_usage_seconds_total{job="lab1-api"}[1m])` |
 | Периоды с CPU throttling, % | Показывает, как часто контейнер исчерпывает квоту CPU | `100 * rate(lab1_cpu_throttled_periods_total{job="lab1-api"}[1m]) / clamp_min(rate(lab1_cpu_periods_total{job="lab1-api"}[1m]), 0.000001)` |
 
