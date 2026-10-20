@@ -198,6 +198,40 @@ helm upgrade --install alloy grafana/alloy \
 <img src="images/img13.png" alt="img13" width="600">
 
 ##Часть 3 — Трейсы (OpenTelemetry + Jaeger)
-### OpenTelemetry
 
-### Jaeger
+Также был добавлен Helm-репозиторий:
+```
+patineshka@p33:~/lab2/setup$ helm repo add jaegertracing \
+  https://jaegertracing.github.io/helm-charts
+"jaegertracing" has been added to your repositories
+patineshka@p33:~/lab2/setup$ helm repo update
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "jaegertracing" chart repository
+...Successfully got an update from the "grafana-community" chart repository
+...Successfully got an update from the "grafana" chart repository
+...Successfully got an update from the "prometheus-community" chart repository
+Update Complete. ⎈Happy Helming!⎈
+```
+Добавлен файл `jaeger-values.yaml`, в котором порт `4317` принимает трейсы от API, а `16686` обслуживает интерфейс просмотра через веб-интерфейс Jaeger
+
+Установка: 
+```
+helm upgrade --install jaeger jaegertracing/jaeger \
+  --version 4.16.1 \
+  --namespace monitoring \
+  --kube-context lab2 \
+  -f ~/lab2/monitoring/jaeger-values.yaml \
+  --wait --timeout 5m
+```
+Проверка работы:
+
+<img src="images/img13.png" alt="img13" width="900">
+
+Был запущен Jaeger и три эндпоинта /slow, /fail и /health. В интерфейсе Jaeger они отображаются:
+
+<img src="images/img14.png" alt="img14" width="500"><img src="images/img15.png" alt="img15" width="500">
+
+Также они найдены в Grafana по trace_id:
+
+<img src="images/img16.png" alt="img16" width="500"><img src="images/img17.png" alt="img17" width="500">
+
