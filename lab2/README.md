@@ -61,7 +61,7 @@ Service дает постоянное имя `lab2-api` и направляет 
 
 <img src="images/img4.png" alt="img4" width="600">
 
-Ура! API развернут) Теперь проверим все endpoint:
+Ура! API развернут 🙂 Теперь проверим все endpoint:
 
 <img src="images/img5.png" alt="img5" width="600">
 
@@ -105,7 +105,7 @@ helm upgrade --install monitoring \
   -f ~/lab2/monitoring/values.yaml \
   --wait --timeout 10m
 ```
-Работает :)
+Работает 🙂 :
 
 <img src="images/img6.png" alt="img6" width="600">
 
@@ -133,5 +133,71 @@ namespace="lab2", service="lab2-api"}[1m])),0.000001)`
 <img src="images/img9.png" alt="img9" width="600">
 
 ## Часть 2 — Логи (Loki + Grafana)
-Начинаются флэшбеки с написания диплома... (благо не Elasticsearch... мой ноут на 8 гб RAM не пережил такого)
+Начинаются флэшбеки с написания диплома... (благо не Elasticsearch..)
 
+### Loki
+Для настройки Loki был добавлен Helm-репозиторий:
+```
+patineshka@p33:~/lab2/setup$ helm repo add grafana https://grafana.github.io/helm-charts
+"grafana" has been added to your repositories
+patineshka@p33:~/lab2/setup$ helm repo add grafana-community \
+  https://grafana-community.github.io/helm-charts
+"grafana-community" has been added to your repositories
+patineshka@p33:~/lab2/setup$ helm repo update
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "grafana-community" chart repository
+...Successfully got an update from the "grafana" chart repository
+...Successfully got an update from the "prometheus-community" chart repository
+Update Complete. ⎈Happy Helming!⎈
+```
+
+Был добавлен файл `loki-values.yaml`, в котором настроены все основные функции Loki, для работы в одном процессе. Логи хранятся в файловой системе на томе. Отдельные распределенные компоненты и кэши отключены. Для одного экземпляра задан replication_factor: 1
+
+Затем был установлен стек:
+```
+helm upgrade --install loki grafana-community/loki \
+  --version 18.17.1 \
+  --namespace monitoring \
+  --kube-context lab2 \
+  -f ~/lab2/monitoring/loki-values.yaml \
+  --wait --timeout 10m
+```
+Все запустилось, под работает 🙂 :
+
+<img src="images/img10.png" alt="img10" width="600">
+
+### Alloy
+Для сбора логов сначала хотела подключить Promtail, но увидела, что он не больше не поддерживается (https://grafana.com/docs/loki/latest/send-data/promtail/). Для лабы скорее всего хватило бы последней версии, но хочется попробовать что-то новое. Поэтому настрою Alloy
+
+Был добавлен файл `alloy-values.yaml`, в котором:
+- /var/log ноды подключается к агенту
+- local.file_match находит файлы API
+- loki.source.file читает строки
+- stage.cri снимает служебную обертку containerd
+- loki.write отправляет строки в Loki
+
+Также все устанавливаем: 
+```
+helm upgrade --install alloy grafana/alloy \
+  --version 1.14.0 \
+  --namespace monitoring \
+  --kube-context lab2 \
+  -f ~/lab2/monitoring/alloy-values.yaml \
+  --wait --timeout 5m
+```
+Работает 🙂 :
+
+<img src="images/img11.png" alt="img11" width="600">
+
+В explorer в Grafana был найден JSON-лог с /fail, статусом 500 и trace_id (соответственно после того как был вызван этот эндпоинт):
+
+<img src="images/img12.png" alt="img12" width="600">
+
+Также я еще добавила timechart по http-статусам:
+
+<img src="images/img13.png" alt="img13" width="600">
+
+##Часть 3 — Трейсы (OpenTelemetry + Jaeger)
+### OpenTelemetry
+
+### Jaeger
