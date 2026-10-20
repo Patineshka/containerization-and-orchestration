@@ -76,7 +76,7 @@ Service дает постоянное имя `lab2-api` и направляет 
 
 Observability (почти) настроен, остался мониторинг ;)
 
-## Часть 0 — Метрики (Prometheus + Grafana)
+## Часть 1 — Метрики (Prometheus + Grafana)
 ### Prometheus
 Для настройки Prometheus был добавлен Helm-репозиторий:
 ```
@@ -118,3 +118,15 @@ helm upgrade --install monitoring \
 <img src="images/img8.png" alt="img8" width="600">
 
 ### Grafana
+В графане были построены три графика:
+- Интенсивность запросов, RPS - `sum(rate(api_requests_total{namespace="lab2", service="lab2-api"}[1m]))`
+- Доля ошибок 5xx, % - `100 * (sum(rate(api_requests_total{namespace="lab2", service="lab2-api", status=~"5.."}[1m])) or vector(0)) / clamp_min(sum(rate(api_requests_total{
+namespace="lab2", service="lab2-api"}[1m])),0.000001)`
+- p95 времени ответа - `histogram_quantile(0.95, sum by (le) (rate(api_request_duration_seconds_bucket{namespace="lab2", service="lab2-api"}[1m])))`
+
+С помощью эндпоинта /load были инициировано 20 запросов к /health и график "Интенсивность запросов" вырос до 5 req/s. 
+Вызов 20 раз эндпоинта /fail увеличил долю ошибок на соответствующем графике до ~80% 
+Эндпоинт /slow позволил проверить график "p95 времени ответа"
+
+<img src="images/img9.png" alt="img9" width="600">
+
