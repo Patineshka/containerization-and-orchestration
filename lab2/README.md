@@ -14,7 +14,7 @@
 - для исправления времени
 ```
 patineshka@p33:~$ sudo timedatectl set-ntp false
-patineshka@p33:~$ 
+patineshka@p33:~$ sudo hwclock --hctosys --utc
 patineshka@p33:~$ sudo timedatectl set-ntp true
 patineshka@p33:~$ date -u
 пн 19 окт 2026 18:27:18 UTC
@@ -225,13 +225,36 @@ helm upgrade --install jaeger jaegertracing/jaeger \
 ```
 Проверка работы:
 
-<img src="images/img13.png" alt="img13" width="900">
+<img src="images/img14.png" alt="img14" width="900">
 
 Был запущен Jaeger и три эндпоинта /slow, /fail и /health. В интерфейсе Jaeger они отображаются:
 
-<img src="images/img14.png" alt="img14" width="500"><img src="images/img15.png" alt="img15" width="500">
+<img src="images/img15.png" alt="img15" width="500"><img src="images/img16.png" alt="img16" width="500">
 
 Также они найдены в Grafana по trace_id:
 
-<img src="images/img16.png" alt="img16" width="500"><img src="images/img17.png" alt="img17" width="500">
+<img src="images/img17.png" alt="img17" width="500"><img src="images/img18.png" alt="img18" width="500">
+
+##Часть 4 — Алерты (Alertmanager + Karma)
+
+Были добавлены три алерта прописанные в alerts-values.yaml:
+- Более 20% запросов API завершаются ошибками
+- p95 времени ответа API превышает секунду
+- Метрики API недоступны
+
+Затем были применены настройки:
+```
+helm upgrade monitoring prometheus-community/kube-prometheus-stack \
+  --version 92.10.1 \
+  --namespace monitoring \
+  --kube-context lab2 \
+  --reuse-values \
+  -f ~/lab2/monitoring/alerts-values.yaml \
+  --wait --timeout 5m
+```
+
+Правила для алертов применились: 
+
+<img src="images/img19.png" alt="img19" width="500">
+
 
