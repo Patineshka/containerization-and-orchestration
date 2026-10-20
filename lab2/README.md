@@ -14,7 +14,7 @@
 - для исправления времени
 ```
 patineshka@p33:~$ sudo timedatectl set-ntp false
-patineshka@p33:~$ sudo hwclock --hctosys --utc
+patineshka@p33:~$ 
 patineshka@p33:~$ sudo timedatectl set-ntp true
 patineshka@p33:~$ date -u
 пн 19 окт 2026 18:27:18 UTC
@@ -54,7 +54,7 @@ docker.io/library/lab2-api:v1
 - templates/deployment.yaml	- описывает запуск и поддержание одного экземпляра API
 - templates/service.yaml - создает постоянный сетевой адрес для обращения к API внутри кластера
 
-Deployment создаёт под с контейнером `lab2-api:v1` и поддерживает нужное число экземпляров (в моем случае один)
+Deployment создает под с контейнером `lab2-api:v1` и поддерживает нужное число экземпляров (в моем случае один)
 Service дает постоянное имя `lab2-api` и направляет трафик к подходящим подам по метке `app: lab2-api`
 
 Для запуска проверяем chart на ошибки и затем устанавливаем:
@@ -74,6 +74,47 @@ Service дает постоянное имя `lab2-api` и направляет 
 | `/load` | Делает 20 запросов к собственному `/health` - для проверки роста интенсивности запросов RPS |
 | `/metrics` | Отдает метрики в формате Prometheus - количество запросов, ошибок и гистограмму времени ответа |
 
-Observability (почти) настроена, остался мониторинг ;)
+Observability (почти) настроен, остался мониторинг ;)
 
 ## Часть 0 — Метрики (Prometheus + Grafana)
+### Prometheus
+Для настройки Prometheus был добавлен Helm-репозиторий:
+```
+patineshka@p33:~/lab2/setup$ helm repo add prometheus-community \
+  https://prometheus-community.github.io/helm-charts
+
+helm repo update
+mkdir -p ~/lab2/monitoring
+"prometheus-community" has been added to your repositories
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "prometheus-community" chart repository
+Update Complete. ⎈Happy Helming!⎈
+```
+
+Также были созданы следующие файлы:
+- monitoring/values.yaml - для сохранения метрик и настройки графаны в постоянный томах. Также отключила стандартный набор правил и сбор части метрик, которые сейчас не нужны для мониторинга
+- templates/servicemonitor.yaml - в нем описано, какой Service найти, какой порт и путь опрашивать для сбора метрик Prometheus оператором
+
+Затем был установлен стек:
+```
+helm upgrade --install monitoring \
+  prometheus-community/kube-prometheus-stack \
+  --version 92.10.1 \
+  --namespace monitoring --create-namespace \
+  --kube-context lab2 \
+  -f ~/lab2/monitoring/values.yaml \
+  --wait --timeout 10m
+```
+Работает :)
+
+<img src="images/img6.png" alt="img6" width="600">
+
+Также была обновлена установка API:
+
+<img src="images/img7.png" alt="img7" width="600">
+
+Запустила Prometheus и теперь он собирает метрики: 
+
+<img src="images/img8.png" alt="img8" width="600">
+
+### Grafana
