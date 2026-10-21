@@ -229,11 +229,11 @@ helm upgrade --install jaeger jaegertracing/jaeger \
 
 Был запущен Jaeger и три эндпоинта /slow, /fail и /health. В интерфейсе Jaeger они отображаются:
 
-<img src="images/img15.png" alt="img15" width="450"><img src="images/img16.png" alt="img16" width="500">
+<img src="images/img15.png" alt="img15" width="450">  <img src="images/img16.png" alt="img16" width="500">
 
 Также они найдены в Grafana по trace_id:
 
-<img src="images/img17.png" alt="img17" width="500"><img src="images/img18.png" alt="img18" width="450">
+<img src="images/img17.png" alt="img17" width="500">  <img src="images/img18.png" alt="img18" width="450">
 
 ## Часть 4 — Алерты (Alertmanager + Karma)
 
@@ -263,11 +263,11 @@ helm upgrade monitoring prometheus-community/kube-prometheus-stack \
 
 Для проверки срабатывания алертов были запущены запросы к /fail и /load в течение двух минут, после чего в Karma отобразились алерты Lab2HighErrorRate и Lab2HighLatency:
 
-<img src="images/img21.png" alt="img21" width="470"><img src="images/img22.png" alt="img22" width="500">
+<img src="images/img21.png" alt="img21" width="470">  <img src="images/img22.png" alt="img22" width="500">
 
 Также была проверена доставка этих алертов:
 
-<img src="images/img23.png" alt="img23" width="490"><img src="images/img24.png" alt="img24" width="500">
+<img src="images/img23.png" alt="img23" width="490">  <img src="images/img24.png" alt="img24" width="500">
 
 Для проверки последнего алерта было уменьшено число реплик API до нуля через Helm:
 ```
