@@ -21,7 +21,7 @@ patineshka@p33:~$ date -u
 ```
 - для увеличения памяти
 
-<img src="images/img2.png" alt="img2" width="600">
+<img src="images/img2.png" alt="img2" width="800">
 
 Осталось установить необходимые инструменты: 
 1. Minikube - для создания локального кластера 
@@ -63,7 +63,7 @@ Service дает постоянное имя `lab2-api` и направляет 
 
 Ура! API развернут 🙂 Теперь проверим все endpoint:
 
-<img src="images/img5.png" alt="img5" width="600">
+<img src="images/img5.png" alt="img5" width="800">
 
 Также описание эндпоинтов:
  | Эндпоинт | Описание |
@@ -107,7 +107,7 @@ helm upgrade --install monitoring \
 ```
 Работает 🙂 :
 
-<img src="images/img6.png" alt="img6" width="600">
+<img src="images/img6.png" alt="img6" width="800">
 
 Также была обновлена установка API:
 
@@ -130,7 +130,7 @@ namespace="lab2", service="lab2-api"}[1m])),0.000001)`
 
 Эндпоинт /slow позволил проверить график "p95 времени ответа"
 
-<img src="images/img9.png" alt="img9" width="600">
+<img src="images/img9.png" alt="img9" width="900">
 
 ## Часть 2 — Логи (Loki + Grafana)
 Начинаются флэшбеки с написания диплома... (благо не Elasticsearch..)
@@ -164,7 +164,7 @@ helm upgrade --install loki grafana-community/loki \
 ```
 Все запустилось, под работает 🙂 :
 
-<img src="images/img10.png" alt="img10" width="600">
+<img src="images/img10.png" alt="img10" width="900">
 
 ### Alloy
 Для сбора логов сначала хотела подключить Promtail, но увидела, что он не больше не поддерживается (https://grafana.com/docs/loki/latest/send-data/promtail/). Для лабы скорее всего хватило бы последней версии, но хочется попробовать что-то новое. Поэтому настрою Alloy
@@ -195,7 +195,7 @@ helm upgrade --install alloy grafana/alloy \
 
 Также я еще добавила timechart по http-статусам:
 
-<img src="images/img13.png" alt="img13" width="600">
+<img src="images/img13.png" alt="img13" width="400">
 
 ##Часть 3 — Трейсы (OpenTelemetry + Jaeger)
 
@@ -229,11 +229,11 @@ helm upgrade --install jaeger jaegertracing/jaeger \
 
 Был запущен Jaeger и три эндпоинта /slow, /fail и /health. В интерфейсе Jaeger они отображаются:
 
-<img src="images/img15.png" alt="img15" width="500"><img src="images/img16.png" alt="img16" width="500">
+<img src="images/img15.png" alt="img15" width="450"><img src="images/img16.png" alt="img16" width="500">
 
 Также они найдены в Grafana по trace_id:
 
-<img src="images/img17.png" alt="img17" width="500"><img src="images/img18.png" alt="img18" width="500">
+<img src="images/img17.png" alt="img17" width="500"><img src="images/img18.png" alt="img18" width="450">
 
 ## Часть 4 — Алерты (Alertmanager + Karma)
 
@@ -263,11 +263,11 @@ helm upgrade monitoring prometheus-community/kube-prometheus-stack \
 
 Для проверки срабатывания алертов были запущены запросы к /fail и /load в течение двух минут, после чего в Karma отобразились алерты Lab2HighErrorRate и Lab2HighLatency:
 
-<img src="images/img21.png" alt="img21" width="500"><img src="images/img22.png" alt="img22" width="500">
+<img src="images/img21.png" alt="img21" width="470"><img src="images/img22.png" alt="img22" width="500">
 
 Также была проверена доставка этих алертов:
 
-<img src="images/img23.png" alt="img23" width="500"><img src="images/img24.png" alt="img24" width="500">
+<img src="images/img23.png" alt="img23" width="490"><img src="images/img24.png" alt="img24" width="500">
 
 Для проверки последнего алерта было уменьшено число реплик API до нуля через Helm:
 ```
@@ -280,11 +280,11 @@ helm upgrade lab2-api ~/lab2/charts/api \
 ```
 Через несколько минут алерт отобразился в Karma:
 
-<img src="images/img25.png" alt="img25" width="600">
+<img src="images/img25.png" alt="img25" width="500">
 
 Также сработала доставка алерта (после увеличения реплики до 1):
 
-<img src="images/img26.png" alt="img26" width="600">
+<img src="images/img26.png" alt="img26" width="500">
 
 Полный стек мониторинга настроен! ;)
 
