@@ -1,0 +1,47 @@
+controller:
+  type: daemonset
+
+rbac:
+  create: false
+
+alloy:
+  mounts:
+    varlog: true
+
+  securityContext:
+    runAsUser: 0
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      memory: 512Mi
+
+  configMap:
+    content: |
+      local.file_match "api_logs" {
+        path_targets = [{
+          __path__  = "/var/log/pods/lab2_lab2-api-*/api/*.log",
+          namespace = "lab2",
+          app       = "lab2-api",
+          container = "api",
+        }]
+      }
+
+      loki.source.file "api_logs" {
+        targets    = local.file_match.api_logs.targets
+        forward_to = [loki.process.api_logs.receiver]
+      }
+
+      loki.process "api_logs" {
+        stage.cri {}
+
+        forward_to = [loki.write.local.receiver]
+      }
+
+      loki.write "local" {
+        endpoint {
+          url = "http://loki-gateway.monitoring.svc.cluster.local/loki/api/v1/push"
+        }
+      }

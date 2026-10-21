@@ -1,0 +1,78 @@
+additionalPrometheusRulesMap:
+  lab2-api-alerts:
+    groups:
+      - name: lab2-api
+        rules:
+          - alert: Lab2HighErrorRate
+            expr: |
+              (
+                sum(rate(api_requests_total{
+                  namespace="lab2", service="lab2-api", status=~"5.."
+                }[1m]))
+                /
+                sum(rate(api_requests_total{
+                  namespace="lab2", service="lab2-api"
+                }[1m]))
+              ) > 0.20
+            for: 1m
+            labels:
+              severity: critical
+              namespace: lab2
+              service: lab2-api
+            annotations:
+              summary: "Более 20% запросов API завершаются ошибками"
+              description: "Высокая доля HTTP 5xx сохраняется одну минуту."
+
+          - alert: Lab2HighLatency
+            expr: |
+              histogram_quantile(
+                0.95,
+                sum by (le) (
+                  rate(api_request_duration_seconds_bucket{
+                    namespace="lab2", service="lab2-api"
+                  }[1m])
+                )
+              ) > 1
+            for: 1m
+            labels:
+              severity: critical
+              namespace: lab2
+              service: lab2-api
+            annotations:
+              summary: "p95 времени ответа API превышает секунду"
+              description: "Повышенное время ответа сохраняется одну минуту."
+
+          - alert: Lab2APIDown
+            expr: |
+              (
+                max(up{namespace="lab2", service="lab2-api"}) == 0
+              )
+              or
+              absent(up{namespace="lab2", service="lab2-api"})
+            for: 1m
+            labels:
+              severity: critical
+              namespace: lab2
+              service: lab2-api
+            annotations:
+              summary: "Метрики API недоступны"
+              description: "Все цели API недоступны или отсутствуют одну минуту."
+
+alertmanager:
+  config:
+    global:
+      resolve_timeout: 5m
+
+    route:
+      receiver: lab2-webhook
+      group_by: ["alertname", "namespace", "service"]
+      group_wait: 10s
+      group_interval: 30s
+      repeat_interval: 5m
+      routes: []
+
+    receivers:
+      - name: lab2-webhook
+        webhook_configs:
+          - url: http://alert-receiver.monitoring.svc.cluster.local:8080/
+            send_resolved: true

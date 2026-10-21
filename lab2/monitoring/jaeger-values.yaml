@@ -1,0 +1,57 @@
+fullnameOverride: jaeger
+
+jaeger:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      memory: 512Mi
+
+userconfig:
+  service:
+    extensions:
+      - jaeger_storage
+      - jaeger_query
+      - healthcheckv2
+    pipelines:
+      traces:
+        receivers: [otlp]
+        processors: [batch]
+        exporters: [jaeger_storage_exporter]
+
+  extensions:
+    healthcheckv2:
+      use_v2: true
+      http:
+        endpoint: 0.0.0.0:13133
+
+    jaeger_query:
+      storage:
+        traces: memory
+      http:
+        endpoint: 0.0.0.0:16686
+
+    jaeger_storage:
+      backends:
+        memory:
+          memory:
+            max_traces: 2000
+
+  receivers:
+    otlp:
+      protocols:
+        grpc:
+          endpoint: 0.0.0.0:4317
+        http:
+          endpoint: 0.0.0.0:4318
+
+  processors:
+    batch:
+      timeout: 1s
+      send_batch_size: 128
+
+  exporters:
+    jaeger_storage_exporter:
+      trace_storage: memory

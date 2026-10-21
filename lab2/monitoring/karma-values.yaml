@@ -1,0 +1,23 @@
+fullnameOverride: karma
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    memory: 256Mi
+
+configMap:
+  enabled: true
+  rawConfig:
+    alertmanager:
+      interval: 10s
+      servers:
+        - name: lab2
+          uri: http://monitoring-kube-prometheus-alertmanager.monitoring.svc.cluster.local:9093
+          timeout: 10s
+          proxy: true
+
+    listen:
+      address: "0.0.0.0"
+      port: 8080
