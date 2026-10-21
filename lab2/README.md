@@ -105,30 +105,54 @@ helm upgrade --install monitoring \
   -f ~/lab2/monitoring/values.yaml \
   --wait --timeout 10m
 ```
-Работает 🙂 :
+Работает 🙂 Поднялись Prometheus, Grafana, Alertmanager, оператор и экспортеры. PVC для Prometheus и Grafana перешли в `Bound`: :
 
 <img src="images/img6.png" alt="img6" width="800">
 
-Также была обновлена установка API:
+После установки оператора добавила в чарт API `templates/servicemonitor.yaml`. Он описывает, какой Service найти, какой порт и путь `/metrics` опрашивать. Оператор использует ServiceMonitor для настройки сбора, а сами запросы выполняет Prometheus
+
+Обновила установку API:
 
 <img src="images/img7.png" alt="img7" width="600">
 
-Запустила Prometheus и теперь он собирает метрики: 
+Для доступа к Prometheus:
+
+```bash
+minikube -p lab2 kubectl -- port-forward \
+  -n monitoring svc/monitoring-kube-prometheus-prometheus 9091:9090
+```
+
+Проверила сбор метрик:
+
+```bash
+curl -fsSG http://127.0.0.1:9091/api/v1/query \
+  --data-urlencode 'query=up{namespace="lab2",service="lab2-api"}'
+```
+
+Значение `up = 1` означает, что последний сбор метрик прошел успешно:
 
 <img src="images/img8.png" alt="img8" width="600">
 
 ### Grafana
+Для открытия интерфейса использовала проброс:
+
+```bash
+minikube -p lab2 kubectl -- port-forward \
+  -n monitoring svc/monitoring-grafana 3001:80
+```
+
+Порт `3001` дополнительно пробросила на Mac через вкладку Ports в VSCode. Источник Prometheus уже был настроен установленным чартом
+
 В графане были построены три графика:
 - Интенсивность запросов, RPS - `sum(rate(api_requests_total{namespace="lab2", service="lab2-api"}[1m]))`
 - Доля ошибок 5xx, % - `100 * (sum(rate(api_requests_total{namespace="lab2", service="lab2-api", status=~"5.."}[1m])) or vector(0)) / clamp_min(sum(rate(api_requests_total{
 namespace="lab2", service="lab2-api"}[1m])),0.000001)`
 - p95 времени ответа - `histogram_quantile(0.95, sum by (le) (rate(api_request_duration_seconds_bucket{namespace="lab2", service="lab2-api"}[1m])))`
 
-С помощью эндпоинта /load были инициировано 20 запросов к /health и график "Интенсивность запросов" вырос до 5 req/s 
-
-Вызов 20 раз эндпоинта /fail увеличил долю ошибок на соответствующем графике до ~80%
-
-Эндпоинт /slow позволил проверить график "p95 времени ответа"
+Проверила реакцию графиков:
+- Серия вызовов `/load` увеличила интенсивность запросов примерно до 5 req/s. Каждый вызов создает 20 внутренних запросов к `/health`
+- Вызовы `/fail` увеличили долю ошибок примерно до 80% в наблюдаемом окне
+- Вызовы `/slow` подняли p95. Хотя задержка задана в 2 секунды, оценка по бакетам гистограммы получилась ближе к 3 секундам
 
 <img src="images/img9.png" alt="img9" width="900">
 
@@ -167,7 +191,7 @@ helm upgrade --install loki grafana-community/loki \
 <img src="images/img10.png" alt="img10" width="900">
 
 ### Alloy
-Для сбора логов сначала хотела подключить Promtail, но увидела, что он не больше не поддерживается (https://grafana.com/docs/loki/latest/send-data/promtail/). Для лабы скорее всего хватило бы последней версии, но хочется попробовать что-то новое. Поэтому настрою Alloy
+Для сбора логов сначала хотела подключить Promtail, но увидела, что он не [больше не поддерживается](https://grafana.com/docs/loki/latest/send-data/promtail/). Для лабы скорее всего хватило бы последней версии, но хочется попробовать что-то новое. Поэтому настрою Alloy
 
 Был добавлен файл `alloy-values.yaml`, в котором:
 - /var/log ноды подключается к агенту
@@ -197,9 +221,16 @@ helm upgrade --install alloy grafana/alloy \
 
 <img src="images/img13.png" alt="img13" width="400">
 
-##Часть 3 — Трейсы (OpenTelemetry + Jaeger)
+## Часть 3 — Трейсы (OpenTelemetry + Jaeger)
 
-Также был добавлен Helm-репозиторий:
+Сервис инструментирован через OpenTelemetry:
+- `FlaskInstrumentor` автоматически создает корневые спаны входящих HTTP-запросов
+- `RequestsInstrumentor` инструментирует исходящие запросы библиотеки requests, в том числе из `/load`
+- внутри `/slow` вручную создан вложенный спан `slow-op`
+- для `/fail` устанавливается статус ошибки и добавляется событие `Intentional failure`
+- в JSON-логи записываются `trace_id` и `span_id` текущего спана
+
+Добавила Helm-репозиторий:
 ```
 patineshka@p33:~/lab2/setup$ helm repo add jaegertracing \
   https://jaegertracing.github.io/helm-charts
@@ -231,16 +262,27 @@ helm upgrade --install jaeger jaegertracing/jaeger \
 
 <img src="images/img15.png" alt="img15" width="450">  <img src="images/img16.png" alt="img16" width="500">
 
+У `/slow` видны два спана: родительский `GET /slow` и вложенный `slow-op`. Почти все время запроса занимает именно `slow-op`
+
+У `/fail` видны статус `500`, отметка `error=true` и событие `Intentional failure`
+
 Также они найдены в Grafana по trace_id:
 
 <img src="images/img17.png" alt="img17" width="500">  <img src="images/img18.png" alt="img18" width="450">
 
+В логах и Jaeger совпали идентификаторы. То есть теперь можно увидеть ошибку в Loki, взять ее `trace_id` и открыть соответствующий трейс в Jaeger 🙂
+
 ## Часть 4 — Алерты (Alertmanager + Karma)
 
-Были добавлены три алерта прописанные в alerts-values.yaml:
-- Более 20% запросов API завершаются ошибками
-- p95 времени ответа API превышает секунду
-- Метрики API недоступны
+В `monitoring/alerts-values.yaml` добавила три правила через `additionalPrometheusRulesMap`
+
+Для всех алертов указала `severity: critical` и `for: 1m` 
+
+| Алерт | Почему важно | Что делать дежурному |
+|---|---|---|
+| Lab2HighErrorRate | Более 20% запросов завершаются ошибками 5xx — пользователи не могут выполнить часть действий | Проверить логи ошибок в Loki, найти соответствующие трейсы в Jaeger, проверить последние изменения приложения |
+| Lab2HighLatency | p95 времени ответа превышает секунду — пользователи долго ждут ответа | Найти медленные трейсы, определить долгую операцию, проверить нагрузку и ограничения ресурсов |
+| Lab2APIDown | Prometheus не может получить метрики ни с одного экземпляра API или цели отсутствуют | Проверить Deployment, количество реплик, состояние подов, Service и readiness-пробы |
 
 Затем были применены настройки:
 ```
@@ -282,12 +324,43 @@ helm upgrade lab2-api ~/lab2/charts/api \
 
 <img src="images/img25.png" alt="img25" width="500">
 
-Также сработала доставка алерта (после увеличения реплики до 1):
+Также сработала доставка алерта (после увеличения реплики до 1 и восстановления API):
 
 <img src="images/img26.png" alt="img26" width="500">
+
+## Что получилось
+
+Теперь у сервиса есть весь стек мониторинга:
+- Prometheus собирает метрики API через ServiceMonitor
+- Grafana показывает RPS, долю ошибок и p95, а также позволяет искать логи в Loki
+- Alloy читает логи подов и отправляет их в Loki
+- OpenTelemetry отправляет трейсы в Jaeger
+- По `trace_id` можно связать лог с трейсом одного запроса
+- Prometheus вычисляет три критичных алерта, Alertmanager доставляет их webhook-получателю
+- Karma показывает активные алерты
+
+Основные файлы:
+
+| Путь | Для чего нужен |
+|---|---|
+| `api/` | Код API, зависимости и Dockerfile |
+| `charts/api/` | Helm-чарт API, Service и ServiceMonitor |
+| `charts/alert-receiver/` | Helm-чарт получателя уведомлений |
+| `monitoring/values.yaml` | Настройки kube-prometheus-stack |
+| `monitoring/loki-values.yaml` | Настройки Loki |
+| `monitoring/alloy-values.yaml` | Чтение и отправка логов |
+| `monitoring/jaeger-values.yaml` | Прием и хранение трейсов |
+| `monitoring/alerts-values.yaml` | Правила Prometheus и получатель Alertmanager |
+| `monitoring/karma-values.yaml` | Подключение Karma к Alertmanager |
+| `images/` | Скриншоты проверок |
 
 Полный стек мониторинга настроен! ;)
 
 ## Топ ошибок
 И снова они...
 
+1. **Графана решила, что ей мало памяти.**
+Перезапускалась, роняла port-forward и мешала строить графики. Оказалось, что словила `OOMKilled`. Увеличила лимит с `512Mi` до `1Gi`, и стало спокойнее)
+
+5. **Алерт есть, уведомления нет.**
+Karma показывала алерт, а webhook молчал. Настройки в Helm выглядели правильно, но Alertmanager использовал старую конфигурацию. Оказалось оставшийся маршрут на несуществующего получателя `null`. Помогли логи оператора и явное задание `routes: []`
