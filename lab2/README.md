@@ -235,7 +235,7 @@ helm upgrade --install jaeger jaegertracing/jaeger \
 
 <img src="images/img17.png" alt="img17" width="500"><img src="images/img18.png" alt="img18" width="500">
 
-##Часть 4 — Алерты (Alertmanager + Karma)
+## Часть 4 — Алерты (Alertmanager + Karma)
 
 Были добавлены три алерта прописанные в alerts-values.yaml:
 - Более 20% запросов API завершаются ошибками
