@@ -255,6 +255,39 @@ helm upgrade monitoring prometheus-community/kube-prometheus-stack \
 
 Правила для алертов применились: 
 
-<img src="images/img19.png" alt="img19" width="500">
+<img src="images/img19.png" alt="img19" width="600">
 
+После этого была установлена Karma для получения алертов через веб-интерфейс:
+
+<img src="images/img20.png" alt="img20" width="600">
+
+Для проверки срабатывания алертов были запущены запросы к /fail и /load в течение двух минут, после чего в Karma отобразились алерты Lab2HighErrorRate и Lab2HighLatency:
+
+<img src="images/img21.png" alt="img21" width="500"><img src="images/img22.png" alt="img22" width="500">
+
+Также была проверена доставка этих алертов:
+
+<img src="images/img23.png" alt="img23" width="500"><img src="images/img24.png" alt="img24" width="500">
+
+Для проверки последнего алерта было уменьшено число реплик API до нуля через Helm:
+```
+helm upgrade lab2-api ~/lab2/charts/api \
+  --namespace lab2 \
+  --kube-context lab2 \
+  --reuse-values \
+  --set replicaCount=0 \
+  --wait --timeout 3m
+```
+Через несколько минут алерт отобразился в Karma:
+
+<img src="images/img25.png" alt="img25" width="600">
+
+Также сработала доставка алерта (после увеличения реплики до 1):
+
+<img src="images/img26.png" alt="img26" width="600">
+
+Полный стек мониторинга настроен! ;)
+
+## Топ ошибок
+И снова они...
 
