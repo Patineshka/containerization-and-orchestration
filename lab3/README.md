@@ -557,7 +557,10 @@ done
 100 * (sum(rate(api_requests_total{namespace="lab3", service="shop-api", status=~"5.."}[1m])) or vector(0)) /
 clamp_min(sum(rate(api_requests_total{namespace="lab3", service="shop-api"}[1m])),0.000001)
 ```
-- Время с последнего успешного опроса БД worker: `time() - max(shop_worker_last_success_timestamp_seconds{namespace="lab3", service="shop-worker"} and on(namespace, pod)(up{namespace="lab3", service="shop-worker"} == 1))`
+- Время с последнего успешного опроса БД worker:
+```
+time() - max(shop_worker_last_success_timestamp_seconds{namespace="lab3", service="shop-worker"} and on(namespace, pod)(up{namespace="lab3", service="shop-worker"} == 1))
+```
 
 И конечно, тут без задержки времени на виртуалке снова не обошлось... VM жила с отстованием на 15 минут. 
 Сначала еще и запустила команду синхронизации из Ubuntu, подключившись по SSH к ней же. Время виртуалки успешно скопировалось на ту же виртуалку — полезность примерно нулевая :)
