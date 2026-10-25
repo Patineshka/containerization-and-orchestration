@@ -171,27 +171,23 @@ Pod с app и owner проходит проверку:
 
 ### Разрешенные образы
 
-Для образов разрешила конкретные репозитории приложения и тестов: `docker.io/library/shop-api`, `shop-worker`, `busybox`, `lab2-api`. Для них проверяется префикс с двоеточием перед тегом: например, `shop-api-unknown:v1` уже не совпадет.
+Для образов разрешила конкретные репозитории приложения и тестов: `docker.io/library/shop-api`, `shop-worker`, `busybox`, `lab2-api`. Для них проверяется префикс с двоеточием перед тегом
 
-Позднее для PostgreSQL добавила `ghcr.io/cloudnative-pg/postgresql:` и конкретный служебный образ `ghcr.io/cloudnative-pg/cloudnative-pg:1.30.1`.
-
-Это проверка имени образа, а не его подписи, наличия в реестре или возможности скачивания.
+Применение allowed-images:
 
 <img src="images/img15.png" alt="img15" width="650">
 
-*img15 — Применение allowed-images*
+Разрешенный образ busybox проходит проверку%
 
 <img src="images/img16.png" alt="img16" width="700">
 
-*img16 — Разрешенный образ busybox проходит проверку*
+Nginx не входит в список разрешенных репозиториев и отклоняется:
 
 <img src="images/img17.png" alt="img17" width="700">
 
-*img17 — nginx не входит в список разрешенных репозиториев и отклоняется*
-
 ### Общая проверка пяти нарушений
 
-Подготовила пять сырых манифестов в `tests/`. Проверяла их через API-сервер без фактического запуска опасных контейнеров:
+Подготовила пять сырых манифестов в `tests/`. Проверяла их через API-сервер :
 
 ```bash
 for file in ~/lab3/tests/*-pod.yaml; do
@@ -199,10 +195,21 @@ for file in ~/lab3/tests/*-pod.yaml; do
   minikube -p lab2 kubectl -- apply --dry-run=server -f "$file"
 done
 ```
+Привела каждый файл к одному нарушению. В итоге:
 
-Сначала тесты получились не совсем независимыми: Pod без лимитов одновременно не имел меток, а privileged-тест тоже нарушал несколько правил. При исправлении еще сбились отступы YAML — получила `mapping values are not allowed in this context`.
-
-Исправила отступы и привела каждый файл к одному нарушению. В итоге:
+```
+patineshka@p33:~/lab3$ for file in ~/lab3/tests/*.yaml; do   echo "Проверка: $file";   minikube -p lab2 kubectl -- apply --dry-run=server -f "$file"; done
+Проверка: /home/patineshka/lab3/tests/foreign-image-pod.yaml
+Error from server: error when creating "/home/patineshka/lab3/tests/foreign-image-pod.yaml": admission webhook "vpol.validate.kyverno.svc-fail" denied the request: Policy allowed-images failed: Image repository is not allowed
+Проверка: /home/patineshka/lab3/tests/host-network-pod.yaml
+Error from server: error when creating "/home/patineshka/lab3/tests/host-network-pod.yaml": admission webhook "vpol.validate.kyverno.svc-fail" deniedthe request: Policy disallow-host-namespaces failed: hostNetwork is forbidden
+Проверка: /home/patineshka/lab3/tests/no-labels-pod.yaml
+Error from server: error when creating "/home/patineshka/lab3/tests/no-labels-pod.yaml": admission webhook "vpol.validate.kyverno.svc-fail" denied the request: Policy require-labels failed: Nonempty app and owner labels are required
+Проверка: /home/patineshka/lab3/tests/no-limits-pod.yaml
+Error from server: error when creating "/home/patineshka/lab3/tests/no-limits-pod.yaml": admission webhook "vpol.validate.kyverno.svc-fail" denied the request: Policy require-limits failed: CPU and memory limits are required
+Проверка: /home/patineshka/lab3/tests/privileged-pod.yaml
+Error from server: error when creating "/home/patineshka/lab3/tests/privileged-pod.yaml": admission webhook "vpol.validate.kyverno.svc-fail" denied the request: Policy disallow-privileged failed: Privileged containers are forbidden
+```
 
 | Тест | Единственный отказ |
 |---|---|
@@ -211,8 +218,6 @@ done
 | `no-labels-pod.yaml` | `require-labels` |
 | `no-limits-pod.yaml` | `require-limits` |
 | `privileged-pod.yaml` | `disallow-privileged` |
-
-Важно: `created (server dry run)` означает, что запрос прошел проверку, но объект не был сохранен. Политики применяла отдельно, уже без dry-run.
 
 ## Часть 2 — Helm-чарт api и worker
 
