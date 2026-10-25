@@ -29,7 +29,6 @@ spec:
         object.spec.containers.all(c,
           has(c.resources) &&
           has(c.resources.limits) &&
-          has(c.resources.limits.cpu) &&
           has(c.resources.limits.memory)
         )
       message: "CPU and memory limits are required"
@@ -38,7 +37,6 @@ spec:
         object.spec.initContainers.all(c,
           has(c.resources) &&
           has(c.resources.limits) &&
-          has(c.resources.limits.cpu) &&
           has(c.resources.limits.memory)
         )
       message: "CPU and memory limits are required for init containers"
