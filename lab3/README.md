@@ -1,14 +1,38 @@
-# Лаба 3 — Собери платформу для shop
-
-В этой лабораторной собрала платформу для небольшого магазина: API, worker и PostgreSQL. Настроила политики допуска, проверила восстановление подов, rolling update и rollback, а потом специально отключила API-сервер и посмотрела, что продолжит работать 🙂
-
-Использовала ту же Ubuntu Server ARM64 в UTM на Mac с Apple Silicon и кластер Minikube `lab2` из второй лабы. Название профиля оставила прежним: в нем уже работает мониторинг. Приложение разместила в namespace `lab3`.
+# Лаба 3 — Сборка платформы для shop
 
 ## Часть 0 — Сервисы и подготовка стенда
 
-Перед началом проверила время, память, место на диске и состояние кластера. На VM доступно около 11 ГиБ RAM, на корневой файловой системе оставалось 28 ГБ. Нода была `Ready`, все компоненты мониторинга работали.
+Я спользовала тот же кластер Minikube `lab2` из второй лабы. Название профиля оставила прежним и в нем уже работает мониторинг
 
-Новый стек мониторинга не устанавливала — дальше использовала Prometheus, Grafana, Alertmanager и Karma из второй лабораторной.
+Приложение разместила в namespace `lab3`. Перед началом также проверила время, память, место на диске и состояние кластера. На VM доступно около 11 ГиБ RAM, на корневой файловой системе оставалось 28 ГБ. Нода была `Ready`, все компоненты мониторинга работали:
+
+```
+patineshka@p33:~$ free -h
+               total        used        free      shared  buff/cache   available
+Mem:            11Gi       3,3Gi       849Mi        18Mi       7,2Gi       7,8Gi
+Swap:          4,0Gi        64Ki       4,0Gi
+patineshka@p33:~$ df -h /
+Filesystem                         Size  Used Avail Use% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv   50G   20G   28G  43% /
+patineshka@p33:~$ minikube status -p lab2
+lab2
+type: Control Plane
+host: Running
+kubelet: Running
+apiserver: Running
+kubeconfig: Configured
+patineshka@p33:~$ helm list -A --kube-context lab2
+NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                           APP VERSION
+alert-receiver  monitoring      1               2026-10-20 21:30:12.645626134 +0000 UTC deployed        alert-receiver-0.1.0
+alloy           monitoring      1               2026-10-20 19:32:18.931919514 +0000 UTC deployed        alloy-1.14.0                    v1.21.0
+jaeger          monitoring      1               2026-10-20 20:04:21.589915203 +0000 UTC deployed        jaeger-4.16.1                   2.22.0
+karma           monitoring      1               2026-10-20 21:36:04.183051878 +0000 UTC deployed        karma-2.13.1                    v0.131
+lab2-api        lab2            6               2026-10-21 09:33:09.053464287 +0000 UTC deployed        lab2-api-0.1.0                  v1
+loki            monitoring      1               2026-10-20 19:16:50.018896876 +0000 UTC deployed        loki-18.17.1                    3.7.8
+monitoring      monitoring      7               2026-10-20 21:53:02.718453588 +0000 UTC deployed        kube-prometheus-stack-92.10.1   v0.94.1
+```
+
+Новый стек мониторинга не устанавливала и дальше использовала Prometheus, Grafana, Alertmanager и Karma из второй лабораторной
 
 Для приложения подготовлены два сервиса:
 
@@ -21,28 +45,26 @@
 
 | Эндпоинт | Назначение |
 |---|---|
-| `GET /health` | Возвращает `ok`; при `HEALTH_FAIL=true` — ошибку 503 |
+| `GET /health` | Возвращает `ok`, при `HEALTH_FAIL=true` — ошибку 503 |
 | `POST /order` | Создает заказ в PostgreSQL |
 | `GET /orders` | Возвращает последние 100 заказов |
 | `GET /metrics` | Отдает метрики Prometheus |
-| `GET /fail` | Намеренно возвращает 500 для проверки алерта |
+| `GET /fail` | Возвращает 500 для проверки алерта |
 | `GET /slow`, `GET /load` | Сохранены для проверок задержки и нагрузки |
 
-У worker тоже есть HTTP-сервер с `/health` и `/metrics`. Его health-проверка учитывает работу фонового цикла, но не требует постоянной доступности БД: сбой PostgreSQL не должен перезапускать все приложения по liveness.
+У worker тоже есть HTTP-сервер с `/health` и `/metrics`. Его health-проверка учитывает работу фонового цикла, но не требует постоянной доступности БД, так как сбой PostgreSQL не должен перезапускать все приложения по liveness
 
-Для каждого сервиса подготовлены `server.py`, `observability.py`, `db.py`, `requirements.txt`, `Dockerfile` и `.dockerignore`. Сохранены JSON-логи, метрики и инструментация OpenTelemetry. Пароли в исходники не записывала.
+Для каждого сервиса подготовлены `server.py`, `observability.py`, `db.py`, `requirements.txt`, `Dockerfile` и `.dockerignore`. Сохранены JSON-логи, метрики и инструментация OpenTelemetry
 
-Две реплики worker выбирают заказы через `FOR UPDATE SKIP LOCKED`: занятая одной репликой строка пропускается другой. Выбор заказа и отметка `processed` выполняются в одной транзакции. В этой лабе обработка — только изменение записи в БД, без внешних платежей и других побочных действий.
-
-Сначала подготовила сервисы, но устанавливать их стала только после настройки политик.
+Сервисы подготовлены, но установлю их только после подготовки политик 🙂
 
 ## Часть 1 — Ограждения на кластер
 
 ### Установка Kyverno
 
-Выбрала Kyverno: политики описываются Kubernetes-манифестами с CEL-выражениями, для этой лабы такой вариант понятнее, чем отдельно осваивать Rego в Gatekeeper.
+Выбрала Kyverno, так как политики описываются Kubernetes манифестами с CEL выражениями, для этой лабы такой вариант понятнее, чем отдельно осваивать Rego в Gatekeeper
 
-При создании ресурса API-сервер обращается к admission webhook. Если политика запрещает Pod, его создание отклоняется до сохранения — kubelet такой Pod запускать не начинает.
+При создании ресурса API-сервер обращается к admission webhook. Если политика запрещает Pod, его создание отклоняется до сохранения и kubelet такой Pod запускать не начинает
 
 Установила Kyverno через Helm:
 
@@ -53,15 +75,11 @@ helm repo update
 helm upgrade --install kyverno kyverno/kyverno   --version 3.9.2   --namespace kyverno --create-namespace   --kube-context lab2   --wait --timeout 10m
 ```
 
-Версия Kyverno — `1.19.2`, Kubernetes — `1.37.0`. Эта версия Kubernetes была новее диапазона, указанного в проверенной таблице совместимости Kyverno, поэтому установку и работу правил проверяла на своем стенде. Успешные проверки не означают гарантированную совместимость всех возможностей.
+Версия Kyverno — `1.19.2`, Kubernetes — `1.37.0`. Эта версия Kubernetes была новее диапазона, указанного в проверенной таблице совместимости Kyverno, поэтому установку и работу правил проверяла на своем стенде
 
 Все четыре контроллера запустились, webhook-конфигурации зарегистрировались:
 
 <img src="images/img1.png" alt="img1" width="700">
-
-*img1 — Контроллеры Kyverno и зарегистрированные webhook-конфигурации*
-
-При установке появилось предупреждение об устаревании `ClusterPolicy`. Поэтому использовала новый тип `policies.kyverno.io/v1`, `ValidatingPolicy`.
 
 Настроила пять кластерных политик:
 
@@ -69,13 +87,13 @@ helm upgrade --install kyverno kyverno/kyverno   --version 3.9.2   --namespace k
 |---|---|---|
 | `disallow-privileged.yaml` | Запрет `privileged: true` у обычных и init-контейнеров | Контейнер не получает чрезмерные привилегии |
 | `require-limits.yaml` | Обязательные лимиты CPU и памяти | Ограничение потребления ресурсов отдельным контейнером |
-| `require-labels.yaml` | Непустые метки `app` и `owner` | Понятно, к чему относится Pod и кто за него отвечает |
+| `require-labels.yaml` | Непустые метки `app` и `owner` | К чему относится Pod и кто за него отвечает |
 | `disallow-host-namespaces.yaml` | Запрет `hostNetwork`, `hostPID`, `hostIPC` | Сохранение изоляции от сети, процессов и IPC ноды |
 | `allowed-images.yaml` | Разрешены только выбранные репозитории образов | Произвольный образ не пройдет admission |
 
-У всех политик задано `validationActions: [Deny]`. Проверяются операции создания и обновления Pod.
+У всех политик задано `validationActions: [Deny]`. Проверяются операции создания и обновления Pod
 
-Из области действия явно исключены `kube-system`, `kube-public`, `kube-node-lease`, `kyverno`, `monitoring`, позднее добавлен `cnpg-system`. Это инфраструктурные исключения: например, агентам мониторинга может понадобиться доступ к ноде. Namespace `lab3`, в том числе Pod PostgreSQL, остается под проверками. Поэтому «кластерная политика» здесь не означает отсутствие исключений.
+Из области действия явно исключены `kube-system`, `kube-public`, `kube-node-lease`, `kyverno`, `monitoring`, позднее добавлен `cnpg-system`. Это инфраструктурные исключения, так как, например, агентам мониторинга может понадобиться доступ к ноде
 
 ### Запрет privileged
 
@@ -83,81 +101,73 @@ helm upgrade --install kyverno kyverno/kyverno   --version 3.9.2   --namespace k
 
 <img src="images/img2.png" alt="img2" width="650">
 
-*img2 — Проверка и применение disallow-privileged*
-
-Условие разрешает контейнер, если `securityContext` отсутствует, поле `privileged` не указано или равно `false`. Проверка `.all(...)` требует соответствия каждого контейнера, а не хотя бы одного.
+Условие разрешает контейнер, если `securityContext` отсутствует, поле `privileged` не указано или равно `false`. Проверка `.all(...)` требует соответствия каждого контейнера, а не хотя бы одного
 
 Pod с `privileged: true` отклоняется:
 
 <img src="images/img3.png" alt="img3" width="700">
 
-*img3 — Отказ для привилегированного контейнера*
-
 При замене на `false` тот же тест проходит:
 
 <img src="images/img4.png" alt="img4" width="700">
 
-*img4 — Безопасный вариант проходит серверный dry-run*
-
-Init-контейнеры проверяются отдельно. Если списка `initContainers` нет, проверять нечего — это допустимый вариант.
+Init-контейнеры проверяются отдельно. Если списка `initContainers` нет, проверять нечего 
 
 ### Обязательные лимиты
 
-Следующая политика требует оба поля: `resources.limits.cpu` и `resources.limits.memory`. Условия соединены через `&&`: нужен не любой из лимитов, а оба.
+Следующая политика требует поля: `resources.limits.cpu` и `resources.limits.memory`
+
+Применение политики обязательных лимитов:
 
 <img src="images/img5.png" alt="img5" width="650">
 
-*img5 — Применение политики обязательных лимитов*
+Отказ для Pod без лимитов:
 
 <img src="images/img6.png" alt="img6" width="700">
 
-*img6 — Отказ для Pod без лимитов*
+После добавления CPU и memory limits тест проходит:
 
 <img src="images/img7.png" alt="img7" width="650">
 
-*img7 — После добавления CPU и memory limits тест проходит*
-
-CPU limit ограничивает потребление сверху, а не гарантирует выделение такого количества CPU.
-
 ### Обязательные метки
 
-Добавила правило для непустых `app` и `owner`. Метки относятся ко всему Pod, поэтому перебирать контейнеры здесь не нужно.
+Добавила правило для непустых `app` и `owner`. Метки относятся ко всему Pod, поэтому перебирать контейнеры здесь не нужно
+
+Применение require-labels:
 
 <img src="images/img8.png" alt="img8" width="650">
 
-*img8 — Применение require-labels*
+Отказ для Pod без меток:
 
 <img src="images/img9.png" alt="img9" width="700">
 
-*img9 — Отказ для Pod без меток*
+Pod с app и owner проходит проверку:
 
 <img src="images/img10.png" alt="img10" width="700">
 
-*img10 — Pod с app и owner проходит проверку*
-
-Тут пришлось разобраться с уровнями метаданных: для обычного Pod нужны `metadata.labels`, а в Deployment метки будущих Pod задаются в `spec.template.metadata.labels`. Метки самого Deployment автоматически в Pod не копируются.
+Тут пришлось разобраться с уровнями метаданных: для обычного Pod нужны `metadata.labels`, а в Deployment метки будущих Pod задаются в `spec.template.metadata.labels`. Метки самого Deployment автоматически в Pod не копируются
 
 ### Запрет host namespaces
 
-Следующая политика проверяет три поля в `spec` самого Pod. Отсутствие поля или `false` разрешено, `true` — запрещено.
+Следующая политика проверяет три поля в `spec` самого Pod. Отсутствие поля или `false` разрешено, `true` запрещено
+
+Применение политики запрета host namespaces:
 
 <img src="images/img11.png" alt="img11" width="650">
 
-*img11 — Применение политики запрета host namespaces*
+Проверка запрета hostNetwork:
 
 <img src="images/img12.png" alt="img12" width="700">
 
-*img12 — Проверка запрета hostNetwork*
+Проверка запрета hostPID:
 
 <img src="images/img13.png" alt="img13" width="700">
 
-*img13 — Проверка запрета hostPID*
+Проверка запрета hostIPC:
 
 <img src="images/img14.png" alt="img14" width="700">
 
-*img14 — Проверка запрета hostIPC*
-
-Если все три поля равны `false`, серверный dry-run проходит. Это настройки всего Pod, повторять их для каждого контейнера не нужно.
+Если все три поля равны `false`, серверный dry-run проходит
 
 ### Разрешенные образы
 
