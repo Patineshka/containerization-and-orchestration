@@ -1,46 +1,41 @@
 # Лаба 4 — SLA критического пути под перегрузкой
 
-В этой лабораторной продолжила работать с `shop` из третьей лабы. Теперь задача — сохранить оформление заказов, когда рядом запускается фоновая нагрузка. Добавила бесполезный batch, разнесла API между нодами, подобрала ресурсы по метрикам и специально создала нехватку CPU и давление по памяти 🙂
+## Часть 0 — Batch и подготовка стенда
 
-Критический путь — `api → postgres`: запрос `POST /order` должен сохранить заказ и вернуть HTTP 201. Worker обрабатывает заказ позже, поэтому время его фоновой обработки в HTTP-задержку этого теста не входит.
+Продолжила работать с `shop` из третьей лабы. Критический путь здесь — оформление заказа: `api → postgres`. Batch будет создавать фоновую нагрузку, которой можно пожертвовать, если ресурсов не хватает
 
-## Подготовка стенда
+Использовала ту же Ubuntu Server ARM64 в UTM и профиль Minikube `lab2`. Файлы перенесла в `~/lab4`, но релиз оставила `shop`, а namespace — `lab3`. Так сохранились база и мониторинг из предыдущих лабораторных
 
-Использовала Ubuntu Server ARM64 в UTM на Mac с Apple Silicon. У виртуалки 4 CPU, около 11 ГиБ RAM и примерно 25 ГБ свободного места на диске перед началом работы.
-
-Продолжила работу в Minikube `lab2`, с Kubernetes `v1.37.0`, Docker-драйвером и containerd `2.3.4`. Релиз оставила `shop`, namespace — `lab3`, а файлы четвертой лабы разместила в `~/lab4`. Названия не меняла, чтобы использовать существующую PostgreSQL и уже подключенный мониторинг.
-
-**Отличие от задания:** вместо kind/k3d использовала Minikube с двумя нодами. Это позволило сохранить стенд из предыдущих лабораторных, но не является буквальным выполнением требования к дистрибутиву кластера.
-
-Новый стек мониторинга не устанавливала: использовала Prometheus, Grafana, Alertmanager, Karma и webhook receiver из второй лабы, ServiceMonitor и PrometheusRule — из чарта третьей.
+Вместо kind/k3d из задания продолжила на Minikube с двумя нодами. Новый стек мониторинга не устанавливала
 
 ### Добавление второй ноды
 
-Начала с добавления worker:
+Перед началом проверила ресурсы VM: 4 CPU, около 11 ГиБ RAM и 25 ГБ свободного места на диске
+
+Добавила worker:
 
 ```bash
 minikube node add -p lab2
 ```
 
-И сразу приключение: containerd не мог запустить CRI из-за ошибки `failed to create fsnotify watcher: too many open files`. На Ubuntu увеличила лимиты inotify и перезапустила containerd внутри worker:
+С первого раза не получилось. Containerd не смог запустить CRI и написал `failed to create fsnotify watcher: too many open files`. Увеличила лимиты inotify на Ubuntu и перезапустила containerd:
 
 ```bash
 sudo sysctl -w fs.inotify.max_user_instances=8192
 sudo sysctl -w fs.inotify.max_user_watches=1048576
+
 docker exec lab2-m02 systemctl restart containerd
 ```
 
-Эти изменения sysctl были внесены в работающую систему; отдельную постоянную настройку после перезагрузки в этом эксперименте не проверяла.
+Потом попробовала запустить профиль через `minikube start -p lab2 --nodes=2`. Контейнеры запустились, но worker в Kubernetes еще не появился:
 
-Попытка `minikube start -p lab2 --nodes=2` запустила существующие контейнеры, но не завершила подключение worker. Сообщение «Готово» еще не означает, что API-сервер видит две ноды:
+<img src="images/img1.png" alt="img1" width="850">
 
-<img src="images/img1.png" alt="img1 — Запуск существующего профиля Minikube" width="850">
+Оказалось, что первое добавление оборвалось до настройки kubelet: не было ни `/var/lib/kubelet/config.yaml`, ни kubeconfig-файлов. Подключение завершила через `kubeadm join`
 
-*img1 — Промежуточный запуск Minikube; готовность второй ноды проверяла отдельно*
+В PATH добавила каталог `/var/lib/minikube/binaries/v1.37.0`, иначе kubeadm не находил kubelet. Проверку `SystemVerification` пропустила отдельно: внутри Docker-ноды не загружался модуль ядра `configs`. Все проверки целиком не отключала
 
-У kubelet отсутствовали `config.yaml` и kubeconfig-файлы: первоначальное добавление оборвалось до bootstrap. Завершила подключение через `kubeadm join`, добавив каталог бинарников Minikube в PATH. Проверку `SystemVerification` пришлось пропустить из-за недоступного модуля ядра `configs` внутри Docker-ноды. Остальные проверки не отключала.
-
-После подключения дождалась `Ready` и проверила обе ноды:
+После этого дождалась готовности:
 
 ```bash
 minikube -p lab2 kubectl -- wait \
@@ -49,144 +44,152 @@ minikube -p lab2 kubectl -- wait \
 minikube -p lab2 kubectl -- get nodes -o wide
 ```
 
-<img src="images/img2.png" alt="img2 — Две готовые ноды и видимые Kubernetes ресурсы" width="900">
+Обе ноды Ready. Ура! 🙂
 
-*img2 — `lab2` и `lab2-m02` в Ready*
+<img src="images/img2.png" alt="img2" width="900">
 
-| Нода | IP | Ограничение RAM Docker-контейнера |
+| Нода | IP | Лимит памяти Docker |
 |---|---|---:|
 | `lab2` | `192.168.49.2` | 8 GiB |
 | `lab2-m02` | `192.168.49.3` | 3 GiB |
 
-При этом Kubernetes показывал по 4 CPU и `11684492Ki` памяти на каждой ноде. Эти значения нельзя складывать как независимые физические ресурсы: обе ноды используют одну виртуалку с четырьмя ядрами. Несовпадение видимой памяти и Docker-лимита дальше учитывала при настройке eviction.
+При этом Kubernetes показывал на каждой ноде по 4 CPU и примерно 11 ГиБ памяти. Виртуалка от этого не получила восемь физических ядер и 22 ГиБ RAM — ресурсы у нод общие. Это дальше пригодилось при проверке давления по памяти
 
-## Часть 0 — Сервис batch
+### Сервис batch
 
-Для фоновой нагрузки подготовила `batch/main.py` и Dockerfile на `python:3.13-slim`. Приложение работает от пользователя `10001:10001`, дополнительные Python-библиотеки не нужны.
+Для batch подготовила `main.py`, Dockerfile и `.dockerignore`. Образ — на `python:3.13-slim`, запуск от пользователя `10001:10001`, дополнительных библиотек нет
 
-| Параметр | Что меняет |
+| Параметр | Что делает |
 |---|---|
-| `CPU_WORKERS` | Количество процессов с непрерывными вычислениями; `0` отключает вычисления |
-| `MEMORY_MIB` | Размер выделяемого массива в MiB |
+| `CPU_WORKERS` | Задает количество процессов с непрерывными вычислениями; при `0` вычисления отключены |
+| `MEMORY_MIB` | Задает размер выделенного массива в MiB |
 
-Программа касается каждой страницы массива, чтобы память действительно использовалась. Массив удерживается до завершения процесса, а не увеличивается бесконечно. CPU-процессы работают непрерывно, основной процесс пишет JSON-логи каждые 10 секунд. SIGTERM завершает нагрузку и дочерние процессы.
+Программа касается каждой страницы массива и удерживает его в памяти. Сам массив не растет бесконечно, его размер меняется через параметр. CPU-процессы работают постоянно, основной процесс раз в 10 секунд пишет состояние в JSON. При SIGTERM приложение завершает дочерние процессы
 
-Собрала образ и загрузила его на обе ноды:
+Собрала образ внутри Minikube:
 
 ```bash
 minikube -p lab2 image build \
   -t docker.io/library/lab4-batch:v1 ~/lab4/batch
+```
 
+Так как стоит `imagePullPolicy: Never`, перенесла образ на вторую ноду:
+
+```bash
 docker exec lab2 ctr -n k8s.io images export - \
-  docker.io/library/lab4-batch:v1 > ~/lab4/images/batch-image.tar
+  docker.io/library/lab4-batch:v1 \
+  > ~/lab4/images/batch-image.tar
 
 docker exec -i lab2-m02 ctr -n k8s.io images import - \
   < ~/lab4/images/batch-image.tar
 ```
 
-У приложения стоит `imagePullPolicy: Never`, поэтому наличие образа только на основной ноде было бы недостаточно. Таким же способом перенесла `shop-api:v2` и `shop-worker:v1`.
+Проверила наличие образа на обеих нодах:
 
-<img src="images/img3.png" alt="img3 — Образ batch доступен на обеих нодах" width="850">
+<img src="images/img3.png" alt="img3" width="850">
 
-*img3 — Проверка образа через crictl на lab2 и lab2-m02*
+Так же перенесла `shop-api:v2` и `shop-worker:v1`, иначе Pod мог попасть на ноду без нужного образа
 
-В `allowed-images.yaml` добавила точный префикс `docker.io/library/lab4-batch:` для обычных и init-контейнеров. Сам namespace из политик не исключала. После этого выполнила временную smoke-проверку одной реплики:
+В политику `allowed-images.yaml` добавила префикс `docker.io/library/lab4-batch:` для обычных и init-контейнеров. Исключать batch из политик не стала
 
-<img src="images/img4.png" alt="img4 — Применение политики и запуск smoke-проверки batch" width="800">
+Для первой проверки запустила одну реплику:
 
-*img4 — Образ разрешен политикой, временный Deployment успешно запущен*
+<img src="images/img4.png" alt="img4" width="800">
 
-В логах — один работающий CPU-процесс и массив `67108864` байта. Pod запустился на worker, класс QoS — Burstable:
+В логах один CPU-процесс и массив на 64 MiB. Pod запущен на `lab2-m02`, QoS — Burstable:
 
-<img src="images/img5.png" alt="img5 — Логи нагрузки и класс Burstable" width="900">
+<img src="images/img5.png" alt="img5" width="900">
 
-*img5 — Batch работает, выделено 64 MiB памяти*
+Начальные ресурсы batch:
 
-Для первой проверки задала CPU request `100m`, limit `500m`, memory request `64Mi`, limit `128Mi`. В Prometheus получила:
+```yaml
+requests:
+  cpu: 100m
+  memory: 64Mi
+limits:
+  cpu: 500m
+  memory: 128Mi
+```
 
-| Метрика | Результат |
-|---|---:|
-| CPU | 0,499877 ядра, примерно 500m |
-| Working set памяти | 87,0039 MiB |
+Через Prometheus проверила реальное потребление:
 
-<img src="images/img6.png" alt="img6 — Фактические CPU и память batch в Prometheus" width="800">
+<img src="images/img6.png" alt="img6" width="800">
 
-*img6 — CPU ограничен квотой 500m, память выше размера массива из-за расходов Python*
+Получилось примерно **500m CPU и 87 MiB памяти**. CPU уперся в limit, а память выше 64 MiB из-за расходов Python и процессов
 
-Requests не ограничивают потребление сверху. Поэтому request 100m не помешал программе использовать почти 500m — верхнюю границу задавал limit.
+Здесь разобралась с requests: `100m` не ограничивает CPU сверху. Batch мог потреблять почти `500m`, потому что именно такое значение задано в limits
 
-После smoke-проверки временный Deployment удалила, дальнейшие эксперименты запускала через Helm.
+После проверки временный Deployment удалила. Дальше запускала batch через Helm
 
-## Часть 1 — Выбор механизма разнесения
+## Часть 1 — Механизм разнесения
 
-В `values.yaml` добавила переключатель:
+В `values.yaml` добавила выбор:
 
 ```yaml
 scheduling:
   mode: spread  # spread или antiAffinity
 ```
 
-| Вариант | Поведение |
+| Режим | Настройка |
 |---|---|
-| `spread` | `topologySpreadConstraints`, `maxSkew: 1`, `DoNotSchedule` по `kubernetes.io/hostname` |
-| `antiAffinity` | Мягкая `podAntiAffinity`, вес 100, по `kubernetes.io/hostname` |
+| `spread` | `topologySpreadConstraints`, `maxSkew: 1`, `DoNotSchedule` |
+| `antiAffinity` | Мягкая `podAntiAffinity`, вес 100 |
 
-Выбрала **spread**, потому что нужно разместить четыре реплики на двух нодах и контролировать равномерность. При двух доступных подходящих нодах и достаточных ресурсах ожидаю 2 + 2.
+В обоих случаях использовала `kubernetes.io/hostname`, чтобы учитывать разные ноды
 
-Мягкая anti-affinity только предпочитает разнести Pod, но не гарантирует равномерное размещение. Жесткая anti-affinity с запретом совместного размещения любых двух API Pod на одной ноде позволила бы запустить только две из четырех реплик.
+Выбрала **spread**: у меня четыре реплики API и две ноды, поэтому хочу получить 2 + 2. `maxSkew: 1` ограничивает разницу количества подходящих Pod между нодами
 
-В spread-правиле есть `matchLabelKeys: [pod-template-hash]`: при rolling update реплики каждой версии Deployment учитываются отдельно. Это не устраняет ограничения по ресурсам и не заставляет scheduler автоматически переселять уже работающие Pod.
+Мягкая anti-affinity только предпочитает размещение на разных нодах, но не гарантирует равномерность. Жесткая anti-affinity «не больше одного API Pod на ноду» оставила бы две реплики Pending
 
-Проверила рендеринг обоих режимов через `helm template`, затем установила выбранный вариант через `helm upgrade`.
+Добавила `matchLabelKeys: [pod-template-hash]`, чтобы при обновлении реплики каждой версии Deployment считались отдельно. Оба режима проверила через `helm template`
 
-## Часть 2 — Тесная площадка и batch в чарте
+## Часть 2 — Batch в Helm-чарте
 
-Использовала ровно две ноды. В чарт добавила `templates/batch-deployment.yaml`, параметры нагрузки, ресурсы и количество реплик вынесла в values. В обычном состоянии `batch.replicas: 0`, чтобы эксперимент случайно не продолжал нагружать стенд.
+В `charts/shop/templates/` добавила `batch-deployment.yaml`. Образы, число реплик, параметры нагрузки и ресурсы вынесла в values
 
-У batch есть метки `app` и `owner`, memory и CPU limits, обычная изоляция Pod и разрешенный образ. Ни privileged, ни host namespaces для него не включала. Существующие инфраструктурные исключения Kyverno сохранились, новых исключений для приложения не добавляла.
+В обычной конфигурации `batch.replicas: 0`, чтобы нагрузка не продолжала работать между экспериментами
 
-Для разных проверок использовала отдельные файлы значений:
+У Pod есть `app` и `owner`, requests и limits, разрешенный образ. Privileged и host namespaces не включены. Политики третьей лабы продолжают действовать в `lab3`, новых исключений для batch не добавляла
+
+Для экспериментов подготовила отдельные файлы:
 
 | Файл | Назначение |
 |---|---|
-| `values.yaml` | Основная конфигурация, выбор spread, приоритеты и PDB |
-| `values-resources.yaml` | Выбранные ресурсы API, worker, PostgreSQL и привязка БД к ноде |
+| `values.yaml` | Основные настройки, spread, приоритеты и PDB |
+| `values-resources.yaml` | Ресурсы API, worker и PostgreSQL, выбор ноды для БД |
 | `values-scheduling.yaml` | Большие requests batch для Pending и preemption |
-| `values-eviction.yaml` | Рост потребления памяти batch |
-| `values-overload.yaml` | Четыре вычислительные batch-реплики для теста SLA |
+| `values-eviction.yaml` | Увеличение потребления памяти |
+| `values-overload.yaml` | CPU-нагрузка для проверки SLA |
 
-При обновлении порядок `-f` важен: последний профиль переопределяет предыдущие значения. Все экспериментальные профили одновременно не подключала.
+При обновлении сначала передавала `values-resources.yaml`, затем нужный профиль эксперимента. Последний файл переопределяет предыдущие значения
 
-## Часть 3 — Реальные числа вместо угадывания
+## Часть 3 — Подбор ресурсов по метрикам
 
-### Нагрузка по пути заказа
+### Нагрузка на оформление заказа
 
-В `tests/orders.js` подготовила k6-тест: `POST /order`, JSON с товаром и количеством, ожидаемый ответ — HTTP 201.
+Для k6 создала `tests/orders.js`. Тест отправляет `POST /order` с товаром и количеством и проверяет HTTP 201
 
-| Настройка | Значение |
-|---|---|
-| Executor | `constant-arrival-rate` |
-| Частота | 5 итераций в секунду |
-| Основной прогон | 10 минут |
-| VU | 5 заранее выделенных, максимум 20 |
-| Порог задержки | p95 < 300 мс |
-| HTTP-ошибки | < 1% |
-| Успешные проверки HTTP 201 | > 99% |
-| Пропущенные итерации | 0 |
+Задала следующие условия:
 
-Использовала официальный Docker-образ k6, его digest сохранила в `reports/k6-image.txt`:
+- 5 заказов в секунду через `constant-arrival-rate`
+- Продолжительность основного прогона — 10 минут
+- 5 заранее выделенных VU, максимум 20
+- p95 времени ответа меньше 300 мс
+- Ошибок меньше 1%, успешных проверок HTTP 201 больше 99%
+- Пропущенных итераций нет
 
-<img src="images/img8.png" alt="img8 — Загрузка k6 и получение адреса Service" width="850">
+Скачала Docker-образ k6 и сохранила digest в `reports/k6-image.txt`:
 
-*img8 — k6 запускается в Docker, запросы идут к Service shop-api*
+<img src="images/img8.png" alt="img8" width="850">
 
-Запускала k6 в сетевом пространстве основной ноды через `--network container:lab2`, с обращением к ClusterIP Service. Поэтому запросы проходили через Service ко всем API, а не были привязаны port-forward к одному Pod.
+Запускала тест из Docker в сети основной ноды. Обращалась к ClusterIP Service, чтобы запросы распределялись между API, а не шли через port-forward к одному Pod:
 
 ```bash
 LAB4_API_IP=$(minikube -p lab2 kubectl -- get svc shop-api \
   -n lab3 -o jsonpath='{.spec.clusterIP}')
 
 set -o pipefail
+
 docker run --rm -i \
   --network container:lab2 \
   -e BASE_URL="http://${LAB4_API_IP}:8080" \
@@ -196,19 +199,17 @@ docker run --rm -i \
   2>&1 | tee ~/lab4/reports/orders-baseline.txt
 ```
 
-Генератор тоже работает на этой виртуалке и использует ее CPU, но находится в отдельном Docker-контейнере, а не в cgroup самой ноды.
+Сначала короткая проверка на 30 секунд: 150 заказов, ошибок нет, p95 — 11,33 мс
 
-Сначала короткая проверка: 150 заказов, 0 ошибок, p95 11,33 мс. Затем baseline: 3001 заказ, 0 ошибок, p95 16,06 мс.
+Потом основной baseline: **3001 заказ, 0 ошибок, p95 — 16,06 мс**
 
-### KRR на ARM64
+### Запуск KRR
 
-Готовый Ubuntu-архив KRR `v1.31.1` оказался x86-64. На ARM64 такой бинарник напрямую не подходит, поэтому собрала KRR из исходников этой версии в Docker с Python 3.12.
+С установкой тоже не сразу получилось. Скачала Ubuntu-архив KRR `v1.31.1`, а бинарник оказался x86-64. У меня ARM64, поэтому собрала KRR из исходников в Docker с Python 3.12
 
-<img src="images/img9.png" alt="img9 — Запуск Robusta KRR" width="750">
+<img src="images/img9.png" alt="img9" width="750">
 
-*img9 — KRR запускается из собственного Docker-образа*
-
-Prometheus доступен через port-forward `9091:9090`. В KRR передала kubeconfig и каталог сертификатов Minikube только для чтения:
+Для анализа передала kubeconfig, сертификаты Minikube и адрес существующего Prometheus:
 
 ```bash
 docker run --rm \
@@ -227,27 +228,29 @@ docker run --rm \
   2>&1 | tee ~/lab4/reports/krr-baseline.txt
 ```
 
-Сначала указала историю 10 минут и получила ValidationError: KRR требует минимум один час. В итоге окно — последний час, включая baseline-нагрузку, шаг — 15 секунд, минимум — 20 точек. Это короткий лабораторный замер, а не оценка всех суточных пиков приложения.
+Окно анализа — один час, включая нагрузку, шаг — 15 секунд, минимум — 20 точек. Сначала пыталась указать 10 минут истории, но KRR требует хотя бы час
 
-<img src="images/img10.png" alt="img10 — Таблица рекомендаций KRR" width="1000">
+Получила рекомендации:
 
-*img10 — KRR обнаружил API, worker и batch, включая исторические Pod*
+<img src="images/img10.png" alt="img10" width="1000">
 
-| Компонент | Начальный CPU request | KRR CPU request | Начальная память request / limit | KRR память request / limit |
+| Компонент | Изначальный CPU request | KRR CPU request | Изначальная память request / limit | KRR память request / limit |
 |---|---:|---:|---|---|
-| API, на Pod | 100m | 13m | 128Mi / 256Mi | 100Mi / 100Mi |
-| Worker, на Pod | 50m | 10m | 64Mi / 128Mi | 100Mi / 100Mi |
-| Batch, smoke-профиль | 100m | 501m | 64Mi / 128Mi | 101Mi / 101Mi |
+| API | 100m | 13m | 128Mi / 256Mi | 100Mi / 100Mi |
+| Worker | 50m | 10m | 64Mi / 128Mi | 100Mi / 100Mi |
+| Batch | 100m | 501m | 64Mi / 128Mi | 101Mi / 101Mi |
 
-В момент анализа у batch было 0 действующих Pod и 1 исторический — поэтому рекомендация в таблице есть, хотя нагрузка уже остановлена. Рекомендацию batch механически не применяла: в дальнейших профилях намеренно меняла соотношение requests и фактического потребления.
+Это значения на контейнер. У batch в момент анализа уже не было работающих Pod, но KRR использовал данные старого Pod
 
-У API и worker исходный CPU request оказался заметно выше измеренного p95. Для worker KRR предложил увеличить память относительно первоначальных 64Mi. При этом 100Mi — минимальное значение памяти в настройках KRR, а не утверждение, что процесс всегда потребляет ровно столько.
+CPU requests у API и worker изначально были выше измеренного потребления. Для worker, наоборот, предложено увеличить request памяти. При этом 100Mi — минимум рекомендации KRR, а не обязательно измеренный расход процесса
 
-Стратегия Simple рекомендует CPU request по p95 и не задает CPU limit. Память оценивает как максимум плюс 15%, с учетом минимального значения рекомендации.
+Стратегия Simple берет p95 CPU и не предлагает CPU limit, для памяти — максимум плюс 15%. Замер короткий, поэтому все возможные пики приложения за сутки он не покрывает
 
-### Что получилось с PostgreSQL
+### PostgreSQL
 
-**PostgreSQL в отчет KRR не попал:** его Pod напрямую управляется CloudNativePG, а не обнаруженными Deployment. Поэтому для БД выполнила отдельный расчет из Prometheus по аналогичным показателям:
+PostgreSQL в таблицу KRR не попала: ее Pod напрямую управляется CloudNativePG. Для нее отдельно получила показатели из Prometheus за тот же час
+
+CPU, p95 в millicores:
 
 ```promql
 1000 * quantile_over_time(
@@ -258,6 +261,8 @@ docker run --rm \
 )
 ```
 
+Пиковая память с запасом 15%, в MiB:
+
 ```promql
 1.15 * max_over_time(
   (sum(container_memory_working_set_bytes{
@@ -266,11 +271,11 @@ docker run --rm \
 ) / 1024 / 1024
 ```
 
-Получила примерно **46,55m CPU** и **132,59 MiB памяти с запасом 15%**. Это отдельный расчет по метрикам, а не рекомендация, выданная KRR для PostgreSQL. Требование получить рекомендации KRR для всех трех компонентов этим полностью не закрыто.
+Получила **46,55m CPU и 132,59 MiB памяти**. Это мой расчет по метрикам, а не результат KRR для PostgreSQL
 
-### Примененные ресурсы
+### Изменение ресурсов
 
-По измерениям выбрала значения с дополнительным запасом и записала в `values-resources.yaml`:
+По результатам выбрала значения с дополнительным запасом:
 
 | Компонент | CPU request / limit | Memory request / limit |
 |---|---|---|
@@ -278,119 +283,126 @@ docker run --rm \
 | Worker | 20m / без CPU limit | 128Mi / 128Mi |
 | PostgreSQL | 100m / 100m | 256Mi / 256Mi |
 
-Эти числа опираются на измерения, но **не повторяют рекомендации KRR дословно**. API получила запас относительно 13m, worker — относительно 10m. Для PostgreSQL оставила дополнительный запас к измеренному потреблению. У API и PostgreSQL CPU limit вернула для требуемого эксперимента с Guaranteed; у worker CPU limit не задавала.
-
-Здесь не получилось просто «уменьшила ресурсы и стало лучше»: после изменения задержка выросла. Поэтому после применения повторила тот же тест и сохранила результат, а не ограничилась успешным Helm upgrade.
+Записала их в `values-resources.yaml` и применила через Helm. Значения выбраны по измерениям, но не скопированы из KRR дословно. Для API и PostgreSQL вернула CPU limits, чтобы получить Guaranteed в следующей части
 
 ```bash
 helm upgrade shop ~/lab4/charts/shop \
-  --namespace lab3 --kube-context lab2 \
+  --namespace lab3 \
+  --kube-context lab2 \
   -f ~/lab4/charts/shop/values-resources.yaml \
   --wait --timeout 5m
 ```
 
-### PostgreSQL переехал, а данные — нет
+И тут PostgreSQL ушла в CrashLoopBackOff, а Helm ждал готовности и завершился по таймауту
 
-Во время обновления Pod БД попал на `lab2-m02` и ушел в CrashLoopBackOff. В логах было:
+В логах нашла:
 
 ```text
 stat /var/lib/postgresql/data/pgdata: no such file or directory
 ```
 
-Причина оказалась не в CPU limit. Стандартный provisioner Minikube создал hostPath-том на `lab2`; та же директория на другой ноде не содержит исходную БД.
+Pod переехал на worker, а данные остались на `lab2`. Стандартный hostPath-том Minikube не переносится на другую ноду вместе с Pod
 
-Проверила наличие `pgdata/PG_VERSION` на основной ноде по пути `/tmp/hostpath-provisioner/lab3/shop-postgres-1`. Данные были на месте. Вернула Pod на `lab2`, затем закрепила настройку в чарте:
+Проверила исходную директорию `/tmp/hostpath-provisioner/lab3/shop-postgres-1` на основной ноде — файл `pgdata/PG_VERSION` на месте. Вернула Pod на `lab2`, а затем закрепила выбор в чарте:
 
 ```yaml
-# values-resources.yaml
 postgresNodeSelector:
   kubernetes.io/hostname: lab2
 ```
 
-В `Cluster.spec.affinity.nodeSelector` подставляются эти значения. PVC не удаляла, новую БД вместо старой не инициализировала. После пересоздания Pod кластер вернулся в healthy.
+В шаблоне PostgreSQL это значение передается в `spec.affinity.nodeSelector`. После пересоздания Pod кластер снова healthy, PVC не удаляла
 
-Это локальное хранилище учебного стенда, а не отказоустойчивая БД с переносимым томом.
+После изменения ресурсов повторила тот же десятиминутный k6-тест. Результат: **3000 заказов, ошибок нет, p95 — 117,96 мс**. Порог 300 мс выполнен, но задержка выше baseline. Причину отдельно по throttling не проверяла
 
-## Часть 4 — Разнесение API между нодами
+## Часть 4 — Разнесение API
 
-Проверила фактическое размещение:
+Применила выбранный spread и проверила реальное размещение:
 
 ```bash
 minikube -p lab2 kubectl -- get pods \
   -n lab3 -l app=shop-api -o wide
 ```
 
-<img src="images/img7.png" alt="img7 — Проверка chart и размещение четырех реплик API" width="850">
+Получилось две реплики на `lab2` и две на `lab2-m02`:
 
-*img7 — После обновления две реплики API на lab2 и две на lab2-m02*
+<img src="images/img7.png" alt="img7" width="850">
 
-Разнесение уменьшает зависимость API от одной ноды. Но две Docker-ноды внутри одной VM не защищают от выключения всей VM. Отдельно отказ ноды с замером доступности в этой лабораторной не проводила. PostgreSQL осталась единственной репликой с локальным томом, поэтому отказоустойчивость всего пути заказа по одному распределению API утверждать нельзя.
+Так API меньше зависит от одной ноды. Но обе ноды работают внутри одной VM, поэтому ее выключение они не переживут. У PostgreSQL одна реплика с локальным томом — разнесение API само по себе не делает весь путь заказа отказоустойчивым
 
-## Часть 5 — Приоритеты, QoS и PDB
+Отдельное отключение ноды в этой проверке не проводила
 
-После применения ресурсов проверила класс Pod, а не только равенство полей в values:
+## Часть 5 — Приоритеты и гарантии
 
-<img src="images/img11.png" alt="img11 — Фактический класс QoS API, PostgreSQL и worker" width="850">
+### QoS
 
-*img11 — API и PostgreSQL Guaranteed, worker Burstable*
+После обновления проверила фактический QoS Pod:
 
-Для Guaranteed у каждого обычного и init-контейнера должны быть заданы равные CPU requests/limits и равные memory requests/limits. У PostgreSQL проверка включала init-контейнер `bootstrap-controller`. Worker остается Burstable, потому что CPU limit отсутствует. Batch — Burstable: его requests ниже limits.
+<img src="images/img11.png" alt="img11" width="850">
+
+API и PostgreSQL получили Guaranteed, worker — Burstable
+
+Для Guaranteed у каждого обычного и init-контейнера должны быть заданы CPU и memory requests/limits, причем request равен limit для каждого ресурса. У PostgreSQL это касается и `bootstrap-controller`
+
+У worker нет CPU limit, а у batch requests ниже limits — они Burstable
 
 ### PriorityClass
 
-Добавила шаблон `priorityclasses.yaml`, числовые значения — в `values.yaml`:
+Добавила `priorityclasses.yaml`, значения приоритетов — в `values.yaml`:
 
-| Класс | Приоритет | Политика preemption | Кому назначен |
+| Класс | Значение | Preemption policy | Для кого |
 |---|---:|---|---|
 | `shop-critical` | 100000 | `PreemptLowerPriority` | API и PostgreSQL |
 | `shop-batch` | -1000 | `Never` | Batch |
 
-`Never` означает, что сам batch не вытесняет чужие Pod. От вытеснения высокоприоритетным Pod эта настройка его не защищает. Worker сохранила с обычным приоритетом 0.
+Worker остался с приоритетом 0. `Never` у batch запрещает ему самому вытеснять другие Pod, но не защищает его от вытеснения
 
 ### PodDisruptionBudget
 
-Для API добавила `api-pdb.yaml`, параметры включения и `minAvailable: 3` вынесла в values. Для PostgreSQL использовала PDB самого CloudNativePG, включаемый через `spec.enablePDB`, тоже из values. Второй пересекающийся PDB для БД не создавала.
+Для API создала `api-pdb.yaml` с `minAvailable: 3`. У четырех готовых реплик разрешено одно добровольное выселение
 
-| PDB | minAvailable | Allowed disruptions при проверке |
-|---|---:|---:|
-| `shop-api` | 3 | 1 |
-| `shop-postgres-primary` | 1 | 0 |
+Для PostgreSQL оставила PDB, которым управляет CloudNativePG. Включение вынесла в values и передала в `spec.enablePDB`. Второй PDB с пересекающимся selector не создавала
 
-<img src="images/img12.png" alt="img12 — PriorityClass, PDB и промежуточное обновление Pod" width="950">
+Проверила классы и бюджеты:
 
-*img12 — Классы и PDB созданы; в этом промежуточном снимке еще есть старые API Pod и PostgreSQL с приоритетом 0*
+<img src="images/img12.png" alt="img12" width="950">
 
-Настройка `priorityClassName` в Cluster уже была `shop-critical`, но существующий Pod PostgreSQL остался со старым приоритетом. Пересоздала его на закрепленной ноде. Итоговая проверка показала:
+На этом снимке обновление еще шло: видны старые Pod API и PostgreSQL с приоритетом 0. В Cluster уже было `shop-critical`, но существующий Pod БД сохранил старое значение. После пересоздания проверка показала:
 
 ```text
 NAME              PRIORITY   CLASS           QOS          NODE
 shop-postgres-1   100000     shop-critical   Guaranteed   lab2
 ```
 
-PDB ограничивает добровольные выселения через Eviction API, например при drain. Он не спасает от отказа ноды и не гарантирует защиту при preemption или node-pressure eviction. Сам по себе PDB также не ограничивает rolling update Deployment — для него важны `maxUnavailable` и `maxSurge`.
+| PDB | Min available | Allowed disruptions |
+|---|---:|---:|
+| `shop-api` | 3 | 1 |
+| `shop-postgres-primary` | 1 | 0 |
 
-Важно не смешивать два механизма: scheduler выбирает жертв preemption прежде всего по **приоритету**, а не по названию QoS. При давлении по памяти kubelet учитывает превышение requests, приоритет и величину превышения. Guaranteed не означает абсолютную неуязвимость, но в нашем сценарии batch был менее защищен и превышал свой memory request.
+PDB ограничивает добровольные выселения через Eviction API. Он не защищает от падения ноды и memory eviction, а при preemption учитывается без абсолютной гарантии. Rolling update Deployment регулируется отдельно через `maxUnavailable` и `maxSurge`
+
+При выборе жертв preemption scheduler учитывает приоритет, а не QoS. При memory eviction kubelet учитывает превышение requests, приоритет и величину превышения. Поэтому Guaranteed — не абсолютная защита, но batch в нашем сценарии менее защищен
 
 ## Часть 6 — Pending и preemption
 
-### Ресурсы закончились на бумаге
+### Нехватка CPU
 
-В `values-scheduling.yaml` задала шесть batch-реплик. Каждая запрашивала 2 CPU и 64Mi памяти, limits — 2500m и 128Mi. Вычислительные процессы отключила (`cpuWorkers: 0`), массив — 16 MiB.
+В `values-scheduling.yaml` подняла batch до шести реплик. У каждой CPU request 2, limit 2500m, память request 64Mi, limit 128Mi
 
-Суммарный CPU request batch — 12 ядер, а scheduler видит суммарно 8 CPU на двух нодах, причем часть уже зарезервирована другими Pod. Физически у VM вообще четыре ядра.
+При этом вычисления отключила: `cpuWorkers: 0`, память — 16 MiB. Так можно увидеть разницу между requests и реальной нагрузкой
 
 ```bash
 helm upgrade shop ~/lab4/charts/shop \
-  --namespace lab3 --kube-context lab2 \
+  --namespace lab3 \
+  --kube-context lab2 \
   -f ~/lab4/charts/shop/values-resources.yaml \
   -f ~/lab4/charts/shop/values-scheduling.yaml
 ```
 
-`--wait` намеренно не использовала: Pending здесь ожидаемый результат.
+Запускала без `--wait`, потому что часть Pod должна остаться Pending
 
-<img src="images/img13.png" alt="img13 — Batch Pending из-за Insufficient cpu" width="1000">
+Одна реплика запустилась, пять не поместились:
 
-*img13 — Одна batch-реплика Running, пять Pending*
+<img src="images/img13.png" alt="img13" width="1000">
 
 В событиях:
 
@@ -399,15 +411,28 @@ helm upgrade shop ~/lab4/charts/shop \
 preemption: not eligible due to preemptionPolicy=Never.
 ```
 
-Хотя batch почти не использовал CPU, остальные реплики не поместились. Scheduler считает по requests, а не по фактическому потреблению из Prometheus.
+Шесть реплик запросили 12 CPU, тогда как Kubernetes видит суммарно 8 CPU, часть которых уже занята requests других приложений. Даже почти не работающий batch занимает место при планировании: scheduler считает requests, а не текущую загрузку
 
-### Высокий приоритет вытесняет batch
+### Вытеснение batch
 
-Для явного наблюдения создала отдельный тестовый Pod `preemption-api` с образом API, приоритетом `shop-critical`, CPU request/limit 2 и memory request/limit 128Mi. Через nodeSelector направила его на `lab2-m02`, где уже работал batch.
+Для проверки создала отдельный Pod `preemption-api` из образа API. Задала `shop-critical`, CPU request/limit 2, memory request/limit 128Mi и nodeSelector на `lab2-m02`, где работал batch
 
-Тестовая метка `app: preemption-api` не совпадает с selector основного Service, поэтому этот Pod не принимал пользовательские заказы. Это проверка механизма с образом API, **а не масштабирование рабочего Deployment**; Pod создан из отдельного файла через kubectl, в отличие от рабочих компонентов чарта.
+У него отдельная метка `app: preemption-api`, поэтому основной Service не направляет к нему заказы. Это тестовый Pod из файла, а не новая реплика рабочего Deployment
 
-В событиях получила:
+Включила наблюдение и применила файл:
+
+```bash
+minikube -p lab2 kubectl -- get pods -n lab3 --watch
+
+minikube -p lab2 kubectl -- apply \
+  -f ~/lab4/tests/preemption-api.yaml
+```
+
+Batch начал завершаться, а тестовый API перешел из Pending в Running:
+
+<img src="images/img15.png" alt="img15" width="700">
+
+В событиях подтвердилось вытеснение:
 
 ```text
 Preempted  pod/shop-batch-f9c85dbf9-bqvqs
@@ -420,35 +445,21 @@ Scheduled  pod/preemption-api
 Successfully assigned lab3/preemption-api to lab2-m02
 ```
 
-В наблюдении видно завершение batch и запуск тестового API:
+API занял освободившееся место и стал `1/1 Running`. ReplicaSet создал замену batch, но она тоже осталась Pending:
 
-<img src="images/img15.png" alt="img15 — Наблюдение за вытеснением batch и запуском API" width="700">
+<img src="images/img14.png" alt="img14" width="950">
 
-*img15 — Batch завершается, preemption-api проходит Pending → Running → Ready*
+Сохранила события в `reports/preemption-events.txt`, затем остановила batch и удалила тестовый Pod
 
-После вытеснения ReplicaSet попытался восстановить batch, но замена осталась Pending:
+## Часть 7 — Давление по памяти
 
-<img src="images/img14.png" alt="img14 — Итог preemption: API готов, batch Pending" width="950">
+### Настройка kubelet
 
-*img14 — Preemption-api 1/1 Running, все шесть batch-реплик Pending*
+Перед нагрузкой проверила, какую память видит kubelet. У worker Docker-лимит 3 GiB, но stats summary показывал около 10843 MiB доступной памяти. В `evictionHard` вообще не было порога памяти
 
-События сохранила в `reports/preemption-events.txt`, список Pod — в `reports/preemption-pods.txt`. Затем выключила batch через Helm и удалила тестовый Pod.
+Если просто выделять все больше памяти, можно получить OOM всей Docker-ноды раньше eviction. Поэтому для проверки временно подняла soft-порог kubelet: примерно на 192 MiB ниже свежего значения доступной памяти
 
-## Часть 7 — MemoryPressure и eviction
-
-### Почему не стала просто выделять память до упора
-
-У worker Docker-лимит 3 GiB, но kubelet видел около 11 GiB общей памяти. Перед тестом stats summary показывал:
-
-```text
-availableBytes 10842.9 MiB
-workingSetBytes 567.7 MiB
-usageBytes 2025.3 MiB
-```
-
-Дополнительно в конфигурации kubelet не было memory-порога eviction: `evictionHard` содержал только нулевые пороги файловых систем. Попытка занять гигабайты могла привести к OOM Docker-ноды раньше требуемого выселения Pod.
-
-Поэтому **изменила условия эксперимента**: на worker временно настроила повышенный soft-порог `memory.available`, примерно на 192 MiB ниже свежего доступного значения. Получившийся порог — `10670Mi`, grace period — 10 секунд, максимальное время завершения Pod при soft eviction — 15 секунд.
+В этом запуске получилось:
 
 ```yaml
 evictionSoft:
@@ -458,29 +469,27 @@ evictionSoftGracePeriod:
 evictionMaxPodGracePeriod: 15
 ```
 
-Порог специально необычно высокий: это воспроизводимый тест механизма на стенде с несовпадением видимой памяти и Docker-лимита. Он **не доказывает**, что физическая память VM действительно была исчерпана. Конфигурацию kubelet меняла вне Helm-чарта, исходный файл сохранила для восстановления.
+Это искусственно повышенный лабораторный порог, а не реальное исчерпание памяти всей VM. Исходный конфиг сохранила, настройку меняла только на worker, вне Helm
 
-<img src="images/img16.png" alt="img16 — Kubelet запущен с лабораторной конфигурацией" width="850">
+Перезапустила kubelet. Он работает, нода Ready, давления пока нет:
 
-*img16 — До нагрузки worker Ready, MemoryPressure=False*
+<img src="images/img16.png" alt="img16" width="850">
 
-### Увеличение потребления batch
+### Запуск нагрузки
 
-В `values-eviction.yaml` указала одну реплику, nodeSelector на worker, `cpuWorkers: 0`, массив 256 MiB, memory request 64Mi, limit 512Mi. CPU request/limit — 100m/500m. Собственный memory limit выше ожидаемого потребления, чтобы не получить обычный container OOM.
+В `values-eviction.yaml` задала одну batch-реплику на `lab2-m02`, отключила вычисления и увеличила массив до 256 MiB. Memory request — 64Mi, limit — 512Mi, CPU request/limit — 100m/500m
+
+Собственный memory limit выше потребления, чтобы проверить eviction, а не OOM по лимиту контейнера
 
 Применила профиль через Helm:
 
-<img src="images/img17.png" alt="img17 — Запуск профиля памяти batch" width="850">
+<img src="images/img17.png" alt="img17" width="850">
 
-*img17 — Профиль установлен; первый снимок Pod еще показывает Running*
+Первый вывод еще показывает Running, а в наблюдении нода уже перешла в MemoryPressure:
 
-В параллельном наблюдении нода перешла в MemoryPressure:
+<img src="images/img18.png" alt="img18" width="900">
 
-<img src="images/img18.png" alt="img18 — Переход worker в MemoryPressure" width="900">
-
-*img18 — Состояние памяти изменилось с False на True*
-
-Затем появилось событие:
+Затем получила событие:
 
 ```text
 Warning Evicted pod/shop-batch-6d7b695994-s49fd
@@ -490,44 +499,41 @@ Container batch was using 274840Ki, request is 64Mi,
 has larger consumption of memory.
 ```
 
-Batch использовал около 268 MiB: выше request 64Mi, но ниже limit 512Mi. Kubelet выбрал его жертвой eviction. API и PostgreSQL продолжали работать. У replacement Pod появился FailedScheduling из-за taint worker и привязки к этой ноде.
+Batch использовал около 268 MiB — больше request, но меньше limit. Kubelet выселил именно его, API и PostgreSQL продолжали работать. Новый batch не смог разместиться из-за taint worker
 
-Первоначальный вывод `Running` был снят до завершения выселения. Основное доказательство — событие `Evicted`, а не эта ранняя строка. События сохранены в `reports/eviction-events.txt`.
-
-### Evicted и OOMKilled — разные причины
-
-| Диагноз | Что произошло |
+| Причина | Что произошло |
 |---|---|
-| `Evicted` | Kubelet завершил Pod из-за давления ресурса на ноде; причина записана в событиях и статусе Pod |
-| `OOMKilled` из-за своего лимита | Процесс контейнера превысил cgroup memory limit; причина видна в состоянии завершения контейнера |
+| `Evicted` | Kubelet завершил Pod из-за давления ресурса на ноде |
+| `OOMKilled` по собственному лимиту | Контейнер превысил свой memory limit и его процесс был убит |
 
-В нашем эксперименте сработал первый вариант. Наличие memory limit у batch не мешает kubelet выселить его раньше достижения этого лимита. PDB от node-pressure eviction не защищает.
+У меня получился первый случай. События сохранила в `reports/eviction-events.txt`
 
-После фиксации события batch масштабировала в ноль, вернула исходный файл kubelet и перезапустила службу:
+После проверки остановила batch и восстановила исходный конфиг:
 
 ```bash
 docker cp ~/lab4/setup/backups/kubelet-worker-original.yaml \
   lab2-m02:/var/lib/kubelet/config.yaml
+
 docker exec lab2-m02 systemctl restart kubelet
 ```
 
-<img src="images/img19.png" alt="img19 — Восстановление kubelet и проверка работающих сервисов" width="850">
+Нода снова Ready, MemoryPressure=False, сервисы работают:
 
-*img19 — MemoryPressure=False, worker Ready; API, PostgreSQL и worker приложения готовы*
+<img src="images/img19.png" alt="img19" width="850">
 
-Старый batch отображался как Error — это завершенный Pod после эксперимента, не продолжающая работать нагрузка.
+Старый batch остался в Error — это уже завершенный Pod после eviction, а не работающая нагрузка
 
-## Часть 8 — SLA под нагрузкой
+## Часть 8 — SLA под перегрузкой
 
-Сформулировала цель теста: **при 5 заказах/с p95 HTTP-времени создания заказа меньше 300 мс, доля ошибок меньше 1%, пропущенных итераций нет**. Это проверка за конкретные 10 минут, а не обещание доступности сервиса за месяц.
+Для проверки задала SLA теста: **при 5 заказах/с p95 времени создания заказа меньше 300 мс, ошибок меньше 1%, пропущенных итераций нет**
 
-Для CPU-перегрузки создала `values-overload.yaml`: четыре batch-реплики на worker, по одному CPU-процессу и массиву 64 MiB. У каждой CPU request 100m, limit 1 CPU, memory request 64Mi, limit 128Mi. Batch остается Burstable и низкоприоритетным.
+В `values-overload.yaml` запустила четыре batch-реплики на worker. У каждой один CPU-процесс, массив 64 MiB, CPU request 100m и limit 1 CPU, память request 64Mi и limit 128Mi
 
-<img src="images/img20.png" alt="img20 — Четыре вычислительные batch-реплики" width="950">
+Все четыре новые реплики запустились:
 
-*img20 — Все четыре новые batch-реплики Running на lab2-m02; старый Error относится к предыдущему eviction*
+<img src="images/img20.png" alt="img20" width="950">
 
-Запрос в Prometheus показал суммарное потребление batch **3,472 CPU**:
+В Prometheus проверила суммарное потребление CPU:
 
 ```promql
 sum(rate(container_cpu_usage_seconds_total{
@@ -535,73 +541,68 @@ sum(rate(container_cpu_usage_seconds_total{
 }[1m]))
 ```
 
-Это существенная конкуренция на VM с четырьмя ядрами. Значение — отдельный замер во время теста, не утверждение, что все десять минут потребление было постоянным.
+Получила **3,472 CPU** во время теста — существенная нагрузка для VM с четырьмя ядрами. Это отдельный замер, а не среднее за все десять минут
 
-Повторила тот же десятиминутный `orders.js` с частотой 5 заказов/с:
+Одновременно запустила тот же `orders.js` на 10 минут:
 
-<img src="images/img21.png" alt="img21 — Результаты k6 под CPU-нагрузкой" width="750">
+<img src="images/img21.png" alt="img21" width="750">
 
-*img21 — Все пороги k6 выполнены при работающем batch*
+Все пороги выполнены 🙂
 
-### Сравнение трех прогонов
-
-| Показатель | Исходные ресурсы | После подбора ресурсов | Под CPU-перегрузкой |
+| Показатель | Исходные ресурсы | После изменения ресурсов | Под CPU-нагрузкой |
 |---|---:|---:|---:|
 | Длительность | 10 минут | 10 минут | 10 минут |
-| Частота | ≈5 заказов/с | ≈5 заказов/с | ≈5 заказов/с |
-| Заказы, HTTP 201 | 3001 | 3000 | 3001 |
+| Заказы с HTTP 201 | 3001 | 3000 | 3001 |
 | Ошибки | 0% | 0% | 0% |
-| Среднее HTTP-время | 12,30 мс | 83,55 мс | 28,32 мс |
-| p95 HTTP-времени | 16,06 мс | 117,96 мс | 83,95 мс |
+| Среднее время | 12,30 мс | 83,55 мс | 28,32 мс |
+| p95 | 16,06 мс | 117,96 мс | 83,95 мс |
 | Максимум | 111,14 мс | 955,73 мс | 392,44 мс |
 | Пропущенные итерации | 0 | 0 | 0 |
 
-Во всех трех прогонах p95 ниже 300 мс. Максимум выше 300 мс в двух тестах не противоречит порогу p95: он не требует, чтобы абсолютно каждый запрос был быстрее 300 мс.
+Под нагрузкой p95 остался ниже 300 мс. Максимальный запрос занял 392,44 мс, но условие задано для p95, а не для каждого запроса
 
-После добавления небольших CPU limits задержка выросла относительно baseline. Это совместимо с влиянием throttling, но отдельное измерение throttling для доказательства причины не проводила. Под нагрузкой p95 оказался ниже предыдущего прогона — записала полученный результат, а не сделала вывод, будто batch ускоряет API. Состояние VM, прогрев и фоновые процессы между отдельными прогонами не идентичны.
+Результат под нагрузкой оказался лучше предыдущего прогона с измененными ресурсами. Отсюда не делаю вывод, что batch ускоряет API: это отдельные запуски, состояние VM и фоновые процессы между ними не одинаковые
 
-**Граница проверки:** десятиминутный SLA-тест проведен отдельно под CPU-нагрузкой. Непрерывный k6 одновременно с preemption и memory eviction не зафиксирован, поэтому сохранение SLA именно в моменты частей 6–7 не доказано. Скриншот k6 содержит итоговые метрики, а не временные графики задержки/ошибок. Новый дашборд и графики для этого эксперимента не экспортировала; дашборд из lab3 не считаю доказательством этого прогона. Эти пункты исходного задания остаются неполностью закрытыми.
+SLA проверила отдельно под CPU-нагрузкой. Непрерывный k6 одновременно с preemption и memory eviction не записывала, поэтому в эти моменты SLA отдельно не подтвержден. На скриншоте — итог k6; временные графики задержки и ошибок и новый дашборд этого прогона не сохраняла
 
-После теста остановила batch, вернув основной профиль ресурсов:
+После теста остановила batch:
 
 ```bash
 helm upgrade shop ~/lab4/charts/shop \
-  --namespace lab3 --kube-context lab2 \
+  --namespace lab3 \
+  --kube-context lab2 \
   -f ~/lab4/charts/shop/values-resources.yaml \
   --set batch.replicas=0 \
   --wait --timeout 5m
 ```
 
-## Часть 9 — Мониторинг и алерты
+## Часть 9 — Мониторинг
 
-ServiceMonitor для API и worker и три правила PrometheusRule находятся в чарте. Использовала метку `release: monitoring`, чтобы существующий Prometheus выбирал эти объекты. Второй стек не устанавливала.
+ServiceMonitor для API и worker и PrometheusRule уже находятся в чарте shop. Сохранила метку `release: monitoring`, чтобы их выбирал существующий Prometheus
 
-| Алерт | Условие | Зачем и что проверить |
+Использовала три алерта:
+
+| Алерт | Условие | Почему важно и что делать |
 |---|---|---|
-| `ShopAPIDown` | Все API scrape-цели имеют up=0 или цели отсутствуют; `for: 1m` | Нельзя собрать метрики API: проверить Pod, readiness, Service и отдельно пользовательский запрос |
-| `ShopHighErrorRate` | Общая доля HTTP 5xx >20% в окне 1m; `for: 1m` | Заказы могут завершаться ошибками: проверить логи API, БД и последние изменения |
-| `ShopWorkerStalled` | Нет свежего успешного опроса БД от доступных worker больше 60 с или подходящие метрики отсутствуют; `for: 1m` | Может остановиться обработка заказов: проверить worker и подключение к PostgreSQL |
+| `ShopAPIDown` | Все API scrape-цели имеют up=0 или цели отсутствуют; `for: 1m` | Проверить Pod, readiness, Service и доступность API |
+| `ShopHighErrorRate` | Доля HTTP 5xx выше 20% в окне 1m; `for: 1m` | Пользователи получают ошибки. Проверить API, PostgreSQL и последние изменения |
+| `ShopWorkerStalled` | Нет свежего успешного опроса БД доступными worker больше 60 секунд или метрики отсутствуют; `for: 1m` | Может остановиться обработка заказов. Проверить worker и подключение к БД |
 
-Все три правила имеют `severity: critical`. `ShopAPIDown` проверяет доступность сбора метрик, а не полный пользовательский путь. У worker успешный пустой опрос очереди тоже обновляет временную метку: отсутствие новых заказов не должно само вызывать алерт.
+Все имеют `severity: critical`. `ShopAPIDown` проверяет сбор метрик, а не весь пользовательский сценарий. У worker даже успешный опрос пустой очереди обновляет временную метку
 
-На скриншоте ниже правила уже в inactive и `health=ok`. Имя файла `alerts-firing.txt` не меняет фактического состояния на снимке:
+Проверила правила — ошибок вычисления нет:
 
-<img src="images/img22.png" alt="img22 — Три правила успешно вычисляются и находятся в inactive" width="850">
+<img src="images/img22.png" alt="img22" width="850">
 
-*img22 — Проверка правил после восстановления, не снимок firing*
+На этом снимке уже inactive. Хотя файл называется `alerts-firing.txt`, это не снимок самого срабатывания
 
-### Проверка доставки firing и resolved
+### Проверка алерта
 
-Для вызова `ShopHighErrorRate` создала `tests/trigger-error-alert.js`: 10 запросов/с к `/fail` в течение трех минут. HTTP 500 в этом тесте намеренные, проверка ожидает именно 500. Нагрузку выполняла отдельно от успешного SLA-прогона.
+Для `ShopHighErrorRate` создала `tests/trigger-error-alert.js`: 10 запросов/с к `/fail` в течение трех минут. В этом тесте HTTP 500 намеренный, его же проверяла в check
 
-Alertmanager отправил уведомление receiver `lab2-webhook`. Имя осталось от второй лабы, но получатель принимает и алерты shop. По логам получателя подтверждены оба события:
+Alertmanager отправил уведомление прежнему receiver `lab2-webhook`. Название осталось от второй лабы, но он принимает и алерты shop
 
-| Событие | UTC |
-|---|---|
-| Начало алерта | `2026-10-25T23:28:41.742Z` |
-| Завершение алерта | `2026-10-25T23:31:11.742Z` |
-
-Сначала получила огромную JSON-строку со служебными ссылками, а потом вспомнила, что форматтер уже был в третьей лабе :) Переиспользовала `tests/format-alerts.py`, который выбирает алерты `Shop*` и оставляет полезные поля:
+Для вывода переиспользовала форматтер из третьей лабы:
 
 ```bash
 python3 ~/lab4/tests/format-alerts.py \
@@ -609,105 +610,52 @@ python3 ~/lab4/tests/format-alerts.py \
   tee ~/lab4/reports/alert-delivery-pretty.txt
 ```
 
-<img src="images/img23.png" alt="img23 — Webhook получил firing и resolved для ShopHighErrorRate" width="750">
+Подтвердила firing и resolved:
 
-*img23 — Подтверждена доставка уведомления о проблеме и восстановлении*
+<img src="images/img23.png" alt="img23" width="750">
 
-Таким образом проверена цепочка **Prometheus → Alertmanager → webhook receiver**. Новый снимок Karma в этой лабораторной не делала; отдельное срабатывание остальных двух правил тоже не провоцировала.
+| Событие | Время UTC |
+|---|---|
+| Начало | `2026-10-25T23:28:41.742Z` |
+| Завершение | `2026-10-25T23:31:11.742Z` |
+
+Получилась цепочка Prometheus → Alertmanager → webhook receiver. Остальные два правила загружены, но отдельно их срабатывание в этой лабе не проверяла
 
 ## Что получилось
 
-- Две готовые ноды Minikube и образы приложения на обеих
-- Batch с настраиваемой нагрузкой CPU и памяти, запуск из Helm-чарта
-- Переключатель spread/anti-affinity и фактическое размещение API 2 + 2
-- Отчет KRR для API и worker, отдельная оценка PostgreSQL по метрикам, сравнение начальных и выбранных ресурсов
-- Guaranteed и высокий приоритет у API/PostgreSQL, низкий приоритет и Burstable у batch
-- PDB API и управляемый оператором PDB PostgreSQL
-- Pending из-за CPU requests и подтвержденный preemption batch тестовым API Pod
-- MemoryPressure и eviction batch при лабораторном soft-пороге, затем восстановление kubelet
-- 3001 успешный заказ под CPU-нагрузкой batch, p95 83,95 мс при пороге 300 мс
-- Три правила алертов в чарте и доставка firing/resolved одного из них
+- Две ноды Minikube и образы приложения на обеих
+- Batch с настраиваемыми CPU-процессами и объемом памяти
+- Переключатель spread/anti-affinity в values, размещение API 2 + 2
+- Рекомендации KRR для API и worker, отдельный расчет PostgreSQL по метрикам
+- Guaranteed и высокий приоритет у API/PostgreSQL, Burstable и низкий приоритет у batch
+- PDB для API и PostgreSQL
+- Pending по requests и вытеснение batch высокоприоритетным тестовым API Pod
+- MemoryPressure и eviction batch, восстановление kubelet после проверки
+- 3001 успешный заказ под CPU-нагрузкой, p95 83,95 мс при пороге 300 мс
+- Три алерта и доставка firing/resolved одного из них
 
-В конце нагрузку остановила, тестовый `preemption-api` удалила, конфигурацию kubelet восстановила. Рабочие компоненты — четыре API, два worker и одна PostgreSQL. БД закреплена на `lab2`, batch в обычном профиле выключен. Исторические завершенные Pod могут оставаться в списке.
+В конце batch выключен, тестовый Pod удален, конфигурация kubelet восстановлена. У API четыре реплики, worker — две, PostgreSQL — одна, закрепленная на `lab2`
 
-### Что отличается от полного задания
-
-Чтобы не путать полученный результат с тем, что еще нужно доказать:
-
-| Требование | Что проверено на этом стенде |
-|---|---|
-| kind/k3d на 1–2 ноды | Использован Minikube на двух нодах |
-| KRR для API, worker, PostgreSQL | API/worker — KRR; PostgreSQL — отдельный Prometheus-расчет |
-| Ресурсы критического пути из KRR | Выбраны по измерениям с дополнительным запасом, не дословные рекомендации |
-| Preemption рабочего API/PostgreSQL | Проверен отдельным тестовым Pod с образом API и высоким приоритетом |
-| Eviction при нехватке памяти | Реальный eviction при временно повышенном soft-пороге kubelet |
-| SLA одновременно с preemption и eviction | Проведен отдельный прогон под CPU-нагрузкой; совмещенного доказательства нет |
-| Временные графики и дашборд прогона | Сохранены итог k6 и замер Prometheus; новых временных графиков нет |
-
-## Файлы и повторение проверок
-
-Исходники и сырые результаты экспериментов находятся на VM в `~/lab4`. При переносе в репозиторий сохраняю их рядом с этим README и `images/`. Папка отчета с Mac сама по себе не содержит автоматически выгруженные файлы VM.
-
-| Каталог | Содержимое |
-|---|---|
-| `api/`, `worker/` | Сервисы из третьей лабы |
-| `batch/` | Генератор нагрузки и Dockerfile |
-| `charts/shop/` | Рабочие шаблоны и профили values |
-| `policies/` | Политики Kyverno с разрешенным образом batch |
-| `tests/` | k6-сценарии, форматтер уведомлений и тест preemption |
-| `reports/` | Сохраненные результаты команд и k6 |
-| `images/` | Скриншоты `img1.png`–`img23.png` |
-
-Основные результаты на VM: `krr-baseline.txt`, `orders-baseline.txt`, `orders-rightsized.txt`, `orders-overload.txt`, `batch-pending.txt`, `preemption-events.txt`, `preemption-pods.txt`, `memory-pressure-watch.txt`, `eviction-events.txt`, `batch-overload-cpu.json`, `alert-delivery.txt` и `alert-delivery-pretty.txt`.
-
-При обычном обновлении обязательно подключаю файл ресурсов:
-
-```bash
-helm lint ~/lab4/charts/shop \
-  -f ~/lab4/charts/shop/values-resources.yaml
-
-helm upgrade shop ~/lab4/charts/shop \
-  --namespace lab3 --kube-context lab2 \
-  -f ~/lab4/charts/shop/values-resources.yaml \
-  --set batch.replicas=0 \
-  --wait --timeout 5m
-```
-
-Архивы Docker-образов, скачанные бинарники и копию исходников KRR в Git не добавляю. Таблица [screenshots-map.csv](screenshots-map.csv) сохраняет соответствие исходных имен скриншотов и новых номеров.
+В работе есть отличия от задания: Minikube вместо kind/k3d, отдельный расчет PostgreSQL вместо рекомендации KRR, выбранные ресурсы с дополнительным запасом. Preemption проверяла отдельным тестовым Pod, eviction — с повышенным порогом. Совмещенный SLA-тест для preemption/eviction и временные графики еще не сделаны
 
 ## Топ ошибок
 
-К сожалению, без приключений снова не обошлось. Вот мой топ затыков (затупов):
+Мое любимое 🥰
 
-1. **Две ноды в списке Minikube — еще не две ноды Kubernetes.** Worker-контейнер существовал, но bootstrap оборвался. Проверять нужно `kubectl get nodes` и состояние kubelet, а не только финальное «Готово».
+1. **Worker есть в Minikube, но нет в Kubernetes.** Контейнер создался, а настройка kubelet оборвалась. Сообщение «Готово» оказалось не последней проверкой — дальше смотрела `kubectl get nodes`
 
-2. **«CPU свободен, почему Pod Pending?»** Запросила по два ядра у шести почти ничего не делающих batch. Планировщик честно посчитал requests, а не фактическую скуку приложения :)
+2. **Ubuntu не означает ARM64.** Скачала KRR для Ubuntu, а внутри x86-64. Пришлось собирать из исходников в Docker
 
-3. **ARM64 снова напомнил о себе.** Архив назывался Ubuntu, но внутри оказался x86-64. В итоге KRR собрала из исходников в Docker с Python 3.12.
+3. **Helm завис, а база потеряла свою директорию.** Данные не пропали, просто Pod переехал на другую ноду. HostPath за ним не переехал. Вернула PostgreSQL на `lab2` и закрепила это в чарте
 
-4. **KRR не согласился на десять минут истории.** Минимум оказался один час. Изменила окно анализа и честно указала, что оно включает и нагрузку, и менее активные периоды.
+4. **Сделала резервную копию и сломала lint.** Файл `.yaml.bak` внутри `templates/` Helm тоже решил проверить. Перенесла backup за пределы чарта
 
-5. **Отсутствие port-forward выглядело как ошибка JSON.** Сначала curl не подключился к 9091, а затем Python закономерно не смог разобрать пустой ввод. Исправлять нужно было соединение с Prometheus, а не парсер.
+5. **Свободный CPU не помог Pod запуститься.** Batch почти ничего не делал, но запросил по два ядра. Scheduler посчитал requests и оставил остальные реплики Pending — тут как раз все работает правильно)
 
-6. **Helm «завис», а PostgreSQL искал данные на другой ноде.** Дождалась таймаута, посмотрела события и логи. HostPath на worker не стал копией тома основной ноды. Вернула БД на `lab2`, закрепила это в чарте, PVC не трогала.
+6. **MemoryPressure и OOM — не одно и то же.** У worker Docker-лимит 3 GiB, а kubelet видел память всей VM. Вместо заполнения памяти до падения ноды настроила лабораторный soft-порог и получила именно Evicted
 
-7. **Резервная копия тоже попала в шаблоны.** `postgres-cluster.yaml.bak` внутри `templates/` сломал lint из-за расширения. Перенесла копию в `setup/backups/`, за пределы чарта.
+7. **Посмотрела слишком рано.** В выводе Pod еще Running, а чуть позже в событиях уже Evicted. Пришлось сравнивать время и смотреть не только одну строку статуса
 
-8. **PriorityClass в Cluster уже есть, а Pod все еще с нулевым приоритетом.** Проверила фактический Pod и пересоздала его. Значения объекта и параметры уже запущенного контейнера — не всегда одно и то же.
+8. **Форматтер уже был.** Сначала получила длинный JSON алерта и собралась писать новый скрипт. Потом вспомнила про третью лабу и просто переиспользовала старый :)
 
-9. **11 GiB у каждой ноды не превратили VM в 22 GiB.** Docker ограничивал worker тремя гигабайтами, а kubelet видел память VM. Поэтому тестировала eviction через контролируемый порог, а не заполняла память до падения всей ноды.
-
-10. **Running сняла раньше, чем случился eviction.** В следующем выводе уже было событие Evicted. При разборе важно сравнивать время снимков, статус завершения и события, а не одну строку.
-
-11. **Файл alerts-firing.txt оказался со статусами inactive.** Название файла — не доказательство срабатывания. Firing и resolved подтвердила по доставленным webhook-уведомлениям.
-
-На этом стенде особенно хорошо стало видно, что requests, limits, QoS, PriorityClass и PDB решают разные задачи. Одно слово Guaranteed не заменяет проверку размещения, работу хранилища и измерение пользовательского запроса ;)
-
-## Полезные ссылки
-
-- [Задание лабораторной №4](https://github.com/KeladKaal/containerization-and-orchestration/blob/main-rus/lecture-4-scheduling-resources/lab.md)
-- [Topology spread constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/)
-- [Priority и preemption](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/)
-- [Node-pressure eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/)
-- [Ограничение стандартного provisioner Minikube в multi-node](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/)
-- [Robusta KRR](https://github.com/robusta-dev/krr)
+В этой лабе наконец получилось увидеть разницу между «Pod не помещается», «Pod вытеснили ради другого» и «Pod выселили из-за памяти». Симптом похожий — batch не работает, а причины и действия совсем разные ;)
