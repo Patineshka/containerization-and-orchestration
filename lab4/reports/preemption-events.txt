@@ -1,0 +1,35 @@
+6m21s       Normal    Killing             pod/shop-api-f65f59649-f5jsq                Stopping container api
+5m1s        Normal    Killing             pod/shop-postgres-1                         Stopping container postgres
+4m58s       Normal    Scheduled           pod/shop-postgres-1                         Successfully assigned lab3/shop-postgres-1 to lab2
+4m57s       Normal    Pulled              pod/shop-postgres-1                         Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.30.1" already present on machine and can be accessed by the pod
+4m57s       Normal    Started             pod/shop-postgres-1                         Container started
+4m57s       Normal    Created             pod/shop-postgres-1                         Container created
+4m56s       Normal    Started             pod/shop-postgres-1                         Container started
+4m56s       Normal    Created             pod/shop-postgres-1                         Container created
+4m56s       Normal    Pulled              pod/shop-postgres-1                         Container image "ghcr.io/cloudnative-pg/postgresql:18.6-system-trixie" already present on machine and can be accessed by the pod
+2m32s       Normal    SuccessfulCreate    replicaset/shop-batch-f9c85dbf9             Created pod: shop-batch-f9c85dbf9-v8x2x
+2m32s       Normal    Started             pod/shop-batch-f9c85dbf9-bqvqs              Container started
+2m32s       Normal    SuccessfulCreate    replicaset/shop-batch-f9c85dbf9             Created pod: shop-batch-f9c85dbf9-wqnrq
+2m32s       Normal    SuccessfulCreate    replicaset/shop-batch-f9c85dbf9             Created pod: shop-batch-f9c85dbf9-qz4ff
+2m32s       Normal    Created             pod/shop-batch-f9c85dbf9-bqvqs              Container created
+2m32s       Normal    SuccessfulCreate    replicaset/shop-batch-f9c85dbf9             Created pod: shop-batch-f9c85dbf9-pqjkt
+2m32s       Normal    SuccessfulCreate    replicaset/shop-batch-f9c85dbf9             Created pod: shop-batch-f9c85dbf9-hh842
+2m32s       Normal    SuccessfulCreate    replicaset/shop-batch-f9c85dbf9             Created pod: shop-batch-f9c85dbf9-bqvqs
+2m32s       Normal    Pulled              pod/shop-batch-f9c85dbf9-bqvqs              Container image "docker.io/library/lab4-batch:v1" already present on machine and can be accessed by the pod
+2m32s       Normal    ScalingReplicaSet   deployment/shop-batch                       Scaled up replica set shop-batch-f9c85dbf9 from 0 to 6
+2m32s       Normal    Scheduled           pod/shop-batch-f9c85dbf9-bqvqs              Successfully assigned lab3/shop-batch-f9c85dbf9-bqvqs to lab2-m02
+38s         Warning   FailedScheduling    pod/shop-batch-f9c85dbf9-wqnrq              0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+38s         Warning   FailedScheduling    pod/shop-batch-f9c85dbf9-v8x2x              0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+38s         Warning   FailedScheduling    pod/shop-batch-f9c85dbf9-qz4ff              0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+38s         Warning   FailedScheduling    pod/shop-batch-f9c85dbf9-pqjkt              0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+38s         Warning   FailedScheduling    pod/shop-batch-f9c85dbf9-hh842              0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+38s         Warning   FailedScheduling    pod/shop-batch-f9c85dbf9-p9wrg              0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+53s         Normal    Preempted           pod/shop-batch-f9c85dbf9-bqvqs              Preempted by pod 01f0dfff-a684-4461-a5a6-d41f4e2c7cef on node lab2-m02
+53s         Normal    Killing             pod/shop-batch-f9c85dbf9-bqvqs              Stopping container batch
+53s         Normal    SuccessfulCreate    replicaset/shop-batch-f9c85dbf9             Created pod: shop-batch-f9c85dbf9-p9wrg
+53s         Warning   FailedScheduling    pod/preemption-api                          0/2 nodes are available: 1 Insufficient cpu, 1 node(s) didn't match Pod's node affinity/selector. preemption: found a potential placement for pod on node lab2-m02, preempting 1 victims
+38s         Normal    Scheduled           pod/preemption-api                          Successfully assigned lab3/preemption-api to lab2-m02
+37s         Warning   Unhealthy           pod/preemption-api                          Readiness probe failed: Get "http://10.244.1.13:8080/health": dial tcp 10.244.1.13:8080: connect: connection refused
+37s         Normal    Started             pod/preemption-api                          Container started
+37s         Normal    Created             pod/preemption-api                          Container created
+37s         Normal    Pulled              pod/preemption-api                          Container image "docker.io/library/shop-api:v2" already present on machine and can be accessed by the pod

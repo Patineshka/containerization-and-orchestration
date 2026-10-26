@@ -1,0 +1,7 @@
+NAME       MEMORY_PRESSURE
+lab2-m02   False
+lab2-m02   False
+lab2-m02   True
+lab2-m02   True
+lab2-m02   False
+lab2-m02   False

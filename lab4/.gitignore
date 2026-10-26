@@ -1,0 +1,7 @@
+images/*.tar
+__pycache__/
+*.pyc
+.DS_Store
+setup/krr/
+setup/krr.zip
+setup/krr-source/

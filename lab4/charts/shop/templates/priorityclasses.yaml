@@ -1,0 +1,17 @@
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: {{ .Release.Name }}-critical
+value: {{ .Values.priorityClasses.critical }}
+globalDefault: false
+preemptionPolicy: PreemptLowerPriority
+description: "Critical shop API and PostgreSQL"
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: {{ .Release.Name }}-batch
+value: {{ .Values.priorityClasses.batch }}
+globalDefault: false
+preemptionPolicy: Never
+description: "Background batch workload"

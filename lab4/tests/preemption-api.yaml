@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: preemption-api
+  namespace: lab3
+  labels:
+    app: preemption-api
+    owner: patineshka
+spec:
+  priorityClassName: shop-critical
+  nodeSelector:
+    kubernetes.io/hostname: lab2-m02
+  containers:
+    - name: api
+      image: docker.io/library/shop-api:v2
+      imagePullPolicy: Never
+      ports:
+        - name: http
+          containerPort: 8080
+      readinessProbe:
+        httpGet:
+          path: /health
+          port: http
+        periodSeconds: 5
+      resources:
+        requests:
+          cpu: "2"
+          memory: 128Mi
+        limits:
+          cpu: "2"
+          memory: 128Mi

@@ -1,0 +1,29 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: {{ .Release.Name }}-postgres
+spec:
+  priorityClassName: {{ printf "%s-critical" .Release.Name | quote }}
+  enablePDB: {{ .Values.pdb.postgres.enabled }}
+  affinity:
+    nodeSelector:
+      {{- toYaml .Values.postgresNodeSelector | nindent 6 }}
+  instances: {{ .Values.postgres.instances }}
+  imageName: {{ .Values.postgres.imageName | quote }}
+
+  inheritedMetadata:
+    labels:
+      app: {{ .Release.Name }}-postgres
+      owner: {{ .Values.owner | quote }}
+
+  bootstrap:
+    initdb:
+      database: {{ .Values.postgres.database | quote }}
+      owner: {{ .Values.postgres.owner | quote }}
+
+  storage:
+    size: {{ .Values.postgres.storage.size | quote }}
+    storageClass: {{ .Values.postgres.storage.storageClass | quote }}
+
+  resources:
+    {{- toYaml .Values.postgres.resources | nindent 4 }}

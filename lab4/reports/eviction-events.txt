@@ -1,0 +1,15 @@
+LAST SEEN   TYPE      REASON              OBJECT                             MESSAGE
+18m         Warning   Unhealthy           pod/shop-api-54c6b5c547-5vr68      Readiness probe failed: Get "http://10.244.1.11:8080/health": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+33m         Warning   Unhealthy           pod/shop-api-54c6b5c547-7ltdq      Readiness probe failed: Get "http://10.244.0.71:8080/health": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+19m         Warning   Unhealthy           pod/shop-api-54c6b5c547-4xjf4      Liveness probe failed: Get "http://10.244.1.10:8080/health": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+19m         Warning   Unhealthy           pod/shop-api-54c6b5c547-4xjf4      Readiness probe failed: Get "http://10.244.1.10:8080/health": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+36s         Normal    Created             pod/shop-batch-6d7b695994-s49fd    Container created
+36s         Normal    Pulled              pod/shop-batch-6d7b695994-s49fd    Container image "docker.io/library/lab4-batch:v1" already present on machine and can be accessed by the pod
+36s         Normal    Scheduled           pod/shop-batch-6d7b695994-s49fd    Successfully assigned lab3/shop-batch-6d7b695994-s49fd to lab2-m02
+36s         Normal    Started             pod/shop-batch-6d7b695994-s49fd    Container started
+36s         Normal    SuccessfulCreate    replicaset/shop-batch-6d7b695994   Created pod: shop-batch-6d7b695994-s49fd
+36s         Normal    ScalingReplicaSet   deployment/shop-batch              Scaled up replica set shop-batch-6d7b695994 from 0 to 1
+18s         Warning   Evicted             pod/shop-batch-6d7b695994-s49fd    The node was low on resource: memory. Threshold quantity: 10670Mi, available: 10838604Ki. Container batch was using 274840Ki, request is 64Mi, has larger consumption of memory.
+18s         Normal    Killing             pod/shop-batch-6d7b695994-s49fd    Stopping container batch
+2s          Warning   FailedScheduling    pod/shop-batch-6d7b695994-x9xbb    0/2 nodes are available: 1 node(s) didn't match Pod's node affinity/selector, 1 node(s) had untolerated taint(s). preemption: not eligible due to preemptionPolicy=Never.
+2s          Normal    SuccessfulCreate    replicaset/shop-batch-6d7b695994   Created pod: shop-batch-6d7b695994-x9xbb

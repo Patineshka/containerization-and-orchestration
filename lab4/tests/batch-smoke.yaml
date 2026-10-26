@@ -1,0 +1,36 @@
+---
+# Source: shop/templates/batch-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-batch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shop-batch
+  template:
+    metadata:
+      labels:
+        app: shop-batch
+        owner: "patineshka"
+    spec:
+      terminationGracePeriodSeconds: 15
+      containers:
+        - name: batch
+          image: "docker.io/library/lab4-batch:v1"
+          imagePullPolicy: Never
+          env:
+            - name: CPU_WORKERS
+              value: "1"
+            - name: MEMORY_MIB
+              value: "64"
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 64Mi
+
+

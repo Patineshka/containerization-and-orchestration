@@ -1,0 +1,471 @@
+---
+# Source: shop/templates/priorityclasses.yaml
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: shop-critical
+value: 100000
+globalDefault: false
+preemptionPolicy: PreemptLowerPriority
+description: "Critical shop API and PostgreSQL"
+
+---
+# Source: shop/templates/priorityclasses.yaml
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: shop-batch
+value: -1000
+globalDefault: false
+preemptionPolicy: Never
+description: "Background batch workload"
+
+---
+# Source: shop/templates/api-pdb.yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: shop-api
+spec:
+  minAvailable: 3
+  selector:
+    matchLabels:
+      app: shop-api
+
+---
+# Source: shop/templates/api-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: shop-api
+  labels:
+    app: shop-api
+    owner: "patineshka"
+spec:
+  type: ClusterIP
+  selector:
+    app: shop-api
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
+---
+# Source: shop/templates/worker-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: shop-worker
+  labels:
+    app: shop-worker
+    owner: "patineshka"
+spec:
+  type: ClusterIP
+  selector:
+    app: shop-worker
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
+---
+# Source: shop/templates/api-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-api
+spec:
+  replicas: 4
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+
+  minReadySeconds: 5
+  progressDeadlineSeconds: 120
+
+  selector:
+    matchLabels:
+      app: shop-api
+
+  template:
+    metadata:
+      labels:
+        app: shop-api
+        owner: "patineshka"
+    spec:
+      priorityClassName: "shop-critical"
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: shop-api
+          matchLabelKeys:
+            - pod-template-hash
+
+      containers:
+        - name: api
+          image: "docker.io/library/shop-api:v2"
+          imagePullPolicy: Never
+
+          ports:
+            - name: http
+              containerPort: 8080
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 2
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+
+          env:
+            - name: HEALTH_FAIL
+              value: "false"
+            - name: APP_VERSION
+              value: "v2"
+            - name: OTEL_SERVICE_NAME
+              value: shop-api
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://jaeger.monitoring.svc.cluster.local:4317
+            - name: PGHOST
+              value: "shop-postgres-rw"
+            - name: PGPORT
+              value: "5432"
+            - name: PGDATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: shop-postgres-app
+                  key: dbname
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: shop-postgres-app
+                  key: username
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: shop-postgres-app
+                  key: password
+
+          resources:
+            limits:
+              cpu: 50m
+              memory: 128Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi
+
+---
+# Source: shop/templates/batch-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-batch
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: shop-batch
+  template:
+    metadata:
+      labels:
+        app: shop-batch
+        owner: "patineshka"
+    spec:
+      priorityClassName: "shop-batch"
+      terminationGracePeriodSeconds: 15
+      containers:
+        - name: batch
+          image: "docker.io/library/lab4-batch:v1"
+          imagePullPolicy: Never
+          env:
+            - name: CPU_WORKERS
+              value: "1"
+            - name: MEMORY_MIB
+              value: "64"
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 64Mi
+
+---
+# Source: shop/templates/worker-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-worker
+spec:
+  replicas: 2
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+
+  minReadySeconds: 5
+  progressDeadlineSeconds: 120
+
+  selector:
+    matchLabels:
+      app: shop-worker
+
+  template:
+    metadata:
+      labels:
+        app: shop-worker
+        owner: "patineshka"
+    spec:
+      containers:
+        - name: worker
+          image: "docker.io/library/shop-worker:v1"
+          imagePullPolicy: Never
+
+          ports:
+            - name: http
+              containerPort: 8080
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 2
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+
+          env:
+            - name: APP_VERSION
+              value: "v1"
+
+            - name: OTEL_SERVICE_NAME
+              value: shop-worker
+
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://jaeger.monitoring.svc.cluster.local:4317
+
+            - name: PGHOST
+              value: "shop-postgres-rw"
+
+            - name: PGPORT
+              value: "5432"
+
+            - name: PGDATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: shop-postgres-app
+                  key: dbname
+
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: shop-postgres-app
+                  key: username
+
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: shop-postgres-app
+                  key: password
+
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 20m
+              memory: 128Mi
+---
+# Source: shop/templates/postgres-cluster.yaml
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: shop-postgres
+spec:
+  priorityClassName: "shop-critical"
+  enablePDB: true
+  affinity:
+    nodeSelector:
+      kubernetes.io/hostname: lab2
+  instances: 1
+  imageName: "ghcr.io/cloudnative-pg/postgresql:18.6-system-trixie"
+
+  inheritedMetadata:
+    labels:
+      app: shop-postgres
+      owner: "patineshka"
+
+  bootstrap:
+    initdb:
+      database: "shop"
+      owner: "shop"
+
+  storage:
+    size: "2Gi"
+    storageClass: "standard"
+
+  resources:
+    limits:
+      cpu: 100m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+---
+# Source: shop/templates/prometheusrules.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: shop-alerts
+  labels:
+    release: monitoring
+spec:
+  groups:
+    - name: shop
+      rules:
+        - alert: ShopAPIDown
+          expr: |
+            (
+              max(up{
+                namespace="lab3",
+                service="shop-api"
+              }) == 0
+            )
+            or
+            absent(up{
+              namespace="lab3",
+              service="shop-api"
+            })
+          for: 1m
+          labels:
+            severity: critical
+            namespace: "lab3"
+            service: "shop-api"
+          annotations:
+            summary: "Все цели shop API недоступны для сбора метрик"
+            description: "Проверить Pod API, readiness-пробы, Service и доступность приложения."
+        
+        - alert: ShopHighErrorRate
+          expr: |
+            (
+              sum(rate(api_requests_total{
+                namespace="lab3",
+                service="shop-api",
+                status=~"5.."
+              }[1m]))
+              /
+              clamp_min(
+                sum(rate(api_requests_total{
+                  namespace="lab3",
+                  service="shop-api"
+                }[1m])),
+                0.000001
+              )
+            ) > 0.20
+          for: 1m
+          labels:
+            severity: critical
+            namespace: "lab3"
+            service: "shop-api"
+          annotations:
+            summary: "Более 20% запросов shop API завершаются ошибками"
+            description: "Проверить ошибки API, доступность PostgreSQL и последние изменения приложения."
+
+        - alert: ShopWorkerStalled
+          expr: |
+            (
+              time() -
+              max(
+                shop_worker_last_success_timestamp_seconds{
+                  namespace="lab3",
+                  service="shop-worker"
+                }
+                and on(namespace, pod)
+                (
+                  up{
+                    namespace="lab3",
+                    service="shop-worker"
+                  } == 1
+                )
+              ) > 60
+            )
+            or
+            absent(
+              shop_worker_last_success_timestamp_seconds{
+                namespace="lab3",
+                service="shop-worker"
+              }
+              and on(namespace, pod)
+              (
+                up{
+                  namespace="lab3",
+                  service="shop-worker"
+                } == 1
+              )
+            )
+          for: 1m
+          labels:
+            severity: critical
+            namespace: "lab3"
+            service: "shop-worker"
+          annotations:
+            summary: "Нет свежих успешных опросов БД от worker"
+            description: "Проверить реплики worker, ошибки подключения к PostgreSQL и состояние базы."
+---
+# Source: shop/templates/servicemonitors.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: shop-api
+  labels:
+    release: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: shop-api
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
+
+---
+# Source: shop/templates/servicemonitors.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: shop-worker
+  labels:
+    release: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: shop-worker
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s

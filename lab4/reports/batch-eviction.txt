@@ -1,0 +1,2 @@
+NAME                          PHASE     REASON   MESSAGE
+shop-batch-6d7b695994-s49fd   Running   <none>   <none>

@@ -1,0 +1,6 @@
+LAST SEEN   TYPE      REASON             OBJECT                           MESSAGE
+41s         Warning   FailedScheduling   pod/shop-batch-f9c85dbf9-hh842   0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+41s         Warning   FailedScheduling   pod/shop-batch-f9c85dbf9-pqjkt   0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+41s         Warning   FailedScheduling   pod/shop-batch-f9c85dbf9-qz4ff   0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+41s         Warning   FailedScheduling   pod/shop-batch-f9c85dbf9-v8x2x   0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.
+41s         Warning   FailedScheduling   pod/shop-batch-f9c85dbf9-wqnrq   0/2 nodes are available: 2 Insufficient cpu. preemption: not eligible due to preemptionPolicy=Never.

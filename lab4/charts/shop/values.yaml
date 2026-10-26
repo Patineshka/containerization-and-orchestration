@@ -1,0 +1,74 @@
+owner: patineshka
+
+api:
+  replicas: 4
+  image:
+    repository: docker.io/library/shop-api
+    tag: v2
+    pullPolicy: Never
+  healthFail: false
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      memory: 256Mi
+
+worker:
+  replicas: 2
+  image:
+    repository: docker.io/library/shop-worker
+    tag: v1
+    pullPolicy: Never
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      memory: 128Mi
+
+postgres:
+  instances: 1
+  imageName: ghcr.io/cloudnative-pg/postgresql:18.6-system-trixie
+  database: shop
+  owner: shop
+  storage:
+    size: 2Gi
+    storageClass: standard
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      memory: 512Mi
+
+batch:
+  replicas: 0
+  image:
+    repository: docker.io/library/lab4-batch
+    tag: v1
+    pullPolicy: Never
+  cpuWorkers: 1
+  memoryMiB: 64
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 500m
+      memory: 128Mi
+
+scheduling:
+  # spread или antiAffinity
+  mode: spread
+
+priorityClasses:
+  critical: 100000
+  batch: -1000
+
+pdb:
+  api:
+    enabled: true
+    minAvailable: 3
+  postgres:
+    enabled: true

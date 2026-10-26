@@ -1,0 +1,13 @@
+batch:
+  replicas: 1
+  nodeSelector:
+    kubernetes.io/hostname: lab2-m02
+  cpuWorkers: 0
+  memoryMiB: 256
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
