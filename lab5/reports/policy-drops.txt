@@ -1,0 +1,6 @@
+=== cilium-459sd ===
+Oct 26 02:22:21.997: lab3/shop-api-6c56f79b5c-44hnb (ID:4912) <> ff02::2 (unknown) Unsupported L3 protocol DROPPED (ICMPv6 RouterSolicitation)
+Oct 26 02:22:54.765: lab3/shop-api-6c56f79b5c-n5bxm (ID:4912) <> ff02::2 (unknown) Unsupported L3 protocol DROPPED (ICMPv6 RouterSolicitation)
+=== cilium-njwm5 ===
+Oct 26 02:24:00.300: lab3/shop-api-6c56f79b5c-w5mn4 (ID:4912) <> ff02::2 (unknown) Unsupported L3 protocol DROPPED (ICMPv6 RouterSolicitation)
+Oct 26 02:25:05.836: lab3/shop-worker-57d444454f-s7tvj (ID:34985) <> ff02::2 (unknown) Unsupported L3 protocol DROPPED (ICMPv6 RouterSolicitation)

@@ -1,0 +1,80 @@
+{
+    "status": "success",
+    "data": {
+        "resultType": "vector",
+        "result": [
+            {
+                "metric": {
+                    "__name__": "hubble_drop_total"
+                },
+                "value": [
+                    1792997218.56,
+                    "2"
+                ]
+            },
+            {
+                "metric": {
+                    "__name__": "hubble_flows_processed_total"
+                },
+                "value": [
+                    1792997218.56,
+                    "52"
+                ]
+            },
+            {
+                "metric": {
+                    "__name__": "hubble_lost_events_total"
+                },
+                "value": [
+                    1792997218.56,
+                    "6"
+                ]
+            },
+            {
+                "metric": {
+                    "__name__": "hubble_tcp_flags_total"
+                },
+                "value": [
+                    1792997218.56,
+                    "52"
+                ]
+            },
+            {
+                "metric": {
+                    "__name__": "hubble_metrics_http_handler_request_duration_seconds_bucket"
+                },
+                "value": [
+                    1792997218.56,
+                    "24"
+                ]
+            },
+            {
+                "metric": {
+                    "__name__": "hubble_metrics_http_handler_request_duration_seconds_sum"
+                },
+                "value": [
+                    1792997218.56,
+                    "2"
+                ]
+            },
+            {
+                "metric": {
+                    "__name__": "hubble_metrics_http_handler_request_duration_seconds_count"
+                },
+                "value": [
+                    1792997218.56,
+                    "2"
+                ]
+            },
+            {
+                "metric": {
+                    "__name__": "hubble_metrics_http_handler_requests_total"
+                },
+                "value": [
+                    1792997218.56,
+                    "2"
+                ]
+            }
+        ]
+    }
+}

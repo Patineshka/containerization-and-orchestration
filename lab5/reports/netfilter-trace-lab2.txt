@@ -1,0 +1,89 @@
+PACKET: 2 49227b20 IN=eth0 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=192.168.49.2 LEN=60 TOS=0x0 TTL=64 ID=64169 DF SPORT=54174 DPORT=30080 SYN 
+ TRACE: 2 49227b20 raw:PREROUTING:rule:0x34:CONTINUE  -4 -t raw -A PREROUTING -p tcp -m tcp --dport 30080 -m comment --comment lab5-nodeport-trace -j TRACE
+ TRACE: 2 49227b20 raw:PREROUTING:rule:0x33:JUMP:CILIUM_PRE_raw  -4 -t raw -A PREROUTING -m comment --comment "cilium-feeder: CILIUM_PRE_raw" -j CILIUM_PRE_raw
+ TRACE: 2 49227b20 raw:PREROUTING:policy:ACCEPT 
+PACKET: 2 49227b20 IN=eth0 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=192.168.49.2 LEN=60 TOS=0x0 TTL=64 ID=64169 DF SPORT=54174 DPORT=30080 SYN 
+ TRACE: 2 49227b20 mangle:PREROUTING:rule:0x34:JUMP:CILIUM_PRE_mangle  -4 -t mangle -A PREROUTING -m comment --comment "cilium-feeder: CILIUM_PRE_mangle" -j CILIUM_PRE_mangle
+ TRACE: 2 49227b20 mangle:PREROUTING:policy:ACCEPT 
+PACKET: 2 49227b20 IN=eth0 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=192.168.49.2 LEN=60 TOS=0x0 TTL=64 ID=64169 DF SPORT=54174 DPORT=30080 SYN 
+ TRACE: 2 49227b20 nat:PREROUTING:rule:0x8938:JUMP:CILIUM_PRE_nat  -4 -t nat -A PREROUTING -m comment --comment "cilium-feeder: CILIUM_PRE_nat" -j CILIUM_PRE_nat
+ TRACE: 2 49227b20 nat:PREROUTING:rule:0x16:JUMP:KUBE-SERVICES  -4 -t nat -A PREROUTING -m comment --comment "kubernetes service portals" -j KUBE-SERVICES
+ TRACE: 2 49227b20 nat:KUBE-SERVICES:rule:0x8932:JUMP:KUBE-NODEPORTS  -4 -t nat -A KUBE-SERVICES -m comment --comment "kubernetes service nodeports; NOTE: this must be the last rule in this chain" -m addrtype --dst-type LOCAL -j KUBE-NODEPORTS
+ TRACE: 2 49227b20 nat:KUBE-NODEPORTS:rule:0x882e:JUMP:KUBE-EXT-ULKIU2KPRKEHS6IK  -4 -t nat -A KUBE-NODEPORTS -p tcp -m comment --comment "lab3/shop-api:http" -m tcp --dport 30080 -j KUBE-EXT-ULKIU2KPRKEHS6IK
+ TRACE: 2 49227b20 nat:KUBE-EXT-ULKIU2KPRKEHS6IK:rule:0x8830:JUMP:KUBE-MARK-MASQ  -4 -t nat -A KUBE-EXT-ULKIU2KPRKEHS6IK -m comment --comment "masquerade traffic for lab3/shop-api:http external destinations" -j KUBE-MARK-MASQ
+ TRACE: 2 49227b20 nat:KUBE-MARK-MASQ:rule:0x8826:CONTINUE  -4 -t nat -A KUBE-MARK-MASQ -j MARK --set-xmark 0x4000/0x4000
+ TRACE: 2 49227b20 nat:KUBE-EXT-ULKIU2KPRKEHS6IK:rule:0x8831:JUMP:KUBE-SVC-ULKIU2KPRKEHS6IK  -4 -t nat -A KUBE-EXT-ULKIU2KPRKEHS6IK -j KUBE-SVC-ULKIU2KPRKEHS6IK
+ TRACE: 2 49227b20 nat:KUBE-SVC-ULKIU2KPRKEHS6IK:rule:0x8834:JUMP:KUBE-SEP-J6JPY3XQHJ4T3Z3V  -4 -t nat -A KUBE-SVC-ULKIU2KPRKEHS6IK -m comment --comment "lab3/shop-api:http -> 10.244.1.38:8080" -m statistic --mode random --probability 0.50000000000 -j KUBE-SEP-J6JPY3XQHJ4T3Z3V
+ TRACE: 2 49227b20 nat:KUBE-SEP-J6JPY3XQHJ4T3Z3V:rule:0x883b:ACCEPT  -4 -t nat -A KUBE-SEP-J6JPY3XQHJ4T3Z3V -p tcp -m comment --comment "lab3/shop-api:http" -m tcp -j DNAT --to-destination 10.244.1.38:8080
+PACKET: 1 49227b20 IN=eth0 NFPROTO=2 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=10.244.1.38 LEN=60 TOS=0x0 TTL=64 ID=64169 DF SPORT=54174 DPORT=8080 SYN MARK=0x4000 
+ TRACE: 1 49227b20 kindnet-network-policies:prerouting:rule:0x16:ACCEPT  
+PACKET: 2 49227b20 IN=eth0 OUT=eth0 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=10.244.1.38 LEN=60 TOS=0x0 TTL=63 ID=64169 DF SPORT=54174 DPORT=8080 SYN MARK=0x4000 
+ TRACE: 2 49227b20 filter:FORWARD:rule:0xbb4:JUMP:CILIUM_FORWARD  -4 -t filter -A FORWARD -m comment --comment "cilium-feeder: CILIUM_FORWARD" -j CILIUM_FORWARD
+ TRACE: 2 49227b20 filter:FORWARD:rule:0x26:JUMP:KUBE-PROXY-FIREWALL  -4 -t filter -A FORWARD -m conntrack --ctstate NEW -m comment --comment "kubernetes load balancer firewall" -j KUBE-PROXY-FIREWALL
+ TRACE: 2 49227b20 filter:FORWARD:rule:0x22:JUMP:KUBE-FORWARD  -4 -t filter -A FORWARD -m comment --comment "kubernetes forwarding rules" -j KUBE-FORWARD
+ TRACE: 2 49227b20 filter:KUBE-FORWARD:rule:0xba5:ACCEPT  -4 -t filter -A KUBE-FORWARD -m comment --comment "kubernetes forwarding rules" -m mark --mark 0x4000/0x4000 -j ACCEPT
+PACKET: 2 49227b20 IN=eth0 OUT=eth0 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=10.244.1.38 LEN=60 TOS=0x0 TTL=63 ID=64169 DF SPORT=54174 DPORT=8080 SYN MARK=0x4000 
+ TRACE: 2 49227b20 mangle:POSTROUTING:rule:0x33:JUMP:CILIUM_POST_mangle  -4 -t mangle -A POSTROUTING -m comment --comment "cilium-feeder: CILIUM_POST_mangle" -j CILIUM_POST_mangle
+ TRACE: 2 49227b20 mangle:POSTROUTING:policy:ACCEPT 
+PACKET: 1 49227b20 IN=eth0 OUT=eth0 NFPROTO=2 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=10.244.1.38 LEN=60 TOS=0x0 TTL=63 ID=64169 DF SPORT=54174 DPORT=8080 SYN MARK=0x4000 
+ TRACE: 1 49227b20 kindnet-network-policies:postrouting:rule:0x10:CONTINUE  
+ TRACE: 1 49227b20 kindnet-network-policies:postrouting:policy:ACCEPT 
+PACKET: 2 49227b20 IN=eth0 OUT=eth0 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=10.244.1.38 LEN=60 TOS=0x0 TTL=63 ID=64169 DF SPORT=54174 DPORT=8080 SYN MARK=0x4000 
+ TRACE: 2 49227b20 nat:POSTROUTING:rule:0x8936:JUMP:CILIUM_POST_nat  -4 -t nat -A POSTROUTING -m comment --comment "cilium-feeder: CILIUM_POST_nat" -j CILIUM_POST_nat
+ TRACE: 2 49227b20 nat:POSTROUTING:rule:0x18:JUMP:KUBE-POSTROUTING  -4 -t nat -A POSTROUTING -m comment --comment "kubernetes postrouting rules" -j KUBE-POSTROUTING
+ TRACE: 2 49227b20 nat:KUBE-POSTROUTING:rule:0x8824:CONTINUE  -4 -t nat -A KUBE-POSTROUTING -j MARK --set-xmark 0x4000/0x0
+ TRACE: 2 49227b20 nat:KUBE-POSTROUTING:rule:0x8825:ACCEPT  -4 -t nat -A KUBE-POSTROUTING -m comment --comment "kubernetes service traffic requiring SNAT" -j MASQUERADE --random-fully
+PACKET: 2 71c556aa IN=eth0 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=192.168.49.2 LEN=60 TOS=0x0 TTL=64 ID=64170 DF SPORT=54174 DPORT=30080 SYN 
+ TRACE: 2 71c556aa raw:PREROUTING:rule:0x34:CONTINUE  -4 -t raw -A PREROUTING -p tcp -m tcp --dport 30080 -m comment --comment lab5-nodeport-trace -j TRACE
+ TRACE: 2 71c556aa raw:PREROUTING:rule:0x33:JUMP:CILIUM_PRE_raw  -4 -t raw -A PREROUTING -m comment --comment "cilium-feeder: CILIUM_PRE_raw" -j CILIUM_PRE_raw
+ TRACE: 2 71c556aa raw:PREROUTING:policy:ACCEPT 
+PACKET: 2 71c556aa IN=eth0 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=192.168.49.2 LEN=60 TOS=0x0 TTL=64 ID=64170 DF SPORT=54174 DPORT=30080 SYN 
+ TRACE: 2 71c556aa mangle:PREROUTING:rule:0x34:JUMP:CILIUM_PRE_mangle  -4 -t mangle -A PREROUTING -m comment --comment "cilium-feeder: CILIUM_PRE_mangle" -j CILIUM_PRE_mangle
+ TRACE: 2 71c556aa mangle:PREROUTING:policy:ACCEPT 
+PACKET: 1 71c556aa IN=eth0 NFPROTO=2 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=10.244.1.38 LEN=60 TOS=0x0 TTL=64 ID=64170 DF SPORT=54174 DPORT=8080 SYN 
+ TRACE: 1 71c556aa kindnet-network-policies:prerouting:rule:0x16:ACCEPT  
+PACKET: 2 71c556aa IN=eth0 OUT=eth0 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=10.244.1.38 LEN=60 TOS=0x0 TTL=63 ID=64170 DF SPORT=54174 DPORT=8080 SYN 
+ TRACE: 2 71c556aa filter:FORWARD:rule:0xbb4:JUMP:CILIUM_FORWARD  -4 -t filter -A FORWARD -m comment --comment "cilium-feeder: CILIUM_FORWARD" -j CILIUM_FORWARD
+ TRACE: 2 71c556aa filter:FORWARD:rule:0x26:JUMP:KUBE-PROXY-FIREWALL  -4 -t filter -A FORWARD -m conntrack --ctstate NEW -m comment --comment "kubernetes load balancer firewall" -j KUBE-PROXY-FIREWALL
+ TRACE: 2 71c556aa filter:FORWARD:rule:0x22:JUMP:KUBE-FORWARD  -4 -t filter -A FORWARD -m comment --comment "kubernetes forwarding rules" -j KUBE-FORWARD
+ TRACE: 2 71c556aa filter:FORWARD:rule:0x1f:JUMP:KUBE-SERVICES  -4 -t filter -A FORWARD -m conntrack --ctstate NEW -m comment --comment "kubernetes service portals" -j KUBE-SERVICES
+ TRACE: 2 71c556aa filter:FORWARD:rule:0x1b:JUMP:KUBE-EXTERNAL-SERVICES  -4 -t filter -A FORWARD -m conntrack --ctstate NEW -m comment --comment "kubernetes externally-visible service portals" -j KUBE-EXTERNAL-SERVICES
+ TRACE: 2 71c556aa filter:FORWARD:rule:0xc:JUMP:DOCKER-USER  -4 -t filter -A FORWARD -j DOCKER-USER
+ TRACE: 2 71c556aa filter:FORWARD:rule:0x7:JUMP:DOCKER-FORWARD  -4 -t filter -A FORWARD -j DOCKER-FORWARD
+ TRACE: 2 71c556aa filter:DOCKER-FORWARD:rule:0xa:JUMP:DOCKER-CT  -4 -t filter -A DOCKER-FORWARD -j DOCKER-CT
+ TRACE: 2 71c556aa filter:DOCKER-FORWARD:rule:0x9:JUMP:DOCKER-INTERNAL  -4 -t filter -A DOCKER-FORWARD -j DOCKER-INTERNAL
+ TRACE: 2 71c556aa filter:DOCKER-FORWARD:rule:0x8:JUMP:DOCKER-BRIDGE  -4 -t filter -A DOCKER-FORWARD -j DOCKER-BRIDGE
+ TRACE: 2 71c556aa filter:FORWARD:policy:ACCEPT 
+PACKET: 2 71c556aa IN=eth0 OUT=eth0 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=10.244.1.38 LEN=60 TOS=0x0 TTL=63 ID=64170 DF SPORT=54174 DPORT=8080 SYN 
+ TRACE: 2 71c556aa mangle:POSTROUTING:rule:0x33:JUMP:CILIUM_POST_mangle  -4 -t mangle -A POSTROUTING -m comment --comment "cilium-feeder: CILIUM_POST_mangle" -j CILIUM_POST_mangle
+ TRACE: 2 71c556aa mangle:POSTROUTING:policy:ACCEPT 
+PACKET: 1 71c556aa IN=eth0 OUT=eth0 NFPROTO=2 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=10.244.1.38 LEN=60 TOS=0x0 TTL=63 ID=64170 DF SPORT=54174 DPORT=8080 SYN 
+ TRACE: 1 71c556aa kindnet-network-policies:postrouting:rule:0x10:CONTINUE  
+ TRACE: 1 71c556aa kindnet-network-policies:postrouting:policy:ACCEPT 
+PACKET: 2 f6eb5dda IN=eth0 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=192.168.49.2 LEN=60 TOS=0x0 TTL=64 ID=64171 DF SPORT=54174 DPORT=30080 SYN 
+ TRACE: 2 f6eb5dda raw:PREROUTING:rule:0x34:CONTINUE  -4 -t raw -A PREROUTING -p tcp -m tcp --dport 30080 -m comment --comment lab5-nodeport-trace -j TRACE
+ TRACE: 2 f6eb5dda raw:PREROUTING:rule:0x33:JUMP:CILIUM_PRE_raw  -4 -t raw -A PREROUTING -m comment --comment "cilium-feeder: CILIUM_PRE_raw" -j CILIUM_PRE_raw
+ TRACE: 2 f6eb5dda raw:PREROUTING:policy:ACCEPT 
+PACKET: 2 f6eb5dda IN=eth0 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=192.168.49.2 LEN=60 TOS=0x0 TTL=64 ID=64171 DF SPORT=54174 DPORT=30080 SYN 
+ TRACE: 2 f6eb5dda mangle:PREROUTING:rule:0x34:JUMP:CILIUM_PRE_mangle  -4 -t mangle -A PREROUTING -m comment --comment "cilium-feeder: CILIUM_PRE_mangle" -j CILIUM_PRE_mangle
+ TRACE: 2 f6eb5dda mangle:PREROUTING:policy:ACCEPT 
+PACKET: 1 f6eb5dda IN=eth0 NFPROTO=2 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=10.244.1.38 LEN=60 TOS=0x0 TTL=64 ID=64171 DF SPORT=54174 DPORT=8080 SYN 
+ TRACE: 1 f6eb5dda kindnet-network-policies:prerouting:rule:0x16:ACCEPT  
+PACKET: 2 f6eb5dda IN=eth0 OUT=eth0 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=10.244.1.38 LEN=60 TOS=0x0 TTL=63 ID=64171 DF SPORT=54174 DPORT=8080 SYN 
+ TRACE: 2 f6eb5dda filter:FORWARD:rule:0xbb4:JUMP:CILIUM_FORWARD  -4 -t filter -A FORWARD -m comment --comment "cilium-feeder: CILIUM_FORWARD" -j CILIUM_FORWARD
+ TRACE: 2 f6eb5dda filter:FORWARD:rule:0x26:JUMP:KUBE-PROXY-FIREWALL  -4 -t filter -A FORWARD -m conntrack --ctstate NEW -m comment --comment "kubernetes load balancer firewall" -j KUBE-PROXY-FIREWALL
+ TRACE: 2 f6eb5dda filter:FORWARD:rule:0x22:JUMP:KUBE-FORWARD  -4 -t filter -A FORWARD -m comment --comment "kubernetes forwarding rules" -j KUBE-FORWARD
+ TRACE: 2 f6eb5dda filter:FORWARD:rule:0x1f:JUMP:KUBE-SERVICES  -4 -t filter -A FORWARD -m conntrack --ctstate NEW -m comment --comment "kubernetes service portals" -j KUBE-SERVICES
+ TRACE: 2 f6eb5dda filter:FORWARD:rule:0x1b:JUMP:KUBE-EXTERNAL-SERVICES  -4 -t filter -A FORWARD -m conntrack --ctstate NEW -m comment --comment "kubernetes externally-visible service portals" -j KUBE-EXTERNAL-SERVICES
+ TRACE: 2 f6eb5dda filter:FORWARD:rule:0xc:JUMP:DOCKER-USER  -4 -t filter -A FORWARD -j DOCKER-USER
+ TRACE: 2 f6eb5dda filter:FORWARD:rule:0x7:JUMP:DOCKER-FORWARD  -4 -t filter -A FORWARD -j DOCKER-FORWARD
+ TRACE: 2 f6eb5dda filter:DOCKER-FORWARD:rule:0xa:JUMP:DOCKER-CT  -4 -t filter -A DOCKER-FORWARD -j DOCKER-CT
+ TRACE: 2 f6eb5dda filter:DOCKER-FORWARD:rule:0x9:JUMP:DOCKER-INTERNAL  -4 -t filter -A DOCKER-FORWARD -j DOCKER-INTERNAL
+ TRACE: 2 f6eb5dda filter:DOCKER-FORWARD:rule:0x8:JUMP:DOCKER-BRIDGE  -4 -t filter -A DOCKER-FORWARD -j DOCKER-BRIDGE
+ TRACE: 2 f6eb5dda filter:FORWARD:policy:ACCEPT 
+PACKET: 2 f6eb5dda IN=eth0 OUT=eth0 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=10.244.1.38 LEN=60 TOS=0x0 TTL=63 ID=64171 DF SPORT=54174 DPORT=8080 SYN 
+ TRACE: 2 f6eb5dda mangle:POSTROUTING:rule:0x33:JUMP:CILIUM_POST_mangle  -4 -t mangle -A POSTROUTING -m comment --comment "cilium-feeder: CILIUM_POST_mangle" -j CILIUM_POST_mangle
+ TRACE: 2 f6eb5dda mangle:POSTROUTING:policy:ACCEPT 
+PACKET: 1 f6eb5dda IN=eth0 OUT=eth0 NFPROTO=2 MACSRC=12:c6:4b:36:c0:ca MACDST=2e:62:27:b5:4c:31 MACPROTO=0800 SRC=192.168.49.1 DST=10.244.1.38 LEN=60 TOS=0x0 TTL=63 ID=64171 DF SPORT=54174 DPORT=8080 SYN 
+ TRACE: 1 f6eb5dda kindnet-network-policies:postrouting:rule:0x10:CONTINUE  
+ TRACE: 1 f6eb5dda kindnet-network-policies:postrouting:policy:ACCEPT 

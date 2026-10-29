@@ -1,0 +1,38 @@
+=== Включение политик ===
+Release "shop" has been upgraded. Happy Helming!
+NAME: shop
+LAST DEPLOYED: Mon Oct 26 03:33:34 2026
+NAMESPACE: lab3
+STATUS: deployed
+REVISION: 34
+DESCRIPTION: Upgrade complete
+TEST SUITE: None
+=== NodePort с Ubuntu ===
+URL: http://192.168.49.2:30080/health
+HTTP/1.1 200 OK
+Server: Werkzeug/3.1.9 Python/3.13.17
+Date: Mon, 26 Oct 2026 03:33:38 GMT
+Content-Type: text/plain; charset=utf-8
+Content-Length: 2
+Connection: close
+
+ok
+URL: http://192.168.49.3:30080/health
+
+=== Запросы из shop-client ===
+{"timestamp": "2026-10-26T03:33:41.972132+00:00", "target": "dns-service", "url": "http://shop-api.lab3.svc.cluster.local:8080/order", "status": 201, "success": true, "latency_ms": 85.78, "total": 1, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:33:46.977810+00:00", "target": "nodeport", "url": "http://192.168.49.2:30080/order", "status": null, "success": false, "latency_ms": 5005.6, "total": 2, "failed": 1, "error": "<urlopen error timed out>"}
+{"timestamp": "2026-10-26T03:33:47.071084+00:00", "target": "dns-service", "url": "http://shop-api.lab3.svc.cluster.local:8080/order", "status": 201, "success": true, "latency_ms": 92.95, "total": 3, "failed": 1, "error": null}
+{"timestamp": "2026-10-26T03:33:52.076716+00:00", "target": "nodeport", "url": "http://192.168.49.3:30080/order", "status": null, "success": false, "latency_ms": 5005.61, "total": 4, "failed": 2, "error": "<urlopen error timed out>"}
+{"timestamp": "2026-10-26T03:33:52.171419+00:00", "target": "dns-service", "url": "http://shop-api.lab3.svc.cluster.local:8080/order", "status": 201, "success": true, "latency_ms": 94.38, "total": 5, "failed": 2, "error": null}
+{"timestamp": "2026-10-26T03:33:57.176346+00:00", "target": "nodeport", "url": "http://192.168.49.2:30080/order", "status": null, "success": false, "latency_ms": 5004.9, "total": 6, "failed": 3, "error": "<urlopen error timed out>"}
+{"summary": true, "total": 6, "failed": 3}
+=== Отключение политик ===
+Release "shop" has been upgraded. Happy Helming!
+NAME: shop
+LAST DEPLOYED: Mon Oct 26 03:33:59 2026
+NAMESPACE: lab3
+STATUS: deployed
+REVISION: 35
+DESCRIPTION: Upgrade complete
+TEST SUITE: None

@@ -1,0 +1,81 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ .Release.Name }}-network-alerts
+  labels:
+    release: monitoring
+spec:
+  groups:
+    - name: shop-network
+      rules:
+        - alert: ShopNetworkPolicyDrops
+          expr: |
+            sum(
+              rate(
+                hubble_drop_total{
+                  reason="POLICY_DENIED",
+                  source_namespace="{{ .Release.Namespace }}"
+                }[1m]
+              )
+              or
+              rate(
+                hubble_drop_total{
+                  reason="POLICY_DENIED",
+                  destination_namespace="{{ .Release.Namespace }}"
+                }[1m]
+              )
+            ) > 0
+          for: 1m
+          labels:
+            severity: warning
+            namespace: {{ .Release.Namespace | quote }}
+            service: shop-network
+          annotations:
+            summary: "Сетевые политики блокируют трафик shop"
+            description: "В течение минуты наблюдаются блокировки POLICY_DENIED. Проверить источники, назначения и разрешённые порты в Hubble."
+
+        - alert: ShopDNSHighErrorRate
+          expr: |
+            (
+              sum(rate(coredns_dns_responses_total{
+                job="coredns",
+                rcode=~"SERVFAIL|REFUSED"
+              }[2m]))
+              /
+              clamp_min(
+                sum(rate(coredns_dns_responses_total{
+                  job="coredns"
+                }[2m])),
+                0.000001
+              )
+            ) > 0.05
+          for: 1m
+          labels:
+            severity: warning
+            namespace: {{ .Release.Namespace | quote }}
+            service: shop-network
+          annotations:
+            summary: "Более 5% ответов CoreDNS — SERVFAIL или REFUSED"
+            description: "Метрика относится ко всему кластеру. Проверить CoreDNS и его upstream-серверы. Заблокированные до CoreDNS запросы эта метрика не учитывает."
+
+        - alert: ShopNetworkMetricsUnavailable
+          expr: |
+            (
+              sum(up{
+                namespace="kube-system",
+                service=~"cilium-agent|hubble-metrics"
+              }) < 4
+            )
+            or
+            absent(up{
+              namespace="kube-system",
+              service=~"cilium-agent|hubble-metrics"
+            })
+          for: 1m
+          labels:
+            severity: warning
+            namespace: {{ .Release.Namespace | quote }}
+            service: shop-network
+          annotations:
+            summary: "Недоступна часть сетевых метрик"
+            description: "Для текущего кластера из двух нод ожидаются четыре доступные цели: два cilium-agent и два hubble-metrics."

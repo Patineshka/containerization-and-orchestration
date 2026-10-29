@@ -1,0 +1,4 @@
+prometheus:
+  prometheusSpec:
+    nodeSelector:
+      kubernetes.io/hostname: lab2

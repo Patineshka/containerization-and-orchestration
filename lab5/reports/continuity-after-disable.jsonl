@@ -1,0 +1,21 @@
+{"timestamp": "2026-10-26T02:25:56.578190+00:00", "target": "dns-service", "status": 201, "success": true, "latency_ms": 339.87, "total": 1, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:25:56.717269+00:00", "target": "nodeport", "status": 201, "success": true, "latency_ms": 139.04, "total": 2, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:25:57.537449+00:00", "target": "dns-service", "status": 201, "success": true, "latency_ms": 299.26, "total": 3, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:25:57.617389+00:00", "target": "nodeport", "status": 201, "success": true, "latency_ms": 79.71, "total": 4, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:25:58.542168+00:00", "target": "dns-service", "status": 201, "success": true, "latency_ms": 303.64, "total": 5, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:25:58.614627+00:00", "target": "nodeport", "status": 201, "success": true, "latency_ms": 72.41, "total": 6, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:25:59.343101+00:00", "target": "dns-service", "status": 201, "success": true, "latency_ms": 104.47, "total": 7, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:25:59.651615+00:00", "target": "nodeport", "status": 201, "success": true, "latency_ms": 308.5, "total": 8, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:26:00.337253+00:00", "target": "dns-service", "status": 201, "success": true, "latency_ms": 98.51, "total": 9, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:26:00.535446+00:00", "target": "nodeport", "status": 201, "success": true, "latency_ms": 198.03, "total": 10, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:26:01.337812+00:00", "target": "dns-service", "status": 201, "success": true, "latency_ms": 98.97, "total": 11, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:26:01.537127+00:00", "target": "nodeport", "status": 201, "success": true, "latency_ms": 199.26, "total": 12, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:26:02.336103+00:00", "target": "dns-service", "status": 201, "success": true, "latency_ms": 97.16, "total": 13, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:26:02.441421+00:00", "target": "nodeport", "status": 201, "success": true, "latency_ms": 105.27, "total": 14, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:26:03.336170+00:00", "target": "dns-service", "status": 201, "success": true, "latency_ms": 97.14, "total": 15, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:26:03.445186+00:00", "target": "nodeport", "status": 201, "success": true, "latency_ms": 108.97, "total": 16, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:26:04.314498+00:00", "target": "dns-service", "status": 201, "success": true, "latency_ms": 75.35, "total": 17, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:26:04.380859+00:00", "target": "nodeport", "status": 201, "success": true, "latency_ms": 66.31, "total": 18, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:26:05.339274+00:00", "target": "dns-service", "status": 201, "success": true, "latency_ms": 100.04, "total": 19, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:26:05.414920+00:00", "target": "nodeport", "status": 201, "success": true, "latency_ms": 75.15, "total": 20, "failed": 0, "error": null}
+{"summary": true, "total": 20, "failed": 0}

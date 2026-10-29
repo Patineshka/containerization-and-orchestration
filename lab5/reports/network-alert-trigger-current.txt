@@ -1,0 +1,3 @@
+{"attempts": 1, "timeouts": 1, "unexpected_connections": 0}
+{"attempts": 10, "timeouts": 10, "unexpected_connections": 0}
+{"attempts": 20, "timeouts": 20, "unexpected_connections": 0}

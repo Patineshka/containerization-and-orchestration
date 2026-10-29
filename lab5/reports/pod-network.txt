@@ -1,0 +1,53 @@
+Worker: shop-worker-57d444454f-svwtj, нода: lab2-m02
+API на другой ноде: 10.244.0.75
+
+=== Интерфейсы внутри network namespace worker ===
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+eth0@if27        UP             10.244.1.23/24 fe80::c86:33ff:fe17:1927/64 
+
+=== Маршруты внутри network namespace worker ===
+default via 10.244.1.1 dev eth0 
+10.244.1.0/24 via 10.244.1.1 dev eth0 src 10.244.1.23 
+10.244.1.1 dev eth0 scope link src 10.244.1.23 
+
+=== Парный интерфейс на ноде: ifindex=27 ===
+{
+  "ifindex": 27,
+  "link_index": 2,
+  "ifname": "veth8d44bd4b",
+  "flags": [
+    "BROADCAST",
+    "MULTICAST",
+    "UP",
+    "LOWER_UP"
+  ],
+  "mtu": 1500,
+  "qdisc": "noqueue",
+  "operstate": "UP",
+  "linkmode": "DEFAULT",
+  "group": "default",
+  "link_type": "ether",
+  "address": "be:38:c9:13:93:7e",
+  "broadcast": "ff:ff:ff:ff:ff:ff",
+  "link_netnsid": 2,
+  "promiscuity": 0,
+  "allmulti": 0,
+  "min_mtu": 68,
+  "max_mtu": 65535,
+  "linkinfo": {
+    "info_kind": "veth"
+  },
+  "inet6_addr_gen_mode": "eui64",
+  "num_tx_queues": 4,
+  "num_rx_queues": 4,
+  "gso_max_size": 65536,
+  "gso_max_segs": 65535,
+  "tso_max_size": 524280,
+  "tso_max_segs": 65535,
+  "gro_max_size": 65536
+}
+
+=== Прямой запрос к Pod API на другой ноде ===
+URL: http://10.244.0.75:8080/health
+HTTP: 200
+Ответ: ok

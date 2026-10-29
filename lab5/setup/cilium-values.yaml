@@ -1,0 +1,36 @@
+cni:
+  chainingMode: generic-veth
+  chainingTarget: kindnet
+  exclusive: false
+
+routingMode: native
+enableIPv4Masquerade: false
+ipv4NativeRoutingCIDR: 10.244.0.0/16
+
+ipam:
+  mode: kubernetes
+
+kubeProxyReplacement: false
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    memory: 1Gi
+
+operator:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      memory: 512Mi
+
+hubble:
+  enabled: true
+  relay:
+    enabled: true
+  ui:
+    enabled: true

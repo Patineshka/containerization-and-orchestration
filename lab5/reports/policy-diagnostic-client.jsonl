@@ -1,0 +1,9 @@
+{"timestamp": "2026-10-26T02:52:43.949745+00:00", "target": "dns-service", "status": 201, "success": true, "latency_ms": 204.86, "total": 1, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T02:52:48.953649+00:00", "target": "nodeport", "status": null, "success": false, "latency_ms": 5003.87, "total": 2, "failed": 1, "error": "<urlopen error timed out>"}
+{"timestamp": "2026-10-26T02:52:49.237429+00:00", "target": "dns-service", "status": 201, "success": true, "latency_ms": 283.53, "total": 3, "failed": 1, "error": null}
+{"timestamp": "2026-10-26T02:52:49.255225+00:00", "target": "nodeport", "status": 201, "success": true, "latency_ms": 17.72, "total": 4, "failed": 1, "error": null}
+{"timestamp": "2026-10-26T02:52:50.110041+00:00", "target": "dns-service", "status": 201, "success": true, "latency_ms": 156.04, "total": 5, "failed": 1, "error": null}
+{"timestamp": "2026-10-26T02:52:55.115861+00:00", "target": "nodeport", "status": null, "success": false, "latency_ms": 5005.79, "total": 6, "failed": 2, "error": "<urlopen error timed out>"}
+{"timestamp": "2026-10-26T02:52:55.153138+00:00", "target": "dns-service", "status": 201, "success": true, "latency_ms": 37.0, "total": 7, "failed": 2, "error": null}
+{"timestamp": "2026-10-26T02:52:55.239709+00:00", "target": "nodeport", "status": 201, "success": true, "latency_ms": 86.51, "total": 8, "failed": 2, "error": null}
+{"summary": true, "total": 8, "failed": 2}

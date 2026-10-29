@@ -1,0 +1,3 @@
+{"source": "shop-api-6c56f79b5c-n5bxm", "destination": "shop-postgres-rw:5432", "expected": "allow", "actual": "allow", "result": "PASS", "error": null}
+{"source": "shop-api-6c56f79b5c-n5bxm", "destination": "shop-worker:8080", "expected": "deny", "actual": "timeout", "result": "PASS", "error": null}
+{"summary": true, "checks": 2, "failed": 0}

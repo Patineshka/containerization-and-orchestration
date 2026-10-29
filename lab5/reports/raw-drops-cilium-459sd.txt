@@ -1,0 +1,5 @@
+Listening for events on 4 CPUs with 64x4096 of shared memory
+Press Ctrl-C to quit
+time=2026-10-26T03:33:39.259049771Z level=info msg="Initializing dissection cache..."
+xx drop (Unsupported L3 protocol) flow 0x0 to endpoint 0, ifindex 52, file bpf_lxc.c:1832, , identity 17201->unknown: fe80::cd:feff:fefa:2e8d -> ff02::2 icmp RouterSolicitation
+xx drop (Policy denied) flow 0x9e27c28d to endpoint 2343, ifindex 48, file bpf_lxc.c:2468, , identity world->34985: 10.244.1.1:60880 -> 10.244.1.44:8080 tcp SYN

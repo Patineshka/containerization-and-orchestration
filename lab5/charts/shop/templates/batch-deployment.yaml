@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-batch
+spec:
+  replicas: {{ .Values.batch.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-batch
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-batch
+        owner: {{ .Values.owner | quote }}
+    spec:
+      {{- with .Values.batch.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      priorityClassName: {{ printf "%s-batch" .Release.Name | quote }}
+      terminationGracePeriodSeconds: 15
+      containers:
+        - name: batch
+          image: "{{ .Values.batch.image.repository }}:{{ .Values.batch.image.tag }}"
+          imagePullPolicy: {{ .Values.batch.image.pullPolicy }}
+          env:
+            - name: CPU_WORKERS
+              value: {{ .Values.batch.cpuWorkers | quote }}
+            - name: MEMORY_MIB
+              value: {{ .Values.batch.memoryMiB | quote }}
+          resources:
+            {{- toYaml .Values.batch.resources | nindent 12 }}

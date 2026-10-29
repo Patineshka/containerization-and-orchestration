@@ -1,0 +1,38 @@
+apiVersion: policies.kyverno.io/v1
+kind: ValidatingPolicy
+metadata:
+  name: disallow-host-namespaces
+spec:
+  validationActions:
+    - Deny
+
+  matchConstraints:
+    namespaceSelector:
+      matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+            - kube-system
+            - kube-public
+            - kube-node-lease
+            - kyverno
+            - monitoring
+            - cnpg-system
+    resourceRules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["pods"]
+
+  validations:
+    - expression: >-
+        !has(object.spec.hostNetwork) || !object.spec.hostNetwork
+      message: "hostNetwork is forbidden"
+
+    - expression: >-
+        !has(object.spec.hostPID) || !object.spec.hostPID
+      message: "hostPID is forbidden"
+
+    - expression: >-
+        !has(object.spec.hostIPC) || !object.spec.hostIPC
+      message: "hostIPC is forbidden"

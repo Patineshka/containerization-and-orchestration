@@ -1,0 +1,11 @@
+{"attempts": 1, "timeouts": 1, "unexpected_connections": 0}
+{"attempts": 10, "timeouts": 10, "unexpected_connections": 0}
+{"attempts": 20, "timeouts": 20, "unexpected_connections": 0}
+{"attempts": 30, "timeouts": 30, "unexpected_connections": 0}
+{"attempts": 40, "timeouts": 40, "unexpected_connections": 0}
+{"attempts": 50, "timeouts": 50, "unexpected_connections": 0}
+{"attempts": 60, "timeouts": 60, "unexpected_connections": 0}
+{"attempts": 70, "timeouts": 70, "unexpected_connections": 0}
+{"attempts": 80, "timeouts": 80, "unexpected_connections": 0}
+{"attempts": 90, "timeouts": 90, "unexpected_connections": 0}
+Генерация запрещённых запросов завершена

@@ -1,0 +1,8 @@
+=== /home/patineshka/lab5/reports/nodeport-hubble-cilium-459sd.txt ===
+Oct 26 03:18:26.597: lab3/shop-client:51866 (ID:9659) -> 192.168.49.2:30080 (kube-apiserver) policy-verdict:L3-L4 EGRESS ALLOWED (TCP Flags: SYN)
+Oct 26 03:18:26.597: lab3/shop-client:51866 (ID:9659) -> 192.168.49.2:30080 (kube-apiserver) to-stack FORWARDED (TCP Flags: SYN)
+Oct 26 03:18:31.787: lab3/shop-client:53610 (ID:9659) -> 192.168.49.3:30080 (host) policy-verdict:L3-L4 EGRESS ALLOWED (TCP Flags: SYN)
+Oct 26 03:18:31.787: lab3/shop-client:53610 (ID:9659) -> 192.168.49.3:30080 (host) to-stack FORWARDED (TCP Flags: SYN)
+Oct 26 03:18:36.868: lab3/shop-client:57394 (ID:9659) -> 192.168.49.2:30080 (kube-apiserver) policy-verdict:L3-L4 EGRESS ALLOWED (TCP Flags: SYN)
+Oct 26 03:18:36.868: lab3/shop-client:57394 (ID:9659) -> 192.168.49.2:30080 (kube-apiserver) to-stack FORWARDED (TCP Flags: SYN)
+=== /home/patineshka/lab5/reports/nodeport-hubble-cilium-njwm5.txt ===

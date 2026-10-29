@@ -1,0 +1,2 @@
+Oct 26 02:52:58.909: lab3/shop-api-6c56f79b5c-n5bxm:51702 (ID:4912) <> monitoring/jaeger-869b86b947-sr462:4317 (ID:17201) policy-verdict:none EGRESS DENIED (TCP Flags: ACK, PSH)
+Oct 26 02:52:58.909: lab3/shop-api-6c56f79b5c-n5bxm:51702 (ID:4912) <> monitoring/jaeger-869b86b947-sr462:4317 (ID:17201) Policy denied DROPPED (TCP Flags: ACK, PSH)

@@ -1,0 +1,107 @@
+=== Внесение случайной неисправности ===
+Release "shop" has been upgraded. Happy Helming!
+NAME: shop
+LAST DEPLOYED: Mon Oct 26 06:23:40 2026
+NAMESPACE: lab3
+STATUS: deployed
+REVISION: 42
+DESCRIPTION: Upgrade complete
+TEST SUITE: None
+
+=== Диагностика разрешённых связей ===
+{"source": "shop-api-6c56f79b5c-n5bxm", "destination": "shop-postgres-rw:5432", "expected": "allow", "actual": "allow", "result": "PASS", "error": null}
+{"summary": true, "checks": 1, "failed": 0}
+
+{"source": "shop-worker-57d444454f-x6ccp", "destination": "shop-postgres-rw:5432", "expected": "allow", "actual": "timeout", "result": "FAIL", "error": null}
+{"summary": true, "checks": 1, "failed": 1}
+command terminated with exit code 1
+
+{"source": "shop-client", "destination": "shop-api:8080", "expected": "allow", "actual": "allow", "result": "PASS", "error": null}
+{"summary": true, "checks": 1, "failed": 0}
+
+Oct 26 06:23:42.297: lab3/shop-worker-57d444454f-x6ccp:51544 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:42.297: lab3/shop-worker-57d444454f-x6ccp:51544 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:43.355: lab3/shop-worker-57d444454f-x6ccp:51544 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:43.355: lab3/shop-worker-57d444454f-x6ccp:51544 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:44.378: lab3/shop-worker-57d444454f-x6ccp:51544 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:44.378: lab3/shop-worker-57d444454f-x6ccp:51544 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:45.402: lab3/shop-worker-57d444454f-x6ccp:51544 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:45.402: lab3/shop-worker-57d444454f-x6ccp:51544 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:46.426: lab3/shop-worker-57d444454f-x6ccp:51544 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:46.426: lab3/shop-worker-57d444454f-x6ccp:51544 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:46.966: lab3/shop-worker-57d444454f-x6ccp:51558 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:46.966: lab3/shop-worker-57d444454f-x6ccp:51558 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:47.300: lab3/shop-worker-57d444454f-x6ccp:51560 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:47.300: lab3/shop-worker-57d444454f-x6ccp:51560 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:47.451: lab3/shop-worker-57d444454f-x6ccp:51544 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:47.451: lab3/shop-worker-57d444454f-x6ccp:51544 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:48.026: lab3/shop-worker-57d444454f-x6ccp:51558 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:48.026: lab3/shop-worker-57d444454f-x6ccp:51558 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:48.347: lab3/shop-worker-57d444454f-x6ccp:51560 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:48.347: lab3/shop-worker-57d444454f-x6ccp:51560 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:49.050: lab3/shop-worker-57d444454f-x6ccp:51558 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:49.050: lab3/shop-worker-57d444454f-x6ccp:51558 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:49.371: lab3/shop-worker-57d444454f-x6ccp:51560 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:49.371: lab3/shop-worker-57d444454f-x6ccp:51560 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:49.498: lab3/shop-worker-57d444454f-x6ccp:51544 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:49.498: lab3/shop-worker-57d444454f-x6ccp:51544 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:50.395: lab3/shop-worker-57d444454f-x6ccp:51560 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:50.395: lab3/shop-worker-57d444454f-x6ccp:51560 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+
+Oct 26 06:23:41.457: lab3/shop-worker-57d444454f-s7tvj:49796 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:41.457: lab3/shop-worker-57d444454f-s7tvj:49796 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:42.459: lab3/shop-worker-57d444454f-s7tvj:49796 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:42.459: lab3/shop-worker-57d444454f-s7tvj:49796 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:43.482: lab3/shop-worker-57d444454f-s7tvj:49796 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:43.482: lab3/shop-worker-57d444454f-s7tvj:49796 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:44.506: lab3/shop-worker-57d444454f-s7tvj:49796 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:44.506: lab3/shop-worker-57d444454f-s7tvj:49796 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:45.530: lab3/shop-worker-57d444454f-s7tvj:49796 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:45.530: lab3/shop-worker-57d444454f-s7tvj:49796 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:46.459: lab3/shop-worker-57d444454f-s7tvj:49812 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:46.459: lab3/shop-worker-57d444454f-s7tvj:49812 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:46.554: lab3/shop-worker-57d444454f-s7tvj:49796 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:46.554: lab3/shop-worker-57d444454f-s7tvj:49796 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:47.514: lab3/shop-worker-57d444454f-s7tvj:49812 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:47.514: lab3/shop-worker-57d444454f-s7tvj:49812 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:48.539: lab3/shop-worker-57d444454f-s7tvj:49812 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:48.539: lab3/shop-worker-57d444454f-s7tvj:49812 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:48.602: lab3/shop-worker-57d444454f-s7tvj:49796 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:48.602: lab3/shop-worker-57d444454f-s7tvj:49796 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:49.562: lab3/shop-worker-57d444454f-s7tvj:49812 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:49.562: lab3/shop-worker-57d444454f-s7tvj:49812 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:23:50.587: lab3/shop-worker-57d444454f-s7tvj:49812 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:23:50.587: lab3/shop-worker-57d444454f-s7tvj:49812 (ID:34985) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+
+=== Восстановление рабочих политик ===
+Release "shop" has been upgraded. Happy Helming!
+NAME: shop
+LAST DEPLOYED: Mon Oct 26 06:23:50 2026
+NAMESPACE: lab3
+STATUS: deployed
+REVISION: 43
+DESCRIPTION: Upgrade complete
+TEST SUITE: None
+
+=== Повторная проверка матрицы ===
+{"source": "shop-api-6c56f79b5c-n5bxm", "destination": "shop-postgres-rw:5432", "expected": "allow", "actual": "allow", "result": "PASS", "error": null}
+{"source": "shop-api-6c56f79b5c-n5bxm", "destination": "shop-worker:8080", "expected": "deny", "actual": "timeout", "result": "PASS", "error": null}
+{"summary": true, "checks": 2, "failed": 0}
+
+{"source": "shop-worker-57d444454f-x6ccp", "destination": "shop-postgres-rw:5432", "expected": "allow", "actual": "allow", "result": "PASS", "error": null}
+{"source": "shop-worker-57d444454f-x6ccp", "destination": "shop-api:8080", "expected": "deny", "actual": "timeout", "result": "PASS", "error": null}
+{"summary": true, "checks": 2, "failed": 0}
+
+{"source": "shop-client", "destination": "shop-api:8080", "expected": "allow", "actual": "allow", "result": "PASS", "error": null}
+{"source": "shop-client", "destination": "shop-worker:8080", "expected": "deny", "actual": "timeout", "result": "PASS", "error": null}
+{"source": "shop-client", "destination": "shop-postgres-rw:5432", "expected": "deny", "actual": "timeout", "result": "PASS", "error": null}
+{"summary": true, "checks": 3, "failed": 0}
+
+{"source": "outsider", "destination": "shop-api.lab3.svc.cluster.local:8080", "expected": "deny", "actual": "timeout", "result": "PASS", "error": null}
+{"source": "outsider", "destination": "shop-worker.lab3.svc.cluster.local:8080", "expected": "deny", "actual": "timeout", "result": "PASS", "error": null}
+{"source": "outsider", "destination": "shop-postgres-rw.lab3.svc.cluster.local:5432", "expected": "deny", "actual": "timeout", "result": "PASS", "error": null}
+{"summary": true, "checks": 3, "failed": 0}
+
+Сценарий: worker-db
+Отчёты: /home/patineshka/lab5/reports/fault-20261026T062340Z
+Групп проверок с ошибками после восстановления: 0

@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-worker
+spec:
+  replicas: {{ .Values.worker.replicas }}
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+
+  minReadySeconds: 5
+  progressDeadlineSeconds: 120
+
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-worker
+
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-worker
+        owner: {{ .Values.owner | quote }}
+    spec:
+      containers:
+        - name: worker
+          image: "{{ .Values.worker.image.repository }}:{{ .Values.worker.image.tag }}"
+          imagePullPolicy: {{ .Values.worker.image.pullPolicy }}
+
+          ports:
+            - name: http
+              containerPort: 8080
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 2
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+
+          env:
+            - name: APP_VERSION
+              value: {{ .Values.worker.image.tag | quote }}
+
+            - name: OTEL_SERVICE_NAME
+              value: shop-worker
+
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://jaeger.monitoring.svc.cluster.local:4317
+
+            - name: PGHOST
+              value: {{ printf "%s-postgres-rw" .Release.Name | quote }}
+
+            - name: PGPORT
+              value: "5432"
+
+            - name: PGDATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-postgres-app
+                  key: dbname
+
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-postgres-app
+                  key: username
+
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-postgres-app
+                  key: password
+
+          resources:
+            {{- toYaml .Values.worker.resources | nindent 12 }}

@@ -1,0 +1,5 @@
+Listening for events on 4 CPUs with 64x4096 of shared memory
+Press Ctrl-C to quit
+time=2026-10-26T03:34:00.017771003Z level=info msg="Initializing dissection cache..."
+xx drop (Policy denied) flow 0xbb9266b3 to endpoint 0, ifindex 98, file bpf_lxc.c:1654, , identity 34985->63041: 10.244.0.94:50905 -> 10.244.0.74:53 udp
+xx drop (Policy denied) flow 0xbb9266b3 to endpoint 0, ifindex 98, file bpf_lxc.c:1654, , identity 34985->63041: 10.244.0.94:50905 -> 10.244.0.74:53 udp

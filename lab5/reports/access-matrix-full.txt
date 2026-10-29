@@ -1,0 +1,28 @@
+Проверяем все найденные реплики; тайм-аут сам по себе ещё не является доказательством policy drop.
+PASS | shop-api-6c56f79b5c-44hnb -> shop-postgres-rw:5432 | ожидаемо=allow, фактически=allow
+PASS | shop-api-6c56f79b5c-44hnb -> shop-worker:8080 | ожидаемо=deny, фактически=timeout
+PASS | shop-api-6c56f79b5c-gdrcw -> shop-postgres-rw:5432 | ожидаемо=allow, фактически=allow
+PASS | shop-api-6c56f79b5c-gdrcw -> shop-worker:8080 | ожидаемо=deny, фактически=timeout
+PASS | shop-api-6c56f79b5c-n5bxm -> shop-postgres-rw:5432 | ожидаемо=allow, фактически=allow
+PASS | shop-api-6c56f79b5c-n5bxm -> shop-worker:8080 | ожидаемо=deny, фактически=timeout
+PASS | shop-api-6c56f79b5c-w5mn4 -> shop-postgres-rw:5432 | ожидаемо=allow, фактически=allow
+PASS | shop-api-6c56f79b5c-w5mn4 -> shop-worker:8080 | ожидаемо=deny, фактически=timeout
+PASS | shop-client -> shop-api:8080 | ожидаемо=allow, фактически=allow
+PASS | shop-client -> shop-worker:8080 | ожидаемо=deny, фактически=timeout
+PASS | shop-client -> shop-postgres-rw:5432 | ожидаемо=deny, фактически=timeout
+PASS | shop-postgres-1 -> shop-api:8080 | ожидаемо=deny, фактически=timeout
+PASS | shop-postgres-1 -> shop-worker:8080 | ожидаемо=deny, фактически=timeout
+PASS | shop-worker-57d444454f-s7tvj -> shop-postgres-rw:5432 | ожидаемо=allow, фактически=allow
+PASS | shop-worker-57d444454f-s7tvj -> shop-api:8080 | ожидаемо=deny, фактически=timeout
+PASS | shop-worker-57d444454f-x6ccp -> shop-postgres-rw:5432 | ожидаемо=allow, фактически=allow
+PASS | shop-worker-57d444454f-x6ccp -> shop-api:8080 | ожидаемо=deny, фактически=timeout
+PASS | outsider -> shop-api:8080 | ожидаемо=deny, фактически=timeout
+PASS | outsider -> shop-worker:8080 | ожидаемо=deny, фактически=timeout
+PASS | outsider -> shop-postgres-rw:5432 | ожидаемо=deny, фактически=timeout
+{
+  "started_utc": "2026-10-29T10:52:26.698035+00:00",
+  "finished_utc": "2026-10-29T10:53:15.966708+00:00",
+  "source_pods": 9,
+  "checks": 20,
+  "failed": 0
+}

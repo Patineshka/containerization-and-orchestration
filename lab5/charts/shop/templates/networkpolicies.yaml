@@ -1,0 +1,12 @@
+{{- if .Values.networkPolicy.enabled }}
+{{- range $name, $policy := .Values.networkPolicy.policies }}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ printf "%s-%s" $.Release.Name $name }}
+  namespace: {{ $.Release.Namespace }}
+spec:
+  {{- toYaml $policy | nindent 2 }}
+{{- end }}
+{{- end }}

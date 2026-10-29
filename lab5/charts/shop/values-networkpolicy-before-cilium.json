@@ -1,0 +1,497 @@
+{
+  "networkPolicy": {
+    "enabled": true,
+    "policies": {
+      "default-deny": {
+        "podSelector": {},
+        "policyTypes": [
+          "Ingress",
+          "Egress"
+        ],
+        "ingress": [],
+        "egress": []
+      },
+      "allow-dns": {
+        "podSelector": {
+          "matchExpressions": [
+            {
+              "key": "app",
+              "operator": "In",
+              "values": [
+                "shop-api",
+                "shop-worker",
+                "shop-postgres",
+                "shop-client"
+              ]
+            }
+          ]
+        },
+        "policyTypes": [
+          "Egress"
+        ],
+        "egress": [
+          {
+            "to": [
+              {
+                "namespaceSelector": {
+                  "matchLabels": {
+                    "kubernetes.io/metadata.name": "kube-system"
+                  }
+                },
+                "podSelector": {
+                  "matchLabels": {
+                    "k8s-app": "kube-dns"
+                  }
+                }
+              }
+            ],
+            "ports": [
+              {
+                "protocol": "UDP",
+                "port": 53
+              },
+              {
+                "protocol": "TCP",
+                "port": 53
+              }
+            ]
+          }
+        ]
+      },
+      "allow-api-ingress": {
+        "podSelector": {
+          "matchLabels": {
+            "app": "shop-api"
+          }
+        },
+        "policyTypes": [
+          "Ingress"
+        ],
+        "ingress": [
+          {
+            "from": [
+              {
+                "podSelector": {
+                  "matchLabels": {
+                    "app": "shop-client"
+                  }
+                }
+              },
+              {
+                "namespaceSelector": {
+                  "matchLabels": {
+                    "kubernetes.io/metadata.name": "monitoring"
+                  }
+                },
+                "podSelector": {
+                  "matchLabels": {
+                    "app.kubernetes.io/name": "prometheus"
+                  }
+                }
+              },
+              {
+                "ipBlock": {
+                  "cidr": "192.168.49.1/32"
+                }
+              }
+            ],
+            "ports": [
+              {
+                "protocol": "TCP",
+                "port": 8080
+              }
+            ]
+          }
+        ]
+      },
+      "allow-worker-metrics": {
+        "podSelector": {
+          "matchLabels": {
+            "app": "shop-worker"
+          }
+        },
+        "policyTypes": [
+          "Ingress"
+        ],
+        "ingress": [
+          {
+            "from": [
+              {
+                "namespaceSelector": {
+                  "matchLabels": {
+                    "kubernetes.io/metadata.name": "monitoring"
+                  }
+                },
+                "podSelector": {
+                  "matchLabels": {
+                    "app.kubernetes.io/name": "prometheus"
+                  }
+                }
+              }
+            ],
+            "ports": [
+              {
+                "protocol": "TCP",
+                "port": 8080
+              }
+            ]
+          }
+        ]
+      },
+      "allow-postgres-ingress": {
+        "podSelector": {
+          "matchLabels": {
+            "app": "shop-postgres"
+          }
+        },
+        "policyTypes": [
+          "Ingress"
+        ],
+        "ingress": [
+          {
+            "from": [
+              {
+                "podSelector": {
+                  "matchLabels": {
+                    "app": "shop-api"
+                  }
+                }
+              },
+              {
+                "podSelector": {
+                  "matchLabels": {
+                    "app": "shop-worker"
+                  }
+                }
+              }
+            ],
+            "ports": [
+              {
+                "protocol": "TCP",
+                "port": 5432
+              }
+            ]
+          },
+          {
+            "from": [
+              {
+                "namespaceSelector": {
+                  "matchLabels": {
+                    "kubernetes.io/metadata.name": "cnpg-system"
+                  }
+                },
+                "podSelector": {
+                  "matchLabels": {
+                    "app.kubernetes.io/name": "cloudnative-pg"
+                  }
+                }
+              }
+            ],
+            "ports": [
+              {
+                "protocol": "TCP",
+                "port": 8000
+              }
+            ]
+          }
+        ]
+      },
+      "allow-api-egress": {
+        "podSelector": {
+          "matchLabels": {
+            "app": "shop-api"
+          }
+        },
+        "policyTypes": [
+          "Egress"
+        ],
+        "egress": [
+          {
+            "to": [
+              {
+                "podSelector": {
+                  "matchLabels": {
+                    "app": "shop-postgres"
+                  }
+                }
+              }
+            ],
+            "ports": [
+              {
+                "protocol": "TCP",
+                "port": 5432
+              }
+            ]
+          },
+          {
+            "to": [
+              {
+                "namespaceSelector": {
+                  "matchLabels": {
+                    "kubernetes.io/metadata.name": "monitoring"
+                  }
+                },
+                "podSelector": {
+                  "matchLabels": {
+                    "app.kubernetes.io/instance": "jaeger"
+                  }
+                }
+              }
+            ],
+            "ports": [
+              {
+                "protocol": "TCP",
+                "port": 4317
+              }
+            ]
+          }
+        ]
+      },
+      "allow-worker-egress": {
+        "podSelector": {
+          "matchLabels": {
+            "app": "shop-worker"
+          }
+        },
+        "policyTypes": [
+          "Egress"
+        ],
+        "egress": [
+          {
+            "to": [
+              {
+                "podSelector": {
+                  "matchLabels": {
+                    "app": "shop-postgres"
+                  }
+                }
+              }
+            ],
+            "ports": [
+              {
+                "protocol": "TCP",
+                "port": 5432
+              }
+            ]
+          },
+          {
+            "to": [
+              {
+                "namespaceSelector": {
+                  "matchLabels": {
+                    "kubernetes.io/metadata.name": "monitoring"
+                  }
+                },
+                "podSelector": {
+                  "matchLabels": {
+                    "app.kubernetes.io/instance": "jaeger"
+                  }
+                }
+              }
+            ],
+            "ports": [
+              {
+                "protocol": "TCP",
+                "port": 4317
+              }
+            ]
+          }
+        ]
+      },
+      "allow-client-egress": {
+        "podSelector": {
+          "matchLabels": {
+            "app": "shop-client"
+          }
+        },
+        "policyTypes": [
+          "Egress"
+        ],
+        "egress": [
+          {
+            "to": [
+              {
+                "podSelector": {
+                  "matchLabels": {
+                    "app": "shop-api"
+                  }
+                }
+              }
+            ],
+            "ports": [
+              {
+                "protocol": "TCP",
+                "port": 8080
+              }
+            ]
+          }
+        ]
+      },
+      "allow-node-health": {
+        "podSelector": {
+          "matchExpressions": [
+            {
+              "key": "app",
+              "operator": "In",
+              "values": [
+                "shop-api",
+                "shop-worker"
+              ]
+            }
+          ]
+        },
+        "policyTypes": [
+          "Ingress"
+        ],
+        "ingress": [
+          {
+            "from": [
+              {
+                "ipBlock": {
+                  "cidr": "10.244.0.1/32"
+                }
+              },
+              {
+                "ipBlock": {
+                  "cidr": "10.244.1.1/32"
+                }
+              }
+            ],
+            "ports": [
+              {
+                "protocol": "TCP",
+                "port": 8080
+              }
+            ]
+          }
+        ]
+      },
+      "allow-node-postgres-health": {
+        "podSelector": {
+          "matchLabels": {
+            "app": "shop-postgres"
+          }
+        },
+        "policyTypes": [
+          "Ingress"
+        ],
+        "ingress": [
+          {
+            "from": [
+              {
+                "ipBlock": {
+                  "cidr": "10.244.0.1/32"
+                }
+              },
+              {
+                "ipBlock": {
+                  "cidr": "10.244.1.1/32"
+                }
+              }
+            ],
+            "ports": [
+              {
+                "protocol": "TCP",
+                "port": 8000
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "ciliumPolicies": {
+      "postgres-to-apiserver": {
+        "endpointSelector": {
+          "matchLabels": {
+            "app": "shop-postgres"
+          }
+        },
+        "egress": [
+          {
+            "toEntities": [
+              "kube-apiserver"
+            ],
+            "toPorts": [
+              {
+                "ports": [
+                  {
+                    "port": "443",
+                    "protocol": "TCP"
+                  },
+                  {
+                    "port": "8443",
+                    "protocol": "TCP"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "toCIDR": [
+              "10.96.0.1/32"
+            ],
+            "toPorts": [
+              {
+                "ports": [
+                  {
+                    "port": "443",
+                    "protocol": "TCP"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "client-to-nodeport": {
+        "endpointSelector": {
+          "matchLabels": {
+            "app": "shop-client"
+          }
+        },
+        "egress": [
+          {
+            "toEntities": [
+              "host",
+              "remote-node"
+            ],
+            "toPorts": [
+              {
+                "ports": [
+                  {
+                    "port": "30080",
+                    "protocol": "TCP"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "nodeport-to-api": {
+        "endpointSelector": {
+          "matchLabels": {
+            "app": "shop-api"
+          }
+        },
+        "ingress": [
+          {
+            "fromEntities": [
+              "remote-node"
+            ],
+            "toPorts": [
+              {
+                "ports": [
+                  {
+                    "port": "8080",
+                    "protocol": "TCP"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

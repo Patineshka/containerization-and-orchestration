@@ -1,0 +1,3 @@
+{"source": "shop-worker-57d444454f-x6ccp", "destination": "shop-postgres-rw:5432", "expected": "allow", "actual": "timeout", "result": "FAIL", "error": null}
+{"summary": true, "checks": 1, "failed": 1}
+command terminated with exit code 1

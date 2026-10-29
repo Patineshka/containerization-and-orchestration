@@ -1,0 +1,63 @@
+=== Включение политик ===
+Release "shop" has been upgraded. Happy Helming!
+NAME: shop
+LAST DEPLOYED: Mon Oct 26 03:47:10 2026
+NAMESPACE: lab3
+STATUS: deployed
+REVISION: 38
+DESCRIPTION: Upgrade complete
+TEST SUITE: None
+=== NodePort с Ubuntu ===
+URL: http://192.168.49.2:30080/health
+HTTP/1.1 200 OK
+Server: Werkzeug/3.1.9 Python/3.13.17
+Date: Mon, 26 Oct 2026 03:47:14 GMT
+Content-Type: text/plain; charset=utf-8
+Content-Length: 2
+Connection: close
+
+ok
+URL: http://192.168.49.3:30080/health
+HTTP/1.1 200 OK
+Server: Werkzeug/3.1.9 Python/3.13.17
+Date: Mon, 26 Oct 2026 03:47:14 GMT
+Content-Type: text/plain; charset=utf-8
+Content-Length: 2
+Connection: close
+
+ok
+=== Запросы из shop-client ===
+{"timestamp": "2026-10-26T03:47:15.295266+00:00", "target": "dns-service", "url": "http://shop-api.lab3.svc.cluster.local:8080/order", "status": 201, "success": true, "latency_ms": 200.81, "total": 1, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:15.388130+00:00", "target": "nodeport", "url": "http://192.168.49.2:30080/order", "status": 201, "success": true, "latency_ms": 92.83, "total": 2, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:16.196034+00:00", "target": "dns-service", "url": "http://shop-api.lab3.svc.cluster.local:8080/order", "status": 201, "success": true, "latency_ms": 101.48, "total": 3, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:16.394425+00:00", "target": "nodeport", "url": "http://192.168.49.3:30080/order", "status": 201, "success": true, "latency_ms": 198.25, "total": 4, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:17.169186+00:00", "target": "dns-service", "url": "http://shop-api.lab3.svc.cluster.local:8080/order", "status": 201, "success": true, "latency_ms": 74.51, "total": 5, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:17.345708+00:00", "target": "nodeport", "url": "http://192.168.49.2:30080/order", "status": 201, "success": true, "latency_ms": 176.46, "total": 6, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:18.198736+00:00", "target": "dns-service", "url": "http://shop-api.lab3.svc.cluster.local:8080/order", "status": 201, "success": true, "latency_ms": 103.97, "total": 7, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:18.291292+00:00", "target": "nodeport", "url": "http://192.168.49.3:30080/order", "status": 201, "success": true, "latency_ms": 92.35, "total": 8, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:19.209617+00:00", "target": "dns-service", "url": "http://shop-api.lab3.svc.cluster.local:8080/order", "status": 201, "success": true, "latency_ms": 114.72, "total": 9, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:19.270342+00:00", "target": "nodeport", "url": "http://192.168.49.2:30080/order", "status": 201, "success": true, "latency_ms": 60.69, "total": 10, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:20.205197+00:00", "target": "dns-service", "url": "http://shop-api.lab3.svc.cluster.local:8080/order", "status": 201, "success": true, "latency_ms": 110.19, "total": 11, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:20.270893+00:00", "target": "nodeport", "url": "http://192.168.49.3:30080/order", "status": 201, "success": true, "latency_ms": 65.63, "total": 12, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:21.296708+00:00", "target": "dns-service", "url": "http://shop-api.lab3.svc.cluster.local:8080/order", "status": 201, "success": true, "latency_ms": 201.59, "total": 13, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:21.395204+00:00", "target": "nodeport", "url": "http://192.168.49.2:30080/order", "status": 201, "success": true, "latency_ms": 98.46, "total": 14, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:22.198891+00:00", "target": "dns-service", "url": "http://shop-api.lab3.svc.cluster.local:8080/order", "status": 201, "success": true, "latency_ms": 103.68, "total": 15, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:22.293886+00:00", "target": "nodeport", "url": "http://192.168.49.3:30080/order", "status": 201, "success": true, "latency_ms": 94.96, "total": 16, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:23.198206+00:00", "target": "dns-service", "url": "http://shop-api.lab3.svc.cluster.local:8080/order", "status": 201, "success": true, "latency_ms": 102.89, "total": 17, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:23.294822+00:00", "target": "nodeport", "url": "http://192.168.49.2:30080/order", "status": 201, "success": true, "latency_ms": 96.55, "total": 18, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:24.209471+00:00", "target": "dns-service", "url": "http://shop-api.lab3.svc.cluster.local:8080/order", "status": 201, "success": true, "latency_ms": 114.02, "total": 19, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:24.292971+00:00", "target": "nodeport", "url": "http://192.168.49.3:30080/order", "status": 201, "success": true, "latency_ms": 83.31, "total": 20, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:25.192004+00:00", "target": "dns-service", "url": "http://shop-api.lab3.svc.cluster.local:8080/order", "status": 201, "success": true, "latency_ms": 96.45, "total": 21, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:25.388766+00:00", "target": "nodeport", "url": "http://192.168.49.2:30080/order", "status": 201, "success": true, "latency_ms": 196.71, "total": 22, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:26.170059+00:00", "target": "dns-service", "url": "http://shop-api.lab3.svc.cluster.local:8080/order", "status": 201, "success": true, "latency_ms": 74.41, "total": 23, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:47:26.207426+00:00", "target": "nodeport", "url": "http://192.168.49.3:30080/order", "status": 201, "success": true, "latency_ms": 37.33, "total": 24, "failed": 0, "error": null}
+{"summary": true, "total": 24, "failed": 0}
+=== Отключение политик ===
+Release "shop" has been upgraded. Happy Helming!
+NAME: shop
+LAST DEPLOYED: Mon Oct 26 03:47:29 2026
+NAMESPACE: lab3
+STATUS: deployed
+REVISION: 39
+DESCRIPTION: Upgrade complete
+TEST SUITE: None

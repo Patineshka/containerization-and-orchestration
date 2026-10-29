@@ -1,0 +1,12 @@
+{{- if .Values.networkPolicy.enabled }}
+{{- range $name, $policy := .Values.networkPolicy.ciliumPolicies }}
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ printf "%s-%s" $.Release.Name $name }}
+  namespace: {{ $.Release.Namespace }}
+spec:
+  {{- toYaml $policy | nindent 2 }}
+{{- end }}
+{{- end }}

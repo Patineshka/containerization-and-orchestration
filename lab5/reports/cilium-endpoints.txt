@@ -1,0 +1,8 @@
+NAME                           SECURITY IDENTITY   INGRESS ENFORCEMENT   EGRESS ENFORCEMENT   ENDPOINT STATE   IPV4          IPV6
+shop-api-646d8466cf-9b5s9      4912                                                           ready            10.244.1.22   fe80::8414:63ff:fe3e:f55c
+shop-api-646d8466cf-b7d7c      4912                                                           ready            10.244.0.75   fe80::9c75:b1ff:fe8f:bba2
+shop-api-646d8466cf-jqx66      4912                                                           ready            10.244.0.76   fe80::600e:baff:fe0b:22fc
+shop-api-646d8466cf-rx2dj      4912                                                           ready            10.244.1.21   fe80::c4a:2bff:fe07:cd92
+shop-postgres-1                1896                                                           ready            10.244.0.78   fe80::28a4:90ff:feb2:83d6
+shop-worker-57d444454f-fx42f   34985                                                          ready            10.244.0.77   fe80::80f0:7eff:fe9f:2565
+shop-worker-57d444454f-svwtj   34985                                                          ready            10.244.1.23   fe80::c86:33ff:fe17:1927

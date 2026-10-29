@@ -1,0 +1,4 @@
+{"source": "shop-client", "destination": "shop-api:8080", "expected": "allow", "actual": "allow", "result": "PASS", "error": null}
+{"source": "shop-client", "destination": "shop-worker:8080", "expected": "deny", "actual": "timeout", "result": "PASS", "error": null}
+{"source": "shop-client", "destination": "shop-postgres-rw:5432", "expected": "deny", "actual": "timeout", "result": "PASS", "error": null}
+{"summary": true, "checks": 3, "failed": 0}

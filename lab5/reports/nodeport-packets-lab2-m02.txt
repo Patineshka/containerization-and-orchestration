@@ -1,0 +1,1063 @@
+tcpdump: data link type LINUX_SLL2
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on any, link-type LINUX_SLL2 (Linux cooked v2), snapshot length 262144 bytes
+2026-10-26 03:47:08.400065 veth6699296e Out IP 10.244.1.1.40974 > 10.244.1.38.8080: Flags [S], seq 133544815, win 64240, options [mss 1460,sackOK,TS val 2770686902 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:08.400081 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.40974: Flags [S.], seq 2111525037, ack 133544816, win 65160, options [mss 1460,sackOK,TS val 181660249 ecr 2770686902,nop,wscale 10], length 0
+2026-10-26 03:47:08.400230 veth6699296e Out IP 10.244.1.1.40974 > 10.244.1.38.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2770686902 ecr 181660249], length 0
+2026-10-26 03:47:08.400343 veth6699296e Out IP 10.244.1.1.40974 > 10.244.1.38.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 2770686902 ecr 181660249], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:08.400349 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.40974: Flags [.], ack 110, win 64, options [nop,nop,TS val 181660249 ecr 2770686902], length 0
+2026-10-26 03:47:08.401420 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.40974: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 181660250 ecr 2770686902], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:08.401567 veth6699296e Out IP 10.244.1.1.40974 > 10.244.1.38.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 2770686903 ecr 181660250], length 0
+2026-10-26 03:47:08.401585 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.40974: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 181660251 ecr 2770686903], length 2: HTTP
+2026-10-26 03:47:08.401592 veth6699296e Out IP 10.244.1.1.40974 > 10.244.1.38.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 2770686904 ecr 181660251], length 0
+2026-10-26 03:47:08.401710 veth6699296e Out IP 10.244.1.1.40974 > 10.244.1.38.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 2770686904 ecr 181660251], length 0
+2026-10-26 03:47:08.401901 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.40974: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 181660251 ecr 2770686904], length 0
+2026-10-26 03:47:08.401959 veth6699296e Out IP 10.244.1.1.40974 > 10.244.1.38.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 2770686904 ecr 181660251], length 0
+2026-10-26 03:47:09.781102 veth6699296e Out IP 10.244.1.1.40990 > 10.244.1.38.8080: Flags [S], seq 786805971, win 64240, options [mss 1460,sackOK,TS val 2445307354 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:09.781118 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.40990: Flags [S.], seq 1405273219, ack 786805972, win 65160, options [mss 1460,sackOK,TS val 1052258146 ecr 2445307354,nop,wscale 10], length 0
+2026-10-26 03:47:09.781288 veth6699296e Out IP 10.244.1.1.40990 > 10.244.1.38.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2445307354 ecr 1052258146], length 0
+2026-10-26 03:47:09.781888 veth6699296e Out IP 10.244.1.1.40990 > 10.244.1.38.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 2445307355 ecr 1052258146], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:09.781896 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.40990: Flags [.], ack 110, win 64, options [nop,nop,TS val 1052258147 ecr 2445307355], length 0
+2026-10-26 03:47:09.783452 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.40990: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 1052258148 ecr 2445307355], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:09.783702 veth6699296e Out IP 10.244.1.1.40990 > 10.244.1.38.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 2445307357 ecr 1052258148], length 0
+2026-10-26 03:47:09.783728 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.40990: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 1052258149 ecr 2445307357], length 2: HTTP
+2026-10-26 03:47:09.783735 veth6699296e Out IP 10.244.1.1.40990 > 10.244.1.38.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 2445307357 ecr 1052258149], length 0
+2026-10-26 03:47:09.783864 veth6699296e Out IP 10.244.1.1.40990 > 10.244.1.38.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 2445307357 ecr 1052258149], length 0
+2026-10-26 03:47:09.784075 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.40990: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 1052258149 ecr 2445307357], length 0
+2026-10-26 03:47:09.784163 veth6699296e Out IP 10.244.1.1.40990 > 10.244.1.38.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 2445307357 ecr 1052258149], length 0
+2026-10-26 03:47:09.947973 vetha1ad7713 Out IP 10.244.1.1.55194 > 10.244.1.44.8080: Flags [S], seq 687098879, win 64240, options [mss 1460,sackOK,TS val 932283298 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:09.947994 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.55194: Flags [S.], seq 1668363010, ack 687098880, win 65160, options [mss 1460,sackOK,TS val 2635021142 ecr 932283298,nop,wscale 10], length 0
+2026-10-26 03:47:09.948143 vetha1ad7713 Out IP 10.244.1.1.55194 > 10.244.1.44.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 932283298 ecr 2635021142], length 0
+2026-10-26 03:47:09.948424 vetha1ad7713 Out IP 10.244.1.1.55194 > 10.244.1.44.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 932283298 ecr 2635021142], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:09.948438 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.55194: Flags [.], ack 110, win 64, options [nop,nop,TS val 2635021142 ecr 932283298], length 0
+2026-10-26 03:47:09.949464 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.55194: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 2635021143 ecr 932283298], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:09.949621 vetha1ad7713 Out IP 10.244.1.1.55194 > 10.244.1.44.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 932283300 ecr 2635021143], length 0
+2026-10-26 03:47:09.949643 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.55194: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 2635021144 ecr 932283300], length 2: HTTP
+2026-10-26 03:47:09.949651 vetha1ad7713 Out IP 10.244.1.1.55194 > 10.244.1.44.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 932283300 ecr 2635021144], length 0
+2026-10-26 03:47:09.949774 vetha1ad7713 Out IP 10.244.1.1.55194 > 10.244.1.44.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 932283300 ecr 2635021144], length 0
+2026-10-26 03:47:09.950055 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.55194: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 2635021144 ecr 932283300], length 0
+2026-10-26 03:47:09.950215 vetha1ad7713 Out IP 10.244.1.1.55194 > 10.244.1.44.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 932283300 ecr 2635021144], length 0
+2026-10-26 03:47:11.407423 eth0  In  IP 10.244.0.95.52462 > 10.244.1.45.8080: Flags [S], seq 2486733234, win 64240, options [mss 1460,sackOK,TS val 558324660 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:11.407607 veth2203d974 Out IP 10.244.0.95.52462 > 10.244.1.45.8080: Flags [S], seq 2486733234, win 64240, options [mss 1460,sackOK,TS val 558324660 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:11.407626 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.0.95.52462: Flags [S.], seq 2553093999, ack 2486733235, win 65160, options [mss 1460,sackOK,TS val 4203407349 ecr 558324660,nop,wscale 10], length 0
+2026-10-26 03:47:11.407664 eth0  Out IP 10.244.1.45.8080 > 10.244.0.95.52462: Flags [S.], seq 2553093999, ack 2486733235, win 65160, options [mss 1460,sackOK,TS val 4203407349 ecr 558324660,nop,wscale 10], length 0
+2026-10-26 03:47:11.407779 eth0  In  IP 10.244.0.95.52462 > 10.244.1.45.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 558324661 ecr 4203407349], length 0
+2026-10-26 03:47:11.407804 veth2203d974 Out IP 10.244.0.95.52462 > 10.244.1.45.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 558324661 ecr 4203407349], length 0
+2026-10-26 03:47:11.407947 eth0  In  IP 10.244.0.95.52462 > 10.244.1.45.8080: Flags [P.], seq 1:366, ack 1, win 63, options [nop,nop,TS val 558324661 ecr 4203407349], length 365: HTTP: GET /metrics HTTP/1.1
+2026-10-26 03:47:11.407964 veth2203d974 Out IP 10.244.0.95.52462 > 10.244.1.45.8080: Flags [P.], seq 1:366, ack 1, win 63, options [nop,nop,TS val 558324661 ecr 4203407349], length 365: HTTP: GET /metrics HTTP/1.1
+2026-10-26 03:47:11.407969 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.0.95.52462: Flags [.], ack 366, win 64, options [nop,nop,TS val 4203407349 ecr 558324661], length 0
+2026-10-26 03:47:11.407973 eth0  Out IP 10.244.1.45.8080 > 10.244.0.95.52462: Flags [.], ack 366, win 64, options [nop,nop,TS val 4203407349 ecr 558324661], length 0
+2026-10-26 03:47:11.410733 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.0.95.52462: Flags [P.], seq 1:193, ack 366, win 64, options [nop,nop,TS val 4203407352 ecr 558324661], length 192: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:11.410778 eth0  Out IP 10.244.1.45.8080 > 10.244.0.95.52462: Flags [P.], seq 1:193, ack 366, win 64, options [nop,nop,TS val 4203407352 ecr 558324661], length 192: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:11.410846 eth0  In  IP 10.244.0.95.52462 > 10.244.1.45.8080: Flags [.], ack 193, win 63, options [nop,nop,TS val 558324664 ecr 4203407352], length 0
+2026-10-26 03:47:11.410850 veth2203d974 Out IP 10.244.0.95.52462 > 10.244.1.45.8080: Flags [.], ack 193, win 63, options [nop,nop,TS val 558324664 ecr 4203407352], length 0
+2026-10-26 03:47:11.410863 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.0.95.52462: Flags [P.], seq 193:5044, ack 366, win 64, options [nop,nop,TS val 4203407352 ecr 558324664], length 4851: HTTP
+2026-10-26 03:47:11.410867 eth0  Out IP 10.244.1.45.8080 > 10.244.0.95.52462: Flags [P.], seq 193:5044, ack 366, win 64, options [nop,nop,TS val 4203407352 ecr 558324664], length 4851: HTTP
+2026-10-26 03:47:11.410880 eth0  In  IP 10.244.0.95.52462 > 10.244.1.45.8080: Flags [.], ack 5044, win 73, options [nop,nop,TS val 558324664 ecr 4203407352], length 0
+2026-10-26 03:47:11.410883 veth2203d974 Out IP 10.244.0.95.52462 > 10.244.1.45.8080: Flags [.], ack 5044, win 73, options [nop,nop,TS val 558324664 ecr 4203407352], length 0
+2026-10-26 03:47:11.411053 eth0  In  IP 10.244.0.95.52462 > 10.244.1.45.8080: Flags [F.], seq 366, ack 5044, win 73, options [nop,nop,TS val 558324664 ecr 4203407352], length 0
+2026-10-26 03:47:11.411077 veth2203d974 Out IP 10.244.0.95.52462 > 10.244.1.45.8080: Flags [F.], seq 366, ack 5044, win 73, options [nop,nop,TS val 558324664 ecr 4203407352], length 0
+2026-10-26 03:47:11.411145 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.0.95.52462: Flags [F.], seq 5044, ack 367, win 64, options [nop,nop,TS val 4203407352 ecr 558324664], length 0
+2026-10-26 03:47:11.411176 eth0  Out IP 10.244.1.45.8080 > 10.244.0.95.52462: Flags [F.], seq 5044, ack 367, win 64, options [nop,nop,TS val 4203407352 ecr 558324664], length 0
+2026-10-26 03:47:11.411232 eth0  In  IP 10.244.0.95.52462 > 10.244.1.45.8080: Flags [.], ack 5045, win 73, options [nop,nop,TS val 558324664 ecr 4203407352], length 0
+2026-10-26 03:47:11.411282 veth2203d974 Out IP 10.244.0.95.52462 > 10.244.1.45.8080: Flags [.], ack 5045, win 73, options [nop,nop,TS val 558324664 ecr 4203407352], length 0
+2026-10-26 03:47:11.770952 veth2203d974 Out IP 10.244.1.1.39672 > 10.244.1.45.8080: Flags [S], seq 3598332649, win 64240, options [mss 1460,sackOK,TS val 2787692559 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:11.770964 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.39672: Flags [S.], seq 155364936, ack 3598332650, win 65160, options [mss 1460,sackOK,TS val 3753189137 ecr 2787692559,nop,wscale 10], length 0
+2026-10-26 03:47:11.771060 veth2203d974 Out IP 10.244.1.1.39672 > 10.244.1.45.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2787692559 ecr 3753189137], length 0
+2026-10-26 03:47:11.771164 veth2203d974 Out IP 10.244.1.1.39672 > 10.244.1.45.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 2787692559 ecr 3753189137], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:11.771170 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.39672: Flags [.], ack 110, win 64, options [nop,nop,TS val 3753189137 ecr 2787692559], length 0
+2026-10-26 03:47:11.781218 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.39672: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 3753189147 ecr 2787692559], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:11.781331 veth2203d974 Out IP 10.244.1.1.39672 > 10.244.1.45.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 2787692569 ecr 3753189147], length 0
+2026-10-26 03:47:11.782048 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.39672: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 3753189148 ecr 2787692569], length 2: HTTP
+2026-10-26 03:47:11.782066 veth2203d974 Out IP 10.244.1.1.39672 > 10.244.1.45.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 2787692570 ecr 3753189148], length 0
+2026-10-26 03:47:11.782300 veth2203d974 Out IP 10.244.1.1.39672 > 10.244.1.45.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 2787692570 ecr 3753189148], length 0
+2026-10-26 03:47:11.782685 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.39672: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 3753189149 ecr 2787692570], length 0
+2026-10-26 03:47:11.782840 veth2203d974 Out IP 10.244.1.1.39672 > 10.244.1.45.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 2787692571 ecr 3753189149], length 0
+2026-10-26 03:47:11.818355 vetha1ad7713 Out IP 10.244.1.1.57780 > 10.244.1.44.8080: Flags [S], seq 3339048561, win 64240, options [mss 1460,sackOK,TS val 1547811977 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:11.818368 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.57780: Flags [S.], seq 2691198011, ack 3339048562, win 65160, options [mss 1460,sackOK,TS val 1201716833 ecr 1547811977,nop,wscale 10], length 0
+2026-10-26 03:47:11.818404 vetha1ad7713 Out IP 10.244.1.1.57780 > 10.244.1.44.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1547811977 ecr 1201716833], length 0
+2026-10-26 03:47:11.818480 vetha1ad7713 Out IP 10.244.1.1.57780 > 10.244.1.44.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 1547811977 ecr 1201716833], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:11.818483 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.57780: Flags [.], ack 110, win 64, options [nop,nop,TS val 1201716833 ecr 1547811977], length 0
+2026-10-26 03:47:11.836984 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.57780: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 1201716852 ecr 1547811977], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:11.837048 vetha1ad7713 Out IP 10.244.1.1.57780 > 10.244.1.44.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 1547811996 ecr 1201716852], length 0
+2026-10-26 03:47:11.837061 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.57780: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 1201716852 ecr 1547811996], length 2: HTTP
+2026-10-26 03:47:11.837067 vetha1ad7713 Out IP 10.244.1.1.57780 > 10.244.1.44.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 1547811996 ecr 1201716852], length 0
+2026-10-26 03:47:11.837206 vetha1ad7713 Out IP 10.244.1.1.57780 > 10.244.1.44.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 1547811996 ecr 1201716852], length 0
+2026-10-26 03:47:11.837296 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.57780: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 1201716852 ecr 1547811996], length 0
+2026-10-26 03:47:11.837368 vetha1ad7713 Out IP 10.244.1.1.57780 > 10.244.1.44.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 1547811996 ecr 1201716852], length 0
+2026-10-26 03:47:14.780651 veth6699296e Out IP 10.244.1.1.52880 > 10.244.1.38.8080: Flags [S], seq 3372951338, win 64240, options [mss 1460,sackOK,TS val 2322485052 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:14.780667 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.52880: Flags [S.], seq 1127270965, ack 3372951339, win 65160, options [mss 1460,sackOK,TS val 4149470715 ecr 2322485052,nop,wscale 10], length 0
+2026-10-26 03:47:14.780809 veth6699296e Out IP 10.244.1.1.52880 > 10.244.1.38.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2322485053 ecr 4149470715], length 0
+2026-10-26 03:47:14.781155 veth6699296e Out IP 10.244.1.1.52880 > 10.244.1.38.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 2322485053 ecr 4149470715], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:14.781162 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.52880: Flags [.], ack 110, win 64, options [nop,nop,TS val 4149470715 ecr 2322485053], length 0
+2026-10-26 03:47:14.782284 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.52880: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 4149470716 ecr 2322485053], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:14.782369 veth6699296e Out IP 10.244.1.1.52880 > 10.244.1.38.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 2322485054 ecr 4149470716], length 0
+2026-10-26 03:47:14.782394 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.52880: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 4149470716 ecr 2322485054], length 2: HTTP
+2026-10-26 03:47:14.782402 veth6699296e Out IP 10.244.1.1.52880 > 10.244.1.38.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 2322485054 ecr 4149470716], length 0
+2026-10-26 03:47:14.782827 veth6699296e Out IP 10.244.1.1.52880 > 10.244.1.38.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 2322485055 ecr 4149470716], length 0
+2026-10-26 03:47:14.782973 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.52880: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 4149470717 ecr 2322485055], length 0
+2026-10-26 03:47:14.783127 veth6699296e Out IP 10.244.1.1.52880 > 10.244.1.38.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 2322485055 ecr 4149470717], length 0
+2026-10-26 03:47:14.833363 eth0  In  IP 192.168.49.1.51236 > 192.168.49.3.30080: Flags [S], seq 2756324669, win 64240, options [mss 1460,sackOK,TS val 2498868766 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:14.833400 eth0  Out IP 192.168.49.3.31371 > 10.244.0.93.8080: Flags [S], seq 2756324669, win 64240, options [mss 1460,sackOK,TS val 2498868766 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:14.833754 eth0  In  IP 10.244.0.93.8080 > 192.168.49.3.31371: Flags [S.], seq 1692956864, ack 2756324670, win 65160, options [mss 1460,sackOK,TS val 589075786 ecr 2498868766,nop,wscale 10], length 0
+2026-10-26 03:47:14.833769 eth0  Out IP 192.168.49.3.30080 > 192.168.49.1.51236: Flags [S.], seq 1692956864, ack 2756324670, win 65160, options [mss 1460,sackOK,TS val 589075786 ecr 2498868766,nop,wscale 10], length 0
+2026-10-26 03:47:14.833786 eth0  In  IP 192.168.49.1.51236 > 192.168.49.3.30080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2498868767 ecr 589075786], length 0
+2026-10-26 03:47:14.833791 eth0  Out IP 192.168.49.3.31371 > 10.244.0.93.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2498868767 ecr 589075786], length 0
+2026-10-26 03:47:14.833968 eth0  In  IP 192.168.49.1.51236 > 192.168.49.3.30080: Flags [P.], seq 1:89, ack 1, win 63, options [nop,nop,TS val 2498868767 ecr 589075786], length 88
+2026-10-26 03:47:14.833973 eth0  Out IP 192.168.49.3.31371 > 10.244.0.93.8080: Flags [P.], seq 1:89, ack 1, win 63, options [nop,nop,TS val 2498868767 ecr 589075786], length 88: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:14.834055 eth0  In  IP 10.244.0.93.8080 > 192.168.49.3.31371: Flags [.], ack 89, win 64, options [nop,nop,TS val 589075786 ecr 2498868767], length 0
+2026-10-26 03:47:14.834062 eth0  Out IP 192.168.49.3.30080 > 192.168.49.1.51236: Flags [.], ack 89, win 64, options [nop,nop,TS val 589075786 ecr 2498868767], length 0
+2026-10-26 03:47:14.834992 eth0  In  IP 10.244.0.93.8080 > 192.168.49.3.31371: Flags [P.], seq 1:175, ack 89, win 64, options [nop,nop,TS val 589075787 ecr 2498868767], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:14.835001 eth0  Out IP 192.168.49.3.30080 > 192.168.49.1.51236: Flags [P.], seq 1:175, ack 89, win 64, options [nop,nop,TS val 589075787 ecr 2498868767], length 174
+2026-10-26 03:47:14.835012 eth0  In  IP 192.168.49.1.51236 > 192.168.49.3.30080: Flags [.], ack 175, win 63, options [nop,nop,TS val 2498868768 ecr 589075787], length 0
+2026-10-26 03:47:14.835016 eth0  Out IP 192.168.49.3.31371 > 10.244.0.93.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 2498868768 ecr 589075787], length 0
+2026-10-26 03:47:14.835159 eth0  In  IP 10.244.0.93.8080 > 192.168.49.3.31371: Flags [P.], seq 175:177, ack 89, win 64, options [nop,nop,TS val 589075787 ecr 2498868768], length 2: HTTP
+2026-10-26 03:47:14.835168 eth0  Out IP 192.168.49.3.30080 > 192.168.49.1.51236: Flags [P.], seq 175:177, ack 89, win 64, options [nop,nop,TS val 589075787 ecr 2498868768], length 2
+2026-10-26 03:47:14.835175 eth0  In  IP 192.168.49.1.51236 > 192.168.49.3.30080: Flags [.], ack 177, win 63, options [nop,nop,TS val 2498868768 ecr 589075787], length 0
+2026-10-26 03:47:14.835179 eth0  Out IP 192.168.49.3.31371 > 10.244.0.93.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 2498868768 ecr 589075787], length 0
+2026-10-26 03:47:14.835486 eth0  In  IP 192.168.49.1.51236 > 192.168.49.3.30080: Flags [F.], seq 89, ack 177, win 63, options [nop,nop,TS val 2498868768 ecr 589075787], length 0
+2026-10-26 03:47:14.835491 eth0  Out IP 192.168.49.3.31371 > 10.244.0.93.8080: Flags [F.], seq 89, ack 177, win 63, options [nop,nop,TS val 2498868768 ecr 589075787], length 0
+2026-10-26 03:47:14.836493 eth0  In  IP 10.244.0.93.8080 > 192.168.49.3.31371: Flags [F.], seq 177, ack 90, win 64, options [nop,nop,TS val 589075788 ecr 2498868768], length 0
+2026-10-26 03:47:14.836551 eth0  Out IP 192.168.49.3.30080 > 192.168.49.1.51236: Flags [F.], seq 177, ack 90, win 64, options [nop,nop,TS val 589075788 ecr 2498868768], length 0
+2026-10-26 03:47:14.836583 eth0  In  IP 192.168.49.1.51236 > 192.168.49.3.30080: Flags [.], ack 178, win 63, options [nop,nop,TS val 2498868770 ecr 589075788], length 0
+2026-10-26 03:47:14.836594 eth0  Out IP 192.168.49.3.31371 > 10.244.0.93.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 2498868770 ecr 589075788], length 0
+2026-10-26 03:47:14.947438 vetha1ad7713 Out IP 10.244.1.1.57788 > 10.244.1.44.8080: Flags [S], seq 3161532628, win 64240, options [mss 1460,sackOK,TS val 4194965429 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:14.947454 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.57788: Flags [S.], seq 2157710044, ack 3161532629, win 65160, options [mss 1460,sackOK,TS val 3815509027 ecr 4194965429,nop,wscale 10], length 0
+2026-10-26 03:47:14.947561 vetha1ad7713 Out IP 10.244.1.1.57788 > 10.244.1.44.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 4194965429 ecr 3815509027], length 0
+2026-10-26 03:47:14.947951 vetha1ad7713 Out IP 10.244.1.1.57788 > 10.244.1.44.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 4194965430 ecr 3815509027], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:14.947957 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.57788: Flags [.], ack 110, win 64, options [nop,nop,TS val 3815509028 ecr 4194965430], length 0
+2026-10-26 03:47:14.950794 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.57788: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 3815509031 ecr 4194965430], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:14.950943 vetha1ad7713 Out IP 10.244.1.1.57788 > 10.244.1.44.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 4194965433 ecr 3815509031], length 0
+2026-10-26 03:47:14.951133 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.57788: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 3815509031 ecr 4194965433], length 2: HTTP
+2026-10-26 03:47:14.951156 vetha1ad7713 Out IP 10.244.1.1.57788 > 10.244.1.44.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 4194965433 ecr 3815509031], length 0
+2026-10-26 03:47:14.951241 vetha1ad7713 Out IP 10.244.1.1.57788 > 10.244.1.44.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 4194965433 ecr 3815509031], length 0
+2026-10-26 03:47:14.951591 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.57788: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 3815509032 ecr 4194965433], length 0
+2026-10-26 03:47:14.951657 vetha1ad7713 Out IP 10.244.1.1.57788 > 10.244.1.44.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 4194965434 ecr 3815509032], length 0
+2026-10-26 03:47:15.190668 veth03eca504 In  IP 10.244.1.24.47604 > 10.101.22.76.8080: Flags [S], seq 695099876, win 64240, options [mss 1460,sackOK,TS val 2910905961 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:15.191032 veth2203d974 Out IP 10.244.1.24.47604 > 10.244.1.45.8080: Flags [S], seq 695099876, win 64240, options [mss 1460,sackOK,TS val 2910905961 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:15.191045 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.47604: Flags [S.], seq 4255131213, ack 695099877, win 65160, options [mss 1460,sackOK,TS val 825077897 ecr 2910905961,nop,wscale 10], length 0
+2026-10-26 03:47:15.191097 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47604: Flags [S.], seq 4255131213, ack 695099877, win 65160, options [mss 1460,sackOK,TS val 825077897 ecr 2910905961,nop,wscale 10], length 0
+2026-10-26 03:47:15.191105 veth03eca504 In  IP 10.244.1.24.47604 > 10.101.22.76.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2910905961 ecr 825077897], length 0
+2026-10-26 03:47:15.191234 veth2203d974 Out IP 10.244.1.24.47604 > 10.244.1.45.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2910905961 ecr 825077897], length 0
+2026-10-26 03:47:15.191273 veth03eca504 In  IP 10.244.1.24.47604 > 10.101.22.76.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 2910905961 ecr 825077897], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:15.191364 veth2203d974 Out IP 10.244.1.24.47604 > 10.244.1.45.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 2910905961 ecr 825077897], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:15.191369 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.47604: Flags [.], ack 199, win 64, options [nop,nop,TS val 825077897 ecr 2910905961], length 0
+2026-10-26 03:47:15.191378 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47604: Flags [.], ack 199, win 64, options [nop,nop,TS val 825077897 ecr 2910905961], length 0
+2026-10-26 03:47:15.191394 veth03eca504 In  IP 10.244.1.24.47604 > 10.101.22.76.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 2910905961 ecr 825077897], length 42: HTTP
+2026-10-26 03:47:15.191400 veth2203d974 Out IP 10.244.1.24.47604 > 10.244.1.45.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 2910905961 ecr 825077897], length 42: HTTP
+2026-10-26 03:47:15.191402 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.47604: Flags [.], ack 241, win 64, options [nop,nop,TS val 825077897 ecr 2910905961], length 0
+2026-10-26 03:47:15.191405 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47604: Flags [.], ack 241, win 64, options [nop,nop,TS val 825077897 ecr 2910905961], length 0
+2026-10-26 03:47:15.294752 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.47604: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 825078001 ecr 2910905961], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:15.294881 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47604: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 825078001 ecr 2910905961], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:15.294904 veth03eca504 In  IP 10.244.1.24.47604 > 10.101.22.76.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 2910906065 ecr 825078001], length 0
+2026-10-26 03:47:15.294922 veth2203d974 Out IP 10.244.1.24.47604 > 10.244.1.45.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 2910906065 ecr 825078001], length 0
+2026-10-26 03:47:15.294949 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.47604: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 825078001 ecr 2910906065], length 178: HTTP
+2026-10-26 03:47:15.294956 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47604: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 825078001 ecr 2910906065], length 178: HTTP
+2026-10-26 03:47:15.294959 veth03eca504 In  IP 10.244.1.24.47604 > 10.101.22.76.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 2910906065 ecr 825078001], length 0
+2026-10-26 03:47:15.294962 veth2203d974 Out IP 10.244.1.24.47604 > 10.244.1.45.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 2910906065 ecr 825078001], length 0
+2026-10-26 03:47:15.295171 veth03eca504 In  IP 10.244.1.24.47604 > 10.101.22.76.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 2910906065 ecr 825078001], length 0
+2026-10-26 03:47:15.295238 veth2203d974 Out IP 10.244.1.24.47604 > 10.244.1.45.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 2910906065 ecr 825078001], length 0
+2026-10-26 03:47:15.295493 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.47604: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 825078001 ecr 2910906065], length 0
+2026-10-26 03:47:15.295673 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47604: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 825078001 ecr 2910906065], length 0
+2026-10-26 03:47:15.295685 veth03eca504 In  IP 10.244.1.24.47604 > 10.101.22.76.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 2910906066 ecr 825078001], length 0
+2026-10-26 03:47:15.295727 veth2203d974 Out IP 10.244.1.24.47604 > 10.244.1.45.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 2910906066 ecr 825078001], length 0
+2026-10-26 03:47:15.295924 veth03eca504 In  IP 10.244.1.24.51746 > 192.168.49.2.30080: Flags [S], seq 399563672, win 64240, options [mss 1460,sackOK,TS val 1753331581 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:15.296052 eth0  Out IP 192.168.49.3.51746 > 192.168.49.2.30080: Flags [S], seq 399563672, win 64240, options [mss 1460,sackOK,TS val 1753331581 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:15.296241 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.51746: Flags [S.], seq 780603045, ack 399563673, win 65160, options [mss 1460,sackOK,TS val 2445744169 ecr 1753331581,nop,wscale 10], length 0
+2026-10-26 03:47:15.296318 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.51746: Flags [S.], seq 780603045, ack 399563673, win 65160, options [mss 1460,sackOK,TS val 2445744169 ecr 1753331581,nop,wscale 10], length 0
+2026-10-26 03:47:15.296329 veth03eca504 In  IP 10.244.1.24.51746 > 192.168.49.2.30080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1753331581 ecr 2445744169], length 0
+2026-10-26 03:47:15.296353 eth0  Out IP 192.168.49.3.51746 > 192.168.49.2.30080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1753331581 ecr 2445744169], length 0
+2026-10-26 03:47:15.296706 veth03eca504 In  IP 10.244.1.24.51746 > 192.168.49.2.30080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 1753331582 ecr 2445744169], length 180
+2026-10-26 03:47:15.296733 eth0  Out IP 192.168.49.3.51746 > 192.168.49.2.30080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 1753331582 ecr 2445744169], length 180
+2026-10-26 03:47:15.296772 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.51746: Flags [.], ack 181, win 64, options [nop,nop,TS val 2445744170 ecr 1753331582], length 0
+2026-10-26 03:47:15.296776 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.51746: Flags [.], ack 181, win 64, options [nop,nop,TS val 2445744170 ecr 1753331582], length 0
+2026-10-26 03:47:15.296789 veth03eca504 In  IP 10.244.1.24.51746 > 192.168.49.2.30080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 1753331582 ecr 2445744170], length 42
+2026-10-26 03:47:15.296793 eth0  Out IP 192.168.49.3.51746 > 192.168.49.2.30080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 1753331582 ecr 2445744170], length 42
+2026-10-26 03:47:15.296804 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.51746: Flags [.], ack 223, win 64, options [nop,nop,TS val 2445744170 ecr 1753331582], length 0
+2026-10-26 03:47:15.296807 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.51746: Flags [.], ack 223, win 64, options [nop,nop,TS val 2445744170 ecr 1753331582], length 0
+2026-10-26 03:47:15.387699 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.51746: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 2445744261 ecr 1753331582], length 172
+2026-10-26 03:47:15.387755 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.51746: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 2445744261 ecr 1753331582], length 172
+2026-10-26 03:47:15.387775 veth03eca504 In  IP 10.244.1.24.51746 > 192.168.49.2.30080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1753331673 ecr 2445744261], length 0
+2026-10-26 03:47:15.387796 eth0  Out IP 192.168.49.3.51746 > 192.168.49.2.30080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1753331673 ecr 2445744261], length 0
+2026-10-26 03:47:15.387841 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.51746: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 2445744261 ecr 1753331673], length 178
+2026-10-26 03:47:15.387847 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.51746: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 2445744261 ecr 1753331673], length 178
+2026-10-26 03:47:15.387849 veth03eca504 In  IP 10.244.1.24.51746 > 192.168.49.2.30080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1753331673 ecr 2445744261], length 0
+2026-10-26 03:47:15.387852 eth0  Out IP 192.168.49.3.51746 > 192.168.49.2.30080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1753331673 ecr 2445744261], length 0
+2026-10-26 03:47:15.388030 veth03eca504 In  IP 10.244.1.24.51746 > 192.168.49.2.30080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 1753331673 ecr 2445744261], length 0
+2026-10-26 03:47:15.388057 eth0  Out IP 192.168.49.3.51746 > 192.168.49.2.30080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 1753331673 ecr 2445744261], length 0
+2026-10-26 03:47:15.388389 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.51746: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 2445744261 ecr 1753331673], length 0
+2026-10-26 03:47:15.388462 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.51746: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 2445744261 ecr 1753331673], length 0
+2026-10-26 03:47:15.388472 veth03eca504 In  IP 10.244.1.24.51746 > 192.168.49.2.30080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1753331673 ecr 2445744261], length 0
+2026-10-26 03:47:15.388589 eth0  Out IP 192.168.49.3.51746 > 192.168.49.2.30080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1753331673 ecr 2445744261], length 0
+2026-10-26 03:47:16.098261 veth03eca504 In  IP 10.244.1.24.47618 > 10.101.22.76.8080: Flags [S], seq 668416205, win 64240, options [mss 1460,sackOK,TS val 1482690941 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:16.098381 eth0  Out IP 10.244.1.24.47618 > 10.244.0.91.8080: Flags [S], seq 668416205, win 64240, options [mss 1460,sackOK,TS val 1482690941 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:16.098649 eth0  In  IP 10.244.0.91.8080 > 10.244.1.24.47618: Flags [S.], seq 3069583388, ack 668416206, win 65160, options [mss 1460,sackOK,TS val 2910871863 ecr 1482690941,nop,wscale 10], length 0
+2026-10-26 03:47:16.098705 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47618: Flags [S.], seq 3069583388, ack 668416206, win 65160, options [mss 1460,sackOK,TS val 2910871863 ecr 1482690941,nop,wscale 10], length 0
+2026-10-26 03:47:16.098737 veth03eca504 In  IP 10.244.1.24.47618 > 10.101.22.76.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1482690942 ecr 2910871863], length 0
+2026-10-26 03:47:16.098816 eth0  Out IP 10.244.1.24.47618 > 10.244.0.91.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1482690942 ecr 2910871863], length 0
+2026-10-26 03:47:16.099473 veth03eca504 In  IP 10.244.1.24.47618 > 10.101.22.76.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 1482690942 ecr 2910871863], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:16.099730 eth0  Out IP 10.244.1.24.47618 > 10.244.0.91.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 1482690942 ecr 2910871863], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:16.099994 eth0  In  IP 10.244.0.91.8080 > 10.244.1.24.47618: Flags [.], ack 199, win 64, options [nop,nop,TS val 2910871864 ecr 1482690942], length 0
+2026-10-26 03:47:16.100002 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47618: Flags [.], ack 199, win 64, options [nop,nop,TS val 2910871864 ecr 1482690942], length 0
+2026-10-26 03:47:16.100045 veth03eca504 In  IP 10.244.1.24.47618 > 10.101.22.76.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 1482690943 ecr 2910871864], length 42: HTTP
+2026-10-26 03:47:16.100053 eth0  Out IP 10.244.1.24.47618 > 10.244.0.91.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 1482690943 ecr 2910871864], length 42: HTTP
+2026-10-26 03:47:16.100068 eth0  In  IP 10.244.0.91.8080 > 10.244.1.24.47618: Flags [.], ack 241, win 64, options [nop,nop,TS val 2910871864 ecr 1482690943], length 0
+2026-10-26 03:47:16.100071 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47618: Flags [.], ack 241, win 64, options [nop,nop,TS val 2910871864 ecr 1482690943], length 0
+2026-10-26 03:47:16.192089 eth0  In  IP 10.244.0.91.8080 > 10.244.1.24.47618: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 2910871956 ecr 1482690943], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:16.192136 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47618: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 2910871956 ecr 1482690943], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:16.192149 veth03eca504 In  IP 10.244.1.24.47618 > 10.101.22.76.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1482691035 ecr 2910871956], length 0
+2026-10-26 03:47:16.192159 eth0  Out IP 10.244.1.24.47618 > 10.244.0.91.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1482691035 ecr 2910871956], length 0
+2026-10-26 03:47:16.192256 eth0  In  IP 10.244.0.91.8080 > 10.244.1.24.47618: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 2910871956 ecr 1482691035], length 178: HTTP
+2026-10-26 03:47:16.192260 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47618: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 2910871956 ecr 1482691035], length 178: HTTP
+2026-10-26 03:47:16.192262 veth03eca504 In  IP 10.244.1.24.47618 > 10.101.22.76.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1482691035 ecr 2910871956], length 0
+2026-10-26 03:47:16.192265 eth0  Out IP 10.244.1.24.47618 > 10.244.0.91.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1482691035 ecr 2910871956], length 0
+2026-10-26 03:47:16.192374 veth03eca504 In  IP 10.244.1.24.47618 > 10.101.22.76.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 1482691035 ecr 2910871956], length 0
+2026-10-26 03:47:16.192438 eth0  Out IP 10.244.1.24.47618 > 10.244.0.91.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 1482691035 ecr 2910871956], length 0
+2026-10-26 03:47:16.192793 eth0  In  IP 10.244.0.91.8080 > 10.244.1.24.47618: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 2910871957 ecr 1482691035], length 0
+2026-10-26 03:47:16.192828 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47618: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 2910871957 ecr 1482691035], length 0
+2026-10-26 03:47:16.195829 veth03eca504 In  IP 10.244.1.24.47618 > 10.101.22.76.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1482691039 ecr 2910871957], length 0
+2026-10-26 03:47:16.195866 eth0  Out IP 10.244.1.24.47618 > 10.244.0.91.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1482691039 ecr 2910871957], length 0
+2026-10-26 03:47:16.196372 veth03eca504 In  IP 10.244.1.24.46012 > 192.168.49.3.30080: Flags [S], seq 3529881403, win 64240, options [mss 1460,sackOK,TS val 3929759155 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:16.196449 eth0  Out IP 192.168.49.3.10811 > 10.244.0.91.8080: Flags [S], seq 3529881403, win 64240, options [mss 1460,sackOK,TS val 3929759155 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:16.196617 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.10811: Flags [S.], seq 2561548536, ack 3529881404, win 65160, options [mss 1460,sackOK,TS val 1430550936 ecr 3929759155,nop,wscale 10], length 0
+2026-10-26 03:47:16.196639 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.46012: Flags [S.], seq 2561548536, ack 3529881404, win 65160, options [mss 1460,sackOK,TS val 1430550936 ecr 3929759155,nop,wscale 10], length 0
+2026-10-26 03:47:16.196672 veth03eca504 In  IP 10.244.1.24.46012 > 192.168.49.3.30080: Flags [.], ack 1, win 63, options [nop,nop,TS val 3929759156 ecr 1430550936], length 0
+2026-10-26 03:47:16.196696 eth0  Out IP 192.168.49.3.10811 > 10.244.0.91.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 3929759156 ecr 1430550936], length 0
+2026-10-26 03:47:16.196999 veth03eca504 In  IP 10.244.1.24.46012 > 192.168.49.3.30080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 3929759156 ecr 1430550936], length 180
+2026-10-26 03:47:16.197029 eth0  Out IP 192.168.49.3.10811 > 10.244.0.91.8080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 3929759156 ecr 1430550936], length 180: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:16.197125 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.10811: Flags [.], ack 181, win 64, options [nop,nop,TS val 1430550936 ecr 3929759156], length 0
+2026-10-26 03:47:16.197134 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.46012: Flags [.], ack 181, win 64, options [nop,nop,TS val 1430550936 ecr 3929759156], length 0
+2026-10-26 03:47:16.197264 veth03eca504 In  IP 10.244.1.24.46012 > 192.168.49.3.30080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 3929759156 ecr 1430550936], length 42
+2026-10-26 03:47:16.197271 eth0  Out IP 192.168.49.3.10811 > 10.244.0.91.8080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 3929759156 ecr 1430550936], length 42: HTTP
+2026-10-26 03:47:16.197288 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.10811: Flags [.], ack 223, win 64, options [nop,nop,TS val 1430550936 ecr 3929759156], length 0
+2026-10-26 03:47:16.197291 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.46012: Flags [.], ack 223, win 64, options [nop,nop,TS val 1430550936 ecr 3929759156], length 0
+2026-10-26 03:47:16.391756 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.10811: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 1430551131 ecr 3929759156], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:16.391808 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.46012: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 1430551131 ecr 3929759156], length 172
+2026-10-26 03:47:16.391824 veth03eca504 In  IP 10.244.1.24.46012 > 192.168.49.3.30080: Flags [.], ack 173, win 63, options [nop,nop,TS val 3929759351 ecr 1430551131], length 0
+2026-10-26 03:47:16.391836 eth0  Out IP 192.168.49.3.10811 > 10.244.0.91.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 3929759351 ecr 1430551131], length 0
+2026-10-26 03:47:16.391881 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.10811: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 1430551131 ecr 3929759351], length 178: HTTP
+2026-10-26 03:47:16.391885 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.46012: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 1430551131 ecr 3929759351], length 178
+2026-10-26 03:47:16.391887 veth03eca504 In  IP 10.244.1.24.46012 > 192.168.49.3.30080: Flags [.], ack 351, win 63, options [nop,nop,TS val 3929759351 ecr 1430551131], length 0
+2026-10-26 03:47:16.391890 eth0  Out IP 192.168.49.3.10811 > 10.244.0.91.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 3929759351 ecr 1430551131], length 0
+2026-10-26 03:47:16.392290 veth03eca504 In  IP 10.244.1.24.46012 > 192.168.49.3.30080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 3929759351 ecr 1430551131], length 0
+2026-10-26 03:47:16.392496 eth0  Out IP 192.168.49.3.10811 > 10.244.0.91.8080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 3929759351 ecr 1430551131], length 0
+2026-10-26 03:47:16.392836 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.10811: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 1430551132 ecr 3929759351], length 0
+2026-10-26 03:47:16.392870 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.46012: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 1430551132 ecr 3929759351], length 0
+2026-10-26 03:47:16.393214 veth03eca504 In  IP 10.244.1.24.46012 > 192.168.49.3.30080: Flags [.], ack 352, win 63, options [nop,nop,TS val 3929759352 ecr 1430551132], length 0
+2026-10-26 03:47:16.393364 eth0  Out IP 192.168.49.3.10811 > 10.244.0.91.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 3929759352 ecr 1430551132], length 0
+2026-10-26 03:47:16.771328 veth2203d974 Out IP 10.244.1.1.39676 > 10.244.1.45.8080: Flags [S], seq 2833696121, win 64240, options [mss 1460,sackOK,TS val 642409380 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:16.771347 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.39676: Flags [S.], seq 1083525758, ack 2833696122, win 65160, options [mss 1460,sackOK,TS val 1701187636 ecr 642409380,nop,wscale 10], length 0
+2026-10-26 03:47:16.771557 veth2203d974 Out IP 10.244.1.1.39676 > 10.244.1.45.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 642409380 ecr 1701187636], length 0
+2026-10-26 03:47:16.771976 veth2203d974 Out IP 10.244.1.1.39676 > 10.244.1.45.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 642409381 ecr 1701187636], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:16.771984 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.39676: Flags [.], ack 110, win 64, options [nop,nop,TS val 1701187637 ecr 642409381], length 0
+2026-10-26 03:47:16.773241 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.39676: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 1701187638 ecr 642409381], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:16.773313 veth2203d974 Out IP 10.244.1.1.39676 > 10.244.1.45.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 642409382 ecr 1701187638], length 0
+2026-10-26 03:47:16.773327 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.39676: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 1701187638 ecr 642409382], length 2: HTTP
+2026-10-26 03:47:16.773332 veth2203d974 Out IP 10.244.1.1.39676 > 10.244.1.45.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 642409382 ecr 1701187638], length 0
+2026-10-26 03:47:16.773662 veth2203d974 Out IP 10.244.1.1.39676 > 10.244.1.45.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 642409383 ecr 1701187638], length 0
+2026-10-26 03:47:16.773893 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.39676: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 1701187639 ecr 642409383], length 0
+2026-10-26 03:47:16.773984 veth2203d974 Out IP 10.244.1.1.39676 > 10.244.1.45.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 642409383 ecr 1701187639], length 0
+2026-10-26 03:47:17.081975 veth2203d974 Out IP 10.244.1.1.39678 > 10.244.1.45.8080: Flags [S], seq 3622174142, win 64240, options [mss 1460,sackOK,TS val 2752933634 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:17.081993 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.39678: Flags [S.], seq 333978378, ack 3622174143, win 65160, options [mss 1460,sackOK,TS val 3743485879 ecr 2752933634,nop,wscale 10], length 0
+2026-10-26 03:47:17.082175 veth2203d974 Out IP 10.244.1.1.39678 > 10.244.1.45.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2752933634 ecr 3743485879], length 0
+2026-10-26 03:47:17.082386 veth2203d974 Out IP 10.244.1.1.39678 > 10.244.1.45.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 2752933634 ecr 3743485879], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:17.082392 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.39678: Flags [.], ack 110, win 64, options [nop,nop,TS val 3743485879 ecr 2752933634], length 0
+2026-10-26 03:47:17.083464 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.39678: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 3743485880 ecr 2752933634], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:17.083572 veth2203d974 Out IP 10.244.1.1.39678 > 10.244.1.45.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 2752933636 ecr 3743485880], length 0
+2026-10-26 03:47:17.083614 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.39678: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 3743485881 ecr 2752933636], length 2: HTTP
+2026-10-26 03:47:17.083624 veth2203d974 Out IP 10.244.1.1.39678 > 10.244.1.45.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 2752933636 ecr 3743485881], length 0
+2026-10-26 03:47:17.083689 veth2203d974 Out IP 10.244.1.1.39678 > 10.244.1.45.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 2752933636 ecr 3743485881], length 0
+2026-10-26 03:47:17.083837 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.39678: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 3743485881 ecr 2752933636], length 0
+2026-10-26 03:47:17.083948 veth2203d974 Out IP 10.244.1.1.39678 > 10.244.1.45.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 2752933636 ecr 3743485881], length 0
+2026-10-26 03:47:17.098307 veth03eca504 In  IP 10.244.1.24.47632 > 10.101.22.76.8080: Flags [S], seq 2730079208, win 64240, options [mss 1460,sackOK,TS val 3345309952 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:17.098673 veth6699296e Out IP 10.244.1.24.47632 > 10.244.1.38.8080: Flags [S], seq 2730079208, win 64240, options [mss 1460,sackOK,TS val 3345309952 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:17.098686 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.24.47632: Flags [S.], seq 1974930643, ack 2730079209, win 65160, options [mss 1460,sackOK,TS val 3918464356 ecr 3345309952,nop,wscale 10], length 0
+2026-10-26 03:47:17.098831 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47632: Flags [S.], seq 1974930643, ack 2730079209, win 65160, options [mss 1460,sackOK,TS val 3918464356 ecr 3345309952,nop,wscale 10], length 0
+2026-10-26 03:47:17.098893 veth03eca504 In  IP 10.244.1.24.47632 > 10.101.22.76.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 3345309953 ecr 3918464356], length 0
+2026-10-26 03:47:17.099055 veth6699296e Out IP 10.244.1.24.47632 > 10.244.1.38.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 3345309953 ecr 3918464356], length 0
+2026-10-26 03:47:17.099087 veth03eca504 In  IP 10.244.1.24.47632 > 10.101.22.76.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 3345309953 ecr 3918464356], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:17.099121 veth6699296e Out IP 10.244.1.24.47632 > 10.244.1.38.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 3345309953 ecr 3918464356], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:17.099123 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.24.47632: Flags [.], ack 199, win 64, options [nop,nop,TS val 3918464356 ecr 3345309953], length 0
+2026-10-26 03:47:17.099129 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47632: Flags [.], ack 199, win 64, options [nop,nop,TS val 3918464356 ecr 3345309953], length 0
+2026-10-26 03:47:17.099277 veth03eca504 In  IP 10.244.1.24.47632 > 10.101.22.76.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 3345309953 ecr 3918464356], length 42: HTTP
+2026-10-26 03:47:17.099284 veth6699296e Out IP 10.244.1.24.47632 > 10.244.1.38.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 3345309953 ecr 3918464356], length 42: HTTP
+2026-10-26 03:47:17.099287 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.24.47632: Flags [.], ack 241, win 64, options [nop,nop,TS val 3918464356 ecr 3345309953], length 0
+2026-10-26 03:47:17.099290 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47632: Flags [.], ack 241, win 64, options [nop,nop,TS val 3918464356 ecr 3345309953], length 0
+2026-10-26 03:47:17.168720 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.24.47632: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 3918464426 ecr 3345309953], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:17.168829 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47632: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 3918464426 ecr 3345309953], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:17.168843 veth03eca504 In  IP 10.244.1.24.47632 > 10.101.22.76.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 3345310023 ecr 3918464426], length 0
+2026-10-26 03:47:17.168859 veth6699296e Out IP 10.244.1.24.47632 > 10.244.1.38.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 3345310023 ecr 3918464426], length 0
+2026-10-26 03:47:17.168877 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.24.47632: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 3918464426 ecr 3345310023], length 178: HTTP
+2026-10-26 03:47:17.168884 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47632: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 3918464426 ecr 3345310023], length 178: HTTP
+2026-10-26 03:47:17.168886 veth03eca504 In  IP 10.244.1.24.47632 > 10.101.22.76.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 3345310023 ecr 3918464426], length 0
+2026-10-26 03:47:17.168890 veth6699296e Out IP 10.244.1.24.47632 > 10.244.1.38.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 3345310023 ecr 3918464426], length 0
+2026-10-26 03:47:17.169082 veth03eca504 In  IP 10.244.1.24.47632 > 10.101.22.76.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 3345310023 ecr 3918464426], length 0
+2026-10-26 03:47:17.169166 veth6699296e Out IP 10.244.1.24.47632 > 10.244.1.38.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 3345310023 ecr 3918464426], length 0
+2026-10-26 03:47:17.169468 veth03eca504 In  IP 10.244.1.24.51756 > 192.168.49.2.30080: Flags [S], seq 745650235, win 64240, options [mss 1460,sackOK,TS val 1727283594 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:17.169648 eth0  Out IP 192.168.49.3.51756 > 192.168.49.2.30080: Flags [S], seq 745650235, win 64240, options [mss 1460,sackOK,TS val 1727283594 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:17.169873 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.51756: Flags [S.], seq 1790334350, ack 745650236, win 65160, options [mss 1460,sackOK,TS val 2093484296 ecr 1727283594,nop,wscale 10], length 0
+2026-10-26 03:47:17.169900 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.51756: Flags [S.], seq 1790334350, ack 745650236, win 65160, options [mss 1460,sackOK,TS val 2093484296 ecr 1727283594,nop,wscale 10], length 0
+2026-10-26 03:47:17.169909 veth03eca504 In  IP 10.244.1.24.51756 > 192.168.49.2.30080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1727283595 ecr 2093484296], length 0
+2026-10-26 03:47:17.169937 eth0  Out IP 192.168.49.3.51756 > 192.168.49.2.30080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1727283595 ecr 2093484296], length 0
+2026-10-26 03:47:17.170015 veth03eca504 In  IP 10.244.1.24.51756 > 192.168.49.2.30080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 1727283595 ecr 2093484296], length 180
+2026-10-26 03:47:17.170039 eth0  Out IP 192.168.49.3.51756 > 192.168.49.2.30080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 1727283595 ecr 2093484296], length 180
+2026-10-26 03:47:17.170090 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.51756: Flags [.], ack 181, win 64, options [nop,nop,TS val 2093484296 ecr 1727283595], length 0
+2026-10-26 03:47:17.170093 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.51756: Flags [.], ack 181, win 64, options [nop,nop,TS val 2093484296 ecr 1727283595], length 0
+2026-10-26 03:47:17.170169 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.24.47632: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 3918464427 ecr 3345310023], length 0
+2026-10-26 03:47:17.170270 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47632: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 3918464427 ecr 3345310023], length 0
+2026-10-26 03:47:17.170277 veth03eca504 In  IP 10.244.1.24.47632 > 10.101.22.76.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 3345310024 ecr 3918464427], length 0
+2026-10-26 03:47:17.170357 veth6699296e Out IP 10.244.1.24.47632 > 10.244.1.38.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 3345310024 ecr 3918464427], length 0
+2026-10-26 03:47:17.170391 veth03eca504 In  IP 10.244.1.24.51756 > 192.168.49.2.30080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 1727283595 ecr 2093484296], length 42
+2026-10-26 03:47:17.170401 eth0  Out IP 192.168.49.3.51756 > 192.168.49.2.30080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 1727283595 ecr 2093484296], length 42
+2026-10-26 03:47:17.170422 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.51756: Flags [.], ack 223, win 64, options [nop,nop,TS val 2093484296 ecr 1727283595], length 0
+2026-10-26 03:47:17.170426 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.51756: Flags [.], ack 223, win 64, options [nop,nop,TS val 2093484296 ecr 1727283595], length 0
+2026-10-26 03:47:17.344912 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.51756: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 2093484471 ecr 1727283595], length 172
+2026-10-26 03:47:17.345088 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.51756: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 2093484471 ecr 1727283595], length 172
+2026-10-26 03:47:17.345105 veth03eca504 In  IP 10.244.1.24.51756 > 192.168.49.2.30080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1727283770 ecr 2093484471], length 0
+2026-10-26 03:47:17.345126 eth0  Out IP 192.168.49.3.51756 > 192.168.49.2.30080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1727283770 ecr 2093484471], length 0
+2026-10-26 03:47:17.345421 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.51756: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 2093484471 ecr 1727283770], length 178
+2026-10-26 03:47:17.345429 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.51756: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 2093484471 ecr 1727283770], length 178
+2026-10-26 03:47:17.345434 veth03eca504 In  IP 10.244.1.24.51756 > 192.168.49.2.30080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1727283770 ecr 2093484471], length 0
+2026-10-26 03:47:17.345438 eth0  Out IP 192.168.49.3.51756 > 192.168.49.2.30080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1727283770 ecr 2093484471], length 0
+2026-10-26 03:47:17.345462 veth03eca504 In  IP 10.244.1.24.51756 > 192.168.49.2.30080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 1727283770 ecr 2093484471], length 0
+2026-10-26 03:47:17.345606 eth0  Out IP 192.168.49.3.51756 > 192.168.49.2.30080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 1727283770 ecr 2093484471], length 0
+2026-10-26 03:47:17.345934 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.51756: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 2093484472 ecr 1727283770], length 0
+2026-10-26 03:47:17.345990 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.51756: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 2093484472 ecr 1727283770], length 0
+2026-10-26 03:47:17.346002 veth03eca504 In  IP 10.244.1.24.51756 > 192.168.49.2.30080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1727283771 ecr 2093484472], length 0
+2026-10-26 03:47:17.346038 eth0  Out IP 192.168.49.3.51756 > 192.168.49.2.30080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1727283771 ecr 2093484472], length 0
+2026-10-26 03:47:18.098657 veth03eca504 In  IP 10.244.1.24.47642 > 10.101.22.76.8080: Flags [S], seq 3211589078, win 64240, options [mss 1460,sackOK,TS val 2232093168 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:18.098728 eth0  Out IP 10.244.1.24.47642 > 10.244.0.93.8080: Flags [S], seq 3211589078, win 64240, options [mss 1460,sackOK,TS val 2232093168 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:18.098883 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.47642: Flags [S.], seq 4258248249, ack 3211589079, win 65160, options [mss 1460,sackOK,TS val 1754751460 ecr 2232093168,nop,wscale 10], length 0
+2026-10-26 03:47:18.098979 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47642: Flags [S.], seq 4258248249, ack 3211589079, win 65160, options [mss 1460,sackOK,TS val 1754751460 ecr 2232093168,nop,wscale 10], length 0
+2026-10-26 03:47:18.098991 veth03eca504 In  IP 10.244.1.24.47642 > 10.101.22.76.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2232093168 ecr 1754751460], length 0
+2026-10-26 03:47:18.099019 eth0  Out IP 10.244.1.24.47642 > 10.244.0.93.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2232093168 ecr 1754751460], length 0
+2026-10-26 03:47:18.099914 veth03eca504 In  IP 10.244.1.24.47642 > 10.101.22.76.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 2232093169 ecr 1754751460], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:18.099970 eth0  Out IP 10.244.1.24.47642 > 10.244.0.93.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 2232093169 ecr 1754751460], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:18.100059 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.47642: Flags [.], ack 199, win 64, options [nop,nop,TS val 1754751461 ecr 2232093169], length 0
+2026-10-26 03:47:18.100067 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47642: Flags [.], ack 199, win 64, options [nop,nop,TS val 1754751461 ecr 2232093169], length 0
+2026-10-26 03:47:18.100739 veth03eca504 In  IP 10.244.1.24.47642 > 10.101.22.76.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 2232093170 ecr 1754751461], length 42: HTTP
+2026-10-26 03:47:18.100797 eth0  Out IP 10.244.1.24.47642 > 10.244.0.93.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 2232093170 ecr 1754751461], length 42: HTTP
+2026-10-26 03:47:18.100821 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.47642: Flags [.], ack 241, win 64, options [nop,nop,TS val 1754751462 ecr 2232093170], length 0
+2026-10-26 03:47:18.100827 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47642: Flags [.], ack 241, win 64, options [nop,nop,TS val 1754751462 ecr 2232093170], length 0
+2026-10-26 03:47:18.197434 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.47642: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 1754751558 ecr 2232093170], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:18.197470 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47642: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 1754751558 ecr 2232093170], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:18.197483 veth03eca504 In  IP 10.244.1.24.47642 > 10.101.22.76.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 2232093266 ecr 1754751558], length 0
+2026-10-26 03:47:18.197493 eth0  Out IP 10.244.1.24.47642 > 10.244.0.93.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 2232093266 ecr 1754751558], length 0
+2026-10-26 03:47:18.197711 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.47642: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 1754751559 ecr 2232093266], length 178: HTTP
+2026-10-26 03:47:18.197721 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47642: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 1754751559 ecr 2232093266], length 178: HTTP
+2026-10-26 03:47:18.197725 veth03eca504 In  IP 10.244.1.24.47642 > 10.101.22.76.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 2232093267 ecr 1754751559], length 0
+2026-10-26 03:47:18.197732 eth0  Out IP 10.244.1.24.47642 > 10.244.0.93.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 2232093267 ecr 1754751559], length 0
+2026-10-26 03:47:18.198000 veth03eca504 In  IP 10.244.1.24.47642 > 10.101.22.76.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 2232093267 ecr 1754751559], length 0
+2026-10-26 03:47:18.198066 eth0  Out IP 10.244.1.24.47642 > 10.244.0.93.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 2232093267 ecr 1754751559], length 0
+2026-10-26 03:47:18.198301 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.47642: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 1754751559 ecr 2232093267], length 0
+2026-10-26 03:47:18.198361 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47642: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 1754751559 ecr 2232093267], length 0
+2026-10-26 03:47:18.198372 veth03eca504 In  IP 10.244.1.24.47642 > 10.101.22.76.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 2232093267 ecr 1754751559], length 0
+2026-10-26 03:47:18.198413 eth0  Out IP 10.244.1.24.47642 > 10.244.0.93.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 2232093267 ecr 1754751559], length 0
+2026-10-26 03:47:18.199356 veth03eca504 In  IP 10.244.1.24.46024 > 192.168.49.3.30080: Flags [S], seq 2939059275, win 64240, options [mss 1460,sackOK,TS val 1778177336 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:18.199485 eth0  Out IP 192.168.49.3.26514 > 10.244.0.91.8080: Flags [S], seq 2939059275, win 64240, options [mss 1460,sackOK,TS val 1778177336 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:18.199742 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.26514: Flags [S.], seq 705296364, ack 2939059276, win 65160, options [mss 1460,sackOK,TS val 1987765310 ecr 1778177336,nop,wscale 10], length 0
+2026-10-26 03:47:18.199763 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.46024: Flags [S.], seq 705296364, ack 2939059276, win 65160, options [mss 1460,sackOK,TS val 1987765310 ecr 1778177336,nop,wscale 10], length 0
+2026-10-26 03:47:18.199832 veth03eca504 In  IP 10.244.1.24.46024 > 192.168.49.3.30080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1778177337 ecr 1987765310], length 0
+2026-10-26 03:47:18.199957 eth0  Out IP 192.168.49.3.26514 > 10.244.0.91.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1778177337 ecr 1987765310], length 0
+2026-10-26 03:47:18.200046 veth03eca504 In  IP 10.244.1.24.46024 > 192.168.49.3.30080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 1778177337 ecr 1987765310], length 180
+2026-10-26 03:47:18.200080 eth0  Out IP 192.168.49.3.26514 > 10.244.0.91.8080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 1778177337 ecr 1987765310], length 180: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:18.200117 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.26514: Flags [.], ack 181, win 64, options [nop,nop,TS val 1987765310 ecr 1778177337], length 0
+2026-10-26 03:47:18.200123 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.46024: Flags [.], ack 181, win 64, options [nop,nop,TS val 1987765310 ecr 1778177337], length 0
+2026-10-26 03:47:18.200171 veth03eca504 In  IP 10.244.1.24.46024 > 192.168.49.3.30080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 1778177337 ecr 1987765310], length 42
+2026-10-26 03:47:18.200176 eth0  Out IP 192.168.49.3.26514 > 10.244.0.91.8080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 1778177337 ecr 1987765310], length 42: HTTP
+2026-10-26 03:47:18.200189 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.26514: Flags [.], ack 223, win 64, options [nop,nop,TS val 1987765310 ecr 1778177337], length 0
+2026-10-26 03:47:18.200192 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.46024: Flags [.], ack 223, win 64, options [nop,nop,TS val 1987765310 ecr 1778177337], length 0
+2026-10-26 03:47:18.290699 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.26514: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 1987765401 ecr 1778177337], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:18.290737 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.46024: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 1987765401 ecr 1778177337], length 172
+2026-10-26 03:47:18.290752 veth03eca504 In  IP 10.244.1.24.46024 > 192.168.49.3.30080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1778177428 ecr 1987765401], length 0
+2026-10-26 03:47:18.290762 eth0  Out IP 192.168.49.3.26514 > 10.244.0.91.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1778177428 ecr 1987765401], length 0
+2026-10-26 03:47:18.290980 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.26514: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 1987765401 ecr 1778177428], length 178: HTTP
+2026-10-26 03:47:18.290985 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.46024: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 1987765401 ecr 1778177428], length 178
+2026-10-26 03:47:18.290989 veth03eca504 In  IP 10.244.1.24.46024 > 192.168.49.3.30080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1778177428 ecr 1987765401], length 0
+2026-10-26 03:47:18.290993 eth0  Out IP 192.168.49.3.26514 > 10.244.0.91.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1778177428 ecr 1987765401], length 0
+2026-10-26 03:47:18.291052 veth03eca504 In  IP 10.244.1.24.46024 > 192.168.49.3.30080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 1778177428 ecr 1987765401], length 0
+2026-10-26 03:47:18.291074 eth0  Out IP 192.168.49.3.26514 > 10.244.0.91.8080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 1778177428 ecr 1987765401], length 0
+2026-10-26 03:47:18.291177 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.26514: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 1987765401 ecr 1778177428], length 0
+2026-10-26 03:47:18.291205 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.46024: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 1987765401 ecr 1778177428], length 0
+2026-10-26 03:47:18.291213 veth03eca504 In  IP 10.244.1.24.46024 > 192.168.49.3.30080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1778177428 ecr 1987765401], length 0
+2026-10-26 03:47:18.291251 eth0  Out IP 192.168.49.3.26514 > 10.244.0.91.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1778177428 ecr 1987765401], length 0
+2026-10-26 03:47:18.399402 veth6699296e Out IP 10.244.1.1.52884 > 10.244.1.38.8080: Flags [S], seq 2891839832, win 64240, options [mss 1460,sackOK,TS val 2317483124 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:18.399420 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.52884: Flags [S.], seq 4250747823, ack 2891839833, win 65160, options [mss 1460,sackOK,TS val 2909891503 ecr 2317483124,nop,wscale 10], length 0
+2026-10-26 03:47:18.399611 veth6699296e Out IP 10.244.1.1.52884 > 10.244.1.38.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2317483124 ecr 2909891503], length 0
+2026-10-26 03:47:18.399778 veth6699296e Out IP 10.244.1.1.52884 > 10.244.1.38.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 2317483125 ecr 2909891503], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:18.399784 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.52884: Flags [.], ack 110, win 64, options [nop,nop,TS val 2909891504 ecr 2317483125], length 0
+2026-10-26 03:47:18.401184 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.52884: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 2909891505 ecr 2317483125], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:18.401321 veth6699296e Out IP 10.244.1.1.52884 > 10.244.1.38.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 2317483126 ecr 2909891505], length 0
+2026-10-26 03:47:18.401354 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.52884: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 2909891505 ecr 2317483126], length 2: HTTP
+2026-10-26 03:47:18.401362 veth6699296e Out IP 10.244.1.1.52884 > 10.244.1.38.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 2317483126 ecr 2909891505], length 0
+2026-10-26 03:47:18.401762 veth6699296e Out IP 10.244.1.1.52884 > 10.244.1.38.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 2317483127 ecr 2909891505], length 0
+2026-10-26 03:47:18.401873 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.52884: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 2909891506 ecr 2317483127], length 0
+2026-10-26 03:47:18.402045 veth6699296e Out IP 10.244.1.1.52884 > 10.244.1.38.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 2317483127 ecr 2909891506], length 0
+2026-10-26 03:47:19.099009 veth03eca504 In  IP 10.244.1.24.47650 > 10.101.22.76.8080: Flags [S], seq 1875087457, win 64240, options [mss 1460,sackOK,TS val 299526735 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:19.099183 veth2203d974 Out IP 10.244.1.24.47650 > 10.244.1.45.8080: Flags [S], seq 1875087457, win 64240, options [mss 1460,sackOK,TS val 299526735 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:19.099198 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.47650: Flags [S.], seq 2959442634, ack 1875087458, win 65160, options [mss 1460,sackOK,TS val 3535768426 ecr 299526735,nop,wscale 10], length 0
+2026-10-26 03:47:19.099340 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47650: Flags [S.], seq 2959442634, ack 1875087458, win 65160, options [mss 1460,sackOK,TS val 3535768426 ecr 299526735,nop,wscale 10], length 0
+2026-10-26 03:47:19.099348 veth03eca504 In  IP 10.244.1.24.47650 > 10.101.22.76.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 299526735 ecr 3535768426], length 0
+2026-10-26 03:47:19.099400 veth2203d974 Out IP 10.244.1.24.47650 > 10.244.1.45.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 299526735 ecr 3535768426], length 0
+2026-10-26 03:47:19.099433 veth03eca504 In  IP 10.244.1.24.47650 > 10.101.22.76.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 299526735 ecr 3535768426], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:19.099593 veth2203d974 Out IP 10.244.1.24.47650 > 10.244.1.45.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 299526735 ecr 3535768426], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:19.099600 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.47650: Flags [.], ack 199, win 64, options [nop,nop,TS val 3535768427 ecr 299526735], length 0
+2026-10-26 03:47:19.099612 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47650: Flags [.], ack 199, win 64, options [nop,nop,TS val 3535768427 ecr 299526735], length 0
+2026-10-26 03:47:19.099647 veth03eca504 In  IP 10.244.1.24.47650 > 10.101.22.76.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 299526736 ecr 3535768427], length 42: HTTP
+2026-10-26 03:47:19.099655 veth2203d974 Out IP 10.244.1.24.47650 > 10.244.1.45.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 299526736 ecr 3535768427], length 42: HTTP
+2026-10-26 03:47:19.099657 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.47650: Flags [.], ack 241, win 64, options [nop,nop,TS val 3535768427 ecr 299526736], length 0
+2026-10-26 03:47:19.099660 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47650: Flags [.], ack 241, win 64, options [nop,nop,TS val 3535768427 ecr 299526736], length 0
+2026-10-26 03:47:19.206588 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.47650: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 3535768534 ecr 299526736], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:19.206640 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47650: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 3535768534 ecr 299526736], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:19.206653 veth03eca504 In  IP 10.244.1.24.47650 > 10.101.22.76.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 299526843 ecr 3535768534], length 0
+2026-10-26 03:47:19.206666 veth2203d974 Out IP 10.244.1.24.47650 > 10.244.1.45.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 299526843 ecr 3535768534], length 0
+2026-10-26 03:47:19.206864 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.47650: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 3535768534 ecr 299526843], length 178: HTTP
+2026-10-26 03:47:19.206873 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47650: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 3535768534 ecr 299526843], length 178: HTTP
+2026-10-26 03:47:19.206876 veth03eca504 In  IP 10.244.1.24.47650 > 10.101.22.76.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 299526843 ecr 3535768534], length 0
+2026-10-26 03:47:19.206882 veth2203d974 Out IP 10.244.1.24.47650 > 10.244.1.45.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 299526843 ecr 3535768534], length 0
+2026-10-26 03:47:19.208481 veth03eca504 In  IP 10.244.1.24.47650 > 10.101.22.76.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 299526844 ecr 3535768534], length 0
+2026-10-26 03:47:19.208602 veth2203d974 Out IP 10.244.1.24.47650 > 10.244.1.45.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 299526844 ecr 3535768534], length 0
+2026-10-26 03:47:19.208772 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.47650: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 3535768536 ecr 299526844], length 0
+2026-10-26 03:47:19.208847 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47650: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 3535768536 ecr 299526844], length 0
+2026-10-26 03:47:19.208857 veth03eca504 In  IP 10.244.1.24.47650 > 10.101.22.76.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 299526845 ecr 3535768536], length 0
+2026-10-26 03:47:19.208932 veth2203d974 Out IP 10.244.1.24.47650 > 10.244.1.45.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 299526845 ecr 3535768536], length 0
+2026-10-26 03:47:19.209892 veth03eca504 In  IP 10.244.1.24.51760 > 192.168.49.2.30080: Flags [S], seq 273223707, win 64240, options [mss 1460,sackOK,TS val 1016649200 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:19.209995 eth0  Out IP 192.168.49.3.51760 > 192.168.49.2.30080: Flags [S], seq 273223707, win 64240, options [mss 1460,sackOK,TS val 1016649200 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:19.210039 eth0  In  IP 192.168.49.2.10683 > 10.244.1.38.8080: Flags [S], seq 273223707, win 64240, options [mss 1460,sackOK,TS val 1016649200 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:19.210183 veth6699296e Out IP 192.168.49.2.10683 > 10.244.1.38.8080: Flags [S], seq 273223707, win 64240, options [mss 1460,sackOK,TS val 1016649200 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:19.210196 veth6699296e In  IP 10.244.1.38.8080 > 192.168.49.2.10683: Flags [S.], seq 1373347897, ack 273223708, win 65160, options [mss 1460,sackOK,TS val 430786476 ecr 1016649200,nop,wscale 10], length 0
+2026-10-26 03:47:19.210226 eth0  Out IP 10.244.1.38.8080 > 192.168.49.2.10683: Flags [S.], seq 1373347897, ack 273223708, win 65160, options [mss 1460,sackOK,TS val 430786476 ecr 1016649200,nop,wscale 10], length 0
+2026-10-26 03:47:19.210240 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.51760: Flags [S.], seq 1373347897, ack 273223708, win 65160, options [mss 1460,sackOK,TS val 430786476 ecr 1016649200,nop,wscale 10], length 0
+2026-10-26 03:47:19.210280 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.51760: Flags [S.], seq 1373347897, ack 273223708, win 65160, options [mss 1460,sackOK,TS val 430786476 ecr 1016649200,nop,wscale 10], length 0
+2026-10-26 03:47:19.210290 veth03eca504 In  IP 10.244.1.24.51760 > 192.168.49.2.30080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1016649200 ecr 430786476], length 0
+2026-10-26 03:47:19.210362 eth0  Out IP 192.168.49.3.51760 > 192.168.49.2.30080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1016649200 ecr 430786476], length 0
+2026-10-26 03:47:19.210433 eth0  In  IP 192.168.49.2.10683 > 10.244.1.38.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1016649200 ecr 430786476], length 0
+2026-10-26 03:47:19.210491 veth6699296e Out IP 192.168.49.2.10683 > 10.244.1.38.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1016649200 ecr 430786476], length 0
+2026-10-26 03:47:19.212774 veth03eca504 In  IP 10.244.1.24.51760 > 192.168.49.2.30080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 1016649203 ecr 430786476], length 180
+2026-10-26 03:47:19.212801 eth0  Out IP 192.168.49.3.51760 > 192.168.49.2.30080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 1016649203 ecr 430786476], length 180
+2026-10-26 03:47:19.212815 eth0  In  IP 192.168.49.2.10683 > 10.244.1.38.8080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 1016649203 ecr 430786476], length 180: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:19.212879 veth6699296e Out IP 192.168.49.2.10683 > 10.244.1.38.8080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 1016649203 ecr 430786476], length 180: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:19.212887 veth6699296e In  IP 10.244.1.38.8080 > 192.168.49.2.10683: Flags [.], ack 181, win 64, options [nop,nop,TS val 430786479 ecr 1016649203], length 0
+2026-10-26 03:47:19.212897 eth0  Out IP 10.244.1.38.8080 > 192.168.49.2.10683: Flags [.], ack 181, win 64, options [nop,nop,TS val 430786479 ecr 1016649203], length 0
+2026-10-26 03:47:19.212911 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.51760: Flags [.], ack 181, win 64, options [nop,nop,TS val 430786479 ecr 1016649203], length 0
+2026-10-26 03:47:19.212915 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.51760: Flags [.], ack 181, win 64, options [nop,nop,TS val 430786479 ecr 1016649203], length 0
+2026-10-26 03:47:19.212981 veth03eca504 In  IP 10.244.1.24.51760 > 192.168.49.2.30080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 1016649203 ecr 430786479], length 42
+2026-10-26 03:47:19.212988 eth0  Out IP 192.168.49.3.51760 > 192.168.49.2.30080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 1016649203 ecr 430786479], length 42
+2026-10-26 03:47:19.213000 eth0  In  IP 192.168.49.2.10683 > 10.244.1.38.8080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 1016649203 ecr 430786479], length 42: HTTP
+2026-10-26 03:47:19.213005 veth6699296e Out IP 192.168.49.2.10683 > 10.244.1.38.8080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 1016649203 ecr 430786479], length 42: HTTP
+2026-10-26 03:47:19.213071 veth6699296e In  IP 10.244.1.38.8080 > 192.168.49.2.10683: Flags [.], ack 223, win 64, options [nop,nop,TS val 430786479 ecr 1016649203], length 0
+2026-10-26 03:47:19.213082 eth0  Out IP 10.244.1.38.8080 > 192.168.49.2.10683: Flags [.], ack 223, win 64, options [nop,nop,TS val 430786479 ecr 1016649203], length 0
+2026-10-26 03:47:19.213095 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.51760: Flags [.], ack 223, win 64, options [nop,nop,TS val 430786479 ecr 1016649203], length 0
+2026-10-26 03:47:19.213099 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.51760: Flags [.], ack 223, win 64, options [nop,nop,TS val 430786479 ecr 1016649203], length 0
+2026-10-26 03:47:19.269921 veth6699296e In  IP 10.244.1.38.8080 > 192.168.49.2.10683: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 430786536 ecr 1016649203], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:19.269974 eth0  Out IP 10.244.1.38.8080 > 192.168.49.2.10683: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 430786536 ecr 1016649203], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:19.269991 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.51760: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 430786536 ecr 1016649203], length 172
+2026-10-26 03:47:19.270023 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.51760: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 430786536 ecr 1016649203], length 172
+2026-10-26 03:47:19.270036 veth03eca504 In  IP 10.244.1.24.51760 > 192.168.49.2.30080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1016649260 ecr 430786536], length 0
+2026-10-26 03:47:19.270046 eth0  Out IP 192.168.49.3.51760 > 192.168.49.2.30080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1016649260 ecr 430786536], length 0
+2026-10-26 03:47:19.270061 eth0  In  IP 192.168.49.2.10683 > 10.244.1.38.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1016649260 ecr 430786536], length 0
+2026-10-26 03:47:19.270066 veth6699296e Out IP 192.168.49.2.10683 > 10.244.1.38.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1016649260 ecr 430786536], length 0
+2026-10-26 03:47:19.270082 veth6699296e In  IP 10.244.1.38.8080 > 192.168.49.2.10683: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 430786536 ecr 1016649260], length 178: HTTP
+2026-10-26 03:47:19.270085 eth0  Out IP 10.244.1.38.8080 > 192.168.49.2.10683: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 430786536 ecr 1016649260], length 178: HTTP
+2026-10-26 03:47:19.270091 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.51760: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 430786536 ecr 1016649260], length 178
+2026-10-26 03:47:19.270094 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.51760: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 430786536 ecr 1016649260], length 178
+2026-10-26 03:47:19.270096 veth03eca504 In  IP 10.244.1.24.51760 > 192.168.49.2.30080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1016649260 ecr 430786536], length 0
+2026-10-26 03:47:19.270099 eth0  Out IP 192.168.49.3.51760 > 192.168.49.2.30080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1016649260 ecr 430786536], length 0
+2026-10-26 03:47:19.270103 eth0  In  IP 192.168.49.2.10683 > 10.244.1.38.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1016649260 ecr 430786536], length 0
+2026-10-26 03:47:19.270106 veth6699296e Out IP 192.168.49.2.10683 > 10.244.1.38.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1016649260 ecr 430786536], length 0
+2026-10-26 03:47:19.270284 veth03eca504 In  IP 10.244.1.24.51760 > 192.168.49.2.30080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 1016649260 ecr 430786536], length 0
+2026-10-26 03:47:19.270302 eth0  Out IP 192.168.49.3.51760 > 192.168.49.2.30080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 1016649260 ecr 430786536], length 0
+2026-10-26 03:47:19.270309 eth0  In  IP 192.168.49.2.10683 > 10.244.1.38.8080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 1016649260 ecr 430786536], length 0
+2026-10-26 03:47:19.270321 veth6699296e Out IP 192.168.49.2.10683 > 10.244.1.38.8080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 1016649260 ecr 430786536], length 0
+2026-10-26 03:47:19.270468 veth6699296e In  IP 10.244.1.38.8080 > 192.168.49.2.10683: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 430786536 ecr 1016649260], length 0
+2026-10-26 03:47:19.270526 eth0  Out IP 10.244.1.38.8080 > 192.168.49.2.10683: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 430786536 ecr 1016649260], length 0
+2026-10-26 03:47:19.270534 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.51760: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 430786536 ecr 1016649260], length 0
+2026-10-26 03:47:19.270559 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.51760: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 430786536 ecr 1016649260], length 0
+2026-10-26 03:47:19.270567 veth03eca504 In  IP 10.244.1.24.51760 > 192.168.49.2.30080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1016649261 ecr 430786536], length 0
+2026-10-26 03:47:19.270589 eth0  Out IP 192.168.49.3.51760 > 192.168.49.2.30080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1016649261 ecr 430786536], length 0
+2026-10-26 03:47:19.270595 eth0  In  IP 192.168.49.2.10683 > 10.244.1.38.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1016649261 ecr 430786536], length 0
+2026-10-26 03:47:19.270607 veth6699296e Out IP 192.168.49.2.10683 > 10.244.1.38.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1016649261 ecr 430786536], length 0
+2026-10-26 03:47:19.780644 veth6699296e Out IP 10.244.1.1.52894 > 10.244.1.38.8080: Flags [S], seq 97705355, win 64240, options [mss 1460,sackOK,TS val 2624522802 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:19.780663 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.52894: Flags [S.], seq 3558820892, ack 97705356, win 65160, options [mss 1460,sackOK,TS val 528865366 ecr 2624522802,nop,wscale 10], length 0
+2026-10-26 03:47:19.780820 veth6699296e Out IP 10.244.1.1.52894 > 10.244.1.38.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2624522803 ecr 528865366], length 0
+2026-10-26 03:47:19.781031 veth6699296e Out IP 10.244.1.1.52894 > 10.244.1.38.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 2624522803 ecr 528865366], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:19.781037 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.52894: Flags [.], ack 110, win 64, options [nop,nop,TS val 528865366 ecr 2624522803], length 0
+2026-10-26 03:47:19.782828 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.52894: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 528865368 ecr 2624522803], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:19.782913 veth6699296e Out IP 10.244.1.1.52894 > 10.244.1.38.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 2624522805 ecr 528865368], length 0
+2026-10-26 03:47:19.782926 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.52894: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 528865368 ecr 2624522805], length 2: HTTP
+2026-10-26 03:47:19.782931 veth6699296e Out IP 10.244.1.1.52894 > 10.244.1.38.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 2624522805 ecr 528865368], length 0
+2026-10-26 03:47:19.783177 veth6699296e Out IP 10.244.1.1.52894 > 10.244.1.38.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 2624522805 ecr 528865368], length 0
+2026-10-26 03:47:19.783336 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.52894: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 528865368 ecr 2624522805], length 0
+2026-10-26 03:47:19.783636 veth6699296e Out IP 10.244.1.1.52894 > 10.244.1.38.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 2624522806 ecr 528865368], length 0
+2026-10-26 03:47:19.947714 vetha1ad7713 Out IP 10.244.1.1.57802 > 10.244.1.44.8080: Flags [S], seq 3293343828, win 64240, options [mss 1460,sackOK,TS val 2128206589 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:19.947728 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.57802: Flags [S.], seq 2520232440, ack 3293343829, win 65160, options [mss 1460,sackOK,TS val 1439140646 ecr 2128206589,nop,wscale 10], length 0
+2026-10-26 03:47:19.947863 vetha1ad7713 Out IP 10.244.1.1.57802 > 10.244.1.44.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2128206589 ecr 1439140646], length 0
+2026-10-26 03:47:19.948060 vetha1ad7713 Out IP 10.244.1.1.57802 > 10.244.1.44.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 2128206589 ecr 1439140646], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:19.948065 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.57802: Flags [.], ack 110, win 64, options [nop,nop,TS val 1439140646 ecr 2128206589], length 0
+2026-10-26 03:47:19.949450 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.57802: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 1439140647 ecr 2128206589], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:19.949598 vetha1ad7713 Out IP 10.244.1.1.57802 > 10.244.1.44.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 2128206590 ecr 1439140647], length 0
+2026-10-26 03:47:19.949622 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.57802: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 1439140648 ecr 2128206590], length 2: HTTP
+2026-10-26 03:47:19.949630 vetha1ad7713 Out IP 10.244.1.1.57802 > 10.244.1.44.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 2128206591 ecr 1439140648], length 0
+2026-10-26 03:47:19.949748 vetha1ad7713 Out IP 10.244.1.1.57802 > 10.244.1.44.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 2128206591 ecr 1439140648], length 0
+2026-10-26 03:47:19.949879 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.57802: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 1439140648 ecr 2128206591], length 0
+2026-10-26 03:47:19.949982 vetha1ad7713 Out IP 10.244.1.1.57802 > 10.244.1.44.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 2128206591 ecr 1439140648], length 0
+2026-10-26 03:47:20.099727 veth03eca504 In  IP 10.244.1.24.47664 > 10.101.22.76.8080: Flags [S], seq 4215113552, win 64240, options [mss 1460,sackOK,TS val 4021787278 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:20.099997 veth2203d974 Out IP 10.244.1.24.47664 > 10.244.1.45.8080: Flags [S], seq 4215113552, win 64240, options [mss 1460,sackOK,TS val 4021787278 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:20.100009 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.47664: Flags [S.], seq 3951675700, ack 4215113553, win 65160, options [mss 1460,sackOK,TS val 2038056676 ecr 4021787278,nop,wscale 10], length 0
+2026-10-26 03:47:20.100079 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47664: Flags [S.], seq 3951675700, ack 4215113553, win 65160, options [mss 1460,sackOK,TS val 2038056676 ecr 4021787278,nop,wscale 10], length 0
+2026-10-26 03:47:20.100089 veth03eca504 In  IP 10.244.1.24.47664 > 10.101.22.76.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 4021787278 ecr 2038056676], length 0
+2026-10-26 03:47:20.100222 veth2203d974 Out IP 10.244.1.24.47664 > 10.244.1.45.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 4021787278 ecr 2038056676], length 0
+2026-10-26 03:47:20.100257 veth03eca504 In  IP 10.244.1.24.47664 > 10.101.22.76.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 4021787278 ecr 2038056676], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:20.100310 veth2203d974 Out IP 10.244.1.24.47664 > 10.244.1.45.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 4021787278 ecr 2038056676], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:20.100312 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.47664: Flags [.], ack 199, win 64, options [nop,nop,TS val 2038056676 ecr 4021787278], length 0
+2026-10-26 03:47:20.100318 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47664: Flags [.], ack 199, win 64, options [nop,nop,TS val 2038056676 ecr 4021787278], length 0
+2026-10-26 03:47:20.100329 veth03eca504 In  IP 10.244.1.24.47664 > 10.101.22.76.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 4021787278 ecr 2038056676], length 42: HTTP
+2026-10-26 03:47:20.100333 veth2203d974 Out IP 10.244.1.24.47664 > 10.244.1.45.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 4021787278 ecr 2038056676], length 42: HTTP
+2026-10-26 03:47:20.100335 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.47664: Flags [.], ack 241, win 64, options [nop,nop,TS val 2038056676 ecr 4021787278], length 0
+2026-10-26 03:47:20.100337 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47664: Flags [.], ack 241, win 64, options [nop,nop,TS val 2038056676 ecr 4021787278], length 0
+2026-10-26 03:47:20.204766 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.47664: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 2038056781 ecr 4021787278], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:20.204883 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47664: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 2038056781 ecr 4021787278], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:20.204899 veth03eca504 In  IP 10.244.1.24.47664 > 10.101.22.76.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 4021787383 ecr 2038056781], length 0
+2026-10-26 03:47:20.204925 veth2203d974 Out IP 10.244.1.24.47664 > 10.244.1.45.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 4021787383 ecr 2038056781], length 0
+2026-10-26 03:47:20.204950 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.47664: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 2038056781 ecr 4021787383], length 178: HTTP
+2026-10-26 03:47:20.204959 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47664: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 2038056781 ecr 4021787383], length 178: HTTP
+2026-10-26 03:47:20.204962 veth03eca504 In  IP 10.244.1.24.47664 > 10.101.22.76.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 4021787383 ecr 2038056781], length 0
+2026-10-26 03:47:20.204965 veth2203d974 Out IP 10.244.1.24.47664 > 10.244.1.45.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 4021787383 ecr 2038056781], length 0
+2026-10-26 03:47:20.205130 veth03eca504 In  IP 10.244.1.24.47664 > 10.101.22.76.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 4021787383 ecr 2038056781], length 0
+2026-10-26 03:47:20.205178 veth2203d974 Out IP 10.244.1.24.47664 > 10.244.1.45.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 4021787383 ecr 2038056781], length 0
+2026-10-26 03:47:20.205603 veth03eca504 In  IP 10.244.1.24.46030 > 192.168.49.3.30080: Flags [S], seq 307602134, win 64240, options [mss 1460,sackOK,TS val 2739193949 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:20.205757 veth6699296e Out IP 10.244.1.1.37644 > 10.244.1.38.8080: Flags [S], seq 307602134, win 64240, options [mss 1460,sackOK,TS val 2739193949 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:20.205791 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.37644: Flags [S.], seq 3614426083, ack 307602135, win 65160, options [mss 1460,sackOK,TS val 1544129045 ecr 2739193949,nop,wscale 10], length 0
+2026-10-26 03:47:20.205834 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.46030: Flags [S.], seq 3614426083, ack 307602135, win 65160, options [mss 1460,sackOK,TS val 1544129045 ecr 2739193949,nop,wscale 10], length 0
+2026-10-26 03:47:20.205843 veth03eca504 In  IP 10.244.1.24.46030 > 192.168.49.3.30080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2739193949 ecr 1544129045], length 0
+2026-10-26 03:47:20.205878 veth6699296e Out IP 10.244.1.1.37644 > 10.244.1.38.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2739193949 ecr 1544129045], length 0
+2026-10-26 03:47:20.205966 veth03eca504 In  IP 10.244.1.24.46030 > 192.168.49.3.30080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 2739193949 ecr 1544129045], length 180
+2026-10-26 03:47:20.206086 veth6699296e Out IP 10.244.1.1.37644 > 10.244.1.38.8080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 2739193949 ecr 1544129045], length 180: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:20.206094 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.37644: Flags [.], ack 181, win 64, options [nop,nop,TS val 1544129045 ecr 2739193949], length 0
+2026-10-26 03:47:20.206110 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.46030: Flags [.], ack 181, win 64, options [nop,nop,TS val 1544129045 ecr 2739193949], length 0
+2026-10-26 03:47:20.206140 veth03eca504 In  IP 10.244.1.24.46030 > 192.168.49.3.30080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 2739193949 ecr 1544129045], length 42
+2026-10-26 03:47:20.206151 veth6699296e Out IP 10.244.1.1.37644 > 10.244.1.38.8080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 2739193949 ecr 1544129045], length 42: HTTP
+2026-10-26 03:47:20.206154 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.37644: Flags [.], ack 223, win 64, options [nop,nop,TS val 1544129045 ecr 2739193949], length 0
+2026-10-26 03:47:20.206157 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.46030: Flags [.], ack 223, win 64, options [nop,nop,TS val 1544129045 ecr 2739193949], length 0
+2026-10-26 03:47:20.206258 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.47664: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 2038056782 ecr 4021787383], length 0
+2026-10-26 03:47:20.206312 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.47664: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 2038056782 ecr 4021787383], length 0
+2026-10-26 03:47:20.206320 veth03eca504 In  IP 10.244.1.24.47664 > 10.101.22.76.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 4021787384 ecr 2038056782], length 0
+2026-10-26 03:47:20.206362 veth2203d974 Out IP 10.244.1.24.47664 > 10.244.1.45.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 4021787384 ecr 2038056782], length 0
+2026-10-26 03:47:20.270299 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.37644: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 1544129109 ecr 2739193949], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:20.270457 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.46030: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 1544129109 ecr 2739193949], length 172
+2026-10-26 03:47:20.270474 veth03eca504 In  IP 10.244.1.24.46030 > 192.168.49.3.30080: Flags [.], ack 173, win 63, options [nop,nop,TS val 2739194013 ecr 1544129109], length 0
+2026-10-26 03:47:20.270495 veth6699296e Out IP 10.244.1.1.37644 > 10.244.1.38.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 2739194013 ecr 1544129109], length 0
+2026-10-26 03:47:20.270611 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.37644: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 1544129110 ecr 2739194013], length 178: HTTP
+2026-10-26 03:47:20.270623 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.46030: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 1544129110 ecr 2739194013], length 178
+2026-10-26 03:47:20.270627 veth03eca504 In  IP 10.244.1.24.46030 > 192.168.49.3.30080: Flags [.], ack 351, win 63, options [nop,nop,TS val 2739194014 ecr 1544129110], length 0
+2026-10-26 03:47:20.270633 veth6699296e Out IP 10.244.1.1.37644 > 10.244.1.38.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 2739194014 ecr 1544129110], length 0
+2026-10-26 03:47:20.270818 veth03eca504 In  IP 10.244.1.24.46030 > 192.168.49.3.30080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 2739194014 ecr 1544129110], length 0
+2026-10-26 03:47:20.270874 veth6699296e Out IP 10.244.1.1.37644 > 10.244.1.38.8080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 2739194014 ecr 1544129110], length 0
+2026-10-26 03:47:20.270980 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.37644: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 1544129110 ecr 2739194014], length 0
+2026-10-26 03:47:20.271012 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.46030: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 1544129110 ecr 2739194014], length 0
+2026-10-26 03:47:20.271019 veth03eca504 In  IP 10.244.1.24.46030 > 192.168.49.3.30080: Flags [.], ack 352, win 63, options [nop,nop,TS val 2739194014 ecr 1544129110], length 0
+2026-10-26 03:47:20.271123 veth6699296e Out IP 10.244.1.1.37644 > 10.244.1.38.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 2739194014 ecr 1544129110], length 0
+2026-10-26 03:47:20.897678 eth0  In  IP 10.244.0.95.47602 > 10.244.1.38.8080: Flags [S], seq 985004017, win 64240, options [mss 1460,sackOK,TS val 3471602004 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:20.897823 veth6699296e Out IP 10.244.0.95.47602 > 10.244.1.38.8080: Flags [S], seq 985004017, win 64240, options [mss 1460,sackOK,TS val 3471602004 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:20.897836 veth6699296e In  IP 10.244.1.38.8080 > 10.244.0.95.47602: Flags [S.], seq 3275959939, ack 985004018, win 65160, options [mss 1460,sackOK,TS val 1859381450 ecr 3471602004,nop,wscale 10], length 0
+2026-10-26 03:47:20.897860 eth0  Out IP 10.244.1.38.8080 > 10.244.0.95.47602: Flags [S.], seq 3275959939, ack 985004018, win 65160, options [mss 1460,sackOK,TS val 1859381450 ecr 3471602004,nop,wscale 10], length 0
+2026-10-26 03:47:20.897964 eth0  In  IP 10.244.0.95.47602 > 10.244.1.38.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 3471602004 ecr 1859381450], length 0
+2026-10-26 03:47:20.897997 veth6699296e Out IP 10.244.0.95.47602 > 10.244.1.38.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 3471602004 ecr 1859381450], length 0
+2026-10-26 03:47:20.898905 eth0  In  IP 10.244.0.95.47602 > 10.244.1.38.8080: Flags [P.], seq 1:366, ack 1, win 63, options [nop,nop,TS val 3471602005 ecr 1859381450], length 365: HTTP: GET /metrics HTTP/1.1
+2026-10-26 03:47:20.898933 veth6699296e Out IP 10.244.0.95.47602 > 10.244.1.38.8080: Flags [P.], seq 1:366, ack 1, win 63, options [nop,nop,TS val 3471602005 ecr 1859381450], length 365: HTTP: GET /metrics HTTP/1.1
+2026-10-26 03:47:20.898942 veth6699296e In  IP 10.244.1.38.8080 > 10.244.0.95.47602: Flags [.], ack 366, win 64, options [nop,nop,TS val 1859381451 ecr 3471602005], length 0
+2026-10-26 03:47:20.898947 eth0  Out IP 10.244.1.38.8080 > 10.244.0.95.47602: Flags [.], ack 366, win 64, options [nop,nop,TS val 1859381451 ecr 3471602005], length 0
+2026-10-26 03:47:20.900300 veth6699296e In  IP 10.244.1.38.8080 > 10.244.0.95.47602: Flags [P.], seq 1:193, ack 366, win 64, options [nop,nop,TS val 1859381452 ecr 3471602005], length 192: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:20.900378 eth0  Out IP 10.244.1.38.8080 > 10.244.0.95.47602: Flags [P.], seq 1:193, ack 366, win 64, options [nop,nop,TS val 1859381452 ecr 3471602005], length 192: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:20.900424 eth0  In  IP 10.244.0.95.47602 > 10.244.1.38.8080: Flags [.], ack 193, win 63, options [nop,nop,TS val 3471602006 ecr 1859381452], length 0
+2026-10-26 03:47:20.900430 veth6699296e Out IP 10.244.0.95.47602 > 10.244.1.38.8080: Flags [.], ack 193, win 63, options [nop,nop,TS val 3471602006 ecr 1859381452], length 0
+2026-10-26 03:47:20.900650 veth6699296e In  IP 10.244.1.38.8080 > 10.244.0.95.47602: Flags [P.], seq 193:5045, ack 366, win 64, options [nop,nop,TS val 1859381453 ecr 3471602006], length 4852: HTTP
+2026-10-26 03:47:20.900657 eth0  Out IP 10.244.1.38.8080 > 10.244.0.95.47602: Flags [P.], seq 193:5045, ack 366, win 64, options [nop,nop,TS val 1859381453 ecr 3471602006], length 4852: HTTP
+2026-10-26 03:47:20.900793 eth0  In  IP 10.244.0.95.47602 > 10.244.1.38.8080: Flags [.], ack 5045, win 73, options [nop,nop,TS val 3471602007 ecr 1859381453], length 0
+2026-10-26 03:47:20.900801 veth6699296e Out IP 10.244.0.95.47602 > 10.244.1.38.8080: Flags [.], ack 5045, win 73, options [nop,nop,TS val 3471602007 ecr 1859381453], length 0
+2026-10-26 03:47:20.901081 eth0  In  IP 10.244.0.95.47602 > 10.244.1.38.8080: Flags [F.], seq 366, ack 5045, win 73, options [nop,nop,TS val 3471602007 ecr 1859381453], length 0
+2026-10-26 03:47:20.901126 veth6699296e Out IP 10.244.0.95.47602 > 10.244.1.38.8080: Flags [F.], seq 366, ack 5045, win 73, options [nop,nop,TS val 3471602007 ecr 1859381453], length 0
+2026-10-26 03:47:20.901302 veth6699296e In  IP 10.244.1.38.8080 > 10.244.0.95.47602: Flags [F.], seq 5045, ack 367, win 64, options [nop,nop,TS val 1859381453 ecr 3471602007], length 0
+2026-10-26 03:47:20.901383 eth0  Out IP 10.244.1.38.8080 > 10.244.0.95.47602: Flags [F.], seq 5045, ack 367, win 64, options [nop,nop,TS val 1859381453 ecr 3471602007], length 0
+2026-10-26 03:47:20.901490 eth0  In  IP 10.244.0.95.47602 > 10.244.1.38.8080: Flags [.], ack 5046, win 73, options [nop,nop,TS val 3471602007 ecr 1859381453], length 0
+2026-10-26 03:47:20.901615 veth6699296e Out IP 10.244.0.95.47602 > 10.244.1.38.8080: Flags [.], ack 5046, win 73, options [nop,nop,TS val 3471602007 ecr 1859381453], length 0
+2026-10-26 03:47:21.100132 veth03eca504 In  IP 10.244.1.24.49070 > 10.101.22.76.8080: Flags [S], seq 1614636521, win 64240, options [mss 1460,sackOK,TS val 2450338850 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:21.100291 eth0  Out IP 10.244.1.24.49070 > 10.244.0.93.8080: Flags [S], seq 1614636521, win 64240, options [mss 1460,sackOK,TS val 2450338850 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:21.100480 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.49070: Flags [S.], seq 1084404894, ack 1614636522, win 65160, options [mss 1460,sackOK,TS val 3758218804 ecr 2450338850,nop,wscale 10], length 0
+2026-10-26 03:47:21.100589 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49070: Flags [S.], seq 1084404894, ack 1614636522, win 65160, options [mss 1460,sackOK,TS val 3758218804 ecr 2450338850,nop,wscale 10], length 0
+2026-10-26 03:47:21.100631 veth03eca504 In  IP 10.244.1.24.49070 > 10.101.22.76.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2450338851 ecr 3758218804], length 0
+2026-10-26 03:47:21.100762 eth0  Out IP 10.244.1.24.49070 > 10.244.0.93.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2450338851 ecr 3758218804], length 0
+2026-10-26 03:47:21.100882 veth03eca504 In  IP 10.244.1.24.49070 > 10.101.22.76.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 2450338851 ecr 3758218804], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:21.100923 eth0  Out IP 10.244.1.24.49070 > 10.244.0.93.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 2450338851 ecr 3758218804], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:21.100992 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.49070: Flags [.], ack 199, win 64, options [nop,nop,TS val 3758218805 ecr 2450338851], length 0
+2026-10-26 03:47:21.100998 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49070: Flags [.], ack 199, win 64, options [nop,nop,TS val 3758218805 ecr 2450338851], length 0
+2026-10-26 03:47:21.101025 veth03eca504 In  IP 10.244.1.24.49070 > 10.101.22.76.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 2450338851 ecr 3758218805], length 42: HTTP
+2026-10-26 03:47:21.101029 eth0  Out IP 10.244.1.24.49070 > 10.244.0.93.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 2450338851 ecr 3758218805], length 42: HTTP
+2026-10-26 03:47:21.101041 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.49070: Flags [.], ack 241, win 64, options [nop,nop,TS val 3758218805 ecr 2450338851], length 0
+2026-10-26 03:47:21.101044 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49070: Flags [.], ack 241, win 64, options [nop,nop,TS val 3758218805 ecr 2450338851], length 0
+2026-10-26 03:47:21.295925 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.49070: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 3758219000 ecr 2450338851], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:21.296060 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49070: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 3758219000 ecr 2450338851], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:21.296076 veth03eca504 In  IP 10.244.1.24.49070 > 10.101.22.76.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 2450339046 ecr 3758219000], length 0
+2026-10-26 03:47:21.296094 eth0  Out IP 10.244.1.24.49070 > 10.244.0.93.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 2450339046 ecr 3758219000], length 0
+2026-10-26 03:47:21.296582 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.49070: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 3758219001 ecr 2450339046], length 178: HTTP
+2026-10-26 03:47:21.296592 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49070: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 3758219001 ecr 2450339046], length 178: HTTP
+2026-10-26 03:47:21.296597 veth03eca504 In  IP 10.244.1.24.49070 > 10.101.22.76.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 2450339047 ecr 3758219001], length 0
+2026-10-26 03:47:21.296602 eth0  Out IP 10.244.1.24.49070 > 10.244.0.93.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 2450339047 ecr 3758219001], length 0
+2026-10-26 03:47:21.296631 veth03eca504 In  IP 10.244.1.24.49070 > 10.101.22.76.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 2450339047 ecr 3758219001], length 0
+2026-10-26 03:47:21.296652 eth0  Out IP 10.244.1.24.49070 > 10.244.0.93.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 2450339047 ecr 3758219001], length 0
+2026-10-26 03:47:21.296903 veth03eca504 In  IP 10.244.1.24.33342 > 192.168.49.2.30080: Flags [S], seq 2491357780, win 64240, options [mss 1460,sackOK,TS val 1733338563 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:21.296957 eth0  Out IP 192.168.49.3.33342 > 192.168.49.2.30080: Flags [S], seq 2491357780, win 64240, options [mss 1460,sackOK,TS val 1733338563 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:21.297110 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.33342: Flags [S.], seq 3481088731, ack 2491357781, win 65160, options [mss 1460,sackOK,TS val 431977783 ecr 1733338563,nop,wscale 10], length 0
+2026-10-26 03:47:21.297127 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.33342: Flags [S.], seq 3481088731, ack 2491357781, win 65160, options [mss 1460,sackOK,TS val 431977783 ecr 1733338563,nop,wscale 10], length 0
+2026-10-26 03:47:21.297135 veth03eca504 In  IP 10.244.1.24.33342 > 192.168.49.2.30080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1733338563 ecr 431977783], length 0
+2026-10-26 03:47:21.297149 eth0  Out IP 192.168.49.3.33342 > 192.168.49.2.30080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1733338563 ecr 431977783], length 0
+2026-10-26 03:47:21.297248 veth03eca504 In  IP 10.244.1.24.33342 > 192.168.49.2.30080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 1733338563 ecr 431977783], length 180
+2026-10-26 03:47:21.297327 eth0  Out IP 192.168.49.3.33342 > 192.168.49.2.30080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 1733338563 ecr 431977783], length 180
+2026-10-26 03:47:21.297429 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.33342: Flags [.], ack 181, win 64, options [nop,nop,TS val 431977783 ecr 1733338563], length 0
+2026-10-26 03:47:21.297439 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.33342: Flags [.], ack 181, win 64, options [nop,nop,TS val 431977783 ecr 1733338563], length 0
+2026-10-26 03:47:21.298895 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.49070: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 3758219003 ecr 2450339047], length 0
+2026-10-26 03:47:21.298923 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49070: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 3758219003 ecr 2450339047], length 0
+2026-10-26 03:47:21.298932 veth03eca504 In  IP 10.244.1.24.49070 > 10.101.22.76.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 2450339049 ecr 3758219003], length 0
+2026-10-26 03:47:21.298963 eth0  Out IP 10.244.1.24.49070 > 10.244.0.93.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 2450339049 ecr 3758219003], length 0
+2026-10-26 03:47:21.299215 veth03eca504 In  IP 10.244.1.24.33342 > 192.168.49.2.30080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 1733338565 ecr 431977783], length 42
+2026-10-26 03:47:21.299224 eth0  Out IP 192.168.49.3.33342 > 192.168.49.2.30080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 1733338565 ecr 431977783], length 42
+2026-10-26 03:47:21.299250 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.33342: Flags [.], ack 223, win 64, options [nop,nop,TS val 431977785 ecr 1733338565], length 0
+2026-10-26 03:47:21.299253 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.33342: Flags [.], ack 223, win 64, options [nop,nop,TS val 431977785 ecr 1733338565], length 0
+2026-10-26 03:47:21.393308 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.33342: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 431977879 ecr 1733338565], length 172
+2026-10-26 03:47:21.393340 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.33342: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 431977879 ecr 1733338565], length 172
+2026-10-26 03:47:21.393353 veth03eca504 In  IP 10.244.1.24.33342 > 192.168.49.2.30080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1733338659 ecr 431977879], length 0
+2026-10-26 03:47:21.393363 eth0  Out IP 192.168.49.3.33342 > 192.168.49.2.30080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1733338659 ecr 431977879], length 0
+2026-10-26 03:47:21.394864 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.33342: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 431977881 ecr 1733338659], length 178
+2026-10-26 03:47:21.394878 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.33342: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 431977881 ecr 1733338659], length 178
+2026-10-26 03:47:21.394903 veth03eca504 In  IP 10.244.1.24.33342 > 192.168.49.2.30080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1733338661 ecr 431977881], length 0
+2026-10-26 03:47:21.394912 eth0  Out IP 192.168.49.3.33342 > 192.168.49.2.30080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1733338661 ecr 431977881], length 0
+2026-10-26 03:47:21.394951 veth03eca504 In  IP 10.244.1.24.33342 > 192.168.49.2.30080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 1733338661 ecr 431977881], length 0
+2026-10-26 03:47:21.395112 eth0  Out IP 192.168.49.3.33342 > 192.168.49.2.30080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 1733338661 ecr 431977881], length 0
+2026-10-26 03:47:21.395335 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.33342: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 431977881 ecr 1733338661], length 0
+2026-10-26 03:47:21.395358 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.33342: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 431977881 ecr 1733338661], length 0
+2026-10-26 03:47:21.395366 veth03eca504 In  IP 10.244.1.24.33342 > 192.168.49.2.30080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1733338661 ecr 431977881], length 0
+2026-10-26 03:47:21.395435 eth0  Out IP 192.168.49.3.33342 > 192.168.49.2.30080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1733338661 ecr 431977881], length 0
+2026-10-26 03:47:21.771843 veth2203d974 Out IP 10.244.1.1.58190 > 10.244.1.45.8080: Flags [S], seq 918283267, win 64240, options [mss 1460,sackOK,TS val 604066130 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:21.771862 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.58190: Flags [S.], seq 3934570077, ack 918283268, win 65160, options [mss 1460,sackOK,TS val 1976948603 ecr 604066130,nop,wscale 10], length 0
+2026-10-26 03:47:21.772040 veth2203d974 Out IP 10.244.1.1.58190 > 10.244.1.45.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 604066130 ecr 1976948603], length 0
+2026-10-26 03:47:21.772436 veth2203d974 Out IP 10.244.1.1.58190 > 10.244.1.45.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 604066130 ecr 1976948603], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:21.772445 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.58190: Flags [.], ack 110, win 64, options [nop,nop,TS val 1976948603 ecr 604066130], length 0
+2026-10-26 03:47:21.774116 eth0  In  IP 10.244.0.95.52012 > 10.244.1.44.8080: Flags [S], seq 2308826366, win 64240, options [mss 1460,sackOK,TS val 1742830621 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:21.774201 vetha1ad7713 Out IP 10.244.0.95.52012 > 10.244.1.44.8080: Flags [S], seq 2308826366, win 64240, options [mss 1460,sackOK,TS val 1742830621 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:21.774213 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.0.95.52012: Flags [S.], seq 3344655179, ack 2308826367, win 65160, options [mss 1460,sackOK,TS val 1570310697 ecr 1742830621,nop,wscale 10], length 0
+2026-10-26 03:47:21.774239 eth0  Out IP 10.244.1.44.8080 > 10.244.0.95.52012: Flags [S.], seq 3344655179, ack 2308826367, win 65160, options [mss 1460,sackOK,TS val 1570310697 ecr 1742830621,nop,wscale 10], length 0
+2026-10-26 03:47:21.774335 eth0  In  IP 10.244.0.95.52012 > 10.244.1.44.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1742830621 ecr 1570310697], length 0
+2026-10-26 03:47:21.774386 vetha1ad7713 Out IP 10.244.0.95.52012 > 10.244.1.44.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1742830621 ecr 1570310697], length 0
+2026-10-26 03:47:21.775356 eth0  In  IP 10.244.0.95.52012 > 10.244.1.44.8080: Flags [P.], seq 1:366, ack 1, win 63, options [nop,nop,TS val 1742830622 ecr 1570310697], length 365: HTTP: GET /metrics HTTP/1.1
+2026-10-26 03:47:21.775374 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.58190: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 1976948606 ecr 604066130], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:21.775400 vetha1ad7713 Out IP 10.244.0.95.52012 > 10.244.1.44.8080: Flags [P.], seq 1:366, ack 1, win 63, options [nop,nop,TS val 1742830622 ecr 1570310697], length 365: HTTP: GET /metrics HTTP/1.1
+2026-10-26 03:47:21.775408 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.0.95.52012: Flags [.], ack 366, win 64, options [nop,nop,TS val 1570310698 ecr 1742830622], length 0
+2026-10-26 03:47:21.775414 eth0  Out IP 10.244.1.44.8080 > 10.244.0.95.52012: Flags [.], ack 366, win 64, options [nop,nop,TS val 1570310698 ecr 1742830622], length 0
+2026-10-26 03:47:21.775486 veth2203d974 Out IP 10.244.1.1.58190 > 10.244.1.45.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 604066133 ecr 1976948606], length 0
+2026-10-26 03:47:21.775640 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.58190: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 1976948607 ecr 604066133], length 2: HTTP
+2026-10-26 03:47:21.775650 veth2203d974 Out IP 10.244.1.1.58190 > 10.244.1.45.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 604066134 ecr 1976948607], length 0
+2026-10-26 03:47:21.775931 veth2203d974 Out IP 10.244.1.1.58190 > 10.244.1.45.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 604066134 ecr 1976948607], length 0
+2026-10-26 03:47:21.776069 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.58190: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 1976948607 ecr 604066134], length 0
+2026-10-26 03:47:21.776164 veth2203d974 Out IP 10.244.1.1.58190 > 10.244.1.45.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 604066134 ecr 1976948607], length 0
+2026-10-26 03:47:21.777903 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.0.95.52012: Flags [P.], seq 1:193, ack 366, win 64, options [nop,nop,TS val 1570310701 ecr 1742830622], length 192: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:21.778057 eth0  Out IP 10.244.1.44.8080 > 10.244.0.95.52012: Flags [P.], seq 1:193, ack 366, win 64, options [nop,nop,TS val 1570310701 ecr 1742830622], length 192: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:21.778220 eth0  In  IP 10.244.0.95.52012 > 10.244.1.44.8080: Flags [.], ack 193, win 63, options [nop,nop,TS val 1742830625 ecr 1570310701], length 0
+2026-10-26 03:47:21.778230 vetha1ad7713 Out IP 10.244.0.95.52012 > 10.244.1.44.8080: Flags [.], ack 193, win 63, options [nop,nop,TS val 1742830625 ecr 1570310701], length 0
+2026-10-26 03:47:21.778256 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.0.95.52012: Flags [P.], seq 193:4791, ack 366, win 64, options [nop,nop,TS val 1570310701 ecr 1742830625], length 4598: HTTP
+2026-10-26 03:47:21.778261 eth0  Out IP 10.244.1.44.8080 > 10.244.0.95.52012: Flags [P.], seq 193:4791, ack 366, win 64, options [nop,nop,TS val 1570310701 ecr 1742830625], length 4598: HTTP
+2026-10-26 03:47:21.778278 eth0  In  IP 10.244.0.95.52012 > 10.244.1.44.8080: Flags [.], ack 4791, win 72, options [nop,nop,TS val 1742830625 ecr 1570310701], length 0
+2026-10-26 03:47:21.778281 vetha1ad7713 Out IP 10.244.0.95.52012 > 10.244.1.44.8080: Flags [.], ack 4791, win 72, options [nop,nop,TS val 1742830625 ecr 1570310701], length 0
+2026-10-26 03:47:21.778320 eth0  In  IP 10.244.0.95.52012 > 10.244.1.44.8080: Flags [F.], seq 366, ack 4791, win 72, options [nop,nop,TS val 1742830625 ecr 1570310701], length 0
+2026-10-26 03:47:21.778355 vetha1ad7713 Out IP 10.244.0.95.52012 > 10.244.1.44.8080: Flags [F.], seq 366, ack 4791, win 72, options [nop,nop,TS val 1742830625 ecr 1570310701], length 0
+2026-10-26 03:47:21.778703 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.0.95.52012: Flags [F.], seq 4791, ack 367, win 64, options [nop,nop,TS val 1570310702 ecr 1742830625], length 0
+2026-10-26 03:47:21.778748 eth0  Out IP 10.244.1.44.8080 > 10.244.0.95.52012: Flags [F.], seq 4791, ack 367, win 64, options [nop,nop,TS val 1570310702 ecr 1742830625], length 0
+2026-10-26 03:47:21.778824 eth0  In  IP 10.244.0.95.52012 > 10.244.1.44.8080: Flags [.], ack 4792, win 72, options [nop,nop,TS val 1742830626 ecr 1570310702], length 0
+2026-10-26 03:47:21.778866 vetha1ad7713 Out IP 10.244.0.95.52012 > 10.244.1.44.8080: Flags [.], ack 4792, win 72, options [nop,nop,TS val 1742830626 ecr 1570310702], length 0
+2026-10-26 03:47:21.819343 vetha1ad7713 Out IP 10.244.1.1.38082 > 10.244.1.44.8080: Flags [S], seq 836160891, win 64240, options [mss 1460,sackOK,TS val 3158513521 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:21.819358 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.38082: Flags [S.], seq 2881317505, ack 836160892, win 65160, options [mss 1460,sackOK,TS val 3351922611 ecr 3158513521,nop,wscale 10], length 0
+2026-10-26 03:47:21.819466 vetha1ad7713 Out IP 10.244.1.1.38082 > 10.244.1.44.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 3158513521 ecr 3351922611], length 0
+2026-10-26 03:47:21.819897 vetha1ad7713 Out IP 10.244.1.1.38082 > 10.244.1.44.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 3158513522 ecr 3351922611], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:21.819905 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.38082: Flags [.], ack 110, win 64, options [nop,nop,TS val 3351922612 ecr 3158513522], length 0
+2026-10-26 03:47:21.820858 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.38082: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 3351922613 ecr 3158513522], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:21.820939 vetha1ad7713 Out IP 10.244.1.1.38082 > 10.244.1.44.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 3158513523 ecr 3351922613], length 0
+2026-10-26 03:47:21.820957 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.38082: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 3351922613 ecr 3158513523], length 2: HTTP
+2026-10-26 03:47:21.820963 vetha1ad7713 Out IP 10.244.1.1.38082 > 10.244.1.44.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 3158513523 ecr 3351922613], length 0
+2026-10-26 03:47:21.821599 vetha1ad7713 Out IP 10.244.1.1.38082 > 10.244.1.44.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 3158513523 ecr 3351922613], length 0
+2026-10-26 03:47:21.821799 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.38082: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 3351922614 ecr 3158513523], length 0
+2026-10-26 03:47:21.822300 vetha1ad7713 Out IP 10.244.1.1.38082 > 10.244.1.44.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 3158513524 ecr 3351922614], length 0
+2026-10-26 03:47:22.098762 veth03eca504 In  IP 10.244.1.24.49076 > 10.101.22.76.8080: Flags [S], seq 1597403814, win 64240, options [mss 1460,sackOK,TS val 1034759482 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:22.098938 eth0  Out IP 10.244.1.24.49076 > 10.244.0.93.8080: Flags [S], seq 1597403814, win 64240, options [mss 1460,sackOK,TS val 1034759482 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:22.099263 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.49076: Flags [S.], seq 1857972558, ack 1597403815, win 65160, options [mss 1460,sackOK,TS val 3871718225 ecr 1034759482,nop,wscale 10], length 0
+2026-10-26 03:47:22.099286 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49076: Flags [S.], seq 1857972558, ack 1597403815, win 65160, options [mss 1460,sackOK,TS val 3871718225 ecr 1034759482,nop,wscale 10], length 0
+2026-10-26 03:47:22.099293 veth03eca504 In  IP 10.244.1.24.49076 > 10.101.22.76.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1034759482 ecr 3871718225], length 0
+2026-10-26 03:47:22.099395 eth0  Out IP 10.244.1.24.49076 > 10.244.0.93.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1034759482 ecr 3871718225], length 0
+2026-10-26 03:47:22.099616 veth03eca504 In  IP 10.244.1.24.49076 > 10.101.22.76.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 1034759483 ecr 3871718225], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:22.099647 eth0  Out IP 10.244.1.24.49076 > 10.244.0.93.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 1034759483 ecr 3871718225], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:22.099678 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.49076: Flags [.], ack 199, win 64, options [nop,nop,TS val 3871718226 ecr 1034759483], length 0
+2026-10-26 03:47:22.099682 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49076: Flags [.], ack 199, win 64, options [nop,nop,TS val 3871718226 ecr 1034759483], length 0
+2026-10-26 03:47:22.099707 veth03eca504 In  IP 10.244.1.24.49076 > 10.101.22.76.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 1034759483 ecr 3871718226], length 42: HTTP
+2026-10-26 03:47:22.099711 eth0  Out IP 10.244.1.24.49076 > 10.244.0.93.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 1034759483 ecr 3871718226], length 42: HTTP
+2026-10-26 03:47:22.099723 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.49076: Flags [.], ack 241, win 64, options [nop,nop,TS val 3871718226 ecr 1034759483], length 0
+2026-10-26 03:47:22.099725 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49076: Flags [.], ack 241, win 64, options [nop,nop,TS val 3871718226 ecr 1034759483], length 0
+2026-10-26 03:47:22.197954 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.49076: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 3871718324 ecr 1034759483], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:22.197997 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49076: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 3871718324 ecr 1034759483], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:22.198013 veth03eca504 In  IP 10.244.1.24.49076 > 10.101.22.76.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1034759581 ecr 3871718324], length 0
+2026-10-26 03:47:22.198025 eth0  Out IP 10.244.1.24.49076 > 10.244.0.93.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1034759581 ecr 3871718324], length 0
+2026-10-26 03:47:22.198101 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.49076: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 3871718324 ecr 1034759581], length 178: HTTP
+2026-10-26 03:47:22.198105 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49076: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 3871718324 ecr 1034759581], length 178: HTTP
+2026-10-26 03:47:22.198108 veth03eca504 In  IP 10.244.1.24.49076 > 10.101.22.76.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1034759581 ecr 3871718324], length 0
+2026-10-26 03:47:22.198111 eth0  Out IP 10.244.1.24.49076 > 10.244.0.93.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1034759581 ecr 3871718324], length 0
+2026-10-26 03:47:22.198798 veth03eca504 In  IP 10.244.1.24.49076 > 10.101.22.76.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 1034759582 ecr 3871718324], length 0
+2026-10-26 03:47:22.198835 eth0  Out IP 10.244.1.24.49076 > 10.244.0.93.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 1034759582 ecr 3871718324], length 0
+2026-10-26 03:47:22.198972 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.49076: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 3871718325 ecr 1034759582], length 0
+2026-10-26 03:47:22.198993 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49076: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 3871718325 ecr 1034759582], length 0
+2026-10-26 03:47:22.199002 veth03eca504 In  IP 10.244.1.24.49076 > 10.101.22.76.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1034759582 ecr 3871718325], length 0
+2026-10-26 03:47:22.199020 eth0  Out IP 10.244.1.24.49076 > 10.244.0.93.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1034759582 ecr 3871718325], length 0
+2026-10-26 03:47:22.199081 veth03eca504 In  IP 10.244.1.24.49656 > 192.168.49.3.30080: Flags [S], seq 3637914437, win 64240, options [mss 1460,sackOK,TS val 2640690980 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:22.199141 eth0  Out IP 192.168.49.3.42317 > 10.244.0.91.8080: Flags [S], seq 3637914437, win 64240, options [mss 1460,sackOK,TS val 2640690980 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:22.199243 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.42317: Flags [S.], seq 577066466, ack 3637914438, win 65160, options [mss 1460,sackOK,TS val 2093366023 ecr 2640690980,nop,wscale 10], length 0
+2026-10-26 03:47:22.199288 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.49656: Flags [S.], seq 577066466, ack 3637914438, win 65160, options [mss 1460,sackOK,TS val 2093366023 ecr 2640690980,nop,wscale 10], length 0
+2026-10-26 03:47:22.199296 veth03eca504 In  IP 10.244.1.24.49656 > 192.168.49.3.30080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2640690980 ecr 2093366023], length 0
+2026-10-26 03:47:22.199320 eth0  Out IP 192.168.49.3.42317 > 10.244.0.91.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2640690980 ecr 2093366023], length 0
+2026-10-26 03:47:22.199372 veth03eca504 In  IP 10.244.1.24.49656 > 192.168.49.3.30080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 2640690980 ecr 2093366023], length 180
+2026-10-26 03:47:22.199387 eth0  Out IP 192.168.49.3.42317 > 10.244.0.91.8080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 2640690980 ecr 2093366023], length 180: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:22.199475 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.42317: Flags [.], ack 181, win 64, options [nop,nop,TS val 2093366023 ecr 2640690980], length 0
+2026-10-26 03:47:22.199483 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.49656: Flags [.], ack 181, win 64, options [nop,nop,TS val 2093366023 ecr 2640690980], length 0
+2026-10-26 03:47:22.199605 veth03eca504 In  IP 10.244.1.24.49656 > 192.168.49.3.30080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 2640690981 ecr 2093366023], length 42
+2026-10-26 03:47:22.199615 eth0  Out IP 192.168.49.3.42317 > 10.244.0.91.8080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 2640690981 ecr 2093366023], length 42: HTTP
+2026-10-26 03:47:22.199634 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.42317: Flags [.], ack 223, win 64, options [nop,nop,TS val 2093366024 ecr 2640690981], length 0
+2026-10-26 03:47:22.199638 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.49656: Flags [.], ack 223, win 64, options [nop,nop,TS val 2093366024 ecr 2640690981], length 0
+2026-10-26 03:47:22.293104 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.42317: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 2093366117 ecr 2640690981], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:22.293142 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.49656: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 2093366117 ecr 2640690981], length 172
+2026-10-26 03:47:22.293156 veth03eca504 In  IP 10.244.1.24.49656 > 192.168.49.3.30080: Flags [.], ack 173, win 63, options [nop,nop,TS val 2640691074 ecr 2093366117], length 0
+2026-10-26 03:47:22.293168 eth0  Out IP 192.168.49.3.42317 > 10.244.0.91.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 2640691074 ecr 2093366117], length 0
+2026-10-26 03:47:22.293482 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.42317: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 2093366117 ecr 2640691074], length 178: HTTP
+2026-10-26 03:47:22.293489 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.49656: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 2093366117 ecr 2640691074], length 178
+2026-10-26 03:47:22.293584 veth03eca504 In  IP 10.244.1.24.49656 > 192.168.49.3.30080: Flags [.], ack 351, win 63, options [nop,nop,TS val 2640691074 ecr 2093366117], length 0
+2026-10-26 03:47:22.293597 eth0  Out IP 192.168.49.3.42317 > 10.244.0.91.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 2640691074 ecr 2093366117], length 0
+2026-10-26 03:47:22.293741 veth03eca504 In  IP 10.244.1.24.49656 > 192.168.49.3.30080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 2640691075 ecr 2093366117], length 0
+2026-10-26 03:47:22.293808 eth0  Out IP 192.168.49.3.42317 > 10.244.0.91.8080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 2640691075 ecr 2093366117], length 0
+2026-10-26 03:47:22.295257 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.42317: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 2093366119 ecr 2640691075], length 0
+2026-10-26 03:47:22.295279 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.49656: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 2093366119 ecr 2640691075], length 0
+2026-10-26 03:47:22.295287 veth03eca504 In  IP 10.244.1.24.49656 > 192.168.49.3.30080: Flags [.], ack 352, win 63, options [nop,nop,TS val 2640691076 ecr 2093366119], length 0
+2026-10-26 03:47:22.295304 eth0  Out IP 192.168.49.3.42317 > 10.244.0.91.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 2640691076 ecr 2093366119], length 0
+2026-10-26 03:47:23.099654 veth03eca504 In  IP 10.244.1.24.49086 > 10.101.22.76.8080: Flags [S], seq 2678707545, win 64240, options [mss 1460,sackOK,TS val 13854490 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:23.099792 eth0  Out IP 10.244.1.24.49086 > 10.244.0.93.8080: Flags [S], seq 2678707545, win 64240, options [mss 1460,sackOK,TS val 13854490 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:23.100134 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.49086: Flags [S.], seq 3943602051, ack 2678707546, win 65160, options [mss 1460,sackOK,TS val 1364519861 ecr 13854490,nop,wscale 10], length 0
+2026-10-26 03:47:23.100163 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49086: Flags [S.], seq 3943602051, ack 2678707546, win 65160, options [mss 1460,sackOK,TS val 1364519861 ecr 13854490,nop,wscale 10], length 0
+2026-10-26 03:47:23.100172 veth03eca504 In  IP 10.244.1.24.49086 > 10.101.22.76.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 13854490 ecr 1364519861], length 0
+2026-10-26 03:47:23.100194 eth0  Out IP 10.244.1.24.49086 > 10.244.0.93.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 13854490 ecr 1364519861], length 0
+2026-10-26 03:47:23.100370 veth03eca504 In  IP 10.244.1.24.49086 > 10.101.22.76.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 13854490 ecr 1364519861], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:23.100442 eth0  Out IP 10.244.1.24.49086 > 10.244.0.93.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 13854490 ecr 1364519861], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:23.100496 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.49086: Flags [.], ack 199, win 64, options [nop,nop,TS val 1364519861 ecr 13854490], length 0
+2026-10-26 03:47:23.100608 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49086: Flags [.], ack 199, win 64, options [nop,nop,TS val 1364519861 ecr 13854490], length 0
+2026-10-26 03:47:23.101131 veth03eca504 In  IP 10.244.1.24.49086 > 10.101.22.76.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 13854491 ecr 1364519861], length 42: HTTP
+2026-10-26 03:47:23.101142 eth0  Out IP 10.244.1.24.49086 > 10.244.0.93.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 13854491 ecr 1364519861], length 42: HTTP
+2026-10-26 03:47:23.101179 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.49086: Flags [.], ack 241, win 64, options [nop,nop,TS val 1364519862 ecr 13854491], length 0
+2026-10-26 03:47:23.101183 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49086: Flags [.], ack 241, win 64, options [nop,nop,TS val 1364519862 ecr 13854491], length 0
+2026-10-26 03:47:23.197439 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.49086: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 1364519958 ecr 13854491], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:23.197474 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49086: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 1364519958 ecr 13854491], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:23.197485 veth03eca504 In  IP 10.244.1.24.49086 > 10.101.22.76.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 13854587 ecr 1364519958], length 0
+2026-10-26 03:47:23.197494 eth0  Out IP 10.244.1.24.49086 > 10.244.0.93.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 13854587 ecr 1364519958], length 0
+2026-10-26 03:47:23.197633 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.49086: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 1364519959 ecr 13854587], length 178: HTTP
+2026-10-26 03:47:23.197647 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49086: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 1364519959 ecr 13854587], length 178: HTTP
+2026-10-26 03:47:23.197652 veth03eca504 In  IP 10.244.1.24.49086 > 10.101.22.76.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 13854588 ecr 1364519959], length 0
+2026-10-26 03:47:23.197661 eth0  Out IP 10.244.1.24.49086 > 10.244.0.93.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 13854588 ecr 1364519959], length 0
+2026-10-26 03:47:23.197762 veth03eca504 In  IP 10.244.1.24.49086 > 10.101.22.76.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 13854588 ecr 1364519959], length 0
+2026-10-26 03:47:23.197808 eth0  Out IP 10.244.1.24.49086 > 10.244.0.93.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 13854588 ecr 1364519959], length 0
+2026-10-26 03:47:23.198017 eth0  In  IP 10.244.0.93.8080 > 10.244.1.24.49086: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 1364519959 ecr 13854588], length 0
+2026-10-26 03:47:23.198035 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49086: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 1364519959 ecr 13854588], length 0
+2026-10-26 03:47:23.198042 veth03eca504 In  IP 10.244.1.24.49086 > 10.101.22.76.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 13854588 ecr 1364519959], length 0
+2026-10-26 03:47:23.198058 eth0  Out IP 10.244.1.24.49086 > 10.244.0.93.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 13854588 ecr 1364519959], length 0
+2026-10-26 03:47:23.198587 veth03eca504 In  IP 10.244.1.24.33356 > 192.168.49.2.30080: Flags [S], seq 844779401, win 64240, options [mss 1460,sackOK,TS val 2646483902 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:23.198650 eth0  Out IP 192.168.49.3.33356 > 192.168.49.2.30080: Flags [S], seq 844779401, win 64240, options [mss 1460,sackOK,TS val 2646483902 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:23.198745 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.33356: Flags [S.], seq 3821918650, ack 844779402, win 65160, options [mss 1460,sackOK,TS val 3090431310 ecr 2646483902,nop,wscale 10], length 0
+2026-10-26 03:47:23.198783 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.33356: Flags [S.], seq 3821918650, ack 844779402, win 65160, options [mss 1460,sackOK,TS val 3090431310 ecr 2646483902,nop,wscale 10], length 0
+2026-10-26 03:47:23.198791 veth03eca504 In  IP 10.244.1.24.33356 > 192.168.49.2.30080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2646483902 ecr 3090431310], length 0
+2026-10-26 03:47:23.198809 eth0  Out IP 192.168.49.3.33356 > 192.168.49.2.30080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2646483902 ecr 3090431310], length 0
+2026-10-26 03:47:23.199116 veth03eca504 In  IP 10.244.1.24.33356 > 192.168.49.2.30080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 2646483902 ecr 3090431310], length 180
+2026-10-26 03:47:23.199180 eth0  Out IP 192.168.49.3.33356 > 192.168.49.2.30080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 2646483902 ecr 3090431310], length 180
+2026-10-26 03:47:23.199219 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.33356: Flags [.], ack 181, win 64, options [nop,nop,TS val 3090431310 ecr 2646483902], length 0
+2026-10-26 03:47:23.199223 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.33356: Flags [.], ack 181, win 64, options [nop,nop,TS val 3090431310 ecr 2646483902], length 0
+2026-10-26 03:47:23.199265 veth03eca504 In  IP 10.244.1.24.33356 > 192.168.49.2.30080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 2646483902 ecr 3090431310], length 42
+2026-10-26 03:47:23.199271 eth0  Out IP 192.168.49.3.33356 > 192.168.49.2.30080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 2646483902 ecr 3090431310], length 42
+2026-10-26 03:47:23.199284 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.33356: Flags [.], ack 223, win 64, options [nop,nop,TS val 3090431310 ecr 2646483902], length 0
+2026-10-26 03:47:23.199287 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.33356: Flags [.], ack 223, win 64, options [nop,nop,TS val 3090431310 ecr 2646483902], length 0
+2026-10-26 03:47:23.293019 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.33356: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 3090431404 ecr 2646483902], length 172
+2026-10-26 03:47:23.293060 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.33356: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 3090431404 ecr 2646483902], length 172
+2026-10-26 03:47:23.293078 veth03eca504 In  IP 10.244.1.24.33356 > 192.168.49.2.30080: Flags [.], ack 173, win 63, options [nop,nop,TS val 2646483996 ecr 3090431404], length 0
+2026-10-26 03:47:23.293090 eth0  Out IP 192.168.49.3.33356 > 192.168.49.2.30080: Flags [.], ack 173, win 63, options [nop,nop,TS val 2646483996 ecr 3090431404], length 0
+2026-10-26 03:47:23.293128 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.33356: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 3090431404 ecr 2646483996], length 178
+2026-10-26 03:47:23.293132 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.33356: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 3090431404 ecr 2646483996], length 178
+2026-10-26 03:47:23.293134 veth03eca504 In  IP 10.244.1.24.33356 > 192.168.49.2.30080: Flags [.], ack 351, win 63, options [nop,nop,TS val 2646483996 ecr 3090431404], length 0
+2026-10-26 03:47:23.293137 eth0  Out IP 192.168.49.3.33356 > 192.168.49.2.30080: Flags [.], ack 351, win 63, options [nop,nop,TS val 2646483996 ecr 3090431404], length 0
+2026-10-26 03:47:23.294259 veth03eca504 In  IP 10.244.1.24.33356 > 192.168.49.2.30080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 2646483997 ecr 3090431404], length 0
+2026-10-26 03:47:23.294298 eth0  Out IP 192.168.49.3.33356 > 192.168.49.2.30080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 2646483997 ecr 3090431404], length 0
+2026-10-26 03:47:23.294650 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.33356: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 3090431406 ecr 2646483997], length 0
+2026-10-26 03:47:23.294693 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.33356: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 3090431406 ecr 2646483997], length 0
+2026-10-26 03:47:23.294705 veth03eca504 In  IP 10.244.1.24.33356 > 192.168.49.2.30080: Flags [.], ack 352, win 63, options [nop,nop,TS val 2646483998 ecr 3090431406], length 0
+2026-10-26 03:47:23.294733 eth0  Out IP 192.168.49.3.33356 > 192.168.49.2.30080: Flags [.], ack 352, win 63, options [nop,nop,TS val 2646483998 ecr 3090431406], length 0
+2026-10-26 03:47:24.099156 veth03eca504 In  IP 10.244.1.24.49098 > 10.101.22.76.8080: Flags [S], seq 2463568334, win 64240, options [mss 1460,sackOK,TS val 1534376334 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:24.099412 veth2203d974 Out IP 10.244.1.24.49098 > 10.244.1.45.8080: Flags [S], seq 2463568334, win 64240, options [mss 1460,sackOK,TS val 1534376334 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:24.099426 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.49098: Flags [S.], seq 838532152, ack 2463568335, win 65160, options [mss 1460,sackOK,TS val 2672129460 ecr 1534376334,nop,wscale 10], length 0
+2026-10-26 03:47:24.099491 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49098: Flags [S.], seq 838532152, ack 2463568335, win 65160, options [mss 1460,sackOK,TS val 2672129460 ecr 1534376334,nop,wscale 10], length 0
+2026-10-26 03:47:24.099683 veth03eca504 In  IP 10.244.1.24.49098 > 10.101.22.76.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1534376335 ecr 2672129460], length 0
+2026-10-26 03:47:24.099979 veth2203d974 Out IP 10.244.1.24.49098 > 10.244.1.45.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1534376335 ecr 2672129460], length 0
+2026-10-26 03:47:24.100020 veth03eca504 In  IP 10.244.1.24.49098 > 10.101.22.76.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 1534376335 ecr 2672129460], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:24.100183 veth2203d974 Out IP 10.244.1.24.49098 > 10.244.1.45.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 1534376335 ecr 2672129460], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:24.100188 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.49098: Flags [.], ack 199, win 64, options [nop,nop,TS val 2672129461 ecr 1534376335], length 0
+2026-10-26 03:47:24.100202 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49098: Flags [.], ack 199, win 64, options [nop,nop,TS val 2672129461 ecr 1534376335], length 0
+2026-10-26 03:47:24.100222 veth03eca504 In  IP 10.244.1.24.49098 > 10.101.22.76.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 1534376335 ecr 2672129461], length 42: HTTP
+2026-10-26 03:47:24.100230 veth2203d974 Out IP 10.244.1.24.49098 > 10.244.1.45.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 1534376335 ecr 2672129461], length 42: HTTP
+2026-10-26 03:47:24.100232 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.49098: Flags [.], ack 241, win 64, options [nop,nop,TS val 2672129461 ecr 1534376335], length 0
+2026-10-26 03:47:24.100235 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49098: Flags [.], ack 241, win 64, options [nop,nop,TS val 2672129461 ecr 1534376335], length 0
+2026-10-26 03:47:24.208081 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.49098: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 2672129569 ecr 1534376335], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:24.208122 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49098: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 2672129569 ecr 1534376335], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:24.208149 veth03eca504 In  IP 10.244.1.24.49098 > 10.101.22.76.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1534376443 ecr 2672129569], length 0
+2026-10-26 03:47:24.208169 veth2203d974 Out IP 10.244.1.24.49098 > 10.244.1.45.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1534376443 ecr 2672129569], length 0
+2026-10-26 03:47:24.208187 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.49098: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 2672129569 ecr 1534376443], length 178: HTTP
+2026-10-26 03:47:24.208192 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49098: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 2672129569 ecr 1534376443], length 178: HTTP
+2026-10-26 03:47:24.208196 veth03eca504 In  IP 10.244.1.24.49098 > 10.101.22.76.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1534376443 ecr 2672129569], length 0
+2026-10-26 03:47:24.208199 veth2203d974 Out IP 10.244.1.24.49098 > 10.244.1.45.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1534376443 ecr 2672129569], length 0
+2026-10-26 03:47:24.209187 veth03eca504 In  IP 10.244.1.24.49098 > 10.101.22.76.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 1534376444 ecr 2672129569], length 0
+2026-10-26 03:47:24.209252 veth2203d974 Out IP 10.244.1.24.49098 > 10.244.1.45.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 1534376444 ecr 2672129569], length 0
+2026-10-26 03:47:24.209321 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.24.49098: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 2672129570 ecr 1534376444], length 0
+2026-10-26 03:47:24.209383 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49098: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 2672129570 ecr 1534376444], length 0
+2026-10-26 03:47:24.209391 veth03eca504 In  IP 10.244.1.24.49098 > 10.101.22.76.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1534376444 ecr 2672129570], length 0
+2026-10-26 03:47:24.209416 veth2203d974 Out IP 10.244.1.24.49098 > 10.244.1.45.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1534376444 ecr 2672129570], length 0
+2026-10-26 03:47:24.209945 veth03eca504 In  IP 10.244.1.24.49658 > 192.168.49.3.30080: Flags [S], seq 2304473863, win 64240, options [mss 1460,sackOK,TS val 3946006073 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:24.210101 eth0  Out IP 192.168.49.3.32393 > 10.244.0.91.8080: Flags [S], seq 2304473863, win 64240, options [mss 1460,sackOK,TS val 3946006073 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:24.210266 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.32393: Flags [S.], seq 2695168519, ack 2304473864, win 65160, options [mss 1460,sackOK,TS val 2666185210 ecr 3946006073,nop,wscale 10], length 0
+2026-10-26 03:47:24.210295 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.49658: Flags [S.], seq 2695168519, ack 2304473864, win 65160, options [mss 1460,sackOK,TS val 2666185210 ecr 3946006073,nop,wscale 10], length 0
+2026-10-26 03:47:24.210303 veth03eca504 In  IP 10.244.1.24.49658 > 192.168.49.3.30080: Flags [.], ack 1, win 63, options [nop,nop,TS val 3946006073 ecr 2666185210], length 0
+2026-10-26 03:47:24.210396 eth0  Out IP 192.168.49.3.32393 > 10.244.0.91.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 3946006073 ecr 2666185210], length 0
+2026-10-26 03:47:24.210573 veth03eca504 In  IP 10.244.1.24.49658 > 192.168.49.3.30080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 3946006074 ecr 2666185210], length 180
+2026-10-26 03:47:24.210633 eth0  Out IP 192.168.49.3.32393 > 10.244.0.91.8080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 3946006074 ecr 2666185210], length 180: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:24.210674 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.32393: Flags [.], ack 181, win 64, options [nop,nop,TS val 2666185211 ecr 3946006074], length 0
+2026-10-26 03:47:24.210679 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.49658: Flags [.], ack 181, win 64, options [nop,nop,TS val 2666185211 ecr 3946006074], length 0
+2026-10-26 03:47:24.210703 veth03eca504 In  IP 10.244.1.24.49658 > 192.168.49.3.30080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 3946006074 ecr 2666185211], length 42
+2026-10-26 03:47:24.210708 eth0  Out IP 192.168.49.3.32393 > 10.244.0.91.8080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 3946006074 ecr 2666185211], length 42: HTTP
+2026-10-26 03:47:24.210720 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.32393: Flags [.], ack 223, win 64, options [nop,nop,TS val 2666185211 ecr 3946006074], length 0
+2026-10-26 03:47:24.210723 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.49658: Flags [.], ack 223, win 64, options [nop,nop,TS val 2666185211 ecr 3946006074], length 0
+2026-10-26 03:47:24.292417 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.32393: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 2666185292 ecr 3946006074], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:24.292493 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.49658: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 2666185292 ecr 3946006074], length 172
+2026-10-26 03:47:24.292576 veth03eca504 In  IP 10.244.1.24.49658 > 192.168.49.3.30080: Flags [.], ack 173, win 63, options [nop,nop,TS val 3946006156 ecr 2666185292], length 0
+2026-10-26 03:47:24.292592 eth0  Out IP 192.168.49.3.32393 > 10.244.0.91.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 3946006156 ecr 2666185292], length 0
+2026-10-26 03:47:24.292847 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.32393: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 2666185293 ecr 3946006156], length 178: HTTP
+2026-10-26 03:47:24.292853 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.49658: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 2666185293 ecr 3946006156], length 178
+2026-10-26 03:47:24.292858 veth03eca504 In  IP 10.244.1.24.49658 > 192.168.49.3.30080: Flags [.], ack 351, win 63, options [nop,nop,TS val 3946006156 ecr 2666185293], length 0
+2026-10-26 03:47:24.292862 eth0  Out IP 192.168.49.3.32393 > 10.244.0.91.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 3946006156 ecr 2666185293], length 0
+2026-10-26 03:47:24.292893 veth03eca504 In  IP 10.244.1.24.49658 > 192.168.49.3.30080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 3946006156 ecr 2666185293], length 0
+2026-10-26 03:47:24.292912 eth0  Out IP 192.168.49.3.32393 > 10.244.0.91.8080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 3946006156 ecr 2666185293], length 0
+2026-10-26 03:47:24.293178 eth0  In  IP 10.244.0.91.8080 > 192.168.49.3.32393: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 2666185293 ecr 3946006156], length 0
+2026-10-26 03:47:24.293197 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.49658: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 2666185293 ecr 3946006156], length 0
+2026-10-26 03:47:24.293205 veth03eca504 In  IP 10.244.1.24.49658 > 192.168.49.3.30080: Flags [.], ack 352, win 63, options [nop,nop,TS val 3946006156 ecr 2666185293], length 0
+2026-10-26 03:47:24.293223 eth0  Out IP 192.168.49.3.32393 > 10.244.0.91.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 3946006156 ecr 2666185293], length 0
+2026-10-26 03:47:24.780864 veth6699296e Out IP 10.244.1.1.51852 > 10.244.1.38.8080: Flags [S], seq 3271033910, win 64240, options [mss 1460,sackOK,TS val 2605035397 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:24.780881 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.51852: Flags [S.], seq 4021217832, ack 3271033911, win 65160, options [mss 1460,sackOK,TS val 3066855543 ecr 2605035397,nop,wscale 10], length 0
+2026-10-26 03:47:24.781115 veth6699296e Out IP 10.244.1.1.51852 > 10.244.1.38.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2605035397 ecr 3066855543], length 0
+2026-10-26 03:47:24.781443 veth6699296e Out IP 10.244.1.1.51852 > 10.244.1.38.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 2605035397 ecr 3066855543], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:24.781447 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.51852: Flags [.], ack 110, win 64, options [nop,nop,TS val 3066855543 ecr 2605035397], length 0
+2026-10-26 03:47:24.782763 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.51852: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 3066855545 ecr 2605035397], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:24.782837 veth6699296e Out IP 10.244.1.1.51852 > 10.244.1.38.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 2605035399 ecr 3066855545], length 0
+2026-10-26 03:47:24.782852 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.51852: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 3066855545 ecr 2605035399], length 2: HTTP
+2026-10-26 03:47:24.782858 veth6699296e Out IP 10.244.1.1.51852 > 10.244.1.38.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 2605035399 ecr 3066855545], length 0
+2026-10-26 03:47:24.782997 veth6699296e Out IP 10.244.1.1.51852 > 10.244.1.38.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 2605035399 ecr 3066855545], length 0
+2026-10-26 03:47:24.783053 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.51852: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 3066855545 ecr 2605035399], length 0
+2026-10-26 03:47:24.783283 veth6699296e Out IP 10.244.1.1.51852 > 10.244.1.38.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 2605035399 ecr 3066855545], length 0
+2026-10-26 03:47:24.948007 vetha1ad7713 Out IP 10.244.1.1.38098 > 10.244.1.44.8080: Flags [S], seq 2067974318, win 64240, options [mss 1460,sackOK,TS val 3852102430 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:24.948019 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.38098: Flags [S.], seq 915899544, ack 2067974319, win 65160, options [mss 1460,sackOK,TS val 408113314 ecr 3852102430,nop,wscale 10], length 0
+2026-10-26 03:47:24.948104 vetha1ad7713 Out IP 10.244.1.1.38098 > 10.244.1.44.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 3852102430 ecr 408113314], length 0
+2026-10-26 03:47:24.948294 vetha1ad7713 Out IP 10.244.1.1.38098 > 10.244.1.44.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 3852102430 ecr 408113314], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:24.948300 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.38098: Flags [.], ack 110, win 64, options [nop,nop,TS val 408113314 ecr 3852102430], length 0
+2026-10-26 03:47:24.949168 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.38098: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 408113315 ecr 3852102430], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:24.949270 vetha1ad7713 Out IP 10.244.1.1.38098 > 10.244.1.44.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 3852102431 ecr 408113315], length 0
+2026-10-26 03:47:24.949304 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.38098: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 408113315 ecr 3852102431], length 2: HTTP
+2026-10-26 03:47:24.949312 vetha1ad7713 Out IP 10.244.1.1.38098 > 10.244.1.44.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 3852102431 ecr 408113315], length 0
+2026-10-26 03:47:24.949390 vetha1ad7713 Out IP 10.244.1.1.38098 > 10.244.1.44.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 3852102431 ecr 408113315], length 0
+2026-10-26 03:47:24.949576 vetha1ad7713 In  IP 10.244.1.44.8080 > 10.244.1.1.38098: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 408113316 ecr 3852102431], length 0
+2026-10-26 03:47:24.949668 vetha1ad7713 Out IP 10.244.1.1.38098 > 10.244.1.44.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 3852102432 ecr 408113316], length 0
+2026-10-26 03:47:25.099733 veth03eca504 In  IP 10.244.1.24.49114 > 10.101.22.76.8080: Flags [S], seq 245066560, win 64240, options [mss 1460,sackOK,TS val 3473549297 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:25.099825 eth0  Out IP 10.244.1.24.49114 > 10.244.0.91.8080: Flags [S], seq 245066560, win 64240, options [mss 1460,sackOK,TS val 3473549297 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:25.100095 eth0  In  IP 10.244.0.91.8080 > 10.244.1.24.49114: Flags [S.], seq 3720706706, ack 245066561, win 65160, options [mss 1460,sackOK,TS val 4189644382 ecr 3473549297,nop,wscale 10], length 0
+2026-10-26 03:47:25.100165 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49114: Flags [S.], seq 3720706706, ack 245066561, win 65160, options [mss 1460,sackOK,TS val 4189644382 ecr 3473549297,nop,wscale 10], length 0
+2026-10-26 03:47:25.100174 veth03eca504 In  IP 10.244.1.24.49114 > 10.101.22.76.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 3473549297 ecr 4189644382], length 0
+2026-10-26 03:47:25.100267 eth0  Out IP 10.244.1.24.49114 > 10.244.0.91.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 3473549297 ecr 4189644382], length 0
+2026-10-26 03:47:25.100726 veth03eca504 In  IP 10.244.1.24.49114 > 10.101.22.76.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 3473549298 ecr 4189644382], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:25.100770 eth0  Out IP 10.244.1.24.49114 > 10.244.0.91.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 3473549298 ecr 4189644382], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:25.100807 eth0  In  IP 10.244.0.91.8080 > 10.244.1.24.49114: Flags [.], ack 199, win 64, options [nop,nop,TS val 4189644383 ecr 3473549298], length 0
+2026-10-26 03:47:25.100811 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49114: Flags [.], ack 199, win 64, options [nop,nop,TS val 4189644383 ecr 3473549298], length 0
+2026-10-26 03:47:25.100873 veth03eca504 In  IP 10.244.1.24.49114 > 10.101.22.76.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 3473549298 ecr 4189644383], length 42: HTTP
+2026-10-26 03:47:25.100877 eth0  Out IP 10.244.1.24.49114 > 10.244.0.91.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 3473549298 ecr 4189644383], length 42: HTTP
+2026-10-26 03:47:25.100911 eth0  In  IP 10.244.0.91.8080 > 10.244.1.24.49114: Flags [.], ack 241, win 64, options [nop,nop,TS val 4189644383 ecr 3473549298], length 0
+2026-10-26 03:47:25.100915 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49114: Flags [.], ack 241, win 64, options [nop,nop,TS val 4189644383 ecr 3473549298], length 0
+2026-10-26 03:47:25.191142 eth0  In  IP 10.244.0.91.8080 > 10.244.1.24.49114: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 4189644473 ecr 3473549298], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:25.191222 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49114: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 4189644473 ecr 3473549298], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:25.191237 veth03eca504 In  IP 10.244.1.24.49114 > 10.101.22.76.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 3473549388 ecr 4189644473], length 0
+2026-10-26 03:47:25.191252 eth0  Out IP 10.244.1.24.49114 > 10.244.0.91.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 3473549388 ecr 4189644473], length 0
+2026-10-26 03:47:25.191306 eth0  In  IP 10.244.0.91.8080 > 10.244.1.24.49114: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 4189644473 ecr 3473549388], length 178: HTTP
+2026-10-26 03:47:25.191311 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49114: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 4189644473 ecr 3473549388], length 178: HTTP
+2026-10-26 03:47:25.191313 veth03eca504 In  IP 10.244.1.24.49114 > 10.101.22.76.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 3473549388 ecr 4189644473], length 0
+2026-10-26 03:47:25.191317 eth0  Out IP 10.244.1.24.49114 > 10.244.0.91.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 3473549388 ecr 4189644473], length 0
+2026-10-26 03:47:25.191618 veth03eca504 In  IP 10.244.1.24.49114 > 10.101.22.76.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 3473549389 ecr 4189644473], length 0
+2026-10-26 03:47:25.191654 eth0  Out IP 10.244.1.24.49114 > 10.244.0.91.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 3473549389 ecr 4189644473], length 0
+2026-10-26 03:47:25.191791 eth0  In  IP 10.244.0.91.8080 > 10.244.1.24.49114: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 4189644474 ecr 3473549389], length 0
+2026-10-26 03:47:25.191820 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49114: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 4189644474 ecr 3473549389], length 0
+2026-10-26 03:47:25.191828 veth03eca504 In  IP 10.244.1.24.49114 > 10.101.22.76.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 3473549389 ecr 4189644474], length 0
+2026-10-26 03:47:25.191851 eth0  Out IP 10.244.1.24.49114 > 10.244.0.91.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 3473549389 ecr 4189644474], length 0
+2026-10-26 03:47:25.192223 veth03eca504 In  IP 10.244.1.24.33366 > 192.168.49.2.30080: Flags [S], seq 3602748177, win 64240, options [mss 1460,sackOK,TS val 1390223893 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:25.192389 eth0  Out IP 192.168.49.3.33366 > 192.168.49.2.30080: Flags [S], seq 3602748177, win 64240, options [mss 1460,sackOK,TS val 1390223893 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:25.192553 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.33366: Flags [S.], seq 2948460961, ack 3602748178, win 65160, options [mss 1460,sackOK,TS val 287086535 ecr 1390223893,nop,wscale 10], length 0
+2026-10-26 03:47:25.192586 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.33366: Flags [S.], seq 2948460961, ack 3602748178, win 65160, options [mss 1460,sackOK,TS val 287086535 ecr 1390223893,nop,wscale 10], length 0
+2026-10-26 03:47:25.192620 veth03eca504 In  IP 10.244.1.24.33366 > 192.168.49.2.30080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1390223894 ecr 287086535], length 0
+2026-10-26 03:47:25.192636 eth0  Out IP 192.168.49.3.33366 > 192.168.49.2.30080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1390223894 ecr 287086535], length 0
+2026-10-26 03:47:25.192712 veth03eca504 In  IP 10.244.1.24.33366 > 192.168.49.2.30080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 1390223894 ecr 287086535], length 180
+2026-10-26 03:47:25.192730 eth0  Out IP 192.168.49.3.33366 > 192.168.49.2.30080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 1390223894 ecr 287086535], length 180
+2026-10-26 03:47:25.192767 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.33366: Flags [.], ack 181, win 64, options [nop,nop,TS val 287086536 ecr 1390223894], length 0
+2026-10-26 03:47:25.192770 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.33366: Flags [.], ack 181, win 64, options [nop,nop,TS val 287086536 ecr 1390223894], length 0
+2026-10-26 03:47:25.192821 veth03eca504 In  IP 10.244.1.24.33366 > 192.168.49.2.30080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 1390223894 ecr 287086536], length 42
+2026-10-26 03:47:25.192825 eth0  Out IP 192.168.49.3.33366 > 192.168.49.2.30080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 1390223894 ecr 287086536], length 42
+2026-10-26 03:47:25.192836 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.33366: Flags [.], ack 223, win 64, options [nop,nop,TS val 287086536 ecr 1390223894], length 0
+2026-10-26 03:47:25.192839 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.33366: Flags [.], ack 223, win 64, options [nop,nop,TS val 287086536 ecr 1390223894], length 0
+2026-10-26 03:47:25.387962 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.33366: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 287086731 ecr 1390223894], length 172
+2026-10-26 03:47:25.388056 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.33366: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 287086731 ecr 1390223894], length 172
+2026-10-26 03:47:25.388075 veth03eca504 In  IP 10.244.1.24.33366 > 192.168.49.2.30080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1390224089 ecr 287086731], length 0
+2026-10-26 03:47:25.388101 eth0  Out IP 192.168.49.3.33366 > 192.168.49.2.30080: Flags [.], ack 173, win 63, options [nop,nop,TS val 1390224089 ecr 287086731], length 0
+2026-10-26 03:47:25.388350 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.33366: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 287086731 ecr 1390224089], length 178
+2026-10-26 03:47:25.388358 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.33366: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 287086731 ecr 1390224089], length 178
+2026-10-26 03:47:25.388363 veth03eca504 In  IP 10.244.1.24.33366 > 192.168.49.2.30080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1390224089 ecr 287086731], length 0
+2026-10-26 03:47:25.388367 eth0  Out IP 192.168.49.3.33366 > 192.168.49.2.30080: Flags [.], ack 351, win 63, options [nop,nop,TS val 1390224089 ecr 287086731], length 0
+2026-10-26 03:47:25.388421 veth03eca504 In  IP 10.244.1.24.33366 > 192.168.49.2.30080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 1390224089 ecr 287086731], length 0
+2026-10-26 03:47:25.388442 eth0  Out IP 192.168.49.3.33366 > 192.168.49.2.30080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 1390224089 ecr 287086731], length 0
+2026-10-26 03:47:25.388667 eth0  In  IP 192.168.49.2.30080 > 192.168.49.3.33366: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 287086732 ecr 1390224089], length 0
+2026-10-26 03:47:25.388688 veth03eca504 Out IP 192.168.49.2.30080 > 10.244.1.24.33366: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 287086732 ecr 1390224089], length 0
+2026-10-26 03:47:25.388696 veth03eca504 In  IP 10.244.1.24.33366 > 192.168.49.2.30080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1390224090 ecr 287086732], length 0
+2026-10-26 03:47:25.388713 eth0  Out IP 192.168.49.3.33366 > 192.168.49.2.30080: Flags [.], ack 352, win 63, options [nop,nop,TS val 1390224090 ecr 287086732], length 0
+2026-10-26 03:47:26.099105 veth03eca504 In  IP 10.244.1.24.49116 > 10.101.22.76.8080: Flags [S], seq 1135926740, win 64240, options [mss 1460,sackOK,TS val 4288856913 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:26.099372 veth6699296e Out IP 10.244.1.24.49116 > 10.244.1.38.8080: Flags [S], seq 1135926740, win 64240, options [mss 1460,sackOK,TS val 4288856913 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:26.099386 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.24.49116: Flags [S.], seq 2876516216, ack 1135926741, win 65160, options [mss 1460,sackOK,TS val 3528878741 ecr 4288856913,nop,wscale 10], length 0
+2026-10-26 03:47:26.099468 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49116: Flags [S.], seq 2876516216, ack 1135926741, win 65160, options [mss 1460,sackOK,TS val 3528878741 ecr 4288856913,nop,wscale 10], length 0
+2026-10-26 03:47:26.099477 veth03eca504 In  IP 10.244.1.24.49116 > 10.101.22.76.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 4288856913 ecr 3528878741], length 0
+2026-10-26 03:47:26.099612 veth6699296e Out IP 10.244.1.24.49116 > 10.244.1.38.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 4288856913 ecr 3528878741], length 0
+2026-10-26 03:47:26.099671 veth03eca504 In  IP 10.244.1.24.49116 > 10.101.22.76.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 4288856914 ecr 3528878741], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:26.099717 veth6699296e Out IP 10.244.1.24.49116 > 10.244.1.38.8080: Flags [P.], seq 1:199, ack 1, win 63, options [nop,nop,TS val 4288856914 ecr 3528878741], length 198: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:26.099722 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.24.49116: Flags [.], ack 199, win 64, options [nop,nop,TS val 3528878742 ecr 4288856914], length 0
+2026-10-26 03:47:26.099730 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49116: Flags [.], ack 199, win 64, options [nop,nop,TS val 3528878742 ecr 4288856914], length 0
+2026-10-26 03:47:26.099742 veth03eca504 In  IP 10.244.1.24.49116 > 10.101.22.76.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 4288856914 ecr 3528878742], length 42: HTTP
+2026-10-26 03:47:26.099747 veth6699296e Out IP 10.244.1.24.49116 > 10.244.1.38.8080: Flags [P.], seq 199:241, ack 1, win 63, options [nop,nop,TS val 4288856914 ecr 3528878742], length 42: HTTP
+2026-10-26 03:47:26.099749 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.24.49116: Flags [.], ack 241, win 64, options [nop,nop,TS val 3528878742 ecr 4288856914], length 0
+2026-10-26 03:47:26.099752 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49116: Flags [.], ack 241, win 64, options [nop,nop,TS val 3528878742 ecr 4288856914], length 0
+2026-10-26 03:47:26.168676 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.24.49116: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 3528878811 ecr 4288856914], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:26.168799 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49116: Flags [P.], seq 1:173, ack 241, win 64, options [nop,nop,TS val 3528878811 ecr 4288856914], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:26.168813 veth03eca504 In  IP 10.244.1.24.49116 > 10.101.22.76.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 4288856983 ecr 3528878811], length 0
+2026-10-26 03:47:26.168832 veth6699296e Out IP 10.244.1.24.49116 > 10.244.1.38.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 4288856983 ecr 3528878811], length 0
+2026-10-26 03:47:26.168852 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.24.49116: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 3528878811 ecr 4288856983], length 178: HTTP
+2026-10-26 03:47:26.168859 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49116: Flags [P.], seq 173:351, ack 241, win 64, options [nop,nop,TS val 3528878811 ecr 4288856983], length 178: HTTP
+2026-10-26 03:47:26.168861 veth03eca504 In  IP 10.244.1.24.49116 > 10.101.22.76.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 4288856983 ecr 3528878811], length 0
+2026-10-26 03:47:26.168864 veth6699296e Out IP 10.244.1.24.49116 > 10.244.1.38.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 4288856983 ecr 3528878811], length 0
+2026-10-26 03:47:26.169102 veth03eca504 In  IP 10.244.1.24.49116 > 10.101.22.76.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 4288856983 ecr 3528878811], length 0
+2026-10-26 03:47:26.169207 veth6699296e Out IP 10.244.1.24.49116 > 10.244.1.38.8080: Flags [F.], seq 241, ack 351, win 63, options [nop,nop,TS val 4288856983 ecr 3528878811], length 0
+2026-10-26 03:47:26.170438 veth03eca504 In  IP 10.244.1.24.49670 > 192.168.49.3.30080: Flags [S], seq 3843888906, win 64240, options [mss 1460,sackOK,TS val 2570188430 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:26.170616 veth2203d974 Out IP 10.244.1.1.29792 > 10.244.1.45.8080: Flags [S], seq 3843888906, win 64240, options [mss 1460,sackOK,TS val 2570188430 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:26.170627 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.29792: Flags [S.], seq 3274652786, ack 3843888907, win 65160, options [mss 1460,sackOK,TS val 855367354 ecr 2570188430,nop,wscale 10], length 0
+2026-10-26 03:47:26.170657 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.49670: Flags [S.], seq 3274652786, ack 3843888907, win 65160, options [mss 1460,sackOK,TS val 855367354 ecr 2570188430,nop,wscale 10], length 0
+2026-10-26 03:47:26.170709 veth03eca504 In  IP 10.244.1.24.49670 > 192.168.49.3.30080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2570188431 ecr 855367354], length 0
+2026-10-26 03:47:26.170776 veth2203d974 Out IP 10.244.1.1.29792 > 10.244.1.45.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2570188431 ecr 855367354], length 0
+2026-10-26 03:47:26.170823 veth03eca504 In  IP 10.244.1.24.49670 > 192.168.49.3.30080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 2570188431 ecr 855367354], length 180
+2026-10-26 03:47:26.170925 veth2203d974 Out IP 10.244.1.1.29792 > 10.244.1.45.8080: Flags [P.], seq 1:181, ack 1, win 63, options [nop,nop,TS val 2570188431 ecr 855367354], length 180: HTTP: POST /order HTTP/1.1
+2026-10-26 03:47:26.170929 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.29792: Flags [.], ack 181, win 64, options [nop,nop,TS val 855367354 ecr 2570188431], length 0
+2026-10-26 03:47:26.170939 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.49670: Flags [.], ack 181, win 64, options [nop,nop,TS val 855367354 ecr 2570188431], length 0
+2026-10-26 03:47:26.171944 veth03eca504 In  IP 10.244.1.24.49670 > 192.168.49.3.30080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 2570188432 ecr 855367354], length 42
+2026-10-26 03:47:26.171977 veth2203d974 Out IP 10.244.1.1.29792 > 10.244.1.45.8080: Flags [P.], seq 181:223, ack 1, win 63, options [nop,nop,TS val 2570188432 ecr 855367354], length 42: HTTP
+2026-10-26 03:47:26.171981 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.29792: Flags [.], ack 223, win 64, options [nop,nop,TS val 855367355 ecr 2570188432], length 0
+2026-10-26 03:47:26.171987 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.49670: Flags [.], ack 223, win 64, options [nop,nop,TS val 855367355 ecr 2570188432], length 0
+2026-10-26 03:47:26.172115 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.24.49116: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 3528878814 ecr 4288856983], length 0
+2026-10-26 03:47:26.172212 veth03eca504 Out IP 10.101.22.76.8080 > 10.244.1.24.49116: Flags [F.], seq 351, ack 242, win 64, options [nop,nop,TS val 3528878814 ecr 4288856983], length 0
+2026-10-26 03:47:26.172219 veth03eca504 In  IP 10.244.1.24.49116 > 10.101.22.76.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 4288856986 ecr 3528878814], length 0
+2026-10-26 03:47:26.172311 veth6699296e Out IP 10.244.1.24.49116 > 10.244.1.38.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 4288856986 ecr 3528878814], length 0
+2026-10-26 03:47:26.206335 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.29792: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 855367389 ecr 2570188432], length 172: HTTP: HTTP/1.1 201 CREATED
+2026-10-26 03:47:26.206387 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.49670: Flags [P.], seq 1:173, ack 223, win 64, options [nop,nop,TS val 855367389 ecr 2570188432], length 172
+2026-10-26 03:47:26.206398 veth03eca504 In  IP 10.244.1.24.49670 > 192.168.49.3.30080: Flags [.], ack 173, win 63, options [nop,nop,TS val 2570188466 ecr 855367389], length 0
+2026-10-26 03:47:26.206409 veth2203d974 Out IP 10.244.1.1.29792 > 10.244.1.45.8080: Flags [.], ack 173, win 63, options [nop,nop,TS val 2570188466 ecr 855367389], length 0
+2026-10-26 03:47:26.206636 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.29792: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 855367390 ecr 2570188466], length 178: HTTP
+2026-10-26 03:47:26.206643 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.49670: Flags [P.], seq 173:351, ack 223, win 64, options [nop,nop,TS val 855367390 ecr 2570188466], length 178
+2026-10-26 03:47:26.206669 veth03eca504 In  IP 10.244.1.24.49670 > 192.168.49.3.30080: Flags [.], ack 351, win 63, options [nop,nop,TS val 2570188467 ecr 855367390], length 0
+2026-10-26 03:47:26.206684 veth2203d974 Out IP 10.244.1.1.29792 > 10.244.1.45.8080: Flags [.], ack 351, win 63, options [nop,nop,TS val 2570188467 ecr 855367390], length 0
+2026-10-26 03:47:26.206744 veth03eca504 In  IP 10.244.1.24.49670 > 192.168.49.3.30080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 2570188467 ecr 855367390], length 0
+2026-10-26 03:47:26.206829 veth2203d974 Out IP 10.244.1.1.29792 > 10.244.1.45.8080: Flags [F.], seq 223, ack 351, win 63, options [nop,nop,TS val 2570188467 ecr 855367390], length 0
+2026-10-26 03:47:26.206893 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.29792: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 855367390 ecr 2570188467], length 0
+2026-10-26 03:47:26.206943 veth03eca504 Out IP 192.168.49.3.30080 > 10.244.1.24.49670: Flags [F.], seq 351, ack 224, win 64, options [nop,nop,TS val 855367390 ecr 2570188467], length 0
+2026-10-26 03:47:26.206951 veth03eca504 In  IP 10.244.1.24.49670 > 192.168.49.3.30080: Flags [.], ack 352, win 63, options [nop,nop,TS val 2570188467 ecr 855367390], length 0
+2026-10-26 03:47:26.207008 veth2203d974 Out IP 10.244.1.1.29792 > 10.244.1.45.8080: Flags [.], ack 352, win 63, options [nop,nop,TS val 2570188467 ecr 855367390], length 0
+2026-10-26 03:47:26.407821 eth0  In  IP 10.244.0.95.50938 > 10.244.1.45.8080: Flags [S], seq 1934357568, win 64240, options [mss 1460,sackOK,TS val 1478783353 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:26.408002 veth2203d974 Out IP 10.244.0.95.50938 > 10.244.1.45.8080: Flags [S], seq 1934357568, win 64240, options [mss 1460,sackOK,TS val 1478783353 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:26.408016 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.0.95.50938: Flags [S.], seq 1256089753, ack 1934357569, win 65160, options [mss 1460,sackOK,TS val 1629969804 ecr 1478783353,nop,wscale 10], length 0
+2026-10-26 03:47:26.408052 eth0  Out IP 10.244.1.45.8080 > 10.244.0.95.50938: Flags [S.], seq 1256089753, ack 1934357569, win 65160, options [mss 1460,sackOK,TS val 1629969804 ecr 1478783353,nop,wscale 10], length 0
+2026-10-26 03:47:26.408205 eth0  In  IP 10.244.0.95.50938 > 10.244.1.45.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1478783353 ecr 1629969804], length 0
+2026-10-26 03:47:26.408294 veth2203d974 Out IP 10.244.0.95.50938 > 10.244.1.45.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1478783353 ecr 1629969804], length 0
+2026-10-26 03:47:26.409100 eth0  In  IP 10.244.0.95.50938 > 10.244.1.45.8080: Flags [P.], seq 1:366, ack 1, win 63, options [nop,nop,TS val 1478783354 ecr 1629969804], length 365: HTTP: GET /metrics HTTP/1.1
+2026-10-26 03:47:26.409166 veth2203d974 Out IP 10.244.0.95.50938 > 10.244.1.45.8080: Flags [P.], seq 1:366, ack 1, win 63, options [nop,nop,TS val 1478783354 ecr 1629969804], length 365: HTTP: GET /metrics HTTP/1.1
+2026-10-26 03:47:26.409174 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.0.95.50938: Flags [.], ack 366, win 64, options [nop,nop,TS val 1629969805 ecr 1478783354], length 0
+2026-10-26 03:47:26.409188 eth0  Out IP 10.244.1.45.8080 > 10.244.0.95.50938: Flags [.], ack 366, win 64, options [nop,nop,TS val 1629969805 ecr 1478783354], length 0
+2026-10-26 03:47:26.410953 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.0.95.50938: Flags [P.], seq 1:193, ack 366, win 64, options [nop,nop,TS val 1629969807 ecr 1478783354], length 192: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:26.411030 eth0  Out IP 10.244.1.45.8080 > 10.244.0.95.50938: Flags [P.], seq 1:193, ack 366, win 64, options [nop,nop,TS val 1629969807 ecr 1478783354], length 192: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:26.411166 eth0  In  IP 10.244.0.95.50938 > 10.244.1.45.8080: Flags [.], ack 193, win 63, options [nop,nop,TS val 1478783356 ecr 1629969807], length 0
+2026-10-26 03:47:26.411174 veth2203d974 Out IP 10.244.0.95.50938 > 10.244.1.45.8080: Flags [.], ack 193, win 63, options [nop,nop,TS val 1478783356 ecr 1629969807], length 0
+2026-10-26 03:47:26.411192 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.0.95.50938: Flags [P.], seq 193:5045, ack 366, win 64, options [nop,nop,TS val 1629969807 ecr 1478783356], length 4852: HTTP
+2026-10-26 03:47:26.411213 eth0  Out IP 10.244.1.45.8080 > 10.244.0.95.50938: Flags [P.], seq 193:5045, ack 366, win 64, options [nop,nop,TS val 1629969807 ecr 1478783356], length 4852: HTTP
+2026-10-26 03:47:26.411228 eth0  In  IP 10.244.0.95.50938 > 10.244.1.45.8080: Flags [.], ack 5045, win 73, options [nop,nop,TS val 1478783356 ecr 1629969807], length 0
+2026-10-26 03:47:26.411230 veth2203d974 Out IP 10.244.0.95.50938 > 10.244.1.45.8080: Flags [.], ack 5045, win 73, options [nop,nop,TS val 1478783356 ecr 1629969807], length 0
+2026-10-26 03:47:26.411311 eth0  In  IP 10.244.0.95.50938 > 10.244.1.45.8080: Flags [F.], seq 366, ack 5045, win 73, options [nop,nop,TS val 1478783356 ecr 1629969807], length 0
+2026-10-26 03:47:26.411382 veth2203d974 Out IP 10.244.0.95.50938 > 10.244.1.45.8080: Flags [F.], seq 366, ack 5045, win 73, options [nop,nop,TS val 1478783356 ecr 1629969807], length 0
+2026-10-26 03:47:26.411467 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.0.95.50938: Flags [F.], seq 5045, ack 367, win 64, options [nop,nop,TS val 1629969807 ecr 1478783356], length 0
+2026-10-26 03:47:26.411606 eth0  Out IP 10.244.1.45.8080 > 10.244.0.95.50938: Flags [F.], seq 5045, ack 367, win 64, options [nop,nop,TS val 1629969807 ecr 1478783356], length 0
+2026-10-26 03:47:26.411667 eth0  In  IP 10.244.0.95.50938 > 10.244.1.45.8080: Flags [.], ack 5046, win 73, options [nop,nop,TS val 1478783357 ecr 1629969807], length 0
+2026-10-26 03:47:26.411694 veth2203d974 Out IP 10.244.0.95.50938 > 10.244.1.45.8080: Flags [.], ack 5046, win 73, options [nop,nop,TS val 1478783357 ecr 1629969807], length 0
+2026-10-26 03:47:26.771415 veth2203d974 Out IP 10.244.1.1.58196 > 10.244.1.45.8080: Flags [S], seq 3108713925, win 64240, options [mss 1460,sackOK,TS val 2466314534 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:26.771431 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.58196: Flags [S.], seq 3254817047, ack 3108713926, win 65160, options [mss 1460,sackOK,TS val 2025409256 ecr 2466314534,nop,wscale 10], length 0
+2026-10-26 03:47:26.771586 veth2203d974 Out IP 10.244.1.1.58196 > 10.244.1.45.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 2466314534 ecr 2025409256], length 0
+2026-10-26 03:47:26.771847 veth2203d974 Out IP 10.244.1.1.58196 > 10.244.1.45.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 2466314535 ecr 2025409256], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:26.771853 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.58196: Flags [.], ack 110, win 64, options [nop,nop,TS val 2025409257 ecr 2466314535], length 0
+2026-10-26 03:47:26.773818 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.58196: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 2025409259 ecr 2466314535], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:26.773916 veth2203d974 Out IP 10.244.1.1.58196 > 10.244.1.45.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 2466314537 ecr 2025409259], length 0
+2026-10-26 03:47:26.773952 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.58196: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 2025409259 ecr 2466314537], length 2: HTTP
+2026-10-26 03:47:26.773960 veth2203d974 Out IP 10.244.1.1.58196 > 10.244.1.45.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 2466314537 ecr 2025409259], length 0
+2026-10-26 03:47:26.774003 veth2203d974 Out IP 10.244.1.1.58196 > 10.244.1.45.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 2466314537 ecr 2025409259], length 0
+2026-10-26 03:47:26.774290 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.58196: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 2025409259 ecr 2466314537], length 0
+2026-10-26 03:47:26.774406 veth2203d974 Out IP 10.244.1.1.58196 > 10.244.1.45.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 2466314537 ecr 2025409259], length 0
+2026-10-26 03:47:27.082469 veth2203d974 Out IP 10.244.1.1.58198 > 10.244.1.45.8080: Flags [S], seq 2347855406, win 64240, options [mss 1460,sackOK,TS val 3779229377 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:27.082482 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.58198: Flags [S.], seq 3559202506, ack 2347855407, win 65160, options [mss 1460,sackOK,TS val 3623210753 ecr 3779229377,nop,wscale 10], length 0
+2026-10-26 03:47:27.082635 veth2203d974 Out IP 10.244.1.1.58198 > 10.244.1.45.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 3779229378 ecr 3623210753], length 0
+2026-10-26 03:47:27.082833 veth2203d974 Out IP 10.244.1.1.58198 > 10.244.1.45.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 3779229378 ecr 3623210753], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:27.082839 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.58198: Flags [.], ack 110, win 64, options [nop,nop,TS val 3623210754 ecr 3779229378], length 0
+2026-10-26 03:47:27.084071 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.58198: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 3623210755 ecr 3779229378], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:27.084130 veth2203d974 Out IP 10.244.1.1.58198 > 10.244.1.45.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 3779229379 ecr 3623210755], length 0
+2026-10-26 03:47:27.084140 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.58198: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 3623210755 ecr 3779229379], length 2: HTTP
+2026-10-26 03:47:27.084145 veth2203d974 Out IP 10.244.1.1.58198 > 10.244.1.45.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 3779229379 ecr 3623210755], length 0
+2026-10-26 03:47:27.084255 veth2203d974 Out IP 10.244.1.1.58198 > 10.244.1.45.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 3779229379 ecr 3623210755], length 0
+2026-10-26 03:47:27.084478 veth2203d974 In  IP 10.244.1.45.8080 > 10.244.1.1.58198: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 3623210755 ecr 3779229379], length 0
+2026-10-26 03:47:27.084684 veth2203d974 Out IP 10.244.1.1.58198 > 10.244.1.45.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 3779229380 ecr 3623210755], length 0
+2026-10-26 03:47:28.399425 veth6699296e Out IP 10.244.1.1.51856 > 10.244.1.38.8080: Flags [S], seq 213741272, win 64240, options [mss 1460,sackOK,TS val 3079744618 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:28.399444 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.51856: Flags [S.], seq 3311598767, ack 213741273, win 65160, options [mss 1460,sackOK,TS val 684353600 ecr 3079744618,nop,wscale 10], length 0
+2026-10-26 03:47:28.399716 veth6699296e Out IP 10.244.1.1.51856 > 10.244.1.38.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 3079744619 ecr 684353600], length 0
+2026-10-26 03:47:28.399916 veth6699296e Out IP 10.244.1.1.51856 > 10.244.1.38.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 3079744619 ecr 684353600], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:28.399924 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.51856: Flags [.], ack 110, win 64, options [nop,nop,TS val 684353601 ecr 3079744619], length 0
+2026-10-26 03:47:28.401131 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.51856: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 684353602 ecr 3079744619], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:28.401211 veth6699296e Out IP 10.244.1.1.51856 > 10.244.1.38.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 3079744620 ecr 684353602], length 0
+2026-10-26 03:47:28.401223 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.51856: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 684353602 ecr 3079744620], length 2: HTTP
+2026-10-26 03:47:28.401229 veth6699296e Out IP 10.244.1.1.51856 > 10.244.1.38.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 3079744620 ecr 684353602], length 0
+2026-10-26 03:47:28.401411 veth6699296e Out IP 10.244.1.1.51856 > 10.244.1.38.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 3079744620 ecr 684353602], length 0
+2026-10-26 03:47:28.401691 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.51856: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 684353603 ecr 3079744620], length 0
+2026-10-26 03:47:28.401875 veth6699296e Out IP 10.244.1.1.51856 > 10.244.1.38.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 3079744621 ecr 684353603], length 0
+2026-10-26 03:47:29.780352 veth6699296e Out IP 10.244.1.1.51858 > 10.244.1.38.8080: Flags [S], seq 13701495, win 64240, options [mss 1460,sackOK,TS val 1032457411 ecr 0,nop,wscale 10], length 0
+2026-10-26 03:47:29.780367 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.51858: Flags [S.], seq 3733778923, ack 13701496, win 65160, options [mss 1460,sackOK,TS val 1376708647 ecr 1032457411,nop,wscale 10], length 0
+2026-10-26 03:47:29.780452 veth6699296e Out IP 10.244.1.1.51858 > 10.244.1.38.8080: Flags [.], ack 1, win 63, options [nop,nop,TS val 1032457411 ecr 1376708647], length 0
+2026-10-26 03:47:29.780737 veth6699296e Out IP 10.244.1.1.51858 > 10.244.1.38.8080: Flags [P.], seq 1:110, ack 1, win 63, options [nop,nop,TS val 1032457412 ecr 1376708647], length 109: HTTP: GET /health HTTP/1.1
+2026-10-26 03:47:29.780743 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.51858: Flags [.], ack 110, win 64, options [nop,nop,TS val 1376708648 ecr 1032457412], length 0
+2026-10-26 03:47:29.782049 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.51858: Flags [P.], seq 1:175, ack 110, win 64, options [nop,nop,TS val 1376708649 ecr 1032457412], length 174: HTTP: HTTP/1.1 200 OK
+2026-10-26 03:47:29.782097 veth6699296e Out IP 10.244.1.1.51858 > 10.244.1.38.8080: Flags [.], ack 175, win 63, options [nop,nop,TS val 1032457413 ecr 1376708649], length 0
+2026-10-26 03:47:29.782109 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.51858: Flags [P.], seq 175:177, ack 110, win 64, options [nop,nop,TS val 1376708649 ecr 1032457413], length 2: HTTP
+2026-10-26 03:47:29.782115 veth6699296e Out IP 10.244.1.1.51858 > 10.244.1.38.8080: Flags [.], ack 177, win 63, options [nop,nop,TS val 1032457413 ecr 1376708649], length 0
+2026-10-26 03:47:29.782609 veth6699296e Out IP 10.244.1.1.51858 > 10.244.1.38.8080: Flags [F.], seq 110, ack 177, win 63, options [nop,nop,TS val 1032457414 ecr 1376708649], length 0
+2026-10-26 03:47:29.782728 veth6699296e In  IP 10.244.1.38.8080 > 10.244.1.1.51858: Flags [F.], seq 177, ack 111, win 64, options [nop,nop,TS val 1376708650 ecr 1032457414], length 0
+2026-10-26 03:47:29.782793 veth6699296e Out IP 10.244.1.1.51858 > 10.244.1.38.8080: Flags [.], ack 178, win 63, options [nop,nop,TS val 1032457414 ecr 1376708650], length 0

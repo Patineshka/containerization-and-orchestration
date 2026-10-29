@@ -1,0 +1,11 @@
+{
+  "requests": 600,
+  "failed": 0,
+  "deletions_during_requests": 33,
+  "requests_by_target": {
+    "dns-service": 300,
+    "nodeport": 300
+  },
+  "start_utc": "2026-10-26T02:01:23.001040+00:00",
+  "finish_utc": "2026-10-26T02:06:22.080603+00:00"
+}

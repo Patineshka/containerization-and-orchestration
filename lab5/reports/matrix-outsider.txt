@@ -1,0 +1,4 @@
+{"source": "outsider", "destination": "shop-api.lab3.svc.cluster.local:8080", "expected": "deny", "actual": "timeout", "result": "PASS", "error": null}
+{"source": "outsider", "destination": "shop-worker.lab3.svc.cluster.local:8080", "expected": "deny", "actual": "timeout", "result": "PASS", "error": null}
+{"source": "outsider", "destination": "shop-postgres-rw.lab3.svc.cluster.local:5432", "expected": "deny", "actual": "timeout", "result": "PASS", "error": null}
+{"summary": true, "checks": 3, "failed": 0}

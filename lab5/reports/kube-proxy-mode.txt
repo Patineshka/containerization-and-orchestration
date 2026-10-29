@@ -1,0 +1,4 @@
+[pod/kube-proxy-zpd48/kube-proxy] I1019 19:02:22.764680       1 server_linux.go:144] "Using iptables Proxier"
+[pod/kube-proxy-zpd48/kube-proxy] I1019 19:02:22.766774       1 proxier.go:231] "Setting route_localnet=1 to allow node-ports on localhost; to change this either disable iptables.localhostNodePorts (--iptables-localhost-nodeports) or set nodePortAddresses (--nodeport-addresses) to filter loopback addresses" ipFamily="IPv4"
+[pod/kube-proxy-r9fhm/kube-proxy] I1025 20:02:16.100760       1 server_linux.go:144] "Using iptables Proxier"
+[pod/kube-proxy-r9fhm/kube-proxy] I1025 20:02:16.102748       1 proxier.go:231] "Setting route_localnet=1 to allow node-ports on localhost; to change this either disable iptables.localhostNodePorts (--iptables-localhost-nodeports) or set nodePortAddresses (--nodeport-addresses) to filter loopback addresses" ipFamily="IPv4"

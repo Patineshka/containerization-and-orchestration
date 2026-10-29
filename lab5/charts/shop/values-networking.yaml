@@ -1,0 +1,5 @@
+api:
+  service:
+    type: NodePort
+    port: 8080
+    nodePort: 30080

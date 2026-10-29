@@ -1,0 +1,15 @@
+=== cilium-459sd ===
+Oct 26 06:06:34.299: lab3/shop-client (ID:9659) <> ff02::2 (unknown) Unsupported L3 protocol DROPPED (ICMPv6 RouterSolicitation)
+Oct 26 06:07:06.091: lab3/shop-client:37848 (ID:9659) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:07:06.091: lab3/shop-client:37848 (ID:9659) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:07:07.130: lab3/shop-client:37848 (ID:9659) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:07:07.130: lab3/shop-client:37848 (ID:9659) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:07:08.154: lab3/shop-client:37848 (ID:9659) <> lab3/shop-postgres-1:5432 (ID:1896) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:07:08.154: lab3/shop-client:37848 (ID:9659) <> lab3/shop-postgres-1:5432 (ID:1896) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:07:09.095: lab3/shop-client:50386 (ID:9659) <> lab3/shop-worker-57d444454f-s7tvj:8080 (ID:34985) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:07:09.095: lab3/shop-client:50386 (ID:9659) <> lab3/shop-worker-57d444454f-s7tvj:8080 (ID:34985) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:07:10.138: lab3/shop-client:50386 (ID:9659) <> lab3/shop-worker-57d444454f-s7tvj:8080 (ID:34985) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:07:10.138: lab3/shop-client:50386 (ID:9659) <> lab3/shop-worker-57d444454f-s7tvj:8080 (ID:34985) Policy denied DROPPED (TCP Flags: SYN)
+Oct 26 06:07:11.162: lab3/shop-client:50386 (ID:9659) <> lab3/shop-worker-57d444454f-s7tvj:8080 (ID:34985) policy-verdict:none EGRESS DENIED (TCP Flags: SYN)
+Oct 26 06:07:11.162: lab3/shop-client:50386 (ID:9659) <> lab3/shop-worker-57d444454f-s7tvj:8080 (ID:34985) Policy denied DROPPED (TCP Flags: SYN)
+=== cilium-njwm5 ===

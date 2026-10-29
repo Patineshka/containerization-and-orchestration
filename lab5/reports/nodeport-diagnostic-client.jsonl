@@ -1,0 +1,9 @@
+{"timestamp": "2026-10-26T03:02:42.931683+00:00", "target": "dns-service", "url": "http://shop-api.lab3.svc.cluster.local:8080/order", "status": 201, "success": true, "latency_ms": 191.49, "total": 1, "failed": 0, "error": null}
+{"timestamp": "2026-10-26T03:02:47.934837+00:00", "target": "nodeport", "url": "http://192.168.49.2:30080/order", "status": null, "success": false, "latency_ms": 5003.11, "total": 2, "failed": 1, "error": "<urlopen error timed out>"}
+{"timestamp": "2026-10-26T03:02:48.046563+00:00", "target": "dns-service", "url": "http://shop-api.lab3.svc.cluster.local:8080/order", "status": 201, "success": true, "latency_ms": 111.52, "total": 3, "failed": 1, "error": null}
+{"timestamp": "2026-10-26T03:02:48.111262+00:00", "target": "nodeport", "url": "http://192.168.49.3:30080/order", "status": 201, "success": true, "latency_ms": 64.64, "total": 4, "failed": 1, "error": null}
+{"timestamp": "2026-10-26T03:02:49.045624+00:00", "target": "dns-service", "url": "http://shop-api.lab3.svc.cluster.local:8080/order", "status": 201, "success": true, "latency_ms": 110.44, "total": 5, "failed": 1, "error": null}
+{"timestamp": "2026-10-26T03:02:54.050682+00:00", "target": "nodeport", "url": "http://192.168.49.2:30080/order", "status": null, "success": false, "latency_ms": 5005.04, "total": 6, "failed": 2, "error": "<urlopen error timed out>"}
+{"timestamp": "2026-10-26T03:02:54.115164+00:00", "target": "dns-service", "url": "http://shop-api.lab3.svc.cluster.local:8080/order", "status": 201, "success": true, "latency_ms": 64.32, "total": 7, "failed": 2, "error": null}
+{"timestamp": "2026-10-26T03:02:59.121518+00:00", "target": "nodeport", "url": "http://192.168.49.3:30080/order", "status": null, "success": false, "latency_ms": 5004.76, "total": 8, "failed": 3, "error": "<urlopen error timed out>"}
+{"summary": true, "total": 8, "failed": 3}

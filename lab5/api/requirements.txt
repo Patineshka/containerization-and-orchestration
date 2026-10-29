@@ -1,0 +1,8 @@
+Flask>=3.1,<4
+requests>=2.32,<3
+prometheus-client>=0.23,<1
+opentelemetry-sdk>=1.38,<2
+opentelemetry-exporter-otlp-proto-grpc>=1.38,<2
+opentelemetry-instrumentation-flask>=0.59b0,<1
+opentelemetry-instrumentation-requests>=0.59b0,<1
+psycopg[binary]>=3.2,<4

@@ -1,0 +1,252 @@
+
+=== Отбрасывания Hubble — метки и значения ===
+{
+  "status": "success",
+  "data": {
+    "resultType": "vector",
+    "result": [
+      {
+        "metric": {
+          "__name__": "hubble_drop_total",
+          "container": "cilium-agent",
+          "endpoint": "hubble-metrics",
+          "instance": "192.168.49.3:9965",
+          "job": "hubble-metrics",
+          "namespace": "kube-system",
+          "node": "lab2-m02",
+          "pod": "cilium-vr2tk",
+          "protocol": "ICMPv6",
+          "reason": "UNSUPPORTED_L3_PROTOCOL",
+          "service": "hubble-metrics",
+          "source_namespace": "lab5-outsider"
+        },
+        "value": [
+          1792997275.645,
+          "1"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "hubble_drop_total",
+          "container": "cilium-agent",
+          "endpoint": "hubble-metrics",
+          "instance": "192.168.49.3:9965",
+          "job": "hubble-metrics",
+          "namespace": "kube-system",
+          "node": "lab2-m02",
+          "pod": "cilium-vr2tk",
+          "protocol": "ICMPv6",
+          "reason": "UNSUPPORTED_L3_PROTOCOL",
+          "service": "hubble-metrics",
+          "source_namespace": "lab3"
+        },
+        "value": [
+          1792997275.645,
+          "1"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "hubble_drop_total",
+          "container": "cilium-agent",
+          "destination_namespace": "lab3",
+          "endpoint": "hubble-metrics",
+          "instance": "192.168.49.3:9965",
+          "job": "hubble-metrics",
+          "namespace": "kube-system",
+          "node": "lab2-m02",
+          "pod": "cilium-vr2tk",
+          "protocol": "TCP",
+          "reason": "POLICY_DENIED",
+          "service": "hubble-metrics",
+          "source_namespace": "lab3"
+        },
+        "value": [
+          1792997275.645,
+          "12"
+        ]
+      }
+    ]
+  }
+}
+
+=== TCP-флаги ===
+{
+  "status": "success",
+  "data": {
+    "resultType": "vector",
+    "result": [
+      {
+        "metric": {
+          "flag": "FIN"
+        },
+        "value": [
+          1792997275.649,
+          "2176"
+        ]
+      },
+      {
+        "metric": {
+          "flag": "SYN-ACK"
+        },
+        "value": [
+          1792997275.649,
+          "1351"
+        ]
+      },
+      {
+        "metric": {
+          "flag": "RST"
+        },
+        "value": [
+          1792997275.649,
+          "558"
+        ]
+      },
+      {
+        "metric": {
+          "flag": "SYN"
+        },
+        "value": [
+          1792997275.649,
+          "2339"
+        ]
+      }
+    ]
+  }
+}
+
+=== Доступные DNS-метрики CoreDNS ===
+{
+  "status": "success",
+  "data": {
+    "resultType": "vector",
+    "result": [
+      {
+        "metric": {
+          "__name__": "coredns_dns_request_duration_seconds_bucket"
+        },
+        "value": [
+          1792997275.652,
+          "17"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "coredns_dns_request_duration_seconds_sum"
+        },
+        "value": [
+          1792997275.652,
+          "1"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "coredns_dns_request_duration_seconds_count"
+        },
+        "value": [
+          1792997275.652,
+          "1"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "coredns_dns_request_size_bytes_bucket"
+        },
+        "value": [
+          1792997275.652,
+          "30"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "coredns_dns_request_size_bytes_sum"
+        },
+        "value": [
+          1792997275.652,
+          "2"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "coredns_dns_request_size_bytes_count"
+        },
+        "value": [
+          1792997275.652,
+          "2"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "coredns_dns_requests_total"
+        },
+        "value": [
+          1792997275.652,
+          "5"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "coredns_dns_response_size_bytes_bucket"
+        },
+        "value": [
+          1792997275.652,
+          "30"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "coredns_dns_response_size_bytes_sum"
+        },
+        "value": [
+          1792997275.652,
+          "2"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "coredns_dns_response_size_bytes_count"
+        },
+        "value": [
+          1792997275.652,
+          "2"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "coredns_dns_responses_total"
+        },
+        "value": [
+          1792997275.652,
+          "4"
+        ]
+      }
+    ]
+  }
+}
+
+=== Доступность CoreDNS для сбора метрик ===
+{
+  "status": "success",
+  "data": {
+    "resultType": "vector",
+    "result": [
+      {
+        "metric": {
+          "__name__": "up",
+          "container": "coredns",
+          "endpoint": "http-metrics",
+          "instance": "10.244.0.74:9153",
+          "job": "coredns",
+          "namespace": "kube-system",
+          "pod": "coredns-559f6c778d-4xbxt",
+          "service": "monitoring-kube-prometheus-coredns"
+        },
+        "value": [
+          1792997275.656,
+          "1"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "networkPolicy": {
+    "enabled": true,
+    "ciliumPolicies": {
+      "converted-allow-worker-egress": {
+        "endpointSelector": {
+          "matchLabels": {
+            "k8s:app": "shop-worker"
+          }
+        },
+        "enableDefaultDeny": {
+          "egress": true
+        },
+        "egress": [
+          {
+            "toEndpoints": [
+              {
+                "matchLabels": {
+                  "k8s:app": "shop-postgres"
+                }
+              }
+            ],
+            "toPorts": [
+              {
+                "ports": [
+                  {
+                    "port": "5433",
+                    "protocol": "TCP"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "toEndpoints": [
+              {
+                "matchLabels": {
+                  "k8s:app.kubernetes.io/instance": "jaeger",
+                  "k8s:io.kubernetes.pod.namespace": "monitoring"
+                }
+              }
+            ],
+            "toPorts": [
+              {
+                "ports": [
+                  {
+                    "port": "4317",
+                    "protocol": "TCP"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

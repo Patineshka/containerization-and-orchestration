@@ -1,0 +1,176 @@
+=== Настройки Cilium ===
+  cni-chaining-mode: generic-veth
+  cni-chaining-target: kindnet
+  enable-host-firewall: "false"
+  enable-host-legacy-routing: "true"
+  enable-ipv4-masquerade: "false"
+  enable-ipv6-masquerade: "true"
+  enable-masquerade-to-route-source: "false"
+  kube-proxy-replacement: "false"
+=== lab2: правила и счётчики ===
+:CILIUM_POST_mangle - [0:0]
+:CILIUM_PRE_mangle - [0:0]
+[3921:1446353] -A PREROUTING -m comment --comment "cilium-feeder: CILIUM_PRE_mangle" -j CILIUM_PRE_mangle
+[3924:1879413] -A POSTROUTING -m comment --comment "cilium-feeder: CILIUM_POST_mangle" -j CILIUM_POST_mangle
+[0:0] -A CILIUM_PRE_mangle ! -o lo -m socket --transparent -m mark ! --mark 0xe00/0xf00 -m mark ! --mark 0x800/0xf00 -m comment --comment "cilium: any->pod redirect proxied traffic to host proxy" -j MARK --set-xmark 0x200/0xffffffff
+[0:0] -A CILIUM_PRE_mangle -p tcp -m mark --mark 0xf3b10200 -m comment --comment "cilium: TPROXY to host cilium-dns-egress proxy" -j TPROXY --on-port 45555 --on-ip 127.0.0.1 --tproxy-mark 0x200/0xffffffff
+[0:0] -A CILIUM_PRE_mangle -p udp -m mark --mark 0xf3b10200 -m comment --comment "cilium: TPROXY to host cilium-dns-egress proxy" -j TPROXY --on-port 45555 --on-ip 127.0.0.1 --tproxy-mark 0x200/0xffffffff
+:CILIUM_OUTPUT_raw - [0:0]
+:CILIUM_PRE_raw - [0:0]
+[3920:1446301] -A PREROUTING -m comment --comment "cilium-feeder: CILIUM_PRE_raw" -j CILIUM_PRE_raw
+[3229:984139] -A OUTPUT -m comment --comment "cilium-feeder: CILIUM_OUTPUT_raw" -j CILIUM_OUTPUT_raw
+[0:0] -A CILIUM_OUTPUT_raw -o cilium_host -m mark --mark 0xa00/0xfffffeff -m comment --comment "cilium: NOTRACK for proxy return traffic" -j CT --notrack
+[0:0] -A CILIUM_OUTPUT_raw -o cilium_host -m mark --mark 0x800/0xe00 -m comment --comment "cilium: NOTRACK for L7 proxy upstream traffic" -j CT --notrack
+[0:0] -A CILIUM_PRE_raw -m mark --mark 0x200/0xf00 -m comment --comment "cilium: NOTRACK for proxy traffic" -j CT --notrack
+:CILIUM_FORWARD - [0:0]
+:CILIUM_INPUT - [0:0]
+:CILIUM_OUTPUT - [0:0]
+:KUBE-FORWARD - [0:0]
+[3230:537232] -A INPUT -m comment --comment "cilium-feeder: CILIUM_INPUT" -j CILIUM_INPUT
+[715:911095] -A FORWARD -m comment --comment "cilium-feeder: CILIUM_FORWARD" -j CILIUM_FORWARD
+[5425842:5886908840] -A FORWARD -m comment --comment "kubernetes forwarding rules" -j KUBE-FORWARD
+[3229:984139] -A OUTPUT -m comment --comment "cilium-feeder: CILIUM_OUTPUT" -j CILIUM_OUTPUT
+[0:0] -A CILIUM_FORWARD -o cilium_host -m comment --comment "cilium: any->cluster on cilium_host forward accept" -j ACCEPT
+[0:0] -A CILIUM_FORWARD -i cilium_host -m comment --comment "cilium: cluster->any on cilium_host forward accept (nodeport)" -j ACCEPT
+[0:0] -A CILIUM_FORWARD -i lxc+ -m comment --comment "cilium: cluster->any on lxc+ forward accept" -j ACCEPT
+[0:0] -A CILIUM_FORWARD -i cilium_net -m comment --comment "cilium: cluster->any on cilium_net forward accept (nodeport)" -j ACCEPT
+[0:0] -A CILIUM_INPUT -m mark --mark 0x200/0xf00 -m comment --comment "cilium: ACCEPT for proxy traffic" -j ACCEPT
+[0:0] -A CILIUM_OUTPUT -m mark --mark 0xa00/0xe00 -m comment --comment "cilium: ACCEPT for proxy traffic" -j ACCEPT
+[0:0] -A CILIUM_OUTPUT -m mark --mark 0x800/0xe00 -m comment --comment "cilium: ACCEPT for l7 proxy upstream traffic" -j ACCEPT
+[3229:984139] -A CILIUM_OUTPUT -m mark ! --mark 0xd00/0xf00 -m mark ! --mark 0xe00/0xf00 -m mark ! --mark 0x400/0xf00 -m mark ! --mark 0xa00/0xe00 -m mark ! --mark 0x800/0xe00 -m comment --comment "cilium: host->any mark as from host" -j MARK --set-xmark 0xc00/0xf00
+[0:0] -A DOCKER ! -i docker0 -o docker0 -j DROP
+[0:0] -A KUBE-FIREWALL ! -s 127.0.0.0/8 -d 127.0.0.0/8 -m comment --comment "block incoming localnet connections" -m conntrack ! --ctstate RELATED,ESTABLISHED,DNAT -j DROP
+[0:0] -A KUBE-FORWARD -m conntrack --ctstate INVALID -m nfacct --nfacct-name  ct_state_invalid_dropped_pkts -j DROP
+[1:60] -A KUBE-FORWARD -m comment --comment "kubernetes forwarding rules" -m mark --mark 0x4000/0x4000 -j ACCEPT
+[23414:24278214] -A KUBE-FORWARD -m comment --comment "kubernetes forwarding conntrack rule" -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+[0:0] -A KUBE-SERVICES -d 10.102.36.241/32 -p tcp -m comment --comment "lab3/shop-postgres-ro:postgres has no endpoints" -m tcp --dport 5432 -j REJECT --reject-with icmp-port-unreachable
+:CILIUM_OUTPUT_nat - [0:0]
+:CILIUM_POST_nat - [0:0]
+:CILIUM_PRE_nat - [0:0]
+[23:1555] -A PREROUTING -m comment --comment "cilium-feeder: CILIUM_PRE_nat" -j CILIUM_PRE_nat
+[65:3900] -A OUTPUT -m comment --comment "cilium-feeder: CILIUM_OUTPUT_nat" -j CILIUM_OUTPUT_nat
+[86:5335] -A POSTROUTING -m comment --comment "cilium-feeder: CILIUM_POST_nat" -j CILIUM_POST_nat
+[1:60] -A KUBE-EXT-ULKIU2KPRKEHS6IK -m comment --comment "masquerade traffic for lab3/shop-api:http external destinations" -j KUBE-MARK-MASQ
+[0:0] -A KUBE-NODEPORTS -d 127.0.0.0/8 -p tcp -m comment --comment "lab3/shop-api:http" -m tcp --dport 30080 -m nfacct --nfacct-name  localhost_nps_accepted_pkts -j KUBE-EXT-ULKIU2KPRKEHS6IK
+[1:60] -A KUBE-NODEPORTS -p tcp -m comment --comment "lab3/shop-api:http" -m tcp --dport 30080 -j KUBE-EXT-ULKIU2KPRKEHS6IK
+[0:0] -A KUBE-SEP-E6EE7DPTZBWJRJNX -s 10.244.0.91/32 -m comment --comment "lab3/shop-api:http" -j KUBE-MARK-MASQ
+[1:60] -A KUBE-SEP-E6EE7DPTZBWJRJNX -p tcp -m comment --comment "lab3/shop-api:http" -m tcp -j DNAT --to-destination 10.244.0.91:8080
+[0:0] -A KUBE-SEP-J6JPY3XQHJ4T3Z3V -s 10.244.1.38/32 -m comment --comment "lab3/shop-api:http" -j KUBE-MARK-MASQ
+[0:0] -A KUBE-SEP-J6JPY3XQHJ4T3Z3V -p tcp -m comment --comment "lab3/shop-api:http" -m tcp -j DNAT --to-destination 10.244.1.38:8080
+[0:0] -A KUBE-SEP-NDV56UYCXH5UA3PA -s 10.244.1.45/32 -m comment --comment "lab3/shop-api:http" -j KUBE-MARK-MASQ
+[0:0] -A KUBE-SEP-NDV56UYCXH5UA3PA -p tcp -m comment --comment "lab3/shop-api:http" -m tcp -j DNAT --to-destination 10.244.1.45:8080
+[0:0] -A KUBE-SEP-OHO6ZRPNEEAQ6DGR -s 10.244.0.93/32 -m comment --comment "lab3/shop-api:http" -j KUBE-MARK-MASQ
+[0:0] -A KUBE-SEP-OHO6ZRPNEEAQ6DGR -p tcp -m comment --comment "lab3/shop-api:http" -m tcp -j DNAT --to-destination 10.244.0.93:8080
+[0:0] -A KUBE-SERVICES -d 10.101.22.76/32 -p tcp -m comment --comment "lab3/shop-api:http cluster IP" -m tcp --dport 8080 -j KUBE-SVC-ULKIU2KPRKEHS6IK
+[0:0] -A KUBE-SVC-ULKIU2KPRKEHS6IK ! -s 10.244.0.0/16 -d 10.101.22.76/32 -p tcp -m comment --comment "lab3/shop-api:http cluster IP" -m tcp --dport 8080 -j KUBE-MARK-MASQ
+[1:60] -A KUBE-SVC-ULKIU2KPRKEHS6IK -m comment --comment "lab3/shop-api:http -> 10.244.0.91:8080" -m statistic --mode random --probability 0.25000000000 -j KUBE-SEP-E6EE7DPTZBWJRJNX
+[0:0] -A KUBE-SVC-ULKIU2KPRKEHS6IK -m comment --comment "lab3/shop-api:http -> 10.244.0.93:8080" -m statistic --mode random --probability 0.33333333349 -j KUBE-SEP-OHO6ZRPNEEAQ6DGR
+[0:0] -A KUBE-SVC-ULKIU2KPRKEHS6IK -m comment --comment "lab3/shop-api:http -> 10.244.1.38:8080" -m statistic --mode random --probability 0.50000000000 -j KUBE-SEP-J6JPY3XQHJ4T3Z3V
+[0:0] -A KUBE-SVC-ULKIU2KPRKEHS6IK -m comment --comment "lab3/shop-api:http -> 10.244.1.45:8080" -j KUBE-SEP-NDV56UYCXH5UA3PA
+=== lab2: маршруты и policy routing ===
+default via 192.168.49.1 dev eth0 
+10.244.0.5 dev vethe73115d2 scope host 
+10.244.0.7 dev veth9514dc49 scope host 
+10.244.0.8 dev veth237e87fb scope host 
+10.244.0.12 dev veth1bf99a41 scope host 
+10.244.0.14 dev vethf6539c88 scope host 
+10.244.0.15 dev vethe9dc259f scope host 
+10.244.0.16 dev vethad378dd7 scope host 
+10.244.0.23 dev veth073f7f40 scope host 
+10.244.0.26 dev vetha0dddb90 scope host 
+10.244.0.31 dev veth248ba0c4 scope host 
+10.244.0.32 dev vethc064ad2e scope host 
+10.244.0.33 dev vethd85323f0 scope host 
+10.244.0.34 dev veth2356dc3a scope host 
+10.244.0.35 dev vetha983a01e scope host 
+10.244.0.74 dev vethb32050a5 scope host 
+10.244.0.78 dev veth6b4a8367 scope host 
+10.244.0.91 dev vetha6e95cc9 scope host 
+10.244.0.93 dev vethb7b2612d scope host 
+10.244.0.94 dev veth0ddf8b5d scope host 
+10.244.0.95 dev vethef5207d8 scope host 
+10.244.1.0/24 via 192.168.49.3 dev eth0 
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown 
+192.168.49.0/24 dev eth0 proto kernel scope link src 192.168.49.2 
+9:	from all fwmark 0x200/0xf00 lookup 2004
+100:	from all lookup local
+32766:	from all lookup main
+32767:	from all lookup default
+=== lab2-m02: правила и счётчики ===
+:CILIUM_POST_mangle - [0:0]
+:CILIUM_PRE_mangle - [0:0]
+[124216:35581290] -A PREROUTING -m comment --comment "cilium-feeder: CILIUM_PRE_mangle" -j CILIUM_PRE_mangle
+[129675:39079229] -A POSTROUTING -m comment --comment "cilium-feeder: CILIUM_POST_mangle" -j CILIUM_POST_mangle
+[0:0] -A CILIUM_PRE_mangle ! -o lo -m socket --transparent -m mark ! --mark 0xe00/0xf00 -m mark ! --mark 0x800/0xf00 -m comment --comment "cilium: any->pod redirect proxied traffic to host proxy" -j MARK --set-xmark 0x200/0xffffffff
+[0:0] -A CILIUM_PRE_mangle -p tcp -m mark --mark 0x1fac0200 -m comment --comment "cilium: TPROXY to host cilium-dns-egress proxy" -j TPROXY --on-port 44063 --on-ip 127.0.0.1 --tproxy-mark 0x200/0xffffffff
+[0:0] -A CILIUM_PRE_mangle -p udp -m mark --mark 0x1fac0200 -m comment --comment "cilium: TPROXY to host cilium-dns-egress proxy" -j TPROXY --on-port 44063 --on-ip 127.0.0.1 --tproxy-mark 0x200/0xffffffff
+:CILIUM_OUTPUT_raw - [0:0]
+:CILIUM_PRE_raw - [0:0]
+[124216:35581290] -A PREROUTING -m comment --comment "cilium-feeder: CILIUM_PRE_raw" -j CILIUM_PRE_raw
+[53796:20686757] -A OUTPUT -m comment --comment "cilium-feeder: CILIUM_OUTPUT_raw" -j CILIUM_OUTPUT_raw
+[0:0] -A CILIUM_OUTPUT_raw -o cilium_host -m mark --mark 0xa00/0xfffffeff -m comment --comment "cilium: NOTRACK for proxy return traffic" -j CT --notrack
+[0:0] -A CILIUM_OUTPUT_raw -o cilium_host -m mark --mark 0x800/0xe00 -m comment --comment "cilium: NOTRACK for L7 proxy upstream traffic" -j CT --notrack
+[0:0] -A CILIUM_PRE_raw -m mark --mark 0x200/0xf00 -m comment --comment "cilium: NOTRACK for proxy traffic" -j CT --notrack
+:CILIUM_FORWARD - [0:0]
+:CILIUM_INPUT - [0:0]
+:CILIUM_OUTPUT - [0:0]
+:KUBE-FORWARD - [0:0]
+[48331:17188290] -A INPUT -m comment --comment "cilium-feeder: CILIUM_INPUT" -j CILIUM_INPUT
+[75885:18393000] -A FORWARD -m comment --comment "cilium-feeder: CILIUM_FORWARD" -j CILIUM_FORWARD
+[961951:213500371] -A FORWARD -m comment --comment "kubernetes forwarding rules" -j KUBE-FORWARD
+[53790:20686229] -A OUTPUT -m comment --comment "cilium-feeder: CILIUM_OUTPUT" -j CILIUM_OUTPUT
+[0:0] -A CILIUM_FORWARD -o cilium_host -m comment --comment "cilium: any->cluster on cilium_host forward accept" -j ACCEPT
+[0:0] -A CILIUM_FORWARD -i cilium_host -m comment --comment "cilium: cluster->any on cilium_host forward accept (nodeport)" -j ACCEPT
+[0:0] -A CILIUM_FORWARD -i lxc+ -m comment --comment "cilium: cluster->any on lxc+ forward accept" -j ACCEPT
+[0:0] -A CILIUM_FORWARD -i cilium_net -m comment --comment "cilium: cluster->any on cilium_net forward accept (nodeport)" -j ACCEPT
+[0:0] -A CILIUM_INPUT -m mark --mark 0x200/0xf00 -m comment --comment "cilium: ACCEPT for proxy traffic" -j ACCEPT
+[0:0] -A CILIUM_OUTPUT -m mark --mark 0xa00/0xe00 -m comment --comment "cilium: ACCEPT for proxy traffic" -j ACCEPT
+[0:0] -A CILIUM_OUTPUT -m mark --mark 0x800/0xe00 -m comment --comment "cilium: ACCEPT for l7 proxy upstream traffic" -j ACCEPT
+[53790:20686229] -A CILIUM_OUTPUT -m mark ! --mark 0xd00/0xf00 -m mark ! --mark 0xe00/0xf00 -m mark ! --mark 0x400/0xf00 -m mark ! --mark 0xa00/0xe00 -m mark ! --mark 0x800/0xe00 -m comment --comment "cilium: host->any mark as from host" -j MARK --set-xmark 0xc00/0xf00
+[0:0] -A DOCKER ! -i docker0 -o docker0 -j DROP
+[0:0] -A KUBE-FIREWALL ! -s 127.0.0.0/8 -d 127.0.0.0/8 -m comment --comment "block incoming localnet connections" -m conntrack ! --ctstate RELATED,ESTABLISHED,DNAT -j DROP
+[0:0] -A KUBE-FORWARD -m conntrack --ctstate INVALID -m nfacct --nfacct-name  ct_state_invalid_dropped_pkts -j DROP
+[2:120] -A KUBE-FORWARD -m comment --comment "kubernetes forwarding rules" -m mark --mark 0x4000/0x4000 -j ACCEPT
+[14301:3601610] -A KUBE-FORWARD -m comment --comment "kubernetes forwarding conntrack rule" -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+[0:0] -A KUBE-SERVICES -d 10.102.36.241/32 -p tcp -m comment --comment "lab3/shop-postgres-ro:postgres has no endpoints" -m tcp --dport 5432 -j REJECT --reject-with icmp-port-unreachable
+:CILIUM_OUTPUT_nat - [0:0]
+:CILIUM_POST_nat - [0:0]
+:CILIUM_PRE_nat - [0:0]
+[2242:158280] -A PREROUTING -m comment --comment "cilium-feeder: CILIUM_PRE_nat" -j CILIUM_PRE_nat
+[4312:258683] -A OUTPUT -m comment --comment "cilium-feeder: CILIUM_OUTPUT_nat" -j CILIUM_OUTPUT_nat
+[6498:413819] -A POSTROUTING -m comment --comment "cilium-feeder: CILIUM_POST_nat" -j CILIUM_POST_nat
+[2:120] -A KUBE-EXT-ULKIU2KPRKEHS6IK -m comment --comment "masquerade traffic for lab3/shop-api:http external destinations" -j KUBE-MARK-MASQ
+[0:0] -A KUBE-NODEPORTS -d 127.0.0.0/8 -p tcp -m comment --comment "lab3/shop-api:http" -m tcp --dport 30080 -m nfacct --nfacct-name  localhost_nps_accepted_pkts -j KUBE-EXT-ULKIU2KPRKEHS6IK
+[2:120] -A KUBE-NODEPORTS -p tcp -m comment --comment "lab3/shop-api:http" -m tcp --dport 30080 -j KUBE-EXT-ULKIU2KPRKEHS6IK
+[0:0] -A KUBE-SEP-E6EE7DPTZBWJRJNX -s 10.244.0.91/32 -m comment --comment "lab3/shop-api:http" -j KUBE-MARK-MASQ
+[1:60] -A KUBE-SEP-E6EE7DPTZBWJRJNX -p tcp -m comment --comment "lab3/shop-api:http" -m tcp -j DNAT --to-destination 10.244.0.91:8080
+[0:0] -A KUBE-SEP-J6JPY3XQHJ4T3Z3V -s 10.244.1.38/32 -m comment --comment "lab3/shop-api:http" -j KUBE-MARK-MASQ
+[0:0] -A KUBE-SEP-J6JPY3XQHJ4T3Z3V -p tcp -m comment --comment "lab3/shop-api:http" -m tcp -j DNAT --to-destination 10.244.1.38:8080
+[0:0] -A KUBE-SEP-NDV56UYCXH5UA3PA -s 10.244.1.45/32 -m comment --comment "lab3/shop-api:http" -j KUBE-MARK-MASQ
+[0:0] -A KUBE-SEP-NDV56UYCXH5UA3PA -p tcp -m comment --comment "lab3/shop-api:http" -m tcp -j DNAT --to-destination 10.244.1.45:8080
+[0:0] -A KUBE-SEP-OHO6ZRPNEEAQ6DGR -s 10.244.0.93/32 -m comment --comment "lab3/shop-api:http" -j KUBE-MARK-MASQ
+[1:60] -A KUBE-SEP-OHO6ZRPNEEAQ6DGR -p tcp -m comment --comment "lab3/shop-api:http" -m tcp -j DNAT --to-destination 10.244.0.93:8080
+[0:0] -A KUBE-SERVICES -d 10.101.22.76/32 -p tcp -m comment --comment "lab3/shop-api:http cluster IP" -m tcp --dport 8080 -j KUBE-SVC-ULKIU2KPRKEHS6IK
+[0:0] -A KUBE-SVC-ULKIU2KPRKEHS6IK ! -s 10.244.0.0/16 -d 10.101.22.76/32 -p tcp -m comment --comment "lab3/shop-api:http cluster IP" -m tcp --dport 8080 -j KUBE-MARK-MASQ
+[1:60] -A KUBE-SVC-ULKIU2KPRKEHS6IK -m comment --comment "lab3/shop-api:http -> 10.244.0.91:8080" -m statistic --mode random --probability 0.25000000000 -j KUBE-SEP-E6EE7DPTZBWJRJNX
+[1:60] -A KUBE-SVC-ULKIU2KPRKEHS6IK -m comment --comment "lab3/shop-api:http -> 10.244.0.93:8080" -m statistic --mode random --probability 0.33333333349 -j KUBE-SEP-OHO6ZRPNEEAQ6DGR
+[0:0] -A KUBE-SVC-ULKIU2KPRKEHS6IK -m comment --comment "lab3/shop-api:http -> 10.244.1.38:8080" -m statistic --mode random --probability 0.50000000000 -j KUBE-SEP-J6JPY3XQHJ4T3Z3V
+[0:0] -A KUBE-SVC-ULKIU2KPRKEHS6IK -m comment --comment "lab3/shop-api:http -> 10.244.1.45:8080" -j KUBE-SEP-NDV56UYCXH5UA3PA
+=== lab2-m02: маршруты и policy routing ===
+default via 192.168.49.1 dev eth0 
+10.244.0.0/24 via 192.168.49.2 dev eth0 
+10.244.1.2 dev veth4daeb9c2 scope host 
+10.244.1.19 dev veth653bae3a scope host 
+10.244.1.20 dev vethdb951d60 scope host 
+10.244.1.24 dev veth03eca504 scope host 
+10.244.1.38 dev veth6699296e scope host 
+10.244.1.44 dev vetha1ad7713 scope host 
+10.244.1.45 dev veth2203d974 scope host 
+10.244.1.48 dev veth57724602 scope host 
+10.244.1.49 dev veth64c48c9c scope host 
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown 
+192.168.49.0/24 dev eth0 proto kernel scope link src 192.168.49.3 
+9:	from all fwmark 0x200/0xf00 lookup 2004
+100:	from all lookup local
+32766:	from all lookup main
+32767:	from all lookup default
