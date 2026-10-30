@@ -1,0 +1,60 @@
+[
+  {
+    "tool": "get_service_checks",
+    "arguments": {
+      "scenario": "outage"
+    },
+    "success": true
+  },
+  {
+    "tool": "get_oncall_contacts",
+    "arguments": {
+      "scenario": {
+        "type": "string"
+      }
+    },
+    "success": true
+  },
+  {
+    "tool": "get_oncall_contacts",
+    "arguments": {
+      "service": {
+        "type": "string"
+      }
+    },
+    "success": true
+  },
+  {
+    "tool": "get_service_checks",
+    "arguments": {
+      "scenario": "outage"
+    },
+    "success": true
+  },
+  {
+    "tool": "get_oncall_contacts",
+    "arguments": {},
+    "success": true
+  },
+  {
+    "tool": "get_runbook",
+    "arguments": {
+      "service": "PostgreSQL"
+    },
+    "success": false
+  },
+  {
+    "tool": "get_runbook",
+    "arguments": {
+      "service": "API"
+    },
+    "success": false
+  },
+  {
+    "tool": "get_runbook",
+    "arguments": {
+      "service": "Worker"
+    },
+    "success": false
+  }
+]

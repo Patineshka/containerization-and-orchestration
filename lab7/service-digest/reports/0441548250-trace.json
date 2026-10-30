@@ -1,0 +1,43 @@
+[
+  {
+    "tool": "get_service_checks",
+    "arguments": {
+      "scenario": "stale"
+    },
+    "success": true
+  },
+  {
+    "tool": "get_oncall_contacts",
+    "arguments": {},
+    "success": true
+  },
+  {
+    "tool": "get_runbook",
+    "arguments": {
+      "service": "shop-api"
+    },
+    "success": true
+  },
+  {
+    "tool": "get_runbook",
+    "arguments": {
+      "service": "shop-worker"
+    },
+    "success": true
+  },
+  {
+    "tool": "get_runbook",
+    "arguments": {
+      "service": "shop-postgres"
+    },
+    "success": true
+  },
+  {
+    "tool": "save_digest",
+    "arguments": {
+      "content": "Сводка дежурного\nВремя: 2026-10-30T17:13:02 UTC\n\nСостояние сервисов:\n- shop-api: stale (последняя проверка 2026-10-30T16:44:13, устарело на 29 мин)\n- shop-worker: stale (последняя проверка 2026-10-30T16:44:13, устарело на 29 мин)\n- shop-postgres: stale (последняя проверка 2026-10-30T16:44:13, устарело на 29 мин)\n\nПроблемы: Все сервисы устарели на 29 минут (свежесть < 5 мин). Нет данных о текущей работе.\n\nСледующие действия:\n1. Проверить последний успешный опрос БД и очередь заказов для shop-worker\n2. Убедиться в готовности БД, свободном месте и подключениях для shop-postgres\n3. Передать дежурному по БД информацию о текущем состоянии\n\nОтветственные:\n- shop-api/shop-worker: дежурный по приложению\n- shop-postgres: дежурный по БД\n\nГипотеза: При отключении PostgreSQL может возникнуть риск для shop-api из-за нестабильности данных.",
+      "filename": "stale-0441548250.md"
+    },
+    "success": true
+  }
+]

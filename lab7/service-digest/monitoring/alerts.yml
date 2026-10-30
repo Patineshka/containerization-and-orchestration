@@ -1,0 +1,18 @@
+groups:
+  - name: digest
+    rules:
+      - alert: DigestFailures
+        expr: increase(digest_runs_total{status="error"}[10m]) > 0
+        for: 0m
+        annotations:
+          summary: Ошибка подготовки сводки — проверить Ollama и MCP
+      - alert: DigestSlow
+        expr: histogram_quantile(0.95, sum by (le) (rate(digest_duration_seconds_bucket[5m]))) > 180
+        for: 2m
+        annotations:
+          summary: Подготовка сводки занимает больше трёх минут
+      - alert: DigestAgentUnavailable
+        expr: up{job="digest-agent"} == 0
+        for: 1m
+        annotations:
+          summary: Сервис подготовки сводки недоступен

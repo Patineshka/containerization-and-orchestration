@@ -1,0 +1,43 @@
+[
+  {
+    "tool": "get_service_checks",
+    "arguments": {
+      "scenario": "stale"
+    },
+    "success": true
+  },
+  {
+    "tool": "get_oncall_contacts",
+    "arguments": {},
+    "success": true
+  },
+  {
+    "tool": "get_runbook",
+    "arguments": {
+      "service": "shop-api"
+    },
+    "success": true
+  },
+  {
+    "tool": "get_runbook",
+    "arguments": {
+      "service": "shop-worker"
+    },
+    "success": true
+  },
+  {
+    "tool": "get_runbook",
+    "arguments": {
+      "service": "shop-postgres"
+    },
+    "success": true
+  },
+  {
+    "tool": "save_digest",
+    "arguments": {
+      "content": "Время: Начало подготовки сводки (UTC): 2026-10-30T17:17:37.943237+00:00\n\nСостояние сервисов:\n- shop-api: up (последняя проверка 2026-10-30T16:48:56.492042+00:00)\n- shop-worker: up (последняя проверка 2026-10-30T16:48:56.492042+00:00)\n- shop-postgres: up (последняя проверка 2026-10-30T16:48:56.492042+00:00)\n\nПроблемы: Все проверки устарели (старше 5 минут). Текущее состояние неизвестно.\n\nСледующие действия: Получить свежие проверки и проверить сборщик/время последнего обновления.\n\nОтветственные роли:\n- API/worker: application on-call\n- PostgreSQL: database on-call\n\nГипотеза: Если данные по PostgreSQL устарели, возможен риск для API/worker из-за отсутствия актуальных проверок.",
+      "filename": "stale-671e2d0a0a.md"
+    },
+    "success": true
+  }
+]

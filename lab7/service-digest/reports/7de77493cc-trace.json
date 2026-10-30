@@ -1,0 +1,43 @@
+[
+  {
+    "tool": "get_service_checks",
+    "arguments": {
+      "scenario": "healthy"
+    },
+    "success": true
+  },
+  {
+    "tool": "get_oncall_contacts",
+    "arguments": {},
+    "success": true
+  },
+  {
+    "tool": "get_runbook",
+    "arguments": {
+      "service": "shop-api"
+    },
+    "success": true
+  },
+  {
+    "tool": "get_runbook",
+    "arguments": {
+      "service": "shop-worker"
+    },
+    "success": true
+  },
+  {
+    "tool": "get_runbook",
+    "arguments": {
+      "service": "shop-postgres"
+    },
+    "success": true
+  },
+  {
+    "tool": "save_digest",
+    "arguments": {
+      "content": "Сводка дежурного\nВремя: 2026-10-30T17:08:32.581863+00:00\n\nСостояние сервисов:\n- shop-api: healthy (последняя проверка: 2026-10-30T17:09:47.997864+00:00)\n- shop-worker: healthy\n- shop-postgres: healthy\n\nПроблемы: Отсутствуют.\n\nСледующие действия:\n- Проверить /health, readiness и подключение к PostgreSQL для shop-api.\n- Проверить время последнего успешного опроса БД и очередь заказов для shop-worker.\n- Проверить готовность БД, свободное место и подключения для shop-postgres.\n\nОтветственные роли:\n- Application on-call: API/worker\n- Database on-call: PostgreSQL",
+      "filename": "healthy-7de77493cc.md"
+    },
+    "success": true
+  }
+]

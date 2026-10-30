@@ -1,0 +1,43 @@
+[
+  {
+    "tool": "get_service_checks",
+    "arguments": {
+      "scenario": "outage"
+    },
+    "success": true
+  },
+  {
+    "tool": "get_oncall_contacts",
+    "arguments": {},
+    "success": true
+  },
+  {
+    "tool": "get_runbook",
+    "arguments": {
+      "service": "shop-api"
+    },
+    "success": true
+  },
+  {
+    "tool": "get_runbook",
+    "arguments": {
+      "service": "shop-worker"
+    },
+    "success": true
+  },
+  {
+    "tool": "get_runbook",
+    "arguments": {
+      "service": "shop-postgres"
+    },
+    "success": true
+  },
+  {
+    "tool": "save_digest",
+    "arguments": {
+      "content": "Время: 2026-10-30T17:03:18.477200+00:00\n\nСостояние сервисов:\n- shop-api: работает (up)\n- shop-worker: работает (up)\n- shop-postgres: не работает (down)\n\nПроблемы:\nСервис shop-postgres в состоянии down с задержкой 450ms (последний опрос: 2026-10-30T17:04:36.487951+00:00).\n\nСледующие действия:\n1. Проверить готовность БД, свободное место и подключения к PostgreSQL.\n2. Передать дежурному по БД для устранения проблемы.\n\nОтветственные роли:\n- Application on-call: API/worker\n- Database on-call: PostgreSQL\n\nГипотеза риска:\nНедоступность PostgreSQL может привести к отключению API/worker из-за зависимости от БД.",
+      "filename": "outage-f396120a36.md"
+    },
+    "success": true
+  }
+]

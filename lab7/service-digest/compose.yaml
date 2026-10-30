@@ -1,0 +1,58 @@
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    ports:
+      - "127.0.0.1:5678:5678"
+    environment:
+      TZ: Europe/Moscow
+      GENERIC_TIMEZONE: Europe/Moscow
+      N8N_METRICS: "true"
+      N8N_DIAGNOSTICS_ENABLED: "false"
+    volumes:
+      - n8n_data:/home/node/.n8n
+    restart: unless-stopped
+
+  status-mcp:
+    build: ./app
+    command: python mcp_server.py
+    environment:
+      SERVER_MODE: status
+    volumes:
+      - checks_data:/data
+  runbooks-mcp:
+    build: ./app
+    command: python mcp_server.py
+    environment:
+      SERVER_MODE: runbooks
+    volumes:
+      - ./reports:/reports
+  agent:
+    build: ./app
+    volumes:
+      - ./skills:/skills:ro
+      - ./reports:/reports
+    ports:
+      - "127.0.0.1:8010:8000"
+    depends_on:
+      - status-mcp
+      - runbooks-mcp
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "127.0.0.1:9093:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/alerts.yml:/etc/prometheus/alerts.yml:ro
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "127.0.0.1:3007:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/dashboard.json:/etc/grafana/dashboards/digest.json:ro
+
+volumes:
+  checks_data:
+  grafana_data:
+  n8n_data:

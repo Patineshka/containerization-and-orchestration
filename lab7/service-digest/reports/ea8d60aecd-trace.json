@@ -1,0 +1,43 @@
+[
+  {
+    "tool": "get_service_checks",
+    "arguments": {
+      "scenario": "outage"
+    },
+    "success": true
+  },
+  {
+    "tool": "get_oncall_contacts",
+    "arguments": {},
+    "success": true
+  },
+  {
+    "tool": "get_runbook",
+    "arguments": {
+      "service": "shop-api"
+    },
+    "success": true
+  },
+  {
+    "tool": "get_runbook",
+    "arguments": {
+      "service": "shop-worker"
+    },
+    "success": true
+  },
+  {
+    "tool": "get_runbook",
+    "arguments": {
+      "service": "shop-postgres"
+    },
+    "success": true
+  },
+  {
+    "tool": "save_digest",
+    "arguments": {
+      "content": "Время: 2026-10-30T17:00:11+00:00\n\nСостояние:\n- shop-api: работает\n- shop-worker: работает\n- shop-postgres: отключён\n\nПроблема: shop-postgres недоступен.\n\nСледующие действия:\n1. Проверить готовность БД, свободное место и подключения\n2. Передать дежурному по БД (database on-call)\n3. Не перезапускать автоматически\n\nОтветственные:\n- Application on-call: API/worker\n- Database on-call: PostgreSQL\n\nГипотеза риска: Отключение PostgreSQL может вызвать недоступность API и worker.",
+      "filename": "outage-ea8d60aecd.md"
+    },
+    "success": true
+  }
+]
