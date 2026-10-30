@@ -52,9 +52,10 @@ ollama pull qwen3:4b
 
 Для агента подготовила локальный вариант `qwen3-duty:4b`: веса те же, но в шаблоне закрыла блок think, чтобы сократить лишнюю генерацию. Создание варианта воспроизводится скриптом [tests/prepare-model.py](tests/prepare-model.py)
 
-Запуск из папки `service-digest`:
+Запуск из папки `lab7`:
 
 ```bash
+cd ~/Downloads/lab-repo/lab7
 python3 tests/prepare-model.py
 docker compose up -d --build
 ```
